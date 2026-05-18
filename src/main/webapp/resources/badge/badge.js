@@ -63,8 +63,11 @@ function confirmStudent() {
         url: '/updateStudent.do',
         type: 'POST',
         data: {param: studentId},
+        dataType: 'json',
         success: function(data) {
             if(data.status == 'success') {
+                    console.log(data);        // ← 추가해서 확인
+                     console.log(data.status); // ← 추가해서 확인
                 $.ajax({
                     url: '/studentDetail.do',
                     data: { param: studentId },
@@ -86,17 +89,17 @@ function confirmStudent() {
                                 $('#card-dorm').text(dong + '동 ' + ho + '호');
                             }
                         });
-                    },
-                    error: function() {
-                        alert('오류가 발생했습니다.');
                     }
                 });
             }
             else {
-                alert('처리 중 오류가 발생하였습니다.');
+                alert(data.message);
             }
         },
-        error: function() {
+        error: function(xhr, status, error) {
+            console.log('xhr : ' + xhr.responseText);  // ← 추가
+            console.log('status : ' + status);          // ← 추가
+            console.log('error : ' + error);            // ← 추가
             alert('오류가 발생했습니다.');
         }
     });

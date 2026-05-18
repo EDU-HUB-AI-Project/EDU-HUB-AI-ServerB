@@ -1,5 +1,15 @@
 @charset "UTF-8";
 
+/* 색상 변수 */
+:root {
+    --main-blue  : #0055A4;
+    --main-green : #39B54A;
+    --point-gold : #C8A84B;
+    --dark-gray  : #404040;
+    --light-gray : #F5F5F5;
+    --white      : #FFFFFF;
+}
+
 /* 전체 레이아웃 */
 * {
     margin: 0;
@@ -13,60 +23,114 @@ body {
     display: flex;
     flex-direction: column;
     font-family: 'Noto Sans KR', sans-serif;
+    background: var(--white);
 }
 
 /* 헤더 */
 #header {
-    height: 15%;
-    background: #003399;
-    display: flex;
+    height: 70px;
+    background: var(--white);
+    display: none;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 2rem;
+    justify-content: space-between;
+    padding: 0 30px;
+    border-bottom: 3px solid var(--main-blue);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    flex-wrap: nowrap;
 }
 
-/* 버튼 영역 */
-#button-area {
-    height: 20%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 50px;
-    background: #f5f5f5;
-}
-
-#button-area button {
-    width: 250px;
-    height: 80px;
+#header-logo {
     font-size: 1.3rem;
-    cursor: pointer;
-    border: none;
-    border-radius: 10px;
-    background: #003399;
-    color: white;
+    font-weight: bold;
+    color: var(--main-blue);
+    white-space: nowrap;
+    min-width: fit-content;
 }
 
-#button-area button:hover {
-    background: #0044cc;
+#header-nav {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    justify-content: center;
+}
+
+#header-home {
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    min-width: fit-content;
+}
+#nav-badge {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--main-blue);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--main-blue);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#nav-badge:hover, #nav-badge.active {
+    background: var(--main-blue);
+    color: var(--white);
+}
+
+#nav-facility {
+    padding: 8px 15px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    border: 2px solid var(--main-green);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--main-green);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+#nav-facility:hover, #nav-facility.active {
+    background: var(--main-green);
+    color: var(--white);
+}
+
+/* 홈 버튼 */
+#home-btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 2px solid var(--dark-gray);
+    border-radius: 8px;
+    background: var(--white);
+    color: var(--dark-gray);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+#home-btn:hover {
+    background: var(--dark-gray);
+    color: var(--white);
 }
 
 /* 컨텐츠 영역 */
 #content-area {
     flex: 1;
     padding: 30px;
-    background: white;
+    background: var(--white);
     overflow-y: auto;
 }
 
 /* 푸터 */
 #footer {
-    height: 10%;
-    background: #003399;
-    display: flex;
+    height: 8%;
+    background: var(--dark-gray);
+    display: none;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--white);
+    font-size: 0.9rem;
 }
 
 /* 처음 화면 오버레이 */
@@ -76,7 +140,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: #003399;
+    background: var(--white);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -88,7 +152,13 @@ body {
 #intro-title {
     font-size: 3rem;
     font-weight: bold;
-    color: white;
+    color: var(--main-blue);
+    margin-bottom: 10px;
+}
+
+#intro-subtitle {
+    font-size: 1.2rem;
+    color: var(--dark-gray);
     margin-bottom: 60px;
 }
 
@@ -102,25 +172,32 @@ body {
     height: 300px;
     font-size: 1.5rem;
     font-weight: bold;
-    border: 3px solid white;
     border-radius: 20px;
-    background: transparent;
-    color: white;
     cursor: pointer;
     transition: all 0.3s ease;
     line-height: 2;
 }
 
-.intro-btn:hover {
-    background: white;
-    color: #003399;
+.intro-btn:first-child {
+    border: 3px solid var(--main-blue);
+    background: var(--white);
+    color: var(--main-blue);
+}   
+
+.intro-btn:first-child:hover {
+    background: var(--main-blue);
+    color: var(--white);
     transform: scale(1.05);
 }
 
-/* header, button-area, footer 기본 숨김 */
-#header {
-    display: none;
+.intro-btn:last-child {
+    border: 3px solid var(--main-green);
+    background: var(--white);
+    color: var(--main-green);
 }
-#footer {
-    display: none;
+
+.intro-btn:last-child:hover {
+    background: var(--main-green);
+    color: var(--white);
+    transform: scale(1.05);
 }
