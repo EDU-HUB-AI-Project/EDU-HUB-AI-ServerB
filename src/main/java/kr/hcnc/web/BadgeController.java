@@ -1,5 +1,6 @@
 package kr.hcnc.web;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +22,15 @@ public class BadgeController {
 	@ResponseBody
 	public List<Map<String, Object>> selectStudent(String param) {
 		System.out.println("BadgeController :: /searchStudent.do");
+		
+		if(param == null || param.isEmpty()) {
+			return new ArrayList<>();
+		}
+		
+		if(!param.matches("^[0-9]{6}$")) {
+			return new ArrayList<>();
+		}
+		
 		List<Map<String, Object>> list = badgeService.selectStudents(param);
 		System.out.println("BadgeController :: list = " + list);
 		return list;
