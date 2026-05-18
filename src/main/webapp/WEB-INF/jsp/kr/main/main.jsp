@@ -4,12 +4,15 @@
 <head>
 <meta charset="UTF-8">
 <title>메인페이지</title>
+
+<link rel = "stylesheet" href = "resources/css/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/lib/bootstrap.min.css">
 <link rel="stylesheet" href="/resources/common/common.css">
 <script src="/resources/lib/jquery-4.0.0.min.js"></script>
 <script src="/resources/lib/bootstrap.min.js"></script>
 <script src="/resources/common/common.js"></script>
 <script src="/resources/badge/badge.js"></script>
+<script src="/resources/js/classroom.js"></script>
 </head>
 <body>
 
