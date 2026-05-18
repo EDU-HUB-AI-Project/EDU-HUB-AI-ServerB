@@ -9,10 +9,17 @@
 <script src="/resources/lib/jquery-4.0.0.min.js"></script>
 <script src="/resources/lib/bootstrap.min.js"></script>
 <script src="/resources/common/common.js"></script>
+<script src="/resources/badge/badge.js"></script>
 </head>
 <body>
 
-    <!-- 처음 화면 오버레이 -->
+    <div id="loading-overlay">
+        <div id="loading-box">
+            <div class="spinner-border text-light mb-3" role="status"></div>
+            <p>처리중입니다.<br>잠시만 기다려주세요.</p>
+        </div>
+    </div>
+
     <div id="intro-overlay">
         <div id="intro-title">
             🏫 교육생 키오스크
@@ -29,7 +36,6 @@
         </div>
     </div>
 
-    <!-- 일반 화면 -->
     <%@ include file="/WEB-INF/jsp/kr/common/header.jsp" %>
 
     <div id="content-area"></div>

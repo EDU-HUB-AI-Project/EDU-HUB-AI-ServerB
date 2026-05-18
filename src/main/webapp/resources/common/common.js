@@ -4,7 +4,6 @@ function selectMenu(url) {
     setTimeout(function() {
         $('#intro-overlay').hide();
 
-        // show() 대신 flex로 명시
         $('#header').css('display', 'flex');
         $('#footer').css('display', 'flex');
 
@@ -30,17 +29,18 @@ function loadPage(url) {
 }
 
 function goHome() {
-    // content-area 초기화
     $('#content-area').empty();
-
-    // header, footer 숨기기
     $('#header').hide();
     $('#footer').hide();
-
-    // active 초기화
     $('#nav-badge, #nav-facility').removeClass('active');
-
-    // intro-overlay 다시 표시
     $('#intro-overlay').css('opacity', '1');
     $('#intro-overlay').show();
+}
+
+function showLoading() {
+    $('#loading-overlay').css('display', 'flex');
+}
+
+function hideLoading() {
+    $('#loading-overlay').hide();
 }

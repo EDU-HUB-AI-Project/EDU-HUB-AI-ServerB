@@ -60,7 +60,7 @@
     </div>
 
     <!-- 처음으로 버튼 -->
-    <button type="button" id="back-btn" class="btn btn-danger" onclick="goMain()">
+    <button type="button" id="back-btn" class="btn btn-danger" onclick="goHome()">
         🏠 처음으로
     </button>
 

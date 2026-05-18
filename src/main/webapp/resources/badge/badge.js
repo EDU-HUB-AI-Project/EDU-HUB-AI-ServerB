@@ -1,10 +1,14 @@
 var inputValue = '';
 
 function searchByBirth(birth) {
+
+    showLoading();
+
 	$.ajax({
 		url: '/searchStudent.do',
 		data: {param : birth},
 		success: function(data) {
+            hideLoading();
 			$('#result-body').empty();
             $('#selected-area').hide();
             $('#confirm-btn').hide();
@@ -34,6 +38,7 @@ function searchByBirth(birth) {
 			});
 		},
 		error: function() {
+            hideLoading();
 			alert("오류 발생");
 		}
 	});
@@ -59,6 +64,8 @@ function confirmStudent() {
     var selected = $('.student-row.table-primary').data('student');
     var studentId = selected.STUDENT_ID;
 
+    showLoading();
+
     $.ajax({
         url: '/updateStudent.do',
         type: 'POST',
@@ -66,13 +73,13 @@ function confirmStudent() {
         dataType: 'json',
         success: function(data) {
             if(data.status == 'success') {
-                    console.log(data);        // ← 추가해서 확인
-                     console.log(data.status); // ← 추가해서 확인
+                    console.log(data);        
+                    console.log(data.status);
                 $.ajax({
                     url: '/studentDetail.do',
                     data: { param: studentId },
                     success: function(data) {
-                        // content-area에 guidePage 로드 후 데이터 표시
+                        hideLoading();
                         $('#content-area').load('/guide.do', function() {
                             $('#card-name').text(data.STUDENT_NAME);
                             $('#card-edu-name').text(data.EDU_NAME);
@@ -93,14 +100,13 @@ function confirmStudent() {
                 });
             }
             else {
+                hideLoading();
                 alert(data.message);
             }
         },
-        error: function(xhr, status, error) {
-            console.log('xhr : ' + xhr.responseText);  // ← 추가
-            console.log('status : ' + status);          // ← 추가
-            console.log('error : ' + error);            // ← 추가
-            alert('오류가 발생했습니다.');
+        error: function() {
+            hideLoading();
+            alert('오류가 발생하였습니다.');
         }
     });
 }

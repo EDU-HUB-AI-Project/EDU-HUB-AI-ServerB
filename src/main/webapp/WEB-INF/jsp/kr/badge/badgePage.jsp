@@ -62,4 +62,3 @@
 
 </div>
 
-<script src="/resources/badge/badge.js"></script>
