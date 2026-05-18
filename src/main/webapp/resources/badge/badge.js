@@ -28,12 +28,12 @@ function searchByBirth(birth) {
 			
 			$.each(data, function(i, row) {
                 var tr = '<tr class="student-row" data-student=\'' + JSON.stringify(row) + '\'>' +
-                    '<td>' + row.STUDENT_ID + '</td>' +
-                    '<td>' + row.STUDENT_NAME + '</td>' +
-                    '<td>' + row.BIRTH_DATE + '</td>' +
-                    '<td>' + row.EDU_NAME + '</td>' +
-                    '<td>' + row.DORMITORY_ID + '</td>' +
-                    '</tr>';
+                            '<td>' + escapeHtml(row.STUDENT_ID) + '</td>' +
+                            '<td>' + escapeHtml(row.STUDENT_NAME) + '</td>' +
+                            '<td>' + escapeHtml(row.BIRTH_DATE) + '</td>' +
+                            '<td>' + escapeHtml(row.EDU_NAME) + '</td>' +
+                            '<td>' + escapeHtml(row.DORMITORY_ID) + '</td>' +
+                         '</tr>';
                 $('#result-body').append(tr);
 			});
 		},
