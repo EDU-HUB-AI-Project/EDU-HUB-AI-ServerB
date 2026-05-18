@@ -146,5 +146,23 @@ function confirmKey() {
         return;
     }
 
+    var numRegex = /^[0-9]+$/;
+    if(!numRegex.test(inputValue)) {
+        alert('숫자만 입력 가능합니다.');
+        return;
+    }
+
+    var month = parseInt(inputValue.substring(2, 4));
+    var day = parseInt(inputValue.substring(4,6));
+
+    if(month < 1 || month > 12) {
+        alert('올바른 생년월일을 입력해주세요.');
+        return;
+    }
+    if(day < 1 || day > 31) {
+        alert('올바른 생년월일을 입력해주세요.');
+        return;
+    }
+
     searchByBirth(inputValue);
 }
