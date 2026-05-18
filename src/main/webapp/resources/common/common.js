@@ -15,6 +15,7 @@ function selectMenu(url) {
         }
 
         loadPage(url);
+        startIdleTimer();
     }, 500);
 }
 
@@ -26,9 +27,11 @@ function loadPage(url) {
         $('#nav-facility').addClass('active');
     }
     $('#content-area').load(url);
+    resetIdleTimer();
 }
 
 function goHome() {
+    clearIdleTimer();
     $('#content-area').empty();
     $('#header').hide();
     $('#footer').hide();
@@ -94,3 +97,60 @@ function modalClose() {
     $('#commonModal').modal('hide');
     if(typeof modalCallback === 'function') modalCallback();
 }
+
+// 자동 초기화 타이머
+var idleTimer = null;
+var idleTime = 10000;   // 테스트용 10초
+
+function startIdleTimer() {
+    clearIdleTimer();
+    idleTimer = setTimeout(function() {
+        var countdown = 10;
+
+        showConfirm(
+            '일정 시간 동안 조작이 없습니다.<br>처음 화면으로 이동하시겠습니까?<br><br>' +
+            '<span id="countdown-timer" style="font-size:2rem; font-weight:bold; color:#0055A4;">' +
+            countdown + '초</span>',
+            function() {
+                goHome();
+            },
+            function() {
+                startIdleTimer();
+            }
+        );
+
+        var countdownInterval = setInterval(function() {
+            countdown--;
+            $('#countdown-timer').text(countdown + '초');
+
+            if(countdown <= 0) {
+                clearInterval(countdownInterval);
+                $('#commonModal').modal('hide');
+                goHome();
+            }
+        }, 1000)
+
+        $('#commonModal').one('hidden.bs.modal', function() {
+            clearInterval(countdownInterval);
+        });
+
+    }, idleTime)
+}
+
+function clearIdleTimer() {
+    if(idleTimer) {
+        clearTimeout(idleTimer);
+        idleTimer = null;
+    }
+}
+
+function resetIdleTimer() {
+    startIdleTimer();
+}
+
+$(document).ready(function() {
+    // 터치/클릭/키보드 동작 감지
+    $(document).on('click touchstart keypress', function() {
+        resetIdleTimer();
+    });
+});
