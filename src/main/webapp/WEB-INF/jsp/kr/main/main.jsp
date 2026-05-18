@@ -41,5 +41,26 @@
     <div id="content-area"></div>
 
     <%@ include file="/WEB-INF/jsp/kr/common/footer.jsp" %>
+
+    <!-- 공통 Modal -->
+    <div class="modal fade" id="commonModal" tabindex="-1" 
+     aria-labelledby="commonModalLabel" aria-hidden="true"
+     data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <h5 class="modal-title" id="commonModalLabel">안내</h5>
+            </div>
+            <div class="modal-body text-center fs-5" id="modalBody">
+            </div>
+            <div class="modal-footer justify-content-center" id="modalFooter">
+                <button type="button" class="btn btn-primary btn-lg" 
+                        id="modalConfirmBtn" onclick="modalConfirm()">
+                    확인
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>

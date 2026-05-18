@@ -39,7 +39,7 @@ function searchByBirth(birth) {
 		},
 		error: function() {
             hideLoading();
-			alert("오류 발생");
+			showAlert("오류 발생");
 		}
 	});
 }
@@ -99,14 +99,44 @@ function confirmStudent() {
                     }
                 });
             }
+            else if(data.status == 'already') {
+                hideLoading();
+                showConfirm('이미 출석 처리된 교육생입니다. \n안내 화면으로 이동하시겠습니까?', function() {
+                    $.ajax({
+                        url: '/studentDetail.do',
+                        data: {param: studentId},
+                        success: function(data) {
+                            $('#content-area').load('/guide.do', function() {
+                                $('#card-name').text(data.STUDENT_NAME);
+                                $('#card-edu-name').text(data.EDU_NAME);
+                                $('#card-room').text(data.EDU_ROOM_NAME + '호');
+                                $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
+                                $('#card-period').text(data.START_DATE + ' ~ ' + data.END_DATE);
+
+                                var dormId = data.DORMITORY_ID;
+                                if(dormId == null || dormId == 'X') {
+                                    $('#card-dorm').text('생활관 미배정');
+                                } else {
+                                    var dong = dormId.charAt(5);
+                                    var ho = dormId.substr(6);
+                                    $('#card-dorm').text(dong + '동 ' + ho + '호');
+                                }
+                            });
+                        }
+                    });
+                
+                }, function() {
+                    goHome();
+                });
+            }
             else {
                 hideLoading();
-                alert(data.message);
+                showAlert(data.message);
             }
         },
         error: function() {
             hideLoading();
-            alert('오류가 발생하였습니다.');
+            showAlert('오류가 발생하였습니다.');
         }
     });
 }
@@ -142,13 +172,13 @@ function clearKey() {
 
 function confirmKey() {
     if(inputValue.length != 6) {
-        alert('생년월일 6자리를 입력해주세요.');
+        showAlert('생년월일 6자리를 입력해주세요.');
         return;
     }
 
     var numRegex = /^[0-9]+$/;
     if(!numRegex.test(inputValue)) {
-        alert('숫자만 입력 가능합니다.');
+        showAlert('숫자만 입력 가능합니다.');
         return;
     }
 
@@ -156,11 +186,11 @@ function confirmKey() {
     var day = parseInt(inputValue.substring(4,6));
 
     if(month < 1 || month > 12) {
-        alert('올바른 생년월일을 입력해주세요.');
+        showAlert('올바른 생년월일을 입력해주세요.');
         return;
     }
     if(day < 1 || day > 31) {
-        alert('올바른 생년월일을 입력해주세요.');
+        showAlert('올바른 생년월일을 입력해주세요.');
         return;
     }
 
