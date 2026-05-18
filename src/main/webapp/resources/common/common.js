@@ -1,34 +1,46 @@
-function selectMenu(url, title) {
-    // 오버레이 페이드아웃
+function selectMenu(url) {
     $('#intro-overlay').css('opacity', '0');
 
     setTimeout(function() {
-        // 오버레이 숨기기
         $('#intro-overlay').hide();
 
-        // header, button-area, footer 표시
-        $('#header').show();
-        $('#button-area').show();
-        $('#footer').show();
+        $('#header').css('display', 'flex');
+        $('#footer').css('display', 'flex');
 
-        // 선택된 버튼 하이라이트
-        $('#button-area button').css('background', '#003399');
+        $('#nav-badge, #nav-facility').removeClass('active');
         if(url == '/badge.do') {
-            $('#nav-badge').css('background', '#0044cc');
+            $('#nav-badge').addClass('active');
         } else {
-            $('#nav-facility').css('background', '#0044cc');
+            $('#nav-facility').addClass('active');
         }
 
-        // 페이지 로드
         loadPage(url);
-
     }, 500);
 }
 
 function loadPage(url) {
+    $('#nav-badge, #nav-facility').removeClass('active');
+    if(url == '/badge.do') {
+        $('#nav-badge').addClass('active');
+    } else if(url == '/facility.do') {
+        $('#nav-facility').addClass('active');
+    }
     $('#content-area').load(url);
 }
 
-function goMain() {
-    $('#content-area').load('/main.do');
+function goHome() {
+    $('#content-area').empty();
+    $('#header').hide();
+    $('#footer').hide();
+    $('#nav-badge, #nav-facility').removeClass('active');
+    $('#intro-overlay').css('opacity', '1');
+    $('#intro-overlay').show();
+}
+
+function showLoading() {
+    $('#loading-overlay').css('display', 'flex');
+}
+
+function hideLoading() {
+    $('#loading-overlay').hide();
 }
