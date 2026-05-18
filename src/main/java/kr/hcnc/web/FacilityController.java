@@ -2,6 +2,7 @@ package kr.hcnc.web;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import kr.hcnc.service.FacilityService;
@@ -21,10 +22,11 @@ public class FacilityController {
 	
 	// 구내식당
 	@RequestMapping(value = "/facility/cafeteria.do")
-	public String cafeteriaPage() {
+	public String cafeteriaPage(org.springframework.ui.Model model) {
 		System.out.println("FacilityController :: /facility/cafeteria.do");
 		List<Map<String, Object>> list = facilityService.selectCafeteriaList();
 		System.out.println("결과 : " + list);
+		model.addAttribute("cafeteriaList", list);
 		return "facility/cafeteria/cafeteriaPage";
 	}
 	

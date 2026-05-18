@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+#facility-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#facility-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 40px;
+}
+
+#facility-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.facility-btn {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding: 25px 30px;
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    background-color: #ffffff;
+    text-align: left;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.facility-btn:hover {
+    border-color: #003399;
+    background-color: #e9f0ff;
+    color: #003399;
+}
+
+.facility-btn p {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #666;
+    margin: 5px 0 0 0;
+}
+
+.facility-btn:hover p {
+    color: #003399;
+}

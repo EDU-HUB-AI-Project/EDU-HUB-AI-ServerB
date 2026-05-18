@@ -1,0 +1,30 @@
+@charset "UTF-8";
+
+#guide-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+#guide-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 30px;
+}
+.info-label {
+    color: #666;
+    font-size: 1rem;
+}
+.info-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #003399;
+}
+#back-btn {
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
