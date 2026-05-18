@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+#badge-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+#badge-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 30px;
+}
+
+/* 키패드 */
+#keypad-area {
+    display: block;
+    margin-bottom: 20px;
+}
+
+#keypad-display {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    padding: 15px;
+    border: 2px solid #003399;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    letter-spacing: 10px;
+    min-height: 70px;
+    color: #003399;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.key-btn {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 20px;
+    border: none;
+    border-radius: 10px;
+    background: #f0f0f0;
+    cursor: pointer;
+}
+
+.key-btn:hover {
+    background: #003399;
+    color: white;
+}
+
+.key-btn:active {
+    background: #002277;
+    color: white;
+}
+
+.key-delete {
+    background: #ff4444;
+    color: white;
+}
+
+.key-delete:hover {
+    background: #cc0000;
+    color: white;
+}
+
+.key-confirm {
+    background: #003399;
+    color: white;
+    padding: 20px;
+    margin-top: 10px;
+}
+
+.key-confirm:hover {
+    background: #002277;
+    color: white;
+}
+
+.key-clear {
+    background: #ff8800;
+    color: white;
+}
+
+.key-clear:hover {
+    background: #cc6600;
+    color: white;
+}
+
+#result-table {
+    width: 100%;
+}
+
+#result-table thead {
+    font-size: 1.1rem;
+}
+
+#result-table tbody tr {
+    font-size: 1.2rem;
+    height: 60px;
+    cursor: pointer;
+}
+
+#result-table tbody td {
+    vertical-align: middle;
+}
+
+#selected-area {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #e9f0ff;
+    border-radius: 10px;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+#confirm-btn {
+    display: none;
+    width: 100%;
+    font-size: 1.5rem;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+#cancel-btn {
+    display: none;
+    width: 100%;
+    font-size: 1.3rem;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+#no-result {
+    display: none;
+    text-align: center;
+    font-size: 1.3rem;
+    color: red;
+    margin-top: 20px;
+}

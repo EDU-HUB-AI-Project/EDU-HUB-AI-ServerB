@@ -12,4 +12,8 @@ public class ApiClient {
 	public <T> T get(String url, Class<T> responseType) {
 		return restTemplate.getForObject(baseUrl + url, responseType);
 	}
+	
+	public <T> T post(String url, Class<T> responseType) {
+		return restTemplate.postForObject(baseUrl + url, null, responseType);
+	}
 }
