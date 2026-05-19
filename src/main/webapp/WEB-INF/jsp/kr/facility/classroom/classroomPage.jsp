@@ -107,9 +107,4 @@
             <p>해당 층 도면은 준비 중입니다.</p>
         </div>
     </div>
-    
-    <script>
-    	var contextPath = '';
-	</script>
-	<script src="/resources/classroom/classroom.js"></script>
 </div>
