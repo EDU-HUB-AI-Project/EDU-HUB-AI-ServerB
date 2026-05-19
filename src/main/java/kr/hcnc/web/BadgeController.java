@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,42 +22,39 @@ public class BadgeController {
 	@Resource(name = "badgeService")
 	private BadgeService badgeService;
 	
+	private static final Logger log = LoggerFactory.getLogger(BadgeController.class);
+	
 	@RequestMapping(value = "/searchStudent.do")
 	@ResponseBody
 	public List<Map<String, Object>> selectStudent(String param) {
-		System.out.println("BadgeController :: /searchStudent.do");
+		log.info("BadgeController :: /searchStudent.do");
 		
 		if(!RequestValidator.isValidBirthDate(param))
 			return new ArrayList<>();
 		
 		List<Map<String, Object>> list = badgeService.selectStudents(param);
-		System.out.println("BadgeController :: list = " + list);
+		log.info("BadgeController :: list = {}", list);
 		return list;
 	}
 	
 	@RequestMapping(value = "/studentDetail.do")
 	@ResponseBody
 	public Map<String, Object> selectStudentDetail(String param) {
-		System.out.println("BadgeController :: /studentDetail.do");
+		log.info("BadgeController :: /studentDetail.do");
 		
 		if(!RequestValidator.isValidStudentId(param))
 			return new HashMap<>();
 		
 		Map<String, Object> map = badgeService.selectStudentDetail(param);
-		System.out.println("/studentDetail.do :: map = " + map);
+
+		log.info("BadgeController :: map = {}", map);
 		return map;
-	}
-	
-	@RequestMapping(value = "/guide.do")
-	public String guidePage() {
-		System.out.println("MainController :: /guide.do");
-		return "guide/guidePage";
 	}
 	
 	@RequestMapping(value = "/updateStudent.do")
 	@ResponseBody
 	public Map<String, Object> updateStudentStatus(String param) {
-		System.out.println("BadgeController :: /updateStudentStatus.do");
+		log.info("BadgeController :: /updateStudentStatus.do");
 		
 		if(!RequestValidator.isValidStudentId(param)) {
 			Map<String, Object> result = new HashMap<>();
@@ -65,7 +64,7 @@ public class BadgeController {
 		}
 		
 		Map<String, Object> map = badgeService.updateStudentStatus(param);
-		System.out.println("/updateStudentStatus.do :: map = " + map);
+		log.info("/updateStudentStatus :: map = {}", map);
 		return map;
 	}
 }
