@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/classroom.css">
+<link rel="stylesheet" href="/resources/classroom/classroom.css">
 <div id="classroom-container">
     <div id="classroom-title">
         🏫 강의실 안내
@@ -111,5 +111,5 @@
     <script>
     	var contextPath = '';
 	</script>
-	<script src="/resources/js/classroom.js"></script>
+	<script src="/resources/classroom/classroom.js"></script>
 </div>

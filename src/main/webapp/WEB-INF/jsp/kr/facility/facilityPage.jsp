@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/resources/css/facility.css">
+<link rel="stylesheet" href="/resources/facility/facility.css">
 
 <div id="facility-container">
 
@@ -34,4 +34,4 @@
 
 </div>
 
-<script src="/resources/js/facility.js"></script>
+<script src="/resources/facility/facility.js"></script>
