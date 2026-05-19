@@ -44,6 +44,8 @@ function clearOverlays() {
 
 /* 길찾기 버튼 클릭 */
 function searchRoute(type) {
+    $('.route-btn').removeClass('active');
+    $(event.currentTarget).addClass('active');
     var dest = DESTINATIONS[type];
     clearOverlays();
 
