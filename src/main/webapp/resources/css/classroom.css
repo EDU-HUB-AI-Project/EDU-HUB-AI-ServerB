@@ -83,6 +83,19 @@
     #label-줄걸이 { top: 56.0%; left: 76.0%; }
     #label-크레인 { top: 62.0%; left: 81.0%; }
 
+    /* 2층 레이블 */
+    #label-202강의실 { top: 49.5%; left: 11.2%; }
+    #label-201강의실 { top: 54.5%; left: 17.5%; }
+    #label-청력보존 { top: 65.2%; left: 35.7%; }
+    #label-위험물 { top: 65.2%; left: 41.0%; }
+    #label-화학설비 { top: 51.6%; left: 65.9%; }
+    #label-203강의실 { top: 45.0%; left: 73.7%; }
+    #label-작업환경 { top: 40.0%; left: 78.9%; }
+    #label-휴먼에러 { top: 53.8%; left: 74.3%; }
+    #label-204강의실 { top: 50.9%; left: 78.5%; }
+    #label-건강증진 { top: 45.5%; left: 84.0%; }
+    #label-쉼터 { top: 58.9%; left: 64.4%; }
+
     /* 4층 레이블 */
     #label-교육기획부 { top: 44.0%; left: 9.0%; }
     #label-전문교육부 { top: 47.5%; left: 13.0%; }

@@ -7,13 +7,13 @@
     
     <div id="floor-tabs">
         <button type="button" class="floor-btn" onclick="changeFloor(1, this)">1F</button>
-        <button type="button" class="floor-btn" onclick="changeFloor(2, this)">2F</button>
+        <button type="button" class="floor-btn active" onclick="changeFloor(2, this)">2F</button>
         <button type="button" class="floor-btn" onclick="changeFloor(3, this)">3F</button>
-        <button type="button" class="floor-btn active" onclick="changeFloor(4, this)">4F</button>
+        <button type="button" class="floor-btn" onclick="changeFloor(4, this)">4F</button>
     </div>
     
     <div id="floor-map">
-        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_4f.png" alt="4층 강의실 배치도">
+        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_2f.png" alt="2층 강의실 배치도">
         
         <%-- 1층 레이블 --%>
         <div class="floor-labels" id="labels-1" style="display:none;">
@@ -28,17 +28,19 @@
         </div>
         
 	    <%-- 2층 레이블 --%>
-	    <div class="floor-labels" id="labels-2" style="display:none;">
+	    <div class="floor-labels" id="labels-2">
 			<div class="room-label" id="label-201강의실">201강의실</div>
 			<div class="room-label" id="label-202강의실">202강의실</div>
-			<div class="room-label" id="label-청력보존">청력보전실습실</div>
+			<div class="room-label" id="label-청력보존">청력보전<br>실습실</div>
 			<div class="room-label" id="label-위험물">위험물<br>취급실습실</div>
-			<div class="room-label" id="label-화학설비">화학설비실습실</div>
+			<div class="room-label" id="label-화학설비">화학설비<br>실습실</div>
 			<div class="room-label" id="label-203강의실">203강의실</div>
-			<div class="room-label" id="label-작업환경">작업환경측정실습실</div>
-			<div class="room-label" id="label-휴먼에러">휴먼에러실습실</div>
+			<div class="room-label" id="label-작업환경">작업환경측정<br>실습실</div>
+			<div class="room-label" id="label-휴먼에러">휴먼에러<br>실습실</div>
 			<div class="room-label" id="label-204강의실">204강의실</div>
-			<div class="room-label" id="label-건강증진">건강증진실습실</div>
+			<div class="room-label" id="label-건강증진">건강증진<br>실습실</div>
+			<div class="room-label" id="label-쉼터">교육생쉼터</div>
+
 	    </div>
 	
 	    <%-- 3층 레이블 --%>
@@ -46,7 +48,7 @@
 	    </div>
 	
 	    <%-- 4층 레이블 --%>
-	    <div class="floor-labels" id="labels-4">
+	    <div class="floor-labels" id="labels-4" style="display:none;">
 			<div class="room-label" id="label-교육기획부">교육기획부</div>
 			<div class="room-label" id="label-전문교육부">전문교육부</div>
 			<div class="room-label" id="label-특정교육부">특정교육부</div>
