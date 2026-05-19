@@ -39,3 +39,7 @@ target/
 
 # DB 설정 파일 제외
 src/main/resources/egovframework/egovProps/globals.properties
+
+# Claude Code
+.claude/
+CLAUDE.md
