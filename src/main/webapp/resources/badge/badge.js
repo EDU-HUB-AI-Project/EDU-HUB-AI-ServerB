@@ -9,6 +9,12 @@ function searchByBirth(birth) {
 		data: {param : birth},
 		success: function(data) {
             hideLoading();
+
+            if(data.status === 'error' || data.status === 'fail') {
+                showAlert(data.message || '오류가 발생하였습니다.');
+                return;
+            }
+
 			$('#result-body').empty();
             $('#selected-area').hide();
             $('#confirm-btn').hide();
