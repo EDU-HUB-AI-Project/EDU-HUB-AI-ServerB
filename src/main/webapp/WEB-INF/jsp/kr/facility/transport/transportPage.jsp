@@ -46,5 +46,4 @@
 
 </div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eec8e69f7553e61a39348fff684dd5c6&autoload=false&libraries=services"></script>
 <script src="/resources/transport/transport.js"></script>

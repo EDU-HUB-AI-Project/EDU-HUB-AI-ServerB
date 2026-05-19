@@ -12,12 +12,12 @@ kakao.maps.load(function() {
     DESTINATIONS = {
         station: {
             name: '울산역(KTX)',
-            coords: new kakao.maps.LatLng(35.5578336, 129.2296605),
+            coords: new kakao.maps.LatLng(35.550686, 129.137939),
             stopId: 'TODO'
         },
         terminal: {
             name: '울산고속버스터미널',
-            coords: new kakao.maps.LatLng(35.5469022, 129.3323648),
+            coords: new kakao.maps.LatLng(35.5365477, 129.3396948),
             stopId: 'TODO'
         }
     };
@@ -80,42 +80,65 @@ function showBusInfo(type, dest) {
     $title.text('🚏 ' + dest.name + ' 방면 버스 안내');
     $list.html('<p class="loading-text">버스 정보를 불러오는 중...</p>');
 
-    fetchBusArrival(dest.stopId, function(buses) {
+    fetchBusArrival(type, dest.stopId, function(buses) {
         if (!buses || buses.length === 0) {
             $list.html('<p class="no-bus-text">현재 버스 정보를 불러올 수 없습니다.</p>');
             return;
         }
         $list.empty();
+        // 테스트 케이스용 아웃풋
         buses.forEach(function(bus) {
             $list.append(
                 '<div class="bus-card">' +
-                '<span class="bus-no">' + bus.routeNo + '번</span>' +
-                '<span class="bus-stop">📍 ' + bus.stopName + '</span>' +
-                '<span class="bus-arrival">' + bus.arrivalMsg + '</span>' +
+                '<span class="bus-no">' + bus.routeNm + '</span>' +
+                '<span class="bus-stop">📍 ' + bus.stopNm + '</span>' +
+                '<span class="bus-arrival">' + Math.ceil(bus.arrivalTime / 60) + '분 후 도착</span>' +
                 '</div>'
             );
         });
+        // buses.forEach(function(bus) {
+        //     $list.append(
+        //         '<div class="bus-card">' +
+        //         '<span class="bus-no">' + bus.routeNo + '번</span>' +
+        //         '<span class="bus-stop">📍 ' + bus.stopName + '</span>' +
+        //         '<span class="bus-arrival">' + bus.arrivalMsg + '</span>' +
+        //         '</div>'
+        //     );
+        // });
     });
 }
 
 /* BIS API 호출 */
-function fetchBusArrival(stopId, callback) {
-    var url = 'http://openapi.its.ulsan.kr/UlsanAPI/BusArrivalInfo.xo' +
-        '?serviceKey=' + BIS_KEY +
-        '&StopId=' + stopId +
-        '&pageNo=1&numOfRows=20';
+function fetchBusArrival(type, stopId, callback) {
+    /* TODO: BIS API 승인 후 실제 호출로 교체 */
+    var mockData = {
+        station: [
+            { routeNm: '5003(울산역 방면)', arrivalTime: 180, prevStopCnt: 3, stopNm: '성안동 정류장' },
+            { routeNm: '327(울산역 방면)', arrivalTime: 420, prevStopCnt: 7, stopNm: '성안동 정류장' },
+            { routeNm: '114(울산역 방면)', arrivalTime: 660, prevStopCnt: 11, stopNm: '성안동 정류장' }
+        ],
+        terminal: [
+            { routeNm: '233(고속버스터미널 방면)', arrivalTime: 300, prevStopCnt: 5, stopNm: '성안동 정류장' },
+            { routeNm: '401(고속버스터미널 방면)', arrivalTime: 720, prevStopCnt: 12, stopNm: '성안동 정류장' }
+        ]
+    };
+    callback(mockData[type] || []);
+    // var url = 'http://openapi.its.ulsan.kr/UlsanAPI/BusArrivalInfo.xo' +
+    //     '?serviceKey=' + BIS_KEY +
+    //     '&StopId=' + stopId +
+    //     '&pageNo=1&numOfRows=20';
 
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'xml',
-        success: function(xml) {
-            callback(parseBusArrival(xml));
-        },
-        error: function() {
-            callback([]);
-        }
-    });
+    // $.ajax({
+    //     url: url,
+    //     type: 'GET',
+    //     dataType: 'xml',
+    //     success: function(xml) {
+    //         callback(parseBusArrival(xml));
+    //     },
+    //     error: function() {
+    //         callback([]);
+    //     }
+    // });
 }
 
 /* BIS XML 파싱 */
