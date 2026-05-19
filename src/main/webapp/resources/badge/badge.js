@@ -37,9 +37,9 @@ function searchByBirth(birth) {
                 $('#result-body').append(tr);
 			});
 		},
-		error: function() {
+		error: function(xhr) {
             hideLoading();
-			showAlert("오류 발생");
+			showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
 		}
 	});
 }
@@ -96,6 +96,10 @@ function confirmStudent() {
                                 $('#card-dorm').text(dong + '동 ' + ho + '호');
                             }
                         });
+                    },
+                    error: function(xhr) {
+                        hideLoading();
+                        showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
                     }
                 });
             }
@@ -122,6 +126,9 @@ function confirmStudent() {
                                     $('#card-dorm').text(dong + '동 ' + ho + '호');
                                 }
                             });
+                        },
+                        error: function(xhr) {
+                            showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
                         }
                     });
                 
@@ -134,9 +141,9 @@ function confirmStudent() {
                 showAlert(data.message);
             }
         },
-        error: function() {
+        error: function(xhr) {
             hideLoading();
-            showAlert('오류가 발생하였습니다.');
+            showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
         }
     });
 }
