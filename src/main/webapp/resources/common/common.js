@@ -26,7 +26,9 @@ function loadPage(url) {
     } else if(url == '/facility.do') {
         $('#nav-facility').addClass('active');
     }
-    $('#content-area').load(url);
+    $('#content-area').load(url, function(response, status) {
+        if(status === 'error') showAlert('페이지 로드에 실패했습니다.');
+    });
     resetIdleTimer();
 }
 
