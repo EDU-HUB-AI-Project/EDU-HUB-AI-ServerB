@@ -6,17 +6,17 @@
     </div>
     
     <div id="floor-tabs">
-        <button type="button" class="floor-btn" onclick="changeFloor(1, this)">1F</button>
+        <button type="button" class="floor-btn active" onclick="changeFloor(1, this)">1F</button>
         <button type="button" class="floor-btn" onclick="changeFloor(2, this)">2F</button>
-        <button type="button" class="floor-btn active" onclick="changeFloor(3, this)">3F</button>
+        <button type="button" class="floor-btn" onclick="changeFloor(3, this)">3F</button>
         <button type="button" class="floor-btn" onclick="changeFloor(4, this)">4F</button>
     </div>
     
     <div id="floor-map">
-        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_3f.png" alt="3층 강의실 배치도">
+        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_1f.png" alt="1층 강의실 배치도">
         
         <%-- 1층 레이블 --%>
-        <div class="floor-labels" id="labels-1" style="display:none;">
+        <div class="floor-labels" id="labels-1">
         	<div class="room-label" id="label-대강당">대강당</div>
         	<div class="room-label" id="label-유체역학">유체역학실험실습실</div>
         	<div class="room-label" id="label-밀폐공간">밀페공간<br>실습실</div>
@@ -43,7 +43,7 @@
 	    </div>
 	
 	    <%-- 3층 레이블 --%>
-	    <div class="floor-labels" id="labels-3">
+	    <div class="floor-labels" id="labels-3" style="display:none;">
 			<div class="room-label" id="label-301강의실">301강의실</div>
 			<div class="room-label" id="label-302강의실">302강의실</div>
 			<div class="room-label" id="label-컴퓨터실습실">컴퓨터실습실</div>
