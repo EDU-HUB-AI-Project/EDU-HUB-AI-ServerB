@@ -25,7 +25,7 @@
             <p>교육 과정별 강의실 배치도</p>
         </button>
 
-        <button type="button" class="facility-btn" onclick="location.href='/facility/transport.do'">
+        <button type="button" class="facility-btn" onclick="loadPage('/facility/transport.do')"> 
             🚆 교통정보
             <p>KTX · 시외버스 이동 안내</p>
         </button>

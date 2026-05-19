@@ -27,6 +27,88 @@
     border: 1px solid #dee2e6;
 }
 
+
+/* 길찾기 버튼 */
+#route-buttons {
+    display: flex;
+    gap: 15px;
+}
+
+.route-btn {
+    flex: 1;
+    padding: 16px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background-color: #003399;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.route-btn:hover {
+    background-color: #0044cc;
+}
+
+/* 버스 안내 결과 */
+#bus-result {
+    background-color: #f0f4ff;
+    border: 1px solid #c0cff5;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+#bus-result-title {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 15px;
+}
+
+#bus-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.bus-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    padding: 14px 18px;
+}
+
+.bus-no {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #003399;
+    min-width: 70px;
+}
+
+.bus-stop {
+    flex: 1;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.bus-arrival {
+    font-size: 0.95rem;
+    font-weight: bold;
+    color: #e63946;
+}
+
+.loading-text,
+.no-bus-text {
+    font-size: 0.95rem;
+    color: #888;
+    text-align: center;
+    padding: 10px 0;
+}
+
 #transport-info {
     display: flex;
     gap: 15px;
