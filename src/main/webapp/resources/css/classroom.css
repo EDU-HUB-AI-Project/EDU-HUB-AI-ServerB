@@ -96,6 +96,30 @@
     #label-건강증진 { top: 45.5%; left: 84.0%; }
     #label-쉼터 { top: 58.9%; left: 64.4%; }
 
+    /* 3층 레이블 */
+    #label-301강의실 { top: 39.0%; left: 17.0%; }
+    #label-302강의실 { top: 46.0%; left: 11.0%; }
+    #label-컴퓨터실습실 { top: 47.0%; left: 25.1%; }
+    #label-교재보관고 { top: 51.9%; left: 29.0%; }
+    #label-303강의실 { top: 51.9%; left: 36.1%; }
+    #label-석면실습실 { top: 51.9%; left: 43.5%; }
+    #label-소음진동실습실2 { top: 51.9%; left: 49.5%; }
+    #label-소음진동실습실1 { top: 51.9%; left: 54.7%; }
+    #label-교재보관고2 { top: 51.3%; left: 59.5%; }
+    #label-방폭전기실습실 { top: 47.0%; left: 61.6%; }
+    #label-304강의실 { top: 42.5%; left: 67.5%; }
+    #label-305강의실 { top: 37.5%; left: 73.2%; }
+    #label-306강의실 { top: 32.5%; left: 78.5%; }
+    #label-국소배기 { top: 43.5%; left: 77.0%; }
+    #label-보호구실습실 { top: 50.0%; left: 71.5%; }
+    #label-전기기초 { top: 61.0%; left: 32.5%; }
+    #label-전기안전점검 { top: 61.0%; left: 38.0%; }
+    #label-인간공학 { top: 61.0%; left: 44.0%; }
+    #label-분임토의실1 { top: 49.5%; left: 17.3%; }
+    #label-분임토의실2 { top: 52.0%; left: 15.0%; }
+    #label-분임토의실3 { top: 54.0%; left: 22.5%; }
+    #label-분임토의실4 { top: 56.0%; left: 19.5%; }
+
     /* 4층 레이블 */
     #labels-4 .room-label {
         font-size: 7px;

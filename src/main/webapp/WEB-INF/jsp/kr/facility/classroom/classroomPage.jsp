@@ -8,12 +8,12 @@
     <div id="floor-tabs">
         <button type="button" class="floor-btn" onclick="changeFloor(1, this)">1F</button>
         <button type="button" class="floor-btn" onclick="changeFloor(2, this)">2F</button>
-        <button type="button" class="floor-btn" onclick="changeFloor(3, this)">3F</button>
-        <button type="button" class="floor-btn active" onclick="changeFloor(4, this)">4F</button>
+        <button type="button" class="floor-btn active" onclick="changeFloor(3, this)">3F</button>
+        <button type="button" class="floor-btn" onclick="changeFloor(4, this)">4F</button>
     </div>
     
     <div id="floor-map">
-        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_4f.png" alt="4층 강의실 배치도">
+        <img id="floor-img" src="${pageContext.request.contextPath}/images/floor_3f.png" alt="3층 강의실 배치도">
         
         <%-- 1층 레이블 --%>
         <div class="floor-labels" id="labels-1" style="display:none;">
@@ -40,15 +40,36 @@
 			<div class="room-label" id="label-204강의실">204강의실</div>
 			<div class="room-label" id="label-건강증진">건강증진<br>실습실</div>
 			<div class="room-label" id="label-쉼터">교육생쉼터</div>
-
 	    </div>
 	
 	    <%-- 3층 레이블 --%>
-	    <div class="floor-labels" id="labels-3" style="display:none;">
+	    <div class="floor-labels" id="labels-3">
+			<div class="room-label" id="label-301강의실">301강의실</div>
+			<div class="room-label" id="label-302강의실">302강의실</div>
+			<div class="room-label" id="label-컴퓨터실습실">컴퓨터실습실</div>
+			<div class="room-label" id="label-교재보관고">교제보관고</div>
+			<div class="room-label" id="label-분임토의실1">분임토의실</div>
+			<div class="room-label" id="label-분임토의실2">분임토의실</div>
+			<div class="room-label" id="label-분임토의실3">분임토의실</div>
+			<div class="room-label" id="label-분임토의실4">분임토의실</div>
+			<div class="room-label" id="label-303강의실">303강의실</div>
+			<div class="room-label" id="label-석면실습실">석면실습실</div>
+			<div class="room-label" id="label-소음진동실습실2">소음진동<br>실습실2</div>
+			<div class="room-label" id="label-소음진동실습실1">소음진동<br>실습실1</div>
+			<div class="room-label" id="label-전기기초">전기기초실<br>실무실습실</div>
+			<div class="room-label" id="label-전기안전점검">전기안전<br>점검실습실</div>
+			<div class="room-label" id="label-인간공학">인간공학<br>실습실</div>
+			<div class="room-label" id="label-교재보관고2">교재보관고</div>
+			<div class="room-label" id="label-방폭전기실습실">방폭전기실습실</div>
+			<div class="room-label" id="label-304강의실">304강의실</div>
+			<div class="room-label" id="label-305강의실">305강의실</div>
+			<div class="room-label" id="label-306강의실">306강의실</div>
+			<div class="room-label" id="label-보호구실습실">보호구실습실</div>
+			<div class="room-label" id="label-국소배기">국소배기장치<br>실습실 및 강의실</div>
 	    </div>
 	
 	    <%-- 4층 레이블 --%>
-	    <div class="floor-labels" id="labels-4">
+	    <div class="floor-labels" id="labels-4" style="display:none;">
 			<div class="room-label" id="label-교육기획부">교육기획부</div>
 			<div class="room-label" id="label-전문교육부">전문교육부</div>
 			<div class="room-label" id="label-특정교육부">특정교육부</div>
