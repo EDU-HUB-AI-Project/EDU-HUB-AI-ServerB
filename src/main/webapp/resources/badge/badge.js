@@ -86,6 +86,12 @@ function confirmStudent() {
                     data: { param: studentId },
                     success: function(data) {
                         hideLoading();
+
+                        $('#print-edu-name').text(data.EDU_NAME);
+                        $('#print-student-name').text(data.STUDENT_NAME);
+                        // TODO: 프린터 정보 확정 시 아래 window.print() 를 로컬 프린터 API 호출로 교체
+                        window.print();
+
                         $('#content-area').load('/guide.do', function() {
                             $('#card-name').text(data.STUDENT_NAME);
                             $('#card-edu-name').text(data.EDU_NAME);
