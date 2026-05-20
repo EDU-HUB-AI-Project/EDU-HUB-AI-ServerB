@@ -1,6 +1,4 @@
 // 호실별 Canvas 좌표 (단위: %, 이미지 기준) - 실제 도면 측정 후 보정 필요
-var KIOSK_SITE = '${kioskSite}';
-
 var roomCoordsMap  = {
     incheon: {
         '101': { floor: 1, x: 14, y: 44, w: 14, h: 10 },
