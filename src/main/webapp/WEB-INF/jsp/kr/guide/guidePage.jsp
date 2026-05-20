@@ -75,4 +75,3 @@
 
 </div>
 
-<script src="/resources/guide/guide.js"></script> 

@@ -4,33 +4,35 @@ var activeInfoWindows = [];
 var ORIGIN;
 var DESTINATIONS;
 
-kakao.maps.load(function() {
-    ORIGIN = new kakao.maps.LatLng(35.564887329486496, 129.32046843019748);
+function initTransportMap() {
+    kakao.maps.load(function() {
+        ORIGIN = new kakao.maps.LatLng(35.564887329486496, 129.32046843019748);
 
-    DESTINATIONS = {
-        station: {
-            name: '울산역(KTX)',
-            coords: new kakao.maps.LatLng(35.550686, 129.137939),
-            stopId: 'TODO'
-        },
-        terminal: {
-            name: '울산고속버스터미널',
-            coords: new kakao.maps.LatLng(35.5365477, 129.3396948),
-            stopId: 'TODO'
-        }
-    };
+        DESTINATIONS = {
+            station: {
+                name: '울산역(KTX)',
+                coords: new kakao.maps.LatLng(35.550686, 129.137939),
+                stopId: 'TODO'
+            },
+            terminal: {
+                name: '울산고속버스터미널',
+                coords: new kakao.maps.LatLng(35.5365477, 129.3396948),
+                stopId: 'TODO'
+            }
+        };
 
-    var container = document.getElementById('map');
-    map = new kakao.maps.Map(container, { center: ORIGIN, level: 5 });
+        var container = document.getElementById('map');
+        map = new kakao.maps.Map(container, { center: ORIGIN, level: 5 });
 
-    var originMarker = new kakao.maps.Marker({ position: ORIGIN });
-    originMarker.setMap(map);
+        var originMarker = new kakao.maps.Marker({ position: ORIGIN });
+        originMarker.setMap(map);
 
-    var infowindow = new kakao.maps.InfoWindow({
-        content: '<div style="padding:5px;font-size:12px;font-weight:bold;">한국산업안전보건교육원</div>'
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="padding:5px;font-size:12px;font-weight:bold;">한국산업안전보건교육원</div>'
+        });
+        infowindow.open(map, originMarker);
     });
-    infowindow.open(map, originMarker);
-});
+}
 
 /* 마커/인포윈도우 초기화 */
 function clearOverlays() {
