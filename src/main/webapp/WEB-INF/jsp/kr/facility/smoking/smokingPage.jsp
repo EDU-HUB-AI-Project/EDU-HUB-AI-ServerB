@@ -14,7 +14,10 @@
         <%-- 흡연장 사진 영역 --%>
         <div id="smoking-photos" style="display: none;">
             <div id="photo-title"></div>
-            <img id="smoking-photo" alt="흡연장 사진">
+            <div id="photo-container">
+                <img id="smoking-photo-1" alt="흡연장 사진 1">
+                <img id="smoking-photo-2" alt="흡연장 사진 2">
+            </div>
             <button onclick="closePhoto()">닫기</button>
         </div>
 
@@ -31,36 +34,28 @@
         };
         var map = new kakao.maps.Map(container, options);
 
-        // 흡연장 마커 정보
-        var smokingAreas = [
-            {
-                lat : 35.56529749843293,
-                lng : 129.32073941419753,
-                title : '흡연장 1',
-                photo : '/images/smoking_area_1.png'
-            },
-            {
-                lat : 35.56527636426698,
-                lng : 129.32066712401362,
-                title : '흡연장 2',
-                photo : '/images/smoking_area_2.png'
-            }
-        ];
+        var smokingArea = {
+            lat : 35.56529749843293,
+            lng : 129.32073941419753,
+            title : '흡연장',
+            photos : [
+                '/images/smoking_area/smoking_area_1.png',
+                '/images/smoking_area/smoking_area_2.png'
+            ]
+        };
 
-        smokingAreas.forEach(function(area) {
-            var markerPosition = new kakao.maps.LatLng(area.lat, area.lng);
-            var marker = new kakao.maps.Marker({
-                position : markerPosition,
-                title : area.title
-            });
-            marker.setMap(map);
+        var markerPosition = new kakao.maps.LatLng(smokingArea.lat, smokingArea.lng);
+        var marker = new kakao.maps.Marker({
+            position : markerPosition,
+            title : smokingArea.title
+        });
+        marker.setMap(map);
 
-            // 마커 클릭 시 사진 표시
-            kakao.maps.event.addListener(marker, 'click', function() {
-                document.getElementById('photo-title').innerText = area.title;
-                document.getElementById('smoking-photo').src = area.photo;
-                document.getElementById('smoking-photos').style.display = 'block';
-            });
+        kakao.maps.event.addListener(marker, 'click', function() {
+            document.getElementById('photo-title').innerText = smokingArea.title;
+            document.getElementById('smoking-photo-1').src = smokingArea.photos[0];
+            document.getElementById('smoking-photo-2').src = smokingArea.photos[1];
+            document.getElementById('smoking-photos').style.display = 'block';
         });
     });
 

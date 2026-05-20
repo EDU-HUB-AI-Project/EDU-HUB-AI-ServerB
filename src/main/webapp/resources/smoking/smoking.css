@@ -1,9 +1,15 @@
 @charset "UTF-8";
 
-#smoking-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+#photo-container {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#photo-container img {
+    max-width: 48%;
+    border-radius: 8px;
 }
 
 #smoking-title {
@@ -20,14 +26,6 @@
     border-radius: 12px;
     border: 1px solid #dee2e6;
     margin-bottom: 20px;
-}
-
-#smoking-photos {
-    text-align: center;
-    padding: 20px;
-    border: 1px solid #dee2e6;
-    border-radius: 12px;
-    background-color: #f8f9fa;
 }
 
 #photo-title {
