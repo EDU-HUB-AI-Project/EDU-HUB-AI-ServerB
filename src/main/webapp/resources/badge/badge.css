@@ -1,48 +1,48 @@
 @charset "UTF-8";
 
 #badge-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+    max-width: 1040px;
+    margin: 40px auto;
+    padding: 30px;
 }
 
 #badge-title {
     text-align: center;
-    font-size: 2rem;
+    font-size: 2.4rem;
     font-weight: bold;
     color: #003399;
-    margin-bottom: 30px;
+    margin-bottom: 40px;
 }
 
 /* 키패드 */
 #keypad-area {
     display: block;
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 #keypad-display {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
     text-align: center;
-    padding: 15px;
+    padding: 18px;
     border: 2px solid #003399;
     border-radius: 10px;
     margin-bottom: 15px;
     letter-spacing: 10px;
-    min-height: 70px;
+    min-height: 80px;
     color: #003399;
 }
 
 .keypad-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
+    gap: 12px;
 }
 
 .key-btn {
-    font-size: 1.8rem;
+    font-size: 2rem;
     font-weight: bold;
-    padding: 20px;
+    padding: 25px;
     border: none;
     border-radius: 10px;
     background: #f0f0f0;
@@ -72,8 +72,8 @@
 .key-confirm {
     background: #003399;
     color: white;
-    padding: 20px;
-    margin-top: 10px;
+    padding: 25px;
+    margin-top: 12px;
 }
 
 .key-confirm:hover {
@@ -96,12 +96,12 @@
 }
 
 #result-table thead {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
 }
 
 #result-table tbody tr {
-    font-size: 1.2rem;
-    height: 60px;
+    font-size: 1.4rem;
+    height: 70px;
     cursor: pointer;
 }
 
@@ -111,36 +111,36 @@
 
 #selected-area {
     display: none;
-    margin-top: 20px;
-    padding: 20px;
+    margin-top: 25px;
+    padding: 25px;
     background-color: #e9f0ff;
     border-radius: 10px;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     text-align: center;
 }
 
 #confirm-btn {
     display: none;
     width: 100%;
-    font-size: 1.5rem;
-    padding: 20px;
+    font-size: 1.8rem;
+    padding: 25px;
     border-radius: 10px;
-    margin-top: 20px;
+    margin-top: 25px;
 }
 
 #cancel-btn {
     display: none;
     width: 100%;
-    font-size: 1.3rem;
-    padding: 15px;
+    font-size: 1.5rem;
+    padding: 18px;
     border-radius: 10px;
-    margin-top: 10px;
+    margin-top: 12px;
 }
 
 #no-result {
     display: none;
     text-align: center;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     color: red;
-    margin-top: 20px;
+    margin-top: 25px;
 }
