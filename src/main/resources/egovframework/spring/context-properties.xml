@@ -12,8 +12,15 @@
             <map>
                 <entry key="pageUnit" value="10"/>
                 <entry key="pageSize" value="10"/>
+	            <entry key="kiosk.site" value="ulsan"/>
+	            <!-- <entry key="kiosk.site" value="incheon"/> -->
             </map>
         </property>
+        <property name="extFileName">
+        	<set>
+            	<value>classpath:/globals.properties</value>
+        	</set>
+   		</property>
     </bean>
 
 </beans>
