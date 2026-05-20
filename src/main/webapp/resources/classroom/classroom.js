@@ -10,7 +10,7 @@ function changeFloor(floor, btn) {
     var noImage = document.getElementById('no-image');
     var tempImg = new Image();
 
-    var src = '/images/floor_' + floor + 'f/floor_' + floor + 'f.png';
+    var src = '/images/eduInfo/floor_'+ floor + 'f.png';
 
     tempImg.onload = function() {
         img.onload  = null;

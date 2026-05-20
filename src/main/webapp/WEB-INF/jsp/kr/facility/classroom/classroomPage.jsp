@@ -14,7 +14,7 @@
     
     <div id="floor-map">
 
-        <img id="floor-img" src="/images/floor_1f/floor_1f.png" alt="1층 강의실 배치도">
+        <img id="floor-img" src="/images/eduInfo/floor_1f.png" alt="1층 강의실 배치도">
         
         <div id="no-image" style="display:none;">
             <p>해당 층 도면은 준비 중입니다.</p>
