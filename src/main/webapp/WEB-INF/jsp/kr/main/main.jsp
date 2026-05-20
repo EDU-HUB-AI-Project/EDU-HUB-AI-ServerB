@@ -13,6 +13,7 @@
 <script src="/resources/common/common.js"></script>
 <script src="/resources/badge/badge.js"></script>
 <script src="/resources/classroom/classroom.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&autoload=false&libraries=services"></script>
 </head>
 <body>
 

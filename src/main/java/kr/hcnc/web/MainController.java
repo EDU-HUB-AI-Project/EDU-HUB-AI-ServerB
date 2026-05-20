@@ -20,8 +20,9 @@ public class MainController {
 	private EgovPropertyService propertiesService;
 	
 	@RequestMapping(value = "/main.do")
-	public String mainPage() {
+	public String mainPage(Model model) {
 		log.info("MainController :: /main.do");
+		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "main/main";
 	}
 	
