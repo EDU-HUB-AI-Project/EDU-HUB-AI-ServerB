@@ -48,4 +48,6 @@
     </div>
 
 </div>
-<script src="/resources/transport/transport.js"></script>
+<script>
+    initTransportMap();
+</script>
