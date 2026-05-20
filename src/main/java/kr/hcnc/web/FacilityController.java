@@ -6,7 +6,10 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import egovframework.rte.fdl.property.EgovPropertyService;
 import kr.hcnc.service.FacilityService;
 
 @Controller
@@ -14,6 +17,9 @@ public class FacilityController {
 	
 	@Resource(name = "facilityService")
 	private FacilityService facilityService;
+	
+	@Resource(name = "propertiesService")
+	private EgovPropertyService propertiesService;
 	
 	private static final Logger log = LoggerFactory.getLogger(FacilityController.class);
 	
@@ -50,8 +56,9 @@ public class FacilityController {
 	
 	// 교통정보
 	@RequestMapping(value = "/facility/transport.do")
-	public String transportPage() {
+	public String transportPage(Model model) {
 		log.info("FacilityController :: /facility/transport.do");
+		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "facility/transport/transportPage";
 	}
 }

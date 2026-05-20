@@ -4,8 +4,6 @@ var activeInfoWindows = [];
 var ORIGIN;
 var DESTINATIONS;
 
-var BIS_KEY = '2f62215c1fcb435f3963241f6a0fc91cb28917c2282dffa3fcaf12aa0b3927b9';
-
 kakao.maps.load(function() {
     ORIGIN = new kakao.maps.LatLng(35.564887329486496, 129.32046843019748);
 
