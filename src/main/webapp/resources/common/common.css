@@ -28,20 +28,20 @@ body {
 
 /* 헤더 */
 #header {
-    height: 70px;
+    height: 80px;
     background: var(--white);
     display: none;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 0 30px;
+    padding: 0 40px;
     border-bottom: 3px solid var(--main-blue);
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     flex-wrap: nowrap;
 }
 
 #header-logo {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: var(--main-blue);
     white-space: nowrap;
@@ -50,7 +50,7 @@ body {
 
 #header-nav {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     flex: 1;
     justify-content: center;
 }
@@ -61,9 +61,10 @@ body {
     white-space: nowrap;
     min-width: fit-content;
 }
+
 #nav-badge {
-    padding: 8px 15px;
-    font-size: 0.9rem;
+    padding: 10px 20px;
+    font-size: 1.1rem;
     font-weight: bold;
     border: 2px solid var(--main-blue);
     border-radius: 8px;
@@ -80,8 +81,8 @@ body {
 }
 
 #nav-facility {
-    padding: 8px 15px;
-    font-size: 0.9rem;
+    padding: 10px 20px;
+    font-size: 1.1rem;
     font-weight: bold;
     border: 2px solid var(--main-green);
     border-radius: 8px;
@@ -99,8 +100,8 @@ body {
 
 /* 홈 버튼 */
 #home-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
+    padding: 12px 24px;
+    font-size: 1.2rem;
     border: 2px solid var(--dark-gray);
     border-radius: 8px;
     background: var(--white);
@@ -117,7 +118,7 @@ body {
 /* 컨텐츠 영역 */
 #content-area {
     flex: 1;
-    padding: 30px;
+    padding: 40px;
     background: var(--white);
     overflow-y: auto;
 }
@@ -130,7 +131,7 @@ body {
     align-items: center;
     justify-content: center;
     color: var(--white);
-    font-size: 0.9rem;
+    font-size: 1rem;
 }
 
 /* 처음 화면 오버레이 */
@@ -150,27 +151,27 @@ body {
 }
 
 #intro-title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: bold;
     color: var(--main-blue);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 
 #intro-subtitle {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: var(--dark-gray);
-    margin-bottom: 60px;
+    margin-bottom: 70px;
 }
 
 #intro-buttons {
     display: flex;
-    gap: 50px;
+    gap: 60px;
 }
 
 .intro-btn {
-    width: 300px;
-    height: 300px;
-    font-size: 1.5rem;
+    width: 340px;
+    height: 340px;
+    font-size: 1.8rem;
     font-weight: bold;
     border-radius: 20px;
     cursor: pointer;
@@ -182,7 +183,7 @@ body {
     border: 3px solid var(--main-blue);
     background: var(--white);
     color: var(--main-blue);
-}   
+}
 
 .intro-btn:first-child:hover {
     background: var(--main-blue);
@@ -219,7 +220,7 @@ body {
 #loading-box {
     text-align: center;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.5rem;
     line-height: 2;
 }
 
@@ -230,7 +231,7 @@ body {
 
 /* Modal */
 .modal-dialog {
-    max-width: 500px;
+    max-width: 600px;
 }
 
 .modal-header {
@@ -241,23 +242,23 @@ body {
 }
 
 .modal-title {
-    font-size: 1.5rem;
+    font-size: 1.7rem;
     font-weight: bold;
 }
 
 .modal-body {
-    padding: 30px 20px;
-    font-size: 1.3rem;
+    padding: 35px 25px;
+    font-size: 1.5rem;
     line-height: 1.8;
 }
 
 .modal-footer {
     border-top: none;
-    padding: 10px 20px 20px;
+    padding: 10px 25px 25px;
 }
 
 .modal-footer .btn {
-    min-width: 120px;
-    font-size: 1.2rem;
-    padding: 10px 30px;
+    min-width: 140px;
+    font-size: 1.4rem;
+    padding: 12px 35px;
 }

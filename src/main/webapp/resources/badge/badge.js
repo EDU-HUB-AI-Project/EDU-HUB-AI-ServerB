@@ -101,6 +101,8 @@ function confirmStudent() {
                                 var ho = dormId.substr(6);
                                 $('#card-dorm').text(dong + '동 ' + ho + '호');
                             }
+
+                            initGuideCanvas(data.EDU_ROOM_NAME);
                         });
                     },
                     error: function(xhr) {
@@ -131,6 +133,8 @@ function confirmStudent() {
                                     var ho = dormId.substr(6);
                                     $('#card-dorm').text(dong + '동 ' + ho + '호');
                                 }
+
+                                initGuideCanvas(data.EDU_ROOM_NAME);
                             });
                         },
                         error: function(xhr) {
