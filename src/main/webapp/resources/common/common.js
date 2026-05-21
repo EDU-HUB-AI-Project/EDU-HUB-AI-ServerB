@@ -18,7 +18,7 @@ function selectMenu(url) {
         startIdleTimer();
     }, 500);
 }
-
+ 
 function loadPage(url) {
     $('#nav-badge, #nav-facility').removeClass('active');
     if(url == '/badge.do') {
