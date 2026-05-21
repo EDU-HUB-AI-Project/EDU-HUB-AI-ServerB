@@ -8,6 +8,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.rte.fdl.property.EgovPropertyService;
 import kr.hcnc.service.FacilityService;
@@ -32,7 +34,7 @@ public class FacilityController {
 	
 	// 구내식당
 	@RequestMapping(value = "/facility/cafeteria.do")
-	public String cafeteriaPage(org.springframework.ui.Model model) {
+	public String cafeteriaPage(Model model) {
 		log.info("FacilityController :: /facility/cafeteria.do");
 		List<Map<String, Object>> list = facilityService.selectCafeteriaList();
 		log.info("결과 : {}", list);
@@ -60,5 +62,12 @@ public class FacilityController {
 		log.info("FacilityController :: /facility/transport.do");
 		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "facility/transport/transportPage";
+	}
+	
+	@RequestMapping(value = "/facility/transport/bus.do")
+	@ResponseBody
+	public List<Map<String, Object>> getBusInfo(@RequestParam String dest) {
+		log.info("FacilityController :: /facility/transport/bus.do?dest{}", dest);
+		return facilityService.getBusByDest(dest);
 	}
 }
