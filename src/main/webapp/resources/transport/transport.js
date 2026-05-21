@@ -92,8 +92,8 @@ function showBusInfo(type, dest) {
             $list.append(
                 '<div class="bus-card">' +
                 '<span class="bus-no">' + bus.routeNm + '</span>' +
-                '<span class="bus-stop">📍 ' + bus.stopNm + '</span>' +
-                '<span class="bus-arrival">' + Math.ceil(parseInt(bus.arrivalTime) / 60) + '분 후 도착</span>' +
+                '<span class="bus-stop">📍 ' + bus.stopNm + '(' + bus.remark + ')' +'</span>' +
+                '<span class="bus-arrival">' + Math.ceil(parseInt(bus.arrivalTime) / 60) + '분 후 도착' + '(' + bus.prevStopCnt + '개전 정류장)' +'</span>' +
                 '</div>'
             );
         });

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -59,14 +60,15 @@ public class FacilityService extends EgovAbstractServiceImpl{
 		log.info("FacilityService :: getBusByDest{}", dest);
 		
 		// 정류장 id들 받아오기
-		String[] stopIds = propertiesService.getString("Bis." + dest + ".StopIds").split(",");
+		String[] stopIds = propertiesService.getString("Bis." + dest + ".StopIds").split("\\|");
+		log.info("getBusByDest StopIds :: {}", Arrays.toString(stopIds));
 		List<Map<String, Object>> result = new ArrayList<>();
 		
 		for(String stopId : stopIds) {
 
 			// 목적지 받아오기 (station, terminal)
 			String key = "Bis." + dest + "." + stopId.trim();
-			String[] routes = propertiesService.getString(key).split(",");
+			String[] routes = propertiesService.getString(key).split("\\|");
 			Set<String> routeSet = new HashSet<>(Arrays.asList(routes));
 			
 			log.info("getBusByDest ROUTES :: {}", Arrays.toString(routes));
@@ -96,6 +98,14 @@ public class FacilityService extends EgovAbstractServiceImpl{
 			}
 		*/
 		Map<String, Map<String, Object>> fastest = new LinkedHashMap<>();		// 순서 유지를 위해 LinkedHashMap 사용
+		
+		Iterator<Map<String, Object>> iterator = result.iterator();
+		while(iterator.hasNext()) {
+			Map<String, Object> bus = iterator.next();
+			if(Integer.parseInt((String) bus.get("arrivalTime")) <= 300) {
+				iterator.remove();
+			}
+		}
 		
 		result.sort(new Comparator<Map<String, Object>>() {
 

@@ -74,6 +74,7 @@ public class BisApiService {
             item.put("arrivalTime",  getVal(row, "ARRIVALTIME"));
             item.put("prevStopCnt",  getVal(row, "PREVSTOPCNT"));
             item.put("stopNm",       getVal(row, "STOPNM"));
+            item.put("remark",		 getVal(row, "REMARK"));
             result.add(item);
 		}
 		return result;
