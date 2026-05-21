@@ -1,74 +1,158 @@
-    @charset "UTF-8";
+@charset "UTF-8";
 
-    #classroom-container {
-        max-width: 900px;
-        margin: 30px auto;
-        padding: 20px;
-    }
+#classroom-container {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 20px;
+}
 
-    #classroom-title {
-        text-align: center;
-        font-size: 2rem;
-        font-weight: bold;
-        color: #003399;
-        margin-bottom: 30px;
-    }
+#classroom-title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003399;
+    margin-bottom: 30px;
+}
 
-    #floor-tabs {
-        display: flex;
-        gap: 10px;
-        margin-bottom: 20px;
-        justify-content: center;
-    }
+#floor-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
 
-    .floor-btn {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        border: none;
-        background-color: #444;
-        color: white;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background-color 0.2s;
-    }
+.floor-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    border: none;
+    background-color: #444;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
 
-    .floor-btn:hover {
-        background-color: #003399;
-    }
+.floor-btn:hover {
+    background-color: #003399;
+}
 
-    .floor-btn.active {
-        background-color: #003399;
-    }
+.floor-btn.active {
+    background-color: #003399;
+}
 
-    #floor-map {
-        text-align: center;
-        border: 1px solid #dee2e6;
-        border-radius: 12px;
-        background-color: #fff;
-        padding: 10px;
-        position: relative;
-    }
+/* 도면 + 리스트 레이아웃 */
+#floor-content {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
 
-    .floor-labels {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-    }
+/* 도면 영역 */
+#floor-map {
+    flex: 1;
+    text-align: center;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    background-color: #fff;
+    padding: 10px;
+    position: relative;
+}
 
-    #floor-img {
-        width: 100%;
-        max-width: 860px;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
+#floor-img {
+    width: 100%;
+    max-width: 860px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
 
-    #no-image {
-        padding: 60px 0;
-        font-size: 1.2rem;
-        color: #666;
-    }
+#no-image {
+    padding: 60px 0;
+    font-size: 1.2rem;
+    color: #666;
+}
+
+/* 강의실 목록 영역 */
+#room-list-1,
+#room-list-2,
+#room-list-3,
+#room-list-4 {
+    width: 200px;
+    flex-shrink: 0;
+    flex-direction: column;
+    display: none;
+    border: 1px solid #dee2e6;
+    border-radius: 12px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+/* 상위 리스트 */
+#floor-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#floor-ul > li {
+    padding: 10px;
+    font-weight: bold;
+    color: #003399;
+    border-bottom: 1px solid #dee2e6;
+    cursor: default;
+}
+
+#floor-ul > li:last-child {
+    border-bottom: none;
+}
+
+/* 하위 강의실 리스트 */
+#room-ul-1 {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+}
+
+#room-ul-1 li {
+    padding: 8px 10px;
+    font-weight: normal;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+#room-ul-1 li:last-child {
+    border-bottom: none;
+}
+
+#room-ul-1 li:hover {
+    background-color: #e8f0fe;
+    color: #003399;
+    font-weight: bold;
+}
+
+/* 강의실 강조 이미지 공통 */
+#area_대강당,
+#area_유체역학,
+#area_밀폐공간,
+#area_건설안전,
+#area_건설안전2,
+#area_기계종합,
+#area_줄걸이,
+#area_크레인 {
+    position: absolute;
+    display: none;
+}
+
+/* 1층 강의실별 위치 */
+#area_대강당 { top: 63.2%; left: 15%; }
+#area_유체역학 { top: 6.4%; left: 29.2%; }
+#area_밀폐공간 { top: 36%; left: 32.5%; }
+#area_건설안전 { top: 24.5%; left: 38.5%; }
+#area_건설안전2 { top: 15%; left: 49%; }
+#area_기계종합 { top: 15%; left: 62%; }
+#area_줄걸이 { top: 15%; left: 72.6%; }
+#area_크레인 { top: 15%; left: 84%; }
