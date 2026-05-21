@@ -102,7 +102,7 @@ function modalClose() {
 
 // 자동 초기화 타이머
 var idleTimer = null;
-var idleTime = 10000;   // 테스트용 10초
+var idleTime = 100000;   // 테스트용 100초
 
 function startIdleTimer() {
     clearIdleTimer();
