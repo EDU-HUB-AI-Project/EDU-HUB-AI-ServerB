@@ -34,10 +34,10 @@
         </div>
         <div id="intro-subtitle">스마트 EDU-HUB AI 키오스크</div>
         <div id="intro-buttons">
-            <button type="button" class="intro-btn" onclick="selectMenu('/badge.do', '명찰 발급 및 개인 맞춤 안내')">
+            <button type="button" class="intro-btn" onclick="selectMenu('/badge.do')">
                 🪪<br>명찰 발급 및<br>개인 맞춤 안내
             </button>
-            <button type="button" class="intro-btn" onclick="selectMenu('/facility.do', '보편적 시설 및 정보 안내')">
+            <button type="button" class="intro-btn" onclick="selectMenu('/facility.do')">
                 🏢<br>보편적 시설 및<br>정보 안내
             </button>
              

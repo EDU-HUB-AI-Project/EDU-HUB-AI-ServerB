@@ -79,8 +79,8 @@ function confirmStudent() {
         dataType: 'json',
         success: function(data) {
             if(data.status == 'success') {
-                    console.log(data);        
-                    console.log(data.status);
+                    // console.log(data);        
+                    // console.log(data.status);
                 $.ajax({
                     url: '/studentDetail.do',
                     data: { param: studentId },

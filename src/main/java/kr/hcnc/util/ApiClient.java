@@ -1,5 +1,6 @@
 package kr.hcnc.util;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -7,13 +8,15 @@ import org.springframework.web.client.RestTemplate;
 public class ApiClient {
 	
 	private RestTemplate restTemplate = new RestTemplate();
-	private String baseUrl = "http://localhost:8081/";
+	
+	@Value("${Globals.ApiClient}")
+	private String baseUrl;
 
 	public <T> T get(String url, Class<T> responseType) {
 		return restTemplate.getForObject(baseUrl + url, responseType);
 	}
 	
-	public <T> T post(String url, Class<T> responseType) {
-		return restTemplate.postForObject(baseUrl + url, null, responseType);
+	public <T> T post(String url, Object requestBody, Class<T> responseType) {
+		return restTemplate.postForObject(baseUrl + url, requestBody, responseType);
 	}
 }
