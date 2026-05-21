@@ -40,6 +40,7 @@ public class BadgeService extends EgovAbstractServiceImpl {
 		log.info("BadgeService :: updateStudentStatus()");
 		return apiClient.post(
 				"/api/student/update?studentId=" + param,
+				null,
 				Map.class
 				);
 	}
