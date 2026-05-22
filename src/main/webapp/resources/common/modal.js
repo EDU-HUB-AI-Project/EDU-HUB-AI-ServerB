@@ -1,6 +1,9 @@
 var _modalOnHide = null;
 
-function showModal(message, buttons, onHide) {
+function showModal(message, buttons, onHide, extraClass) {
+    $('#common-modal-box').removeClass('modal-reprint');
+    if (extraClass) $('#common-modal-box').addClass(extraClass);
+
     $('#modal-body').html(message.replace(/\n/g, '<br>'));
     $('#modal-footer').empty();
     _modalOnHide = onHide || null;
@@ -52,6 +55,6 @@ function showReprint(message, reprintCb, guideCb, homeCb) {
         { label: '🖨️ 재출력', style: 'btn-primary me-2', callback: reprintCb },
         { label: '📋 안내 화면', style: 'btn-secondary me-2', callback: guideCb},
         { label: '🏠 처음으로', style: 'btn-outline-secondary', callback: homeCb}
-    ]);
+    ], null, 'modal-reprint');
 }
 

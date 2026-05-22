@@ -278,6 +278,32 @@ body {
     padding: 12px 35px;
 }
 
+/* 재출력 모달 전용 */
+#common-modal-box.modal-reprint {
+    width: 760px;
+}
+
+#common-modal-box.modal-reprint #modal-header {
+    font-size: 1.9rem;
+    padding: 20px;
+}
+
+#common-modal-box.modal-reprint #modal-body {
+    padding: 45px 35px;
+    font-size: 1.6rem;
+}
+
+#common-modal-box.modal-reprint #modal-footer {
+    gap: 16px;
+    padding: 15px 30px 35px;
+}
+
+#common-modal-box.modal-reprint #modal-footer .btn {
+    min-width: 160px;
+    font-size: 1.5rem;
+    padding: 14px 40px;
+}
+
 #print-label {
     display: none;
 }
