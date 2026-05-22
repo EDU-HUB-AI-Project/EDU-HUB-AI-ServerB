@@ -23,7 +23,6 @@
     </div>
 
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eec8e69f7553e61a39348fff684dd5c6&autoload=false"></script>
 <script>
     kakao.maps.load(function() {
         var container = document.getElementById('smoking-map');

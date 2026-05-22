@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 #classroom-container {
-    max-width: 900px;
+    max-width: 1000px; 
     margin: 30px auto;
     padding: 20px;
 }
@@ -42,30 +42,59 @@
     background-color: #003399;
 }
 
-/* 도면 + 리스트 레이아웃 */
 #floor-content {
     display: flex;
     gap: 20px;
     align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
 }
 
-/* 도면 영역 */
-#floor-map {
-    flex: 1;
+#floor-map-area {
+    flex: 0 0 622px;
+    max-width: 622px;
     text-align: center;
     border: 1px solid #dee2e6;
     border-radius: 12px;
     background-color: #fff;
     padding: 10px;
-    position: relative;
+    box-sizing: border-box;
 }
 
-#floor-img {
+.floor-map-wrap {
     width: 100%;
-    max-width: 860px;
+    height: auto;
+}
+
+.floor-map-wrap svg {
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+}
+
+.floor-map-wrap svg rect[id^="area_"], 
+.floor-map-wrap svg path[id^="area_"] {
+    fill: #0044ff !important;      
+    fill-opacity: 0 !important;     
+    stroke: #00d2ff !important;    
+    stroke-opacity: 0 !important;   
+    stroke-width: 2px !important;   
+    cursor: pointer;
+    transition: fill-opacity 0.3s ease-in-out, stroke-opacity 0.15s ease-in-out, filter 0.3s ease;
+}
+
+.floor-map-wrap svg rect[id^="area_"]:hover, 
+.floor-map-wrap svg path[id^="area_"]:hover {
+    fill-opacity: 0.12 !important;   
+    stroke-opacity: 0.7 !important;
+    filter: drop-shadow(0px 0px 4px rgba(0, 210, 255, 0.5)) !important;
+}
+
+.floor-map-wrap svg rect[id^="area_"].active,
+.floor-map-wrap svg path[id^="area_"].active {
+    fill-opacity: 0.25 !important; 
+    stroke-opacity: 1 !important;
+    filter: drop-shadow(0px 0px 8px rgba(0, 210, 255, 0.95)) !important;
 }
 
 #no-image {
@@ -74,22 +103,16 @@
     color: #666;
 }
 
-/* 강의실 목록 영역 */
-#room-list-1,
-#room-list-2,
-#room-list-3,
-#room-list-4 {
-    width: 200px;
-    flex-shrink: 0;
-    flex-direction: column;
-    display: none;
+#room-list-area {
+    flex: 1; 
+    min-width: 240px; 
     border: 1px solid #dee2e6;
     border-radius: 12px;
-    padding: 10px;
+    padding: 15px;
     background-color: #fff;
+    box-sizing: border-box;
 }
 
-/* 상위 리스트 */
 #floor-ul {
     list-style: none;
     padding: 0;
@@ -97,26 +120,35 @@
 }
 
 #floor-ul > li {
-    padding: 10px;
+    padding: 12px 10px;
     font-weight: bold;
     color: #003399;
     border-bottom: 1px solid #dee2e6;
-    cursor: default;
+    cursor: pointer;
 }
 
 #floor-ul > li:last-child {
     border-bottom: none;
 }
 
-/* 하위 강의실 리스트 */
-#room-ul-1 {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0 0 0;
+#floor-ul > li:hover {
+    background-color: #e8f0fe;
 }
 
-#room-ul-1 li {
-    padding: 8px 10px;
+#room-ul-1,
+#room-ul-2,
+#room-ul-3,
+#room-ul-4 {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    display: none;
+}
+
+#room-ul-1 > li,
+#room-ul-2 > li,
+#room-ul-3 > li {
+    padding: 8px 15px;
     font-weight: normal;
     color: #333;
     border-bottom: 1px solid #f0f0f0;
@@ -124,35 +156,40 @@
     font-size: 0.9rem;
 }
 
-#room-ul-1 li:last-child {
+#room-ul-1 > li:last-child,
+#room-ul-2 > li:last-child,
+#room-ul-3 > li:last-child {
     border-bottom: none;
 }
 
-#room-ul-1 li:hover {
+#room-ul-1 > li:hover,
+#room-ul-2 > li:hover,
+#room-ul-3 > li:hover {
     background-color: #e8f0fe;
     color: #003399;
     font-weight: bold;
 }
 
-/* 강의실 강조 이미지 공통 */
-#area_대강당,
-#area_유체역학,
-#area_밀폐공간,
-#area_건설안전,
-#area_건설안전2,
-#area_기계종합,
-#area_줄걸이,
-#area_크레인 {
-    position: absolute;
-    display: none;
+#room-ul-2 li ul,
+#room-ul-3 li ul {
+    list-style: none;
+    padding: 0;
+    margin: 5px 0 0 0;
+    display: none; 
 }
 
-/* 1층 강의실별 위치 */
-#area_대강당 { top: 63.2%; left: 15%; }
-#area_유체역학 { top: 6.4%; left: 29.2%; }
-#area_밀폐공간 { top: 36%; left: 32.5%; }
-#area_건설안전 { top: 24.5%; left: 38.5%; }
-#area_건설안전2 { top: 15%; left: 49%; }
-#area_기계종합 { top: 15%; left: 62%; }
-#area_줄걸이 { top: 15%; left: 72.6%; }
-#area_크레인 { top: 15%; left: 84%; }
+#room-ul-2 li ul li,
+#room-ul-3 li ul li {
+    padding: 6px 15px 6px 25px !important;
+    font-weight: normal !important;
+    color: #666 !important;
+    border-bottom: 1px solid #f8f8f8 !important;
+    font-size: 0.85rem !important;
+}
+
+#room-ul-2 li ul li:hover,
+#room-ul-3 li ul li:hover {
+    background-color: #f0f4fc !important;
+    color: #003399 !important;
+    font-weight: bold !important;
+}

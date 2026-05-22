@@ -33,7 +33,6 @@
     </div>
 
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eec8e69f7553e61a39348fff684dd5c6&autoload=false&libraries=services"></script>
 <script>
     kakao.maps.load(function() {
         var coords = new kakao.maps.LatLng(35.564887329486496, 129.32046843019748);
