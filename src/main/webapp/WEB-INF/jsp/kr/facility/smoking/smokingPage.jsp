@@ -12,19 +12,17 @@
         <div id="smoking-map"></div>
 
         <%-- 흡연장 사진 영역 --%>
-        <div id="smoking-photos" style="display: none;">
+        <div id="smoking-photos">
             <div id="photo-title"></div>
             <div id="photo-container">
                 <img id="smoking-photo-1" alt="흡연장 사진 1">
                 <img id="smoking-photo-2" alt="흡연장 사진 2">
             </div>
-            <button onclick="closePhoto()">닫기</button>
         </div>
 
     </div>
 
 </div>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eec8e69f7553e61a39348fff684dd5c6&autoload=false"></script>
 <script>
     kakao.maps.load(function() {
         var container = document.getElementById('smoking-map');
@@ -51,15 +49,10 @@
         });
         marker.setMap(map);
 
-        kakao.maps.event.addListener(marker, 'click', function() {
-            document.getElementById('photo-title').innerText = smokingArea.title;
-            document.getElementById('smoking-photo-1').src = smokingArea.photos[0];
-            document.getElementById('smoking-photo-2').src = smokingArea.photos[1];
-            document.getElementById('smoking-photos').style.display = 'block';
-        });
+        document.getElementById('photo-title').innerText = smokingArea.title;
+        document.getElementById('smoking-photo-1').src = smokingArea.photos[0];
+        document.getElementById('smoking-photo-2').src = smokingArea.photos[1];
+        
     });
 
-    function closePhoto() {
-        document.getElementById('smoking-photos').style.display = 'none';
-    }
 </script>
