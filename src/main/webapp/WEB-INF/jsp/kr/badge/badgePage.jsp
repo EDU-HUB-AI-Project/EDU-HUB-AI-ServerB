@@ -8,7 +8,7 @@
         🪪 명찰 발급 및 개인 맞춤 안내
     </div>
 
-    <!-- 키패드 항상 표시 -->
+    <!-- 키패드 -->
     <div id="keypad-area">
         <div id="keypad-display"></div>
         <div class="keypad-grid">
