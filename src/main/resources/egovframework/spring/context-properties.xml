@@ -14,8 +14,11 @@
             <map>
                 <entry key="pageUnit" value="10"/>
                 <entry key="pageSize" value="10"/>
+                <entry key="chrome.path" value="C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"/>
+                <entry key="badge.print.output" value="C:/test/"/>
 	            <entry key="kiosk.site" value="ulsan"/>
 	            <!-- <entry key="kiosk.site" value="incheon"/> -->
+	            
             </map>
         </property>
         <property name="extFileName">
