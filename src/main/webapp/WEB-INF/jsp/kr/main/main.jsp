@@ -15,8 +15,8 @@
 <script src="/resources/badge/badge.js"></script>
 <script src="/resources/guide/guide.js"></script>
 
+<script src="/resources/facility/facility.js"></script>
 <script src="/resources/classroom/classroom.js"></script>
-<script src="/resources/transport/transport.js"></script>
 
 </head>
 <body>

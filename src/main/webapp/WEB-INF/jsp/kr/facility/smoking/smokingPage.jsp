@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="/resources/smoking/smoking.css">
+<script>
+    var KAKAO_MAP_KEY = '${kakaoMapKey}';
+</script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&autoload=false"></script>
 
 <div id="smoking-container">
     <div id="smoking-title">
@@ -24,35 +28,5 @@
 
 </div>
 <script>
-    kakao.maps.load(function() {
-        var container = document.getElementById('smoking-map');
-        var options = {
-            center : new kakao.maps.LatLng(35.564887329486496, 129.32046843019748),
-            level : 2
-        };
-        var map = new kakao.maps.Map(container, options);
-
-        var smokingArea = {
-            lat : 35.56529749843293,
-            lng : 129.32073941419753,
-            title : '흡연장',
-            photos : [
-                '/images/smoking_area/smoking_area_1.png',
-                '/images/smoking_area/smoking_area_2.png'
-            ]
-        };
-
-        var markerPosition = new kakao.maps.LatLng(smokingArea.lat, smokingArea.lng);
-        var marker = new kakao.maps.Marker({
-            position : markerPosition,
-            title : smokingArea.title
-        });
-        marker.setMap(map);
-
-        document.getElementById('photo-title').innerText = smokingArea.title;
-        document.getElementById('smoking-photo-1').src = smokingArea.photos[0];
-        document.getElementById('smoking-photo-2').src = smokingArea.photos[1];
-        
-    });
-
+  initSmokingMap();
 </script>

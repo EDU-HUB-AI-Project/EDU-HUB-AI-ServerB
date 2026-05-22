@@ -14,13 +14,7 @@
         <button type="button" class="floor-btn" onclick="changeFloor(4, this)">4F</button>
     </div>
     
-<<<<<<< HEAD
     <div id="floor-content">
-=======
-    <div id="floor-map">
-
-        <img id="floor-img" src="/images/eduInfo/floor_1f.png" alt="1층 강의실 배치도">
->>>>>>> origin/develop
         
         <!-- [왼쪽 영역] 도면 시각화 영역 (인라인 SVG가 들어갈 자리를 비워둡니다) -->
         <div id="floor-map-area">

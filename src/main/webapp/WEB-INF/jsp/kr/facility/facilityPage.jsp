@@ -15,7 +15,7 @@
             <p>메뉴 및 위치 안내</p>
         </button>
 
-        <button type="button" class="facility-btn" onclick="loadPage('/facility/smoking.do')">
+        <button type="button" class="facility-btn" onclick="loadFacilityPage('/facility/smoking.do')">
             🚬 흡연장소
             <p>흡연 구역 위치 안내</p>
         </button>
@@ -25,7 +25,7 @@
             <p>교육 과정별 강의실 배치도</p>
         </button>
 
-        <button type="button" class="facility-btn" onclick="loadPage('/facility/transport.do')">
+        <button type="button" class="facility-btn" onclick="loadFacilityPage('/facility/transport.do')">
             🚆 교통정보
             <p>KTX · 시외버스 이동 안내</p>
         </button>

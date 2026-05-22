@@ -25,12 +25,12 @@ function initTransportMap() {
         map = new kakao.maps.Map(container, { center: ORIGIN, level: 5 });
 
         var originMarker = new kakao.maps.Marker({ position: ORIGIN });
-        originMarker.setMap(map);
+        originMarker.setMap(kakaoMapInstance);
 
         var infowindow = new kakao.maps.InfoWindow({
             content: '<div style="padding:5px;font-size:12px;font-weight:bold;">한국산업안전보건교육원</div>'
         });
-        infowindow.open(map, originMarker);
+        infowindow.open(kakaoMapInstance, originMarker);
     });
 }
 
@@ -52,7 +52,7 @@ function searchRoute(type) {
     kakao.maps.load(function() {
         /* 목적지 마커 */
         var destMarker = new kakao.maps.Marker({ position: dest.coords });
-        destMarker.setMap(map);
+        destMarker.setMap(kakaoMapInstance);
         markers.push(destMarker);
 
         var destInfo = new kakao.maps.InfoWindow({
