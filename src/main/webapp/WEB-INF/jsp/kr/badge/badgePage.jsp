@@ -8,7 +8,7 @@
         🪪 명찰 발급 및 개인 맞춤 안내
     </div>
 
-    <!-- 키패드 항상 표시 -->
+    <!-- 키패드 -->
     <div id="keypad-area">
         <div id="keypad-display"></div>
         <div class="keypad-grid">
@@ -59,14 +59,4 @@
     <button type="button" id="cancel-btn" class="btn btn-danger" onclick="cancelSelect()">
         ❌ 취소
     </button>
-
-    <!-- 명찰 출력 영역(인쇄용) -->
-    <div id="print-label">
-        <div id="print-edu-name"></div>
-        <div id="print-student-name"></div>
-        <div id="print-logo-area">
-            <img src="/images/logo.gif" alt="로고">
-        </div>
-    </div>
-
 </div>
