@@ -21,20 +21,20 @@ public class MainController {
 	
 	@RequestMapping(value = "/main.do")
 	public String mainPage(Model model) {
-		log.info("MainController :: /main.do");
+		log.info("Called :: /main.do");
 		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "main/main";
 	}
 	
 	@RequestMapping(value = "/badge.do")
 	public String badgePage() {
-		log.info("MainController :: /badge.do");
+		log.info("Called :: /badge.do");
 		return "badge/badgePage";
 	}
 	
 	@RequestMapping(value = "/guide.do")
 	public String guidePage(Model model) {
-		log.info("MainController :: /guide.do");
+		log.info("Called :: /guide.do");
 		model.addAttribute("kioskSite", propertiesService.getString("kiosk.site"));
 		return "guide/guidePage";
 	}

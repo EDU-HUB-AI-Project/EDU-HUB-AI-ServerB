@@ -36,7 +36,7 @@ public class FacilityService extends EgovAbstractServiceImpl{
 	
 	// 구내식당
 	public List<Map<String, Object>> selectCafeteriaList() {
-		log.info("FacilityService :: selectCafeteriaList");
+		log.info("Called :: selectCafeteriaList");
 		
 		return apiClient.get(
 				"/api/info/cafe",
@@ -46,7 +46,7 @@ public class FacilityService extends EgovAbstractServiceImpl{
 	
 	// 교통 정보
 	public List<Map<String, Object>> selectTransportList(String stopId) {
-		log.info("FacilityService :: selectTransportList");
+		log.info("Called :: selectTransportList");
 		try {
 			return bisApiService.getBusArrival(stopId);
 		}
@@ -57,7 +57,7 @@ public class FacilityService extends EgovAbstractServiceImpl{
 	}
 	
 	public List<Map<String, Object>> getBusByDest(String dest) {
-		log.info("FacilityService :: getBusByDest{}", dest);
+		log.info("Called :: getBusByDest{}", dest);
 		
 		// 정류장 id들 받아오기
 		String[] stopIds = propertiesService.getString("Bis." + dest + ".StopIds").split("\\|");
