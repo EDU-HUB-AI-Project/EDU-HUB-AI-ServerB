@@ -168,17 +168,16 @@ function fetchDetailAndGuide(studentId) {
 function fetchDetailAndReprint(studentId) {
     showLoading();
     $.ajax({
-        url: '/studentDetail.do',
+        url: '/badge/print.do',
         data: {param: studentId},
         success: function(data) {
             hideLoading();
-            $('#print-edu-name').text(data.EDU_NAME);
-            $('#print-student-name').text(data.STUDENT_NAME);
-
-            // TODO: 1. 프린터 확정 시 window.print() → 로컬 프린터 API 교체
-            //       2. 즉시 출력되게(테스트 : 바탕화면 테스트 폴더에 pdf로 자동저장)
-            window.print();
-            moveToGuide(data);
+            if(data.status === 'success') {
+                moveToGuide(data.data);
+            }
+            else {
+                showAlert(data.message);
+            }
         },
         error: function() {
             hideLoading();

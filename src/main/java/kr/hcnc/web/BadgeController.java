@@ -1,5 +1,6 @@
 package kr.hcnc.web;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,10 +10,15 @@ import javax.annotation.Resource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import egovframework.rte.fdl.property.EgovPropertyService;
 import kr.hcnc.service.BadgeService;
 import kr.hcnc.validator.RequestValidator;
 
@@ -21,6 +27,9 @@ public class BadgeController {
 
 	@Resource(name = "badgeService")
 	private BadgeService badgeService;
+	
+	@Resource(name = "propertiesService")
+	private EgovPropertyService propertiesService;
 	
 	private static final Logger log = LoggerFactory.getLogger(BadgeController.class);
 	
@@ -67,4 +76,63 @@ public class BadgeController {
 		log.info("map = {}", map);
 		return map;
 	}
+	
+	@RequestMapping(value = "/badge/print.do", method = RequestMethod.GET)
+	@ResponseBody
+	public Map<String, Object> printBadge(@RequestParam String param) {
+		
+		Map<String, Object> result = new HashMap<>();
+		String chromePath = propertiesService.getString("chrome.path");
+		String printOutputPath = propertiesService.getString("badge.print.output");
+		try {
+			String printUrl = "http://localhost:8080/badgeLabel.do?param=" + param;
+			String outputFile = printOutputPath + "badge_" + param + ".pdf";
+			
+			File outputDif = new File(printOutputPath);
+			if(!outputDif.exists()) {
+				outputDif.mkdirs();
+			}
+			
+			ProcessBuilder pb = new ProcessBuilder(
+				    chromePath,
+				    "--headless",
+				    "--disable-gpu",
+				    "--no-sandbox",
+				    "--no-margins",
+				    "--print-to-pdf-no-header",
+				    "--run-all-compositor-stages-before-draw",
+				    "--virtual-time-budget=3000",
+				    "--paper-width=3.37",
+				    "--paper-height=2.13",
+				    "--print-to-pdf=" + outputFile,
+				    printUrl
+				);
+			pb.start().waitFor();
+			
+			Map<String, Object> detail = badgeService.selectStudentDetail(param);
+			result.put("status", "success");
+			result.put("data", detail);
+		}
+		catch(Exception e) {
+			log.error("Badge print failed", e);
+			result.put("status", "error");
+			result.put("message", "출력 중 오류가 발생하였습니다.");
+		}
+		
+		return result;
+	}
+	
+	@RequestMapping(value = "/badgeLabel.do", method = RequestMethod.GET)
+	public String badgeLabel(@RequestParam String param, Model model) {
+		Map<String, Object> detail = badgeService.selectStudentDetail(param);
+		model.addAttribute("data", detail);
+		return "badge/badgeLabel";
+	}
 }
+
+
+
+
+
+
+
