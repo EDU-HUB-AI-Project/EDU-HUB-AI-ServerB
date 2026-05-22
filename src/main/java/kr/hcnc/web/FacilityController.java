@@ -3,8 +3,15 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import egovframework.rte.fdl.property.EgovPropertyService;
 import kr.hcnc.service.FacilityService;
 
 @Controller
@@ -13,19 +20,24 @@ public class FacilityController {
 	@Resource(name = "facilityService")
 	private FacilityService facilityService;
 	
+	@Resource(name = "propertiesService")
+	private EgovPropertyService propertiesService;
+	
+	private static final Logger log = LoggerFactory.getLogger(FacilityController.class);
+	
 	// 버튼 2 메인
 	@RequestMapping(value = "/facility.do")
 	public String facilityPage() {
-		System.out.println("FacilityController :: /facility.do");
+		log.info("Called :: /facility.do");
 		return "facility/facilityPage";
 	}
 	
 	// 구내식당
 	@RequestMapping(value = "/facility/cafeteria.do")
-	public String cafeteriaPage(org.springframework.ui.Model model) {
-		System.out.println("FacilityController :: /facility/cafeteria.do");
+	public String cafeteriaPage(Model model) {
+		log.info("Called :: /facility/cafeteria.do");
 		List<Map<String, Object>> list = facilityService.selectCafeteriaList();
-		System.out.println("결과 : " + list);
+		log.info("결과 : {}", list);
 		model.addAttribute("cafeteriaList", list);
 		return "facility/cafeteria/cafeteriaPage";
 	}
@@ -33,21 +45,29 @@ public class FacilityController {
 	// 흡연장소
 	@RequestMapping(value = "/facility/smoking.do")
 	public String smokingPage() {
-		System.out.println("FacilityController :: /facility/smoking.do");
+		log.info("Called :: /facility/smoking.do");
 		return "facility/smoking/smokingPage";
 	}
 	
 	// 강의실 안내
 	@RequestMapping(value = "/facility/classroom.do")
 	public String classroomPage() {
-		System.out.println("FacilityController :: /facility/classroom.do");
+		log.info("Called :: /facility/classroom.do");
 		return "facility/classroom/classroomPage";
 	}
 	
 	// 교통정보
 	@RequestMapping(value = "/facility/transport.do")
-	public String transportPage() {
-		System.out.println("FacilityController :: /facility/transport.do");
+	public String transportPage(Model model) {
+		log.info("Called :: /facility/transport.do");
+		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "facility/transport/transportPage";
+	}
+	
+	@RequestMapping(value = "/facility/transport/bus.do")
+	@ResponseBody
+	public List<Map<String, Object>> getBusInfo(@RequestParam String dest) {
+		log.info("Called :: /facility/transport/bus.do?dest{}", dest);
+		return facilityService.getBusByDest(dest);
 	}
 }

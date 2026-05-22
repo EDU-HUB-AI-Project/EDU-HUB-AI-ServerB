@@ -7,13 +7,22 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
+	<context:property-placeholder location = "classpath:/globals.properties" />
+
     <bean name="propertiesService" class="egovframework.rte.fdl.property.impl.EgovPropertyServiceImpl" destroy-method="destroy">
         <property name="properties">
             <map>
                 <entry key="pageUnit" value="10"/>
                 <entry key="pageSize" value="10"/>
+	            <entry key="kiosk.site" value="ulsan"/>
+	            <!-- <entry key="kiosk.site" value="incheon"/> -->
             </map>
         </property>
+        <property name="extFileName">
+        	<set>
+            	<value>classpath:/globals.properties</value>
+        	</set>
+   		</property>
     </bean>
 
 </beans>

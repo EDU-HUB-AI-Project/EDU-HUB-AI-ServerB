@@ -27,34 +27,34 @@ public class BadgeController {
 	@RequestMapping(value = "/searchStudent.do")
 	@ResponseBody
 	public List<Map<String, Object>> selectStudent(String param) {
-		log.info("BadgeController :: /searchStudent.do");
+		log.info("Called :: /searchStudent.do");
 		
 		if(!RequestValidator.isValidBirthDate(param))
 			return new ArrayList<>();
 		
 		List<Map<String, Object>> list = badgeService.selectStudents(param);
-		log.info("BadgeController :: list = {}", list);
+		log.info("list = {}", list);
 		return list;
 	}
 	
 	@RequestMapping(value = "/studentDetail.do")
 	@ResponseBody
 	public Map<String, Object> selectStudentDetail(String param) {
-		log.info("BadgeController :: /studentDetail.do");
+		log.info("Called :: /studentDetail.do");
 		
 		if(!RequestValidator.isValidStudentId(param))
 			return new HashMap<>();
 		
 		Map<String, Object> map = badgeService.selectStudentDetail(param);
 
-		log.info("BadgeController :: map = {}", map);
+		log.info("map = {}", map);
 		return map;
 	}
 	
 	@RequestMapping(value = "/updateStudent.do")
 	@ResponseBody
 	public Map<String, Object> updateStudentStatus(String param) {
-		log.info("BadgeController :: /updateStudentStatus.do");
+		log.info("Called :: /updateStudentStatus.do");
 		
 		if(!RequestValidator.isValidStudentId(param)) {
 			Map<String, Object> result = new HashMap<>();
@@ -64,7 +64,7 @@ public class BadgeController {
 		}
 		
 		Map<String, Object> map = badgeService.updateStudentStatus(param);
-		log.info("/updateStudentStatus :: map = {}", map);
+		log.info("map = {}", map);
 		return map;
 	}
 }
