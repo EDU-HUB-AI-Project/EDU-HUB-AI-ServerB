@@ -10,9 +10,14 @@
 <script src="/resources/lib/jquery-4.0.0.min.js"></script>
 <script src="/resources/lib/bootstrap.min.js"></script>
 <script src="/resources/common/common.js"></script>
+<script src="/resources/common/modal.js"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&autoload=false&libraries=services"></script>
+
 <script src="/resources/badge/badge.js"></script>
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=eec8e69f7553e61a39348fff684dd5c6&autoload=false"></script>
+<script src="/resources/guide/guide.js"></script>
 <script src="/resources/classroom/classroom.js"></script>
+<script src="/resources/transport/transport.js"></script>
+
 </head>
 <body>
 
@@ -29,10 +34,10 @@
         </div>
         <div id="intro-subtitle">스마트 EDU-HUB AI 키오스크</div>
         <div id="intro-buttons">
-            <button type="button" class="intro-btn" onclick="selectMenu('/badge.do', '명찰 발급 및 개인 맞춤 안내')">
+            <button type="button" class="intro-btn" onclick="selectMenu('/badge.do')">
                 🪪<br>명찰 발급 및<br>개인 맞춤 안내
             </button>
-            <button type="button" class="intro-btn" onclick="selectMenu('/facility.do', '보편적 시설 및 정보 안내')">
+            <button type="button" class="intro-btn" onclick="selectMenu('/facility.do')">
                 🏢<br>보편적 시설 및<br>정보 안내
             </button>
              
@@ -46,24 +51,12 @@
     <%@ include file="/WEB-INF/jsp/kr/common/footer.jsp" %>
 
     <!-- 공통 Modal -->
-    <div class="modal fade" id="commonModal" tabindex="-1" 
-     aria-labelledby="commonModalLabel" aria-hidden="true"
-     data-bs-backdrop="static" data-bs-keyboard="false">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header" id="modalHeader">
-                <h5 class="modal-title" id="commonModalLabel">안내</h5>
-            </div>
-            <div class="modal-body text-center fs-5" id="modalBody">
-            </div>
-            <div class="modal-footer justify-content-center" id="modalFooter">
-                <button type="button" class="btn btn-primary btn-lg" 
-                        id="modalConfirmBtn" onclick="modalConfirm()">
-                    확인
-                </button>
-            </div>
+    <div id="common-modal">
+        <div id="common-modal-box">
+            <div id="modal-header">안내</div>
+            <div id="modal-body"></div>
+            <div id="modal-footer"></div>
         </div>
     </div>
-</div>
 </body>
 </html>

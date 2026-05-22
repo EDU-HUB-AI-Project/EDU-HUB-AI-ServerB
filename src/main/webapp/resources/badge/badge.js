@@ -1,13 +1,39 @@
 var inputValue = '';
 
+/*  ------------------
+    Guide.jsp 이동 함수
+    ----------------*/
+function moveToGuide(data) {
+    $('#content-area').load('/guide.do', function() {
+        $('#card-name').text(data.STUDENT_NAME);
+        $('#card-edu-name').text(data.EDU_NAME);
+        $('#card-room').text(data.EDU_ROOM_NAME + '호');
+        $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
+        $('#card-period').text(data.START_DATE + ' ~ ' + data.END_DATE);
+
+        var dormId = data.DORMITORY_ID;
+        if(dormId == null || dormId == 'X') {
+            $('#card-dorm').text('생활관 미배정');
+        }
+        else {
+            var dong = dormId.charAt(5);
+            var ho = dormId.substr(6);
+            $('#card-dorm').text(dong + '동 ' + ho + '호');
+        }
+
+        initGuideCanvas(data.EDU_ROOM_NAME);
+    });
+}
+
+/*  -----------
+    생년월일 조회
+    ---------*/
 function searchByBirth(birth) {
-
     showLoading();
-
-	$.ajax({
-		url: '/searchStudent.do',
-		data: {param : birth},
-		success: function(data) {
+    $.ajax({
+        url: '/searchStudent.do',
+        data: {param: birth},
+        success: function(data) {
             hideLoading();
 
             if(data.status === 'error' || data.status === 'fail') {
@@ -15,7 +41,7 @@ function searchByBirth(birth) {
                 return;
             }
 
-			$('#result-body').empty();
+            $('#result-body').empty();
             $('#selected-area').hide();
             $('#confirm-btn').hide();
             $('#cancel-btn').hide();
@@ -23,39 +49,40 @@ function searchByBirth(birth) {
             inputValue = '';
             $('#keypad-display').text('');
 
-			if(data.length == 0) {
-				$('#result-table').hide()
-				$('#no-result').show();
-				return;
-			}
-			
-			$('#result-table').show()
-			$('#no-result').hide();
-			
-			$.each(data, function(i, row) {
-                var tr = '<tr class="student-row" data-student=\'' + JSON.stringify(row) + '\'>' +
-                            '<td>' + escapeHtml(row.STUDENT_ID) + '</td>' +
-                            '<td>' + escapeHtml(row.STUDENT_NAME) + '</td>' +
-                            '<td>' + escapeHtml(row.BIRTH_DATE) + '</td>' +
-                            '<td>' + escapeHtml(row.EDU_NAME) + '</td>' +
-                            '<td>' + escapeHtml(row.DORMITORY_ID) + '</td>' +
-                         '</tr>';
-                $('#result-body').append(tr);
-			});
-		},
-		error: function(xhr) {
+            if(data.length === 0) {
+                $('#result-table').hide();
+                $('#no-result').show();
+                return;
+            }
+
+            $('#result-table').show();
+            $('#no-result').hide();
+
+            $.each(data, function(i, row) {
+                var $tr = $('<tr>').addClass('student-row').data('student', row);
+
+                ['STUDENT_ID', 'STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID'].forEach(function(key) {
+                    $('<td>').text(row[key] || '').appendTo($tr);
+                });
+
+                $('#result-body').append($tr);
+            });
+        },
+        error: function() {
             hideLoading();
-			showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
-		}
-	});
+            showAlert('오류가 발생하였습니다.');
+        }
+    });
 }
 
+/*  ------------
+    교육생 행 선택
+    ----------*/
 $(document).on('click', '.student-row', function() {
     $('.student-row').removeClass('table-primary');
     $(this).addClass('table-primary');
 
     var selected = $(this).data('student');
-
     $('#selected-name').text(selected.STUDENT_NAME);
     $('#selected-edu').text(selected.EDU_NAME);
     $('#selected-area').show();
@@ -63,10 +90,10 @@ $(document).on('click', '.student-row', function() {
     $('#cancel-btn').show();
 });
 
+/*  ------------
+    확인 - 출석 시
+    -----------*/
 function confirmStudent() {
-    // console.log('SELECTED :: ' + selected.STUDENT_NAME);
-    // alert(selected.STUDENT_ID + "선택됨")
-
     var selected = $('.student-row.table-primary').data('student');
     var studentId = selected.STUDENT_ID;
 
@@ -78,82 +105,37 @@ function confirmStudent() {
         data: {param: studentId},
         dataType: 'json',
         success: function(data) {
-            if(data.status == 'success') {
-                    console.log(data);        
-                    console.log(data.status);
-                $.ajax({
-                    url: '/studentDetail.do',
-                    data: { param: studentId },
-                    success: function(data) {
-                        hideLoading();
-                        $('#content-area').load('/guide.do', function() {
-                            $('#card-name').text(data.STUDENT_NAME);
-                            $('#card-edu-name').text(data.EDU_NAME);
-                            $('#card-room').text(data.EDU_ROOM_NAME + '호');
-                            $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
-                            $('#card-period').text(data.START_DATE + ' ~ ' + data.END_DATE);
-                            
-                            var dormId = data.DORMITORY_ID;
-                            if(dormId == null || dormId == 'X') {
-                                $('#card-dorm').text('생활관 미배정');
-                            } else {
-                                var dong = dormId.charAt(5);
-                                var ho = dormId.substr(6);
-                                $('#card-dorm').text(dong + '동 ' + ho + '호');
-                            }
-                        });
-                    },
-                    error: function(xhr) {
-                        hideLoading();
-                        showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
-                    }
-                });
+            if(data.status === 'success') {
+                fetchDetailAndReprint(studentId);
             }
-            else if(data.status == 'already') {
+            else if(data.status === 'already') {
                 hideLoading();
-                showConfirm('이미 출석 처리된 교육생입니다. \n안내 화면으로 이동하시겠습니까?', function() {
-                    $.ajax({
-                        url: '/studentDetail.do',
-                        data: {param: studentId},
-                        success: function(data) {
-                            $('#content-area').load('/guide.do', function() {
-                                $('#card-name').text(data.STUDENT_NAME);
-                                $('#card-edu-name').text(data.EDU_NAME);
-                                $('#card-room').text(data.EDU_ROOM_NAME + '호');
-                                $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
-                                $('#card-period').text(data.START_DATE + ' ~ ' + data.END_DATE);
-
-                                var dormId = data.DORMITORY_ID;
-                                if(dormId == null || dormId == 'X') {
-                                    $('#card-dorm').text('생활관 미배정');
-                                } else {
-                                    var dong = dormId.charAt(5);
-                                    var ho = dormId.substr(6);
-                                    $('#card-dorm').text(dong + '동 ' + ho + '호');
-                                }
-                            });
-                        },
-                        error: function(xhr) {
-                            showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
-                        }
-                    });
-                
-                }, function() {
-                    goHome();
-                });
+                showReprint(
+                    '이미 출석 처리된 교육생입니다.',
+                    function() {
+                        fetchDetailAndReprint(studentId);
+                    },
+                    function() {
+                        fetchDetailAndGuide(studentId);
+                    },
+                    function() {goHome();}
+                );
             }
             else {
                 hideLoading();
-                showAlert(data.message);
+                showAlert(data.message || '오류가 발생하였습니다.');
             }
         },
-        error: function(xhr) {
+        error: function () {
             hideLoading();
-            showAlert(xhr.responseJSON?.message || '오류가 발생하였습니다.');
+            showAlert('오류가 발생하였습니다.');
         }
     });
 }
 
+/*  --------
+    취소 버튼
+    -------*/
 function cancelSelect() {
     $('.student-row').removeClass('table-primary');
     $('#selected-area').hide();
@@ -161,14 +143,54 @@ function cancelSelect() {
     $('#cancel-btn').hide();
 }
 
-// #####################################
-// ########## 키패드 인터페이스 ###########
-// #####################################
+/*  ------------
+    API 조회 함수
+    ----------*/
 
+// 학생 상세 조회
+function fetchDetailAndGuide(studentId) {
+    showLoading();
+    $.ajax({
+        url: '/studentDetail.do',
+        data: {param: studentId},
+        success: function(data) {
+            hideLoading();
+            moveToGuide(data);
+        },
+        error: function() {
+            hideLoading();
+            showAlert('오류가 발생하였습니다.');
+        }
+    });
+}
 
+// 학생 상제 조회 후 재출력, 가이드 이동
+function fetchDetailAndReprint(studentId) {
+    showLoading();
+    $.ajax({
+        url: '/badge/print.do',
+        data: {param: studentId},
+        success: function(data) {
+            hideLoading();
+            if(data.status === 'success') {
+                moveToGuide(data.data);
+            }
+            else {
+                showAlert(data.message);
+            }
+        },
+        error: function() {
+            hideLoading();
+            showAlert('오류가 발생하였습니다.');
+        }
+    });
+}
+
+/*  ---------------
+    키패드 인터페이스
+    -------------*/
 function pressKey(num) {
     if(inputValue.length >= 6) return;
-
     inputValue += num;
     $('#keypad-display').text(inputValue);
 }
@@ -189,20 +211,14 @@ function confirmKey() {
         return;
     }
 
-    var numRegex = /^[0-9]+$/;
-    if(!numRegex.test(inputValue)) {
-        showAlert('숫자만 입력 가능합니다.');
-        return;
-    }
-
     var month = parseInt(inputValue.substring(2, 4));
-    var day = parseInt(inputValue.substring(4,6));
+    var day = parseInt(inputValue.substring(4, 6));
 
-    if(month < 1 || month > 12) {
+    if(isNaN(month) || month < 1 || month > 12) {
         showAlert('올바른 생년월일을 입력해주세요.');
-        return;
+        return;   
     }
-    if(day < 1 || day > 31) {
+    if(isNaN(day) || day < 1 || day > 31) {
         showAlert('올바른 생년월일을 입력해주세요.');
         return;
     }
