@@ -1,39 +1,36 @@
 function changeFloor(floor, btn) {
-    // 1. 탭 버튼 활성화 상태 변경
+    // 탭 버튼 활성화 상태 변경
     var buttons = document.querySelectorAll('.floor-btn');
     buttons.forEach(function(b) {
         b.classList.remove('active');
     });
     btn.classList.add('active');
 
-    // 2. [SVG 수정] 모든 층 SVG 도면 내부의 강의실 하이라이트(active 클래스) 제거
+    // 모든 층 SVG 도면 내부의 강의실 하이라이트(active 클래스) 제거
     var allSvgAreas = document.querySelectorAll('.floor-map-wrap svg rect[id^="area_"], .floor-map-wrap svg path[id^="area_"]');
     allSvgAreas.forEach(function(area) {
         area.classList.remove('active');
     });
 
-    // 3. 오른쪽 리스트 내의 모든 층별 세부 목록(ul)을 먼저 숨김
+    // 오른쪽 리스트 내의 모든 층별 세부 목록(ul)을 먼저 숨김
     var allRoomUls = document.querySelectorAll('[id^="room-ul-"]');
     allRoomUls.forEach(function(ul) {
         ul.style.display = 'none';
     });
 
-    // 4. 선택한 층의 세부 목록(ul)만 자동으로 펼쳐서 노출
+    // 2층, 3층 내부에 존재하던 충분류/소분류 손자 메뉴(ul)들까지 전부 담음
+    var allNestedUls = document.querySelectorAll('[id^="room-ul-"] ul');
+    allNestedUls.forEach(function(subUl){
+        subUl.style.display = 'none';
+    })
+
+    // 선택한 층의 세부 목록(ul)만 자동으로 펼쳐서 노출
     var targetUl = document.getElementById('room-ul-' + floor);
     if (targetUl) {
         targetUl.style.display = 'block';
-        
-        // 2층 또는 3층인 경우 내부의 중분류(강의실/실습실) 세부 목록들도 기본적으로 다 열리도록 처리
-        if (floor === 2 || floor === 3) {
-            var nestedUls = targetUl.querySelectorAll('ul');
-            nestedUls.forEach(function(subUl) {
-                subUl.style.display = 'block';
-            });
-        }
     }
 
-    // 5. [SVG 수정] 이미지 src 교체 대신 층별 통짜 SVG를 감싼 <div>를 켜고 끄는 방식으로 변경
-    // 피그마 연동 시에는 바탕 도면과 하이라이트가 합쳐진 SVG를 사용하므로 이 방식이 안전합니다.
+    // 이미지 src 교체 대신 층별 통짜 SVG를 감싼 <div>를 켜고 끄는 방식으로 변경
     var allMapWraps = document.querySelectorAll('.floor-map-wrap');
     allMapWraps.forEach(function(wrap) {
         wrap.style.display = 'none';
@@ -51,9 +48,9 @@ function changeFloor(floor, btn) {
     }
 }
 
-// [SVG 수정] 강의실 강조 함수
+// 강의실 강조 함수
 function highlightRoom(areaName, floor) {
-    // 1. 현재 클릭한 강의실이 있는 층 도면 프레임이 닫혀있다면 강제로 띄워줌
+    // 현재 클릭한 강의실이 있는 층 도면 프레임이 닫혀있다면 강제로 띄워줌
     var targetFloorMap = document.getElementById('map-floor-' + floor);
     if (targetFloorMap && targetFloorMap.style.display === 'none') {
         // 상단 탭 버튼 엘리먼트 동기화 추출
@@ -61,13 +58,13 @@ function highlightRoom(areaName, floor) {
         changeFloor(floor, targetBtn);
     }
 
-    // 2. 모든 SVG 내부 하이라이트(active 클래스) 초기화
-    var allSvgAreas = document.querySelectorAll('.floor-map-wrap svg rect[id^="area_"], .floor-map-wrap svg path[id^="area_"]');
+    // 모든 SVG 내부 하이라이트 초기화
+    var allSvgAreas = document.querySelectorAll('.floor-map-wrap svg rect[id^="area_"], .floor-map-wrap svg path[id^="area_"], .floor-map-wrap svg g[id^="area_"]');
     allSvgAreas.forEach(function(area) {
         area.classList.remove('active');
     });
 
-    // 3. 피그마에서 생성되어 삽입된 SVG 엘리먼트 ID를 찾아 active 클래스 부여
+    // 피그마에서 생성되어 삽입된 SVG 엘리먼트 ID를 찾아 active 클래스 부여
     var highlightTarget = document.getElementById(areaName);
     if (highlightTarget) {
         highlightTarget.classList.add('active');
@@ -76,11 +73,29 @@ function highlightRoom(areaName, floor) {
     }
 }
 
-// 오른쪽 대분류(1층, 2층, 3층 글자) 클릭 시 토글 함수 (기존 코드 유지)
+// 오른쪽 대분류(1층, 2층, 3층, 4층 글자) 클릭 시 토글 함수
 function toggleFloorList(floorNum) {
+    var allRoomUls = document.querySelectorAll('[id^="room-ul-"]');
+    allRoomUls.forEach(function(ul) {
+        if(ul.id !== 'room-ul-' + floorNum) {
+            ul.style.display = 'none';
+        }
+    });
+
+    // 다른 층 내부에 혹시 열려있던 중분류/소분류 손자 메뉴들까지 담음
+    var allNestedUls = document.querySelectorAll('[id^="room-ul-"] ul');
+    allNestedUls.forEach(function(subUl) {
+        // 현재 클릭한 층 내부의 하위 ul이 아니라면 전부 숨김
+       var parentUI = subUl.closest('[id^="room-ul-"] ul');
+       if(parentUI && parentUI.id !== 'room-ul-' + floorNum) {
+        subUl.style.display = 'none';
+       }
+    });
+
+    // 현재 선택한 층의 세부 목록(ul)을 찾아서 토글(열고 닫기) 처리
     var ul = document.getElementById('room-ul-' + floorNum);
-    if (ul) {
-        if (ul.style.display === 'none' || ul.style.display === '') {
+    if(ul) {
+        if(ul.style.display === 'none' || ul.style.display === '') {
             ul.style.display = 'block';
         } else {
             ul.style.display = 'none';
@@ -88,7 +103,7 @@ function toggleFloorList(floorNum) {
     }
 }
 
-// 내부 중분류(강의실, 실습실 글자) 클릭 시 토글 함수 (기존 버블링 방지 및 매칭 코드 완벽 유지)
+// 내부 중분류(강의실, 실습실 글자) 클릭 시 토글 함수
 function toggleSubList(element) {
     if (window.event) {
         window.event.stopPropagation();
@@ -108,10 +123,9 @@ function toggleSubList(element) {
         }
     } 
     else if (element && element.tagName) {
-        if (element.tagName === 'LI') {
-            ul = element.querySelector('ul');
-        } else {
-            ul = element.parentElement.querySelector('ul');
+        var targetLi = element.tagName === 'LI' ? element : element.closest('li');
+        if (targetLi) {
+            ul = targetLi.querySelector('ul');
         }
     }
 
