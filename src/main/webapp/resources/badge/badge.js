@@ -1,5 +1,3 @@
-var inputValue = '';
-
 /*  ------------------
     Guide.jsp 이동 함수
     ----------------*/
@@ -49,7 +47,6 @@ function searchByBirth(birth) {
             $('#confirm-btn').hide();
             $('#cancel-btn').hide();
 
-            inputValue = '';
             $('#keypad-display').text('');
 
             if(data.length === 0) {
@@ -64,8 +61,12 @@ function searchByBirth(birth) {
             $.each(data, function(i, row) {
                 var $tr = $('<tr>').addClass('student-row').data('student', row);
 
-                ['STUDENT_ID', 'STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID'].forEach(function(key) {
-                    $('<td>').text(row[key] || '').appendTo($tr);
+                ['STUDENT_ID', 'STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID', 'PHONE_NUMBER'].forEach(function(key) {
+                    var value = row[key] || '';
+                    if(key === 'PHONE_NUMBER' && value.length >= 4) {
+                        value = value.slice(0, -4).replace(/\d/g, '*') + value.slice(-4);
+                    }
+                    $('<td>').text(value).appendTo($tr);
                 });
 
                 $('#result-body').append($tr);
@@ -193,22 +194,22 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
     키패드 인터페이스
     -------------*/
 function pressKey(num) {
-    if(inputValue.length >= 6) return;
-    inputValue += num;
-    $('#keypad-display').text(inputValue);
+    var current = $('#keypad-display').text();
+    if(current.length >= 6) return;
+    $('#keypad-display').text(current + num);
 }
 
 function deleteKey() {
-    inputValue = inputValue.slice(0, -1);
-    $('#keypad-display').text(inputValue);
+    var current = $('#keypad-display').text();
+    $('#keypad-display').text(current.slice(0, -1));
 }
 
 function clearKey() {
-    inputValue = '';
     $('#keypad-display').text('');
 }
 
 function confirmKey() {
+    var inputValue = $('#keypad-display').text();
     if(inputValue.length != 6) {
         showAlert('생년월일 6자리를 입력해주세요.');
         return;

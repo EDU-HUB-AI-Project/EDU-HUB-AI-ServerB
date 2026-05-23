@@ -36,6 +36,7 @@
                 <th>생년월일</th>
                 <th>교육과정</th>
                 <th>기숙사</th>
+                <th>전화번호</th>
             </tr>
         </thead>
         <tbody id="result-body" class="text-center">
