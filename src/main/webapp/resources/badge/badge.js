@@ -1,4 +1,6 @@
-var inputValue = '';
+var allStudents = [];
+var currentPage = 1;
+var MAX_PER_PAGE = 5;
 
 /*  ------------------
     Guide.jsp 이동 함수
@@ -44,13 +46,9 @@ function searchByBirth(birth) {
                 return;
             }
 
-            $('#result-body').empty();
-            $('#selected-area').hide();
-            $('#confirm-btn').hide();
-            $('#cancel-btn').hide();
-
-            inputValue = '';
             $('#keypad-display').text('');
+            $('#step-keypad').hide();
+            $('#step-result').show();
 
             if(data.length === 0) {
                 $('#result-table').hide();
@@ -61,21 +59,76 @@ function searchByBirth(birth) {
             $('#result-table').show();
             $('#no-result').hide();
 
-            $.each(data, function(i, row) {
-                var $tr = $('<tr>').addClass('student-row').data('student', row);
+            allStudents = data;
+            currentPage = 1;
+            renderPage(1);
 
-                ['STUDENT_ID', 'STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID'].forEach(function(key) {
-                    $('<td>').text(row[key] || '').appendTo($tr);
-                });
+            // $.each(data, function(i, row) {
+            //     var $tr = $('<tr>').addClass('student-row').data('student', row);
 
-                $('#result-body').append($tr);
-            });
+            //     ['STUDENT_ID', 'STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID', 'PHONE_NUMBER'].forEach(function(key) {
+            //         var value = row[key] || '';
+            //         if(key === 'PHONE_NUMBER' && value.length === 11) {
+            //             value = value.substring(0, 3) + '-****-' + value.slice(-4);
+            //         }
+            //         $('<td>').text(value).appendTo($tr);
+            //     });
+
+            //     $('#result-body').append($tr);
+            // });
         },
         error: function() {
             hideLoading();
             showAlert('오류가 발생하였습니다.');
         }
     });
+}
+
+/*  ---------------
+    조회 결과(페이지)
+    -------------*/
+function renderPage(page) {
+    currentPage = page;
+    var totalPages = Math.ceil(allStudents.length / MAX_PER_PAGE);
+    var start = (page - 1) * MAX_PER_PAGE;
+    var pageData = allStudents.slice(start, start + MAX_PER_PAGE);
+
+    $('#result-body').empty();
+    $('#selected-area').hide();
+    $('#confirm-btn').hide();
+
+    $.each(pageData, function(i, row) {
+        var $tr = $('<tr>').addClass('student-row').data('student', row);
+
+        ['STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID', 'PHONE_NUMBER'].forEach(function(key) {
+            var value = row[key] || '';
+            if(key === 'PHONE_NUMBER' && value.length === 11) {
+                value = value.substring(0, 3) + '-****-' + value.slice(-4);
+            }
+            $('<td>').text(value).appendTo($tr);
+        });
+
+        $('#result-body').append($tr);
+    });
+
+    $('#page-info').text(page + ' / ' + totalPages);
+    $('#prev-btn').prop('disabled', page === 1);
+    $('#next-btn').prop('disabled', page === totalPages);
+    $('#pagination-area').toggle(totalPages > 1);
+}
+
+/*  --------------------
+    조회 결과 이전 페이지로
+    ------------------*/
+function prevPage() {
+    if(currentPage > 1) renderPage(currentPage - 1);
+}
+/*  --------------------
+    조회 결과 다음 페이지로
+    ------------------*/
+function nextPage() {
+    var totalPages = Math.ceil(allStudents.length / MAX_PER_PAGE);
+    if(currentPage < totalPages) renderPage(currentPage + 1);
 }
 
 /*  ------------
@@ -90,7 +143,6 @@ $(document).on('click', '.student-row', function() {
     $('#selected-edu').text(selected.EDU_NAME);
     $('#selected-area').show();
     $('#confirm-btn').show();
-    $('#cancel-btn').show();
 });
 
 /*  ------------
@@ -143,7 +195,6 @@ function cancelSelect() {
     $('.student-row').removeClass('table-primary');
     $('#selected-area').hide();
     $('#confirm-btn').hide();
-    $('#cancel-btn').hide();
 }
 
 /*  ------------
@@ -193,22 +244,22 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
     키패드 인터페이스
     -------------*/
 function pressKey(num) {
-    if(inputValue.length >= 6) return;
-    inputValue += num;
-    $('#keypad-display').text(inputValue);
+    var current = $('#keypad-display').text();
+    if(current.length >= 6) return;
+    $('#keypad-display').text(current + num);
 }
 
 function deleteKey() {
-    inputValue = inputValue.slice(0, -1);
-    $('#keypad-display').text(inputValue);
+    var current = $('#keypad-display').text();
+    $('#keypad-display').text(current.slice(0, -1));
 }
 
 function clearKey() {
-    inputValue = '';
     $('#keypad-display').text('');
 }
 
 function confirmKey() {
+    var inputValue = $('#keypad-display').text();
     if(inputValue.length != 6) {
         showAlert('생년월일 6자리를 입력해주세요.');
         return;
@@ -227,4 +278,19 @@ function confirmKey() {
     }
 
     searchByBirth(inputValue);
+}
+
+
+/*  ----------------
+    조회 결과 후 재입력
+    --------------*/
+function goBackToKeypad() {
+    allStudents = [];
+    currentPage = 1;
+    $('#step-result').hide();
+    $('#step-keypad').show();
+    $('#result-body').empty();
+    $('#selected-area').hide();
+    $('#confirm-btn').hide();
+    $('#pagination-area').hide();
 }
