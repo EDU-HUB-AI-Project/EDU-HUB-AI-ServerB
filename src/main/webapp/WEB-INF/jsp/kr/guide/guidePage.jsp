@@ -47,7 +47,7 @@
             </div>
             <!-- 강의실 도면 하이라이트 -->
             <div id="classroom-map-area" class="mt-3" style="display:none;">
-                <canvas id="classroom-canvas"></canvas>
+                <div id = "svg-container"></div>
             </div>
             <div id="classroom-map-fallback" class="mt-3 text-center text-muted" style="display:none;">
                 해당 강의실 도면 정보가 없습니다.
