@@ -9,13 +9,7 @@
 <rect id="area_fluid_lab" x="193.364" y="147.174" width="167.761" height="65.5327" transform="rotate(-45 193.364 147.174)" stroke="#F50B0B" stroke-width="2"/>
 <rect id="area_confined_lab" x="215.323" y="242.538" width="55.2042" height="84" transform="rotate(-45 215.323 242.538)" stroke="#F50B0B" stroke-width="2"/>
 <rect id="area_auditorium" x="94" y="368" width="121" height="156" stroke="#F50B0B" stroke-width="2"/>
-<g id="area_construction_lab2">
-<line id="Line 1" x1="325.305" y1="133.281" x2="383.305" y2="77.2806" stroke="#F50B0B" stroke-width="2"/>
-<line id="Line 2" x1="326.688" y1="139.274" x2="384.688" y2="194.274" stroke="#F50B0B" stroke-width="2"/>
-<line id="Line 3" x1="384.255" y1="195.332" x2="410.255" y2="166.332" stroke="#F50B0B" stroke-width="2"/>
-<line id="Line 4" x1="378.969" y1="78.0005" x2="410.969" y2="77.0005" stroke="#F50B0B" stroke-width="2"/>
-<line id="Line 5" x1="413" y1="80.0119" x2="412" y2="164.012" stroke="#F50B0B" stroke-width="2"/>
-</g>
+<path id="area_construction_lab2" d="M412 80H386L324 137L386 195.5L412 174V80Z" stroke="#F50B0B" stroke-width="2"/>
 </g>
 </g>
 <defs>

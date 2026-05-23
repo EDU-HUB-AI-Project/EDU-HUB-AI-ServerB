@@ -58,8 +58,8 @@ function highlightRoom(areaName, floor) {
         changeFloor(floor, targetBtn);
     }
 
-    // 모든 SVG 내부 하이라이트(active 클래스) 초기화
-    var allSvgAreas = document.querySelectorAll('.floor-map-wrap svg rect[id^="area_"], .floor-map-wrap svg path[id^="area_"]');
+    // 모든 SVG 내부 하이라이트 초기화
+    var allSvgAreas = document.querySelectorAll('.floor-map-wrap svg rect[id^="area_"], .floor-map-wrap svg path[id^="area_"], .floor-map-wrap svg g[id^="area_"]');
     allSvgAreas.forEach(function(area) {
         area.classList.remove('active');
     });

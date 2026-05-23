@@ -1,4 +1,4 @@
-    @charset "UTF-8";
+@charset "UTF-8";
 
 #classroom-container {
     max-width: 1000px; 
@@ -86,6 +86,7 @@
 .floor-map-wrap svg rect[id^="area_"]:hover, 
 .floor-map-wrap svg path[id^="area_"]:hover {
     fill-opacity: 0.12 !important;   
+    stroke: #00d2ff !important;
     stroke-opacity: 0.7 !important;
     filter: drop-shadow(0px 0px 4px rgba(0, 210, 255, 0.5)) !important;
 }
@@ -138,12 +139,12 @@
     box-sizing: border-box;
 }
 
-#floor-ul > li:last-child {
-    border-bottom: none;
-}
-
 #floor-ul > li:hover {
     background-color: #e8f0fe;
+}
+
+#floor-ul > li:last-child {
+    border-bottom: none;
 }
 
 #room-ul-1,
@@ -156,10 +157,8 @@
     display: none;
 }
 
-#room-ul-1 > li,
 #room-ul-2 > li,
-#room-ul-3 > li,
-#room-ul-4 > li {
+#room-ul-3 > li {
     display: block;
     width: 100%;
     padding: 0;
@@ -172,17 +171,27 @@
 }
 
 #room-ul-1 > li,
-#room-ul-2 > li,
-#room-ul-3 > li,
+#room-ul-4 > li {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    font-weight: normal;
+    color: #333;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+#room-ul-1 > li,
 #room-ul-4 > li,
 #room-ul-1 > li > span,
 #room-ul-2 > li > span,
 #room-ul-3 > li > span,
 #room-ul-4 > li > span {
-    display: block;
-    width: 100%;
-    padding: 12px 20px;
-    box-sizing: border-box;
+    display: block !important;
+    width: 100% !important;
+    padding: 12px 20px !important;
+    box-sizing: border-box !important;
 }
 
 #room-ul-1 > li:last-child,
@@ -196,9 +205,9 @@
 #room-ul-2 > li:hover,
 #room-ul-3 > li:hover,
 #room-ul-4 > li:hover {
-    background-color: #e8f0fe;
-    color: #003399;
-    font-weight: bold;
+    background-color: #e8f0fe !important;
+    color: #003399 !important;
+    font-weight: bold !important;
 }
 
 #room-ul-2 li ul,
