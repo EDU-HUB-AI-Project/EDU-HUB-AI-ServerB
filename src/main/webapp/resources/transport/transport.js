@@ -21,7 +21,7 @@ function initTransportMap() {
             }
         };
 
-        var container = document.getElementById('map');
+        var container = document.getElementById('map-transport');
         map = new kakao.maps.Map(container, { center: ORIGIN, level: 5 });
 
         var originMarker = new kakao.maps.Marker({ position: ORIGIN });
@@ -31,6 +31,13 @@ function initTransportMap() {
             content: '<div style="padding:5px;font-size:12px;font-weight:bold;">한국산업안전보건교육원</div>'
         });
         infowindow.open(map, originMarker);
+
+        setTimeout(function() {
+            if(map) {
+                map.relayout();
+                map.setCenter(ORIGIN);
+            }
+        }, 100);
     });
 }
 

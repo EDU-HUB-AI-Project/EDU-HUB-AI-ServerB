@@ -13,7 +13,7 @@
     <div id="transport-content">
 
         <%-- 지도 영역 --%>
-        <div id="map"></div>
+        <div id="map-transport"></div>
 
         <%-- 길찾기 버튼 --%>
         <div id="route-buttons">
