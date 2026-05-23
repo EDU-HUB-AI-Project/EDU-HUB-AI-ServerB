@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.Resource;
 
@@ -85,7 +86,7 @@ public class BadgeController {
 		String chromePath = propertiesService.getString("chrome.path");
 		String printOutputPath = propertiesService.getString("badge.print.output");
 		try {
-			String printUrl = "http://localhost:8080/badgeLabel.do?param=" + param;
+			String printUrl = propertiesService.getString("Badge.PrintServerUrl") + "/badgeLabel.do?param=" + param;
 			String outputFile = printOutputPath + "badge_" + param + ".pdf";
 			
 			File outputDif = new File(printOutputPath);
@@ -107,7 +108,7 @@ public class BadgeController {
 				    "--print-to-pdf=" + outputFile,
 				    printUrl
 				);
-			pb.start().waitFor();
+			pb.start().waitFor(30, TimeUnit.SECONDS);
 			
 			Map<String, Object> detail = badgeService.selectStudentDetail(param);
 			result.put("status", "success");
