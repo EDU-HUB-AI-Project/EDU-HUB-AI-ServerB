@@ -184,7 +184,7 @@
                                 <li onclick="highlightRoom('area_clinic_lab', 2)">건강검진실습실</li>
                                 <li onclick="highlightRoom('area_hazmat_lab', 2)">위험물취급실습실</li>
                                 <li onclick="highlightRoom('area_workenv_lab', 2)">작업환경실습실</li>
-                                <li onclick="highlightRoom('area_hearing_lab', 2)">청력보존실습실</li>
+                                <li onclick="highlightRoom('area_power_lab', 2)">청력보존실습실</li>
                                 <li onclick="highlightRoom('area_chemical_lab', 2)">화학설비실습실</li>
                                 <li onclick="highlightRoom('area_humanerror_lab', 2)">휴먼에러실습실</li>
                             </ul>
@@ -225,16 +225,11 @@
                 </li>
                 
                 <!-- 4층 리스트 -->
-                <li>
+                 <li>
                     <span class="floor-title" onclick="toggleFloorList(4)">4층</span>
                     <ul id="room-ul-4">
-                        <li>
-                            <span class="sub-title" onclick="toggleSubList(this)">강의실</span>
-                            <ul>
-                                <li onclick="highlightRoom('area_401_room', 4)">401강의실</li>
-                                <li onclick="highlightRoom('area_402_room', 4)">402강의실</li>
-                            </ul>
-                        </li>
+                        <li onclick="highlightRoom('area_401_room', 4)">401강의실</li>
+                        <li onclick="highlightRoom('area_402_room', 4)">402강의실</li>
                     </ul>
                 </li>
             </ul>
