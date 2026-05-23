@@ -3,7 +3,7 @@ var inputValue = '';
 /*  ------------------
     Guide.jsp 이동 함수
     ----------------*/
-function moveToGuide(data) {
+function moveToGuide(data, autoAssigned) {
     $('#content-area').load('/guide.do', function() {
         $('#card-name').text(data.STUDENT_NAME);
         $('#card-edu-name').text(data.EDU_NAME);
@@ -21,6 +21,9 @@ function moveToGuide(data) {
             $('#card-dorm').text(dong + '동 ' + ho + '호');
         }
 
+        if(autoAssigned) {
+            showAlert('생활관이 자동 배정되었습니다.\n배정 호실을 확인해주세요.');
+        }
         initGuideCanvas(data.EDU_ROOM_NAME);
     });
 }
@@ -106,7 +109,7 @@ function confirmStudent() {
         dataType: 'json',
         success: function(data) {
             if(data.status === 'success') {
-                fetchDetailAndReprint(studentId);
+                fetchDetailAndReprint(studentId, data.autoAssigned === 'Y');
             }
             else if(data.status === 'already') {
                 hideLoading();
@@ -165,7 +168,7 @@ function fetchDetailAndGuide(studentId) {
 }
 
 // 학생 상제 조회 후 재출력, 가이드 이동
-function fetchDetailAndReprint(studentId) {
+function fetchDetailAndReprint(studentId, autoAssigned) {
     showLoading();
     $.ajax({
         url: '/badge/print.do',
@@ -173,7 +176,7 @@ function fetchDetailAndReprint(studentId) {
         success: function(data) {
             hideLoading();
             if(data.status === 'success') {
-                moveToGuide(data.data);
+                moveToGuide(data.data, autoAssigned);
             }
             else {
                 showAlert(data.message);
