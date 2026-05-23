@@ -1,103 +1,125 @@
 @charset "UTF-8";
 
 #badge-container {
-    max-width: 1040px;
-    margin: 40px auto;
-    padding: 30px;
+    max-width: 900px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 20px 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ── Step 1: 키패드 ── */
+#step-keypad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
 }
 
 #badge-title {
     text-align: center;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
     font-weight: bold;
     color: #003399;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
-/* 키패드 */
-#keypad-area {
+#keypad-guide {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #444;
+    margin-bottom: 24px;
+    line-height: 2;
+}
+
+#keypad-guide-ex {
     display: block;
-    margin-bottom: 25px;
+    font-size: 1.2rem;
+    color: #888;
+}
+
+#keypad-area {
+    width: 100%;
+    max-width: 680px;
 }
 
 #keypad-display {
-    font-size: 2.2rem;
+    width: 100%;
+    height: 80px;
+    line-height: 40px;
+    font-size: 2.4rem;
     font-weight: bold;
     text-align: center;
-    padding: 18px;
+    padding: 20px;
     border: 2px solid #003399;
     border-radius: 10px;
-    margin-bottom: 15px;
-    letter-spacing: 10px;
-    min-height: 80px;
+    margin-bottom: 16px;
+    letter-spacing: 12px;
     color: #003399;
+    background: #f8f9ff;
+    box-sizing: border-box;
 }
 
 .keypad-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    gap: 14px;
 }
 
 .key-btn {
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: bold;
-    padding: 25px;
+    padding: 28px;
     border: none;
-    border-radius: 10px;
+    border-radius: 12px;
     background: #f0f0f0;
     cursor: pointer;
+    transition: background 0.15s;
 }
 
-.key-btn:hover {
-    background: #003399;
-    color: white;
+.key-btn:hover  { background: #003399; color: white; }
+.key-btn:active { background: #002277; color: white; }
+
+.key-delete { background: #ff4444; color: white; }
+.key-delete:hover { background: #cc0000; color: white; }
+
+.key-confirm { background: #003399; color: white; padding: 28px; }
+.key-confirm:hover { background: #002277; color: white; }
+
+.key-clear { background: #ff8800; color: white; }
+.key-clear:hover { background: #cc6600; color: white; }
+
+/* ── Step 2: 결과 ── */
+#step-result {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
-.key-btn:active {
-    background: #002277;
-    color: white;
+#result-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #003399;
+    text-align: center;
+    margin-bottom: 20px;
+    flex-shrink: 0;
 }
 
-.key-delete {
-    background: #ff4444;
-    color: white;
-}
-
-.key-delete:hover {
-    background: #cc0000;
-    color: white;
-}
-
-.key-confirm {
-    background: #003399;
-    color: white;
-    padding: 25px;
-    margin-top: 12px;
-}
-
-.key-confirm:hover {
-    background: #002277;
-    color: white;
-}
-
-.key-clear {
-    background: #ff8800;
-    color: white;
-}
-
-.key-clear:hover {
-    background: #cc6600;
-    color: white;
+#no-result {
+    text-align: center;
+    font-size: 1.6rem;
+    color: #cc0000;
+    margin-top: 60px;
+    line-height: 2;
 }
 
 #result-table {
     width: 100%;
+    flex-shrink: 0;
 }
 
-#result-table thead {
-    font-size: 1.3rem;
-}
+#result-table thead { font-size: 1.3rem; }
 
 #result-table tbody tr {
     font-size: 1.4rem;
@@ -105,42 +127,66 @@
     cursor: pointer;
 }
 
-#result-table tbody td {
-    vertical-align: middle;
+#result-table tbody td { vertical-align: middle; }
+
+#pagination-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    padding: 16px 0;
+    flex-shrink: 0;
 }
 
+#page-info {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #003399;
+}
+
+.page-btn {
+    font-size: 1.3rem;
+    font-weight: bold;
+    padding: 12px 30px;
+    border: 2px solid #003399;
+    border-radius: 8px;
+    background: white;
+    color: #003399;
+    cursor: pointer;
+}
+
+.page-btn:hover { background: #003399; color: white; }
+.page-btn:disabled { border-color: #ccc; color: #ccc; cursor: default; background: white; }
+
 #selected-area {
-    display: none;
-    margin-top: 25px;
-    padding: 25px;
-    background-color: #e9f0ff;
+    flex-shrink: 0;
+    padding: 20px;
+    background: #e9f0ff;
     border-radius: 10px;
     font-size: 1.5rem;
     text-align: center;
+    color: #003399;
+    font-weight: bold;
+    margin-top: 16px;
+}
+
+#result-actions {
+    display: flex;
+    gap: 16px;
+    margin-top: 20px;
+    flex-shrink: 0;
+}
+
+#back-btn {
+    flex: 1;
+    font-size: 1.6rem;
+    padding: 22px;
+    border-radius: 10px;
 }
 
 #confirm-btn {
-    display: none;
-    width: 100%;
+    flex: 2;
     font-size: 1.8rem;
-    padding: 25px;
+    padding: 22px;
     border-radius: 10px;
-    margin-top: 25px;
-}
-
-#cancel-btn {
-    display: none;
-    width: 100%;
-    font-size: 1.5rem;
-    padding: 18px;
-    border-radius: 10px;
-    margin-top: 12px;
-}
-
-#no-result {
-    display: none;
-    text-align: center;
-    font-size: 1.5rem;
-    color: red;
-    margin-top: 25px;
 }
