@@ -27,7 +27,7 @@
                 <button class="key-btn" onclick="pressKey('0')">0</button>
                 <button class="key-btn key-delete" onclick="deleteKey()">←</button>
             </div>
-            <button class="key-btn key-confirm w-100 mt-3" onclick="confirmKey()">조회</button>
+            <button class="key-btn key-confirm" onclick="confirmKey()">조회</button>
         </div>
     </div>
 
