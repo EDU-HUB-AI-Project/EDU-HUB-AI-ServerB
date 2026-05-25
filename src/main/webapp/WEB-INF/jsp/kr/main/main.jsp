@@ -29,20 +29,22 @@
     </div>
 
     <div id="intro-overlay">
-        <div id="intro-title">
-            🏫 교육생 키오스크
-        </div>
-        <div id="intro-subtitle">스마트 EDU-HUB AI 키오스크</div>
-        <div id="intro-buttons">
-            <button type="button" class="intro-btn" onclick="selectMenu('/badge.do')">
-                🪪<br>명찰 발급 및<br>개인 맞춤 안내
-            </button>
-            <button type="button" class="intro-btn" onclick="selectMenu('/facility.do')">
-                🏢<br>보편적 시설 및<br>정보 안내
-            </button>
-             
-        </div>
+    <div id="intro-logo">🏫</div>
+    <div id="intro-title">교육생 키오스크</div>
+    <div id="intro-subtitle">스마트 EDU-HUB AI 키오스크</div>
+    <div id="intro-buttons">
+        <button type="button" class="intro-btn" onclick="selectMenu('/badge.do')">
+            <span class="btn-icon">🪪</span>
+            <span>명찰 발급 및 개인 맞춤 안내</span>
+            <span class="btn-sub">생년월일 입력 → 명찰 출력 → 강의실 안내</span>
+        </button>
+        <button type="button" class="intro-btn" onclick="selectMenu('/facility.do')">
+            <span class="btn-icon">🏢</span>
+            <span>보편적 시설 및 정보 안내</span>
+            <span class="btn-sub">식당 · 흡연구역 · 강의실 · 교통정보</span>
+        </button>
     </div>
+</div>
 
     <%@ include file="/WEB-INF/jsp/kr/common/header.jsp" %>
 

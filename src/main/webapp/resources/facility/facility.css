@@ -1,51 +1,86 @@
 @charset "UTF-8";
 
 #facility-container {
-    max-width: 900px;
-    margin: 30px auto;
-    padding: 20px;
+    width: 100%;
+    height: 100%;
+    padding: 50px 70px 40px;
+    display: flex;
+    flex-direction: column;
 }
 
 #facility-title {
     text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    color: #003399;
+    font-size: 2.6rem;
+    font-weight: 900;
+    color: var(--main-blue);
     margin-bottom: 40px;
+    flex-shrink: 0;
 }
 
+/* ── 2×2 그리드 ── */
 #facility-menu {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 28px;
+    min-height: 0;
 }
 
 .facility-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
     width: 100%;
-    font-size: 1.5rem;
-    font-weight: bold;
-    padding: 25px 30px;
-    border: 2px solid #dee2e6;
-    border-radius: 12px;
-    background-color: #ffffff;
-    text-align: left;
+    height: 100%;
+    border: 3px solid #e0e0e0;
+    border-radius: 24px;
+    background: var(--white);
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+    padding: 40px;
 }
 
-.facility-btn:hover {
-    border-color: #003399;
-    background-color: #e9f0ff;
-    color: #003399;
+.facility-btn:active {
+    transform: scale(0.96);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
-.facility-btn p {
-    font-size: 1rem;
-    font-weight: normal;
-    color: #666;
-    margin: 5px 0 0 0;
+/* 버튼별 색상 */
+.facility-btn:nth-child(1) { border-color: #e67e22; }
+.facility-btn:nth-child(1):active { background: #fff5ec; }
+.facility-btn:nth-child(1) .fac-icon { color: #e67e22; }
+
+.facility-btn:nth-child(2) { border-color: #555; }
+.facility-btn:nth-child(2):active { background: #f4f4f4; }
+.facility-btn:nth-child(2) .fac-icon { color: #555; }
+
+.facility-btn:nth-child(3) { border-color: var(--main-green); }
+.facility-btn:nth-child(3):active { background: #edfff2; }
+.facility-btn:nth-child(3) .fac-icon { color: var(--main-green); }
+
+.facility-btn:nth-child(4) { border-color: var(--main-blue); }
+.facility-btn:nth-child(4):active { background: #eef2ff; }
+.facility-btn:nth-child(4) .fac-icon { color: var(--main-blue); }
+
+.fac-icon {
+    font-size: 4.5rem;
+    line-height: 1;
 }
 
-.facility-btn:hover p {
-    color: #003399;
+.fac-name {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--dark-gray);
+}
+
+.fac-desc {
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: #888;
+    text-align: center;
+    line-height: 1.5;
 }

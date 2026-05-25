@@ -6,28 +6,26 @@
 
 <div id="transport-container">
 
-    <div id="transport-title">
-        🚆 교통 정보 안내
-    </div>
+    <div id="transport-title">🚆 교통 정보 안내</div>
 
     <div id="transport-content">
 
-        <%-- 지도 영역 --%>
         <div id="map-transport"></div>
 
-        <%-- 길찾기 버튼 --%>
         <div id="route-buttons">
-            <button class="route-btn" onclick="searchRoute('station')">🚆 울산역(KTX)으로</button>
-            <button class="route-btn" onclick="searchRoute('terminal')">🚌 고속버스터미널로</button>
+            <button class="route-btn" onclick="searchRoute('station')">
+                🚆 울산역(KTX)으로
+            </button>
+            <button class="route-btn" onclick="searchRoute('terminal')">
+                🚌 고속버스터미널로
+            </button>
         </div>
 
-        <%-- 버스 안내 결과 --%>
-        <div id="bus-result" style="display:none;">
+        <div id="bus-result">
             <div id="bus-result-title"></div>
             <div id="bus-card-list"></div>
         </div>
 
-        <%-- 교통 정보 안내 --%>
         <div id="transport-info">
             <div class="info-card">
                 <h3>📍 교육원 위치</h3>
@@ -48,6 +46,7 @@
     </div>
 
 </div>
+
 <script>
     initTransportMap();
 </script>
