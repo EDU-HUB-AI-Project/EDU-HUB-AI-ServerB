@@ -1,0 +1,511 @@
+@charset "UTF-8";
+
+/* =============================================
+   컨테이너
+============================================= */
+#classroom-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #eff6ff 100%);
+    padding: 130px 0 80px;
+    box-sizing: border-box;
+}
+
+/* =============================================
+   헤더
+============================================= */
+.classroom-header {
+    text-align: center;
+    margin-bottom: 16px;
+    animation: fadeInDown 1s ease-out;
+    padding: 8px 0;
+    position: relative;
+}
+
+.classroom-header .back-to-facility {
+    left: 70px;
+}
+
+.classroom-header .header-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.classroom-header .badge-dot {
+    width: 8px;
+    height: 8px;
+    background: #10b981;
+    border-radius: 50%;
+}
+
+.classroom-header .badge-text {
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    color: #64748b;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.page-title {
+    font-size: 60px;
+    font-weight: 200;
+    color: #0f172a;
+    margin: 8px 0 0 0;
+    letter-spacing: -0.02em;
+}
+
+/* =============================================
+   레이아웃
+============================================= */
+.classroom-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 32px;
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    gap: 32px;
+    height: auto;
+    align-items: start;
+}
+
+/* =============================================
+   사이드바
+============================================= */
+.floor-sidebar {
+    animation: fadeInLeft 0.8s ease-out 0.2s;
+    animation-fill-mode: both;
+}
+
+.sidebar-sticky {
+    position: sticky;
+    top: 16px;
+}
+
+.sidebar-label {
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 300;
+    margin-bottom: 24px;
+}
+
+.floor-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* =============================================
+   층 버튼
+============================================= */
+.floor-btn {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    text-align: left;
+}
+
+.floor-btn.selected { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
+
+/* glow 레이어 */
+.floor-glow-blue, .floor-glow-indigo, .floor-glow-purple, .floor-glow-pink {
+    position: absolute;
+    inset: -2px;
+    border-radius: 16px;
+    opacity: 0;
+    filter: blur(20px);
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+.floor-glow-blue   { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.floor-glow-indigo { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.floor-glow-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+.floor-glow-pink   { background: linear-gradient(135deg, #ec4899, #f472b6); }
+
+/* bg 레이어 */
+.floor-bg-blue, .floor-bg-indigo, .floor-bg-purple, .floor-bg-pink {
+    position: absolute;
+    inset: 0;
+    transition: opacity 0.5s;
+    opacity: 0;
+}
+
+.floor-bg-blue   { background: linear-gradient(to right, #3b82f6, #6366f1); }
+.floor-bg-indigo { background: linear-gradient(to right, #6366f1, #8b5cf6); }
+.floor-bg-purple { background: linear-gradient(to right, #8b5cf6, #a855f7); }
+.floor-bg-pink   { background: linear-gradient(to right, #ec4899, #f472b6); }
+
+/* 흰 배경 레이어 */
+.floor-bg-white {
+    position: absolute;
+    inset: 0;
+    background: white;
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+
+/* selected 상태 */
+.floor-btn.selected .floor-bg-white    { opacity: 0; }
+.floor-btn.selected .floor-number      { color: white; }
+.floor-btn.selected .floor-indicator   { background: white; transform: scale(1.5); }
+.floor-btn.selected .floor-rooms       { color: rgba(255, 255, 255, 0.8); }
+.floor-btn.selected .floor-border      { opacity: 1; }
+
+.floor-btn[data-floor="1"].selected .floor-bg-blue   { opacity: 1; }
+.floor-btn[data-floor="2"].selected .floor-bg-indigo { opacity: 1; }
+.floor-btn[data-floor="3"].selected .floor-bg-purple { opacity: 1; }
+.floor-btn[data-floor="4"].selected .floor-bg-pink   { opacity: 1; }
+
+/* hover 색상 */
+.floor-btn[data-floor="1"]:hover .floor-bg-blue   { opacity: 0.8; }
+.floor-btn[data-floor="2"]:hover .floor-bg-indigo { opacity: 0.8; }
+.floor-btn[data-floor="3"]:hover .floor-bg-purple { opacity: 0.8; }
+.floor-btn[data-floor="4"]:hover .floor-bg-pink   { opacity: 0.8; }
+
+/* 버튼 내용 */
+.floor-content {
+    position: relative;
+    padding: 24px;
+}
+
+.floor-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.floor-number {
+    font-size: 36px;
+    font-weight: 300;
+    color: #0f172a;
+    transition: color 0.5s;
+}
+
+.floor-indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #cbd5e1;
+    transition: all 0.5s;
+}
+
+.floor-rooms {
+    font-size: 14px;
+    font-weight: 300;
+    color: #64748b;
+    margin: 0;
+    transition: color 0.5s;
+}
+
+/* 테두리 */
+.floor-border {
+    position: absolute;
+    inset: 0;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+    opacity: 0;
+    transition: opacity 0.5s;
+    pointer-events: none;
+}
+
+/* =============================================
+   콘텐츠 영역
+============================================= */
+.classroom-content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeInRight 0.8s ease-out 0.3s;
+    animation-fill-mode: both;
+    min-width: 0;
+}
+
+/* 섹션 공통 */
+.floor-plan-section,
+.classroom-list-section {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 20px 32px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    flex: 1;
+}
+
+.classroom-list-section .section-title {
+    margin-bottom: 50px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.section-title {
+    font-size: 32px;
+    font-weight: 300;
+    color: #0f172a;
+    margin: 0;
+}
+
+.section-badge {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #94a3b8;
+}
+
+.section-badge svg { color: #94a3b8; }
+
+/* =============================================
+   도면 영역
+============================================= */
+.floor-plan-display {
+    background: linear-gradient(135deg, #f8fafc 0%, #eff6ff 30%);
+    border-radius: 12px;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #e2e8f0;
+    overflow: hidden;
+}
+
+/* 도면 없을 때 플레이스홀더 */
+.plan-placeholder {
+    text-align: center;
+    color: #94a3b8;
+}
+
+.plan-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transition: all 0.5s;
+}
+
+.plan-icon-blue   { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.plan-icon-indigo { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.plan-icon-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+.plan-icon-pink   { background: linear-gradient(135deg, #ec4899, #f472b6); }
+
+.plan-number {
+    font-size: 48px;
+    font-weight: 300;
+    color: white;
+}
+
+.plan-text {
+    font-size: 18px;
+    font-weight: 300;
+    margin: 0;
+}
+
+/* 도면 SVG 래퍼 (원본 유지) */
+.floor-map-wrap {
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.floor-map-wrap svg {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* ★ id 수정: map-floor-1 → floor_1f */
+#floor_1f { display: block; }
+
+/* SVG area 강조 (원본 유지) */
+.floor-map-wrap svg rect[id^="area_"],
+.floor-map-wrap svg path[id^="area_"] {
+    fill: #0044ff !important;
+    fill-opacity: 0 !important;
+    stroke: #00d2ff !important;
+    stroke-opacity: 0 !important;
+    stroke-width: 2px !important;
+    cursor: pointer;
+    transition: fill-opacity 0.3s ease-in-out, stroke-opacity 0.15s ease-in-out, filter 0.3s ease;
+}
+
+.floor-map-wrap svg rect[id^="area_"]:hover,
+.floor-map-wrap svg path[id^="area_"]:hover {
+    fill-opacity: 0.12 !important;
+    stroke-opacity: 0.7 !important;
+    filter: drop-shadow(0px 0px 4px rgba(0, 210, 255, 0.5)) !important;
+}
+
+.floor-map-wrap svg rect[id^="area_"].active,
+.floor-map-wrap svg path[id^="area_"].active {
+    fill-opacity: 0.25 !important;
+    stroke-opacity: 1 !important;
+    filter: drop-shadow(0px 0px 8px rgba(0, 210, 255, 0.95)) !important;
+}
+
+#no-image {
+    padding: 60px 0;
+    font-size: 1.2rem;
+    color: #94a3b8;
+    text-align: center;
+}
+
+/* =============================================
+   강의실 카드 그리드
+============================================= */
+.classroom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 45px;
+    transition: all 0.3s;
+}
+
+/* 강의실 카드 */
+.room-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    border: none;
+    text-align: left;
+    transition: all 0.3s;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+.room-card.selected {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* 카드 배경 */
+.room-bg {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.room-bg-blue   { background: linear-gradient(135deg, #3b82f6, #6366f1); }
+.room-bg-indigo { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+.room-bg-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
+.room-bg-pink   { background: linear-gradient(135deg, #ec4899, #f472b6); }
+
+.room-card.selected .room-bg { opacity: 1; }
+
+/* 카드 흰 배경 */
+.room-bg-white {
+    position: absolute;
+    inset: 0;
+    background: white;
+    transition: opacity 0.3s;
+}
+
+.room-card.selected .room-bg-white { opacity: 0; }
+
+/* 카드 테두리 */
+.room-border {
+    position: absolute;
+    inset: 0;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    transition: border-color 0.3s;
+    pointer-events: none;
+}
+
+.room-card.selected .room-border { border-color: transparent; }
+
+/* 카드 내용 */
+.room-content {
+    position: relative;
+}
+
+.room-name {
+    font-size: 16px;
+    font-weight: 400;
+    color: #0f172a;
+    margin-bottom: 4px;
+    transition: color 0.3s;
+    word-break: keep-all;
+}
+
+.room-card.selected .room-name { color: white; }
+
+/* 선택 표시 */
+.room-indicator {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: 12px;
+    height: 12px;
+    background: white;
+    border-radius: 50%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.3s;
+}
+
+.room-card.selected .room-indicator {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* =============================================
+   애니메이션
+============================================= */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-50px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInLeft {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+    from { opacity: 0; transform: translateX(20px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+    from { transform: scale(0.9); }
+    to   { transform: scale(1); }
+}
+
+/* =============================================
+   반응형
+============================================= */
+@media (max-width: 1024px) {
+    .classroom-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-sticky { position: static; }
+    .floor-buttons  { flex-direction: row; overflow-x: auto; }
+    .floor-btn      { min-width: 200px; }
+    .classroom-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+    .classroom-header .page-title { font-size: 64px; }
+    .section-title  { font-size: 24px; }
+    .classroom-grid { grid-template-columns: 1fr; }
+}

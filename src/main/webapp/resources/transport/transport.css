@@ -1,0 +1,332 @@
+@charset "UTF-8";
+
+#transport-container {
+    width: 100%;
+    height: 100%;
+    padding: 130px 70px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+#transport-title {
+    position: relative;
+    text-align: center;
+    padding: 0 0 8px;
+    flex-shrink: 0;
+}
+
+#transport-title .header-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    color: #64748b;
+}
+
+#transport-title .badge-text {
+    font-size: 1.4rem;
+    letter-spacing: 0.3em;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+#transport-title .page-title {
+    font-size: 56px;
+    font-weight: 200;
+    color: #0f172a;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+#transport-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    min-height: 0;
+}
+
+/* ── 지도 ── */
+#map-transport {
+    width: 100%;
+    height: 520px;
+    border-radius: 20px;
+    border: 2px solid #e0e0e0;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    overflow: hidden;
+}
+
+/* ── 길찾기 버튼 ── */
+#route-buttons {
+    display: flex;
+    gap: 20px;
+    flex-shrink: 0;
+}
+
+.route-btn {
+    flex: 1;
+    height: 110px;
+    font-size: 1.5rem;      /* 1.8rem → 1.5rem */
+    font-weight: 900;
+    color: var(--white);
+    background: var(--main-blue);
+    border: none;
+    border-radius: 16px;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-shadow: 0 4px 16px rgba(0, 51, 153, 0.2);
+}
+
+.route-btn:active {
+    background: #002277;
+    transform: scale(0.97);
+}
+
+/* ── 버스 결과 ── */
+#bus-result {
+    background: #f0f4ff;
+    border: 2px solid #c0cff5;
+    border-radius: 20px;
+    padding: 28px 32px;
+    display: none;
+    flex-direction: column;
+}
+
+#bus-result-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--main-blue);
+    margin-bottom: 18px;
+    flex-shrink: 0;
+}
+
+#bus-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    overflow: hidden;
+}
+
+.bus-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: var(--white);
+    border: 1px solid #dee2e6;
+    border-radius: 14px;
+    padding: 20px 28px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.bus-no {
+    font-size: 1.7rem;
+    font-weight: 900;
+    color: var(--main-blue);
+    min-width: 160px;
+}
+
+.bus-stop {
+    flex: 1;
+    font-size: 1.4rem;
+    color: var(--dark-gray);
+}
+
+.bus-arrival {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e63946;
+}
+
+.loading-text,
+.no-bus-text {
+    font-size: 1.5rem;
+    color: #888;
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* ── 경로 안내 카드 그리드 ── */
+#transport-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.route-card {
+    display: none;
+    flex-direction: column;
+    background: var(--white);
+    border-radius: 18px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+.route-card.active {
+    display: flex;
+}
+
+.route-card-header {
+    padding: 16px 24px;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.route-card-header.blue  { background: var(--main-blue); }
+.route-card-header.green { background: var(--main-green); }
+.route-card-header.gold  { background: var(--point-gold); }
+
+.route-card-body {
+    padding: 20px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.route-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 1.3rem;
+    color: var(--dark-gray);
+    line-height: 1.5;
+}
+
+.step-num {
+    min-width: 28px;
+    height: 28px;
+    background: var(--main-blue);
+    color: var(--white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    font-weight: 900;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.step-text { flex: 1; }
+
+.step-arrow {
+    padding-left: 8px;
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1;
+}
+
+.bus-badge {
+    display: inline-block;
+    background: var(--main-blue);
+    color: var(--white);
+    font-size: 1.05rem;
+    font-weight: 900;
+    padding: 2px 10px;
+    border-radius: 6px;
+    margin-right: 2px;
+}
+
+.route-time {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--main-blue);
+    text-align: right;
+}
+
+.terminal-routes {
+    display: flex;
+    gap: 0;
+}
+
+.terminal-route {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0 20px;
+}
+
+.terminal-route:first-child { padding-left: 0; }
+.terminal-route:last-child  { padding-right: 0; }
+
+.terminal-divider {
+    width: 1.5px;
+    background: #e8e8e8;
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin: 0 4px;
+}
+
+.sub-route-label {
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--main-green);
+    margin-bottom: 4px;
+}
+
+.stop-label {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--dark-gray);
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1.5px solid #eee;
+}
+
+.stop-tag {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    padding: 3px 12px;
+    border-radius: 20px;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.stop-tag.near  { background: #e8f5e9; color: var(--main-green); }
+.stop-tag.cross { background: #fff3e0; color: #e67e22; }
+
+.stop-sub {
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #888;
+    margin-top: 6px;
+}
+
+.bus-route-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.bus-route-dest {
+    font-size: 1.3rem;
+    color: var(--dark-gray);
+    flex: 1;
+}
+
+.bus-route-time {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--main-blue);
+}
+
+.route-btn.active {
+    background: #002277;
+    box-shadow: 0 4px 16px rgba(0, 34, 119, 0.4);
+    transform: scale(0.97);
+}

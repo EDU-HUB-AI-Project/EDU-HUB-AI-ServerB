@@ -37,5 +37,10 @@ target/
 *.war
 *.jar
 
-# DB 설정 파일 제외
-src/main/resources/egovframework/egovProps/globals.properties
+# API KEY 제외
+src/main/resources/globals.properties
+
+# Claude Code
+.claude/
+CLAUDE.md
+globals.properties

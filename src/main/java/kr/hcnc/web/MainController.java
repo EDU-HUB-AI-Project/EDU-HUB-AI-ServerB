@@ -1,19 +1,43 @@
 package kr.hcnc.web;
+
+import javax.annotation.Resource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import egovframework.rte.fdl.property.EgovPropertyService;
 
 @Controller
 public class MainController {
 	
+	private static final Logger log = LoggerFactory.getLogger(MainController.class);
+	
+	@Resource(name = "propertiesService")
+	private EgovPropertyService propertiesService;
+	
 	@RequestMapping(value = "/main.do")
-	public String mainPage() {
-		System.out.println("MainController :: /main.do");
+	public String mainPage(Model model) {
+		log.info("Called :: /main.do");
+		model.addAttribute("kakaoMapKey", propertiesService.getString("kakao.map.key"));
 		return "main/main";
 	}
 	
 	@RequestMapping(value = "/badge.do")
 	public String badgePage() {
-		System.out.println("MainController :: /badge.do");
+		log.info("Called :: /badge.do");
 		return "badge/badgePage";
+	}
+	
+	@RequestMapping(value = "/guide.do")
+	public String guidePage(Model model) {
+		log.info("Called :: /guide.do");
+		model.addAttribute("kioskSite", propertiesService.getString("kiosk.site"));
+		model.addAttribute("contactPhone", propertiesService.getString("kiosk.contact.phone"));
+		model.addAttribute("contactLocation", propertiesService.getString("kiosk.contact.location"));
+		return "guide/guidePage";
 	}
 }
