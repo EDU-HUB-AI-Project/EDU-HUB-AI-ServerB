@@ -384,6 +384,8 @@ function moveToGuide(data, autoAssigned) {
 
         initGuideCanvas(data.EDU_ROOM_NAME);
         initDormCanvas(data.DORMITORY_ROOM_NAME);
+
+        resetIdleTimer();
     });
 }
 
