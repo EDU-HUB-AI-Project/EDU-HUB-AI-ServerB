@@ -69,7 +69,7 @@
 
 #keypad-guide-ex {
     display: block;
-    font-size: 1.7rem;
+    font-size: 1.4rem;
     color: #64748b;
     margin-top: 12px;
     font-weight: 300;
@@ -98,7 +98,7 @@
 .keypad-display {
     position: relative;
     background: white;
-    border: 1px solid #e2e8f0;
+    border: 2px solid #94a3b8;
     border-radius: 28px;
     padding: 64px 48px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.03);
@@ -192,7 +192,7 @@
 
 .key-btn {
     height: 140px;
-    border: 1px solid #e2e8f0;
+    border: 2px solid #cbd5e1;
     border-radius: 20px;
     background: white;
     font-size: 3.8rem;
@@ -207,33 +207,25 @@
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
 }
 
-.key-btn:hover {
-    border-color: #cbd5e1;
-    background: #f8fafc;
-    transform: scale(1.02);
-}
-
 .key-btn:active {
     transform: scale(0.95);
-    background: #f1f5f9;
-}
-
-.key-btn.focused {
-    border-color: #3b82f6;
     background: #eff6ff;
-    box-shadow: 0 6px 20px rgba(59, 130, 246, 0.15);
+    border-color: #3b82f6;
     color: #3b82f6;
 }
 
 .key-clear {
     font-size: 2.4rem;
     font-weight: 500;
+    border-color: #fecaca !important;
+    background: #fef2f2 !important;
+    color: #dc2626 !important;
 }
 
-.key-clear:hover {
-    border-color: #fecaca;
-    background: #fef2f2;
-    color: #dc2626;
+.key-clear:active {
+    background: #fee2e2 !important;
+    border-color: #f87171 !important;
+    transform: scale(0.95);
 }
 
 .key-delete {
@@ -246,16 +238,17 @@
 .key-delete svg {
     width: 40px;
     height: 40px;
-    color: #94a3b8;
+    color: #475569; 
     transition: color 0.2s;
 }
 
-.key-delete:hover {
-    border-color: #fecaca;
+.key-delete:active {
     background: #fef2f2;
+    border-color: #fecaca;
+    transform: scale(0.95);
 }
 
-.key-delete:hover svg {
+.key-delete:active svg {
     color: #dc2626;
 }
 
@@ -282,7 +275,7 @@
     height: 32px;
 }
 
-.submit-btn:hover:not(:disabled) {
+.submit-btn:active:not(:disabled) {
     box-shadow: 0 14px 40px rgba(59, 130, 246, 0.35);
     transform: scale(1.01);
 }
@@ -295,7 +288,6 @@
 }
 
 #step-result {
-    display: flex;
     flex-direction: column;
     width: 100%;
     animation: fadeInUp 0.4s ease-out;
@@ -305,6 +297,17 @@
     width: 100%;
     max-width: 960px;
     margin: 40px auto 0;
+}
+
+.result-guide {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--main-blue);
+    background: rgba(0, 85, 164, 0.07);
+    border-radius: 12px;
+    padding: 18px;
+    margin-bottom: 16px;
 }
 
 .result-table {
@@ -324,13 +327,14 @@
 }
 
 .result-table th {
-    padding: 24px 16px;
+    padding: 24px 10px;
     text-align: center;
     font-size: 1.8rem;
     font-weight: 500;
     color: #64748b;
     letter-spacing: 0.05em;
     border: none;
+    white-space: nowrap;
 }
 
 .result-table tbody tr {
@@ -341,8 +345,8 @@
     height: 100px;
 }
 
-.result-table tbody tr:hover {
-    background: rgba(241, 245, 249, 0.7);
+.result-table tbody tr:active {
+    background: rgba(241, 245, 249, 0.9);
 }
 
 .result-table tbody tr.selected {
@@ -352,15 +356,17 @@
 }
 
 .result-table td {
-    padding: 28px 16px;
+    padding: 28px 10px;
     color: #475569;
     text-align: center;
     vertical-align: middle;
 }
 
-.result-table td:nth-child(1) { font-family: monospace; }
-.result-table td:nth-child(2) { font-weight: 600; color: #0f172a; }
-.result-table td:nth-child(3) { font-family: monospace; }
+.result-table td:nth-child(2), 
+.result-table td:nth-child(4),  
+.result-table td:nth-child(5) { 
+    white-space: nowrap;
+}
 
 #no-result {
     max-width: 960px;
@@ -373,6 +379,12 @@
     text-align: center;
 }
 
+#no-result .btn-cancel {
+    margin-top: 32px;
+    width: 100%;
+}
+
+
 #no-result p, #no-result {
     font-size: 2.2rem;
     color: #dc2626;
@@ -382,7 +394,6 @@
 }
 
 #pagination-area {
-    display: flex;
     align-items: center;
     justify-content: center;
     gap: 48px;
@@ -394,12 +405,16 @@
     font-size: 1.8rem;
     font-weight: bold;
     color: #3b82f6;
+    font-family: monospace;
 }
 
 .page-btn {
-    font-size: 1.7rem;
+    display: flex;
+    align-items: center;
+    height: 56px;
+    padding: 0 24px;
+    font-size: 1.8rem;
     font-weight: bold;
-    padding: 20px 56px;
     border: 2px solid #e2e8f0;
     border-radius: 14px;
     background: white;
@@ -408,13 +423,9 @@
     transition: all 0.15s;
 }
 
-.page-btn:hover:not(:disabled) {
-    border-color: #cbd5e1;
-    background: #f8fafc;
-}
-
 .page-btn:active:not(:disabled) {
     background: #f1f5f9;
+    border-color: #cbd5e1;
 }
 
 .page-btn:disabled {
@@ -456,21 +467,20 @@
 #result-actions {
     display: flex;
     gap: 24px;
-    margin-top: 32px;
+    max-width: 860px;
+    margin: 40px auto 0;
     flex-shrink: 0;
     width: 100%;
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
 }
 
 .btn-cancel, #back-btn {
     flex: 1;
+    width: 100%;
     height: 110px;
     border-radius: 20px;
-    border: 2px solid #e2e8f0;
-    background: white;
-    color: #64748b;
+    border: 2px solid #fecaca;
+    background: #fef2f2;
+    color: #dc2626;
     font-size: 1.9rem;
     font-weight: bold;
     cursor: pointer;
@@ -480,10 +490,24 @@
     transition: all 0.3s;
 }
 
-.btn-cancel:hover, #back-btn:hover {
-    border-color: #fecaca;
-    background: #fef2f2;
-    color: #dc2626;
+.btn-cancel:active, #back-btn:active {
+    background: #fee2e2;
+    border-color: #f87171;
+}
+
+#back-btn {
+    height: 96px;
+    font-size: 1.6rem;
+    margin-top: 0; 
+}
+
+#confirm-btn {
+    height: 96px;
+    font-size: 1.6rem;
+}
+
+#confirm-btn svg {
+    margin-right: 8px;
 }
 
 .btn-confirm, #confirm-btn {
@@ -504,9 +528,9 @@
     box-shadow: 0 10px 30px rgba(16, 185, 129, 0.25);
 }
 
-.btn-confirm:hover, #confirm-btn:hover {
-    box-shadow: 0 14px 40px rgba(16, 185, 129, 0.35);
-    transform: scale(1.01);
+.btn-confirm:active, #confirm-btn:active {
+    transform: scale(0.98);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.3);
 }
 
 @keyframes fadeInDown {
@@ -523,3 +547,12 @@
     from { opacity: 0; transform: scale(0.85); }
     to { opacity: 1; transform: scale(1); }
 }
+
+/* 초기 hidden 상태 */
+#step-result        { display: none; }
+#no-result          { display: none; }
+#result-guide       { display: none; }
+#result-table       { display: none; }
+#pagination-area    { display: none; }
+#selected-section   { display: none; }
+#confirm-btn        { display: none; }
