@@ -1,8 +1,8 @@
 function selectMenu(url) {
-    $('#intro-overlay').css('opacity', '0');
+    $('#intro-container').css('opacity', '0');
 
     setTimeout(function() {
-        $('#intro-overlay').hide();
+        $('#intro-container').hide();
 
         $('#header').css('display', 'flex');
         $('#footer').css('display', 'flex');
@@ -27,7 +27,14 @@ function loadPage(url) {
         $('#nav-facility').addClass('active');
     }
     $('#content-area').load(url, function(response, status) {
-        if(status === 'error') showAlert('페이지 로드에 실패했습니다.');
+        if(status === 'error') {
+            showAlert('페이지 로드에 실패했습니다.');
+        } else {
+            // badge.do 로드 완료 후 키패드 초기화
+            if(url === '/badge.do' && typeof initKeypad === 'function') {
+                initKeypad();
+            }
+        }
     });
     resetIdleTimer();
 }
@@ -38,8 +45,8 @@ function goHome() {
     $('#header').hide();
     $('#footer').hide();
     $('#nav-badge, #nav-facility').removeClass('active');
-    $('#intro-overlay').css('opacity', '1');
-    $('#intro-overlay').show();
+    $('#intro-container').css('opacity', '1');
+    $('#intro-container').show();
 }
 
 function showLoading() {

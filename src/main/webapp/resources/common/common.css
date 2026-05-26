@@ -18,7 +18,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent;
+    scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Edge */
 }
 
 html, body {
@@ -33,7 +37,7 @@ html, body {
     user-select: none;
 }
 
-/* 헤더 */
+/* 헤더 - 스타일은 header.css에서 정의 */
 #header {
     height: 110px;
     background: var(--main-blue);

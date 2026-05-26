@@ -1,52 +1,86 @@
 @charset "UTF-8";
 
 #facility-container {
-    width: 100%;
-    height: 100%;
-    padding: 50px 70px 40px;
-    display: flex;
-    flex-direction: column;
-}
-
-#facility-title {
-    text-align: center;
-    font-size: 2.6rem;
-    font-weight: 900;
-    color: var(--main-blue);
-    margin-bottom: 40px;
-    flex-shrink: 0;
-}
-
-/* ── 2×2 그리드 ── */
-#facility-menu {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 28px;
-    min-height: 0;
-}
-
-.facility-btn {
+    min-height: 100vh;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(239, 246, 255, 0.2) 50%, #ffffff 100%);
+    padding: 240px 48px 100px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+}
+
+.facility-header {
+    text-align: center;
+    margin-bottom: 80px;
+    animation: fadeInDown 0.8s ease-out;
+    width: 100%;
+}
+
+.facility-header .header-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.facility-header .header-badge svg {
+    color: #10b981;
+    width: 24px;
+    height: 24px;
+}
+
+.facility-header .badge-text {
+    font-size: 16px;
+    letter-spacing: 0.15em;
+    color: #10b981;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+.facility-header .page-title {
+    font-size: 72px;
+    font-weight: 200;
+    background: linear-gradient(to right, #10b981, #14b8a6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
+
+.facility-menu {
+    width: 100%;
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.facility-card {
+    position: relative;
     width: 100%;
     height: 100%;
     border: 3px solid #e0e0e0;
     border-radius: 24px;
-    background: var(--white);
+    padding: 44px 48px;
     cursor: pointer;
-    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    padding: 40px;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    text-align: left;
+    box-sizing: border-box;
 }
 
-.facility-btn:active {
-    transform: scale(0.96);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.facility-card:hover {
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+    border-color: #cbd5e1;
+    transform: translateY(-2px);
 }
 
 /* 버튼별 색상 */
@@ -71,16 +105,126 @@
     line-height: 1;
 }
 
-.fac-name {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--dark-gray);
+.card-hover-blue   { background: linear-gradient(135deg, rgba(59,130,246,0.05), rgba(99,102,241,0.05)); }
+.card-hover-gray   { background: linear-gradient(135deg, rgba(107,114,128,0.05), rgba(75,85,99,0.05)); }
+.card-hover-emerald { background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(20,184,166,0.05)); }
+.card-hover-purple { background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.05)); }
+
+.facility-card:hover .card-hover-bg { opacity: 1; }
+
+.card-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
 }
 
-.fac-desc {
-    font-size: 1.3rem;
-    font-weight: 400;
-    color: #888;
-    text-align: center;
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.card-icon {
+    width: 96px;
+    height: 96px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    flex-shrink: 0;
+}
+
+.card-icon svg {
+    width: 44px;
+    height: 44px;
+}
+
+.icon-blue    { background: linear-gradient(135deg, #3b82f6, #6366f1); box-shadow: 0 8px 24px rgba(59,130,246,0.25); }
+.icon-gray    { background: linear-gradient(135deg, #6b7280, #4b5563); box-shadow: 0 8px 24px rgba(107,114,128,0.25); }
+.icon-emerald { background: linear-gradient(135deg, #10b981, #14b8a6); box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
+.icon-purple  { background: linear-gradient(135deg, #8b5cf6, #a855f7); box-shadow: 0 8px 24px rgba(139,92,246,0.25); }
+
+.facility-card:hover .card-icon { transform: scale(1.05); }
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.card-title {
+    font-size: 38px;
+    font-weight: 500;
+    color: #0f172a;
+    margin: 0;
+    transition: color 0.3s;
+    letter-spacing: -0.02em;
+}
+
+.facility-card:hover .card-title { color: #0f172a; }
+
+.card-description {
+    font-size: 18px;
+    color: #64748b;
+    margin: 0;
+    transition: color 0.3s;
     line-height: 1.5;
+}
+
+.facility-card:hover .card-description { color: #64748b; }
+
+.card-arrow {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: #f1f5f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    flex-shrink: 0;
+}
+
+.card-arrow svg {
+    width: 24px;
+    height: 24px;
+    color: #94a3b8;
+    transition: all 0.3s;
+}
+
+.facility-card:hover .card-arrow { background: #3b82f6; }
+.facility-card:hover .card-arrow svg { color: white; transform: translateX(4px); }
+
+.facility-card:nth-child(3):hover .card-arrow { background: #10b981; }
+
+.card-bottom-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 4px;
+    border-radius: 0 0 24px 24px;
+    width: 0;
+    transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card-line-blue   { background: linear-gradient(to right, #3b82f6, #6366f1); }
+.card-line-gray   { background: linear-gradient(to right, #6b7280, #4b5563); }
+.card-line-emerald { background: linear-gradient(to right, #10b981, #14b8a6); }
+.card-line-purple { background: linear-gradient(to right, #8b5cf6, #a855f7); }
+
+.facility-card:hover .card-bottom-line { width: 100%; }
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
