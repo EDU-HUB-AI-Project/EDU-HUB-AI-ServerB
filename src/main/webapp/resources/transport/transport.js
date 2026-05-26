@@ -14,9 +14,19 @@ function initTransportMap() {
                 coords: new kakao.maps.LatLng(35.550686, 129.137939),
                 stopId: 'TODO'
             },
+            taehwa: {
+                name: '태화강역',
+                coords: new kakao.maps.LatLng(35.53881719, 129.3534992),
+                stopId: 'TODO'
+            },
             terminal: {
                 name: '울산고속버스터미널',
                 coords: new kakao.maps.LatLng(35.5365477, 129.3396948),
+                stopId: 'TODO'
+            },
+            airport: {
+                name: '울산공항',
+                coords: new kakao.maps.LatLng(35.593002, 129.352157),
                 stopId: 'TODO'
             }
         };
@@ -53,6 +63,10 @@ function clearOverlays() {
 function searchRoute(type) {
     $('.route-btn').removeClass('active');
     $(event.currentTarget).addClass('active');
+
+    $('.route-card').removeClass('active');
+    $('.route-card[data-type="' + type + '"]').addClass('active');
+
     var dest = DESTINATIONS[type];
     clearOverlays();
 
