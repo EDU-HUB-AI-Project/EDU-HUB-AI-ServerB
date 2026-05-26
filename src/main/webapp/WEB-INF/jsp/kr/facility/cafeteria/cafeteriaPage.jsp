@@ -113,7 +113,7 @@
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="20 6 9 17 4 12"/>
                 </svg>
-                <span>교육생은 무료로 이용 가능합니다</span>
+                <span>교육생도 요금을 지불해야합니다</span>
             </li>
             <li class="notice-item">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">

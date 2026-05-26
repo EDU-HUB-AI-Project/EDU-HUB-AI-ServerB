@@ -56,12 +56,6 @@
     box-sizing: border-box;
 }
 
-/* 상단 헤더 */
-.intro-header {
-    text-align: center;
-    animation: fadeInDown 1s ease-out;
-}
-
 .header-badge {
     display: flex;
     align-items: center;
@@ -135,7 +129,7 @@
     background: linear-gradient(135deg, #10b981, #14b8a6);
 }
 
-.menu-card:hover .card-glow { opacity: 0.1; }
+.card-glow { opacity: 0.1; }
 
 .card-content {
     position: relative;
@@ -147,7 +141,7 @@
     transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.menu-card:hover .card-content {
+.card-content {
     border-color: #cbd5e1;
     box-shadow: 0 20px 50px rgba(59, 130, 246, 0.1);
 }
@@ -176,7 +170,7 @@
     box-shadow: 0 8px 24px rgba(16, 185, 129, 0.3);
 }
 
-.menu-card:hover .icon-box { transform: scale(1.1); }
+.icon-box { transform: scale(1.1); }
 
 /* 텍스트 */
 .card-text { margin-bottom: 24px; }
@@ -231,7 +225,7 @@
     transition: all 0.5s;
 }
 
-.menu-card:hover .arrow-circle {
+.arrow-circle {
     border-color: #3b82f6;
     background: #3b82f6;
 }
@@ -241,9 +235,9 @@
     transition: color 0.5s;
 }
 
-.menu-card:hover .arrow-circle svg { color: white; }
+.arrow-circle svg { color: white; }
 
-.menu-card:nth-child(2):hover .arrow-circle {
+.arrow-circle {
     border-color: #10b981;
     background: #10b981;
 }
