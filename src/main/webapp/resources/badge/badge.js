@@ -353,7 +353,7 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
         },
         error: function() {
             hideLoading();
-            showAlert('오류가 발생하였습니다.');
+            showAlert('오류가 발생하였습니다.', goBackToKeypad);
         }
     });
 }
@@ -369,7 +369,7 @@ function moveToGuide(data, autoAssigned) {
         $('#card-edu-name').text(data.EDU_NAME);
         $('#card-room').text(data.EDU_ROOM_NAME + '호');
         $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
-        $('#card-period').text(data.START_DATE + ' ~ ' + data.END_DATE);
+        $('#card-period').text(formatYYMMDD(data.START_DATE) + ' ~ ' + formatYYMMDD(data.END_DATE));
 
         var dormId = data.DORMITORY_ID;
         if (dormId == null || dormId === 'X') {
@@ -387,6 +387,11 @@ function moveToGuide(data, autoAssigned) {
 
         resetIdleTimer();
     });
+}
+
+function formatYYMMDD(s) {
+    if(!s || s.length != 6) return s || '';
+    return s.substr(0, 2) + '.' + s.substr(2, 2) + '.' + s.substr(4, 2);
 }
 
 
