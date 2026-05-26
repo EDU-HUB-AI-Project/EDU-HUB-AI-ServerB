@@ -26,7 +26,7 @@
 
 
 ## 🏗️ 시스템 아키텍처
-
+```
 [ 키오스크 화면 ]
 
 ↕ HTTP
@@ -40,7 +40,7 @@
 ↕
 
 [ MariaDB ]
-
+```
 
 
 - **External (현재 프로젝트)** — JSP 렌더링, Internal API 호출, BIS API 연동
@@ -140,8 +140,9 @@ Globals.ApiSecretKey=YOUR_SECRET_KEY
 ```
 
 ## 빌드 및 실행
-
+```
 mvn clean package
+```
 > WAR 파일을 Tomcat에 배포
 
 
