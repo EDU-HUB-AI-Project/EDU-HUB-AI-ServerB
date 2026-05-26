@@ -278,11 +278,12 @@ $(document).on('click', '.student-row', function() {
 });
 
 function selectStudent(student, $rowElement) {
+    if (!student) return;
     selectedStudent = student;
 
-    $('.student-row').removeClass('table-primary');
+    $('.student-row').removeClass('table-primary selected');
     if ($rowElement instanceof jQuery) {
-        $rowElement.addClass('table-primary');
+        $rowElement.addClass('table-primary selected');
     }
 
     $('#selected-name').text(student.STUDENT_NAME);
@@ -406,7 +407,6 @@ function moveToGuide(data, autoAssigned) {
         initGuideCanvas(data.EDU_ROOM_NAME);
     });
 }
-
 
 /* =====================
    키패드로 돌아가기
