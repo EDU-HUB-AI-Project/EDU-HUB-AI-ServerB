@@ -36,6 +36,8 @@ public class MainController {
 	public String guidePage(Model model) {
 		log.info("Called :: /guide.do");
 		model.addAttribute("kioskSite", propertiesService.getString("kiosk.site"));
+		model.addAttribute("contactPhone", propertiesService.getString("kiosk.contact.phone"));
+		model.addAttribute("contactLocation", propertiesService.getString("kiosk.contact.location"));
 		return "guide/guidePage";
 	}
 }

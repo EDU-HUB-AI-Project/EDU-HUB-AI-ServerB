@@ -41,6 +41,7 @@ function loadPage(url) {
 
 function goHome() {
     clearIdleTimer();
+    hideModal();
     $('#content-area').empty();
     $('#header').hide();
     $('#footer').hide();
@@ -69,21 +70,24 @@ function escapeHtml(str) {
 
 // 자동 초기화 타이머
 var idleTimer = null;
-var idleTime = 1000000;   // 테스트용 10초
+var idleTime = 10000;   // 테스트용 10초
 
 function startIdleTimer() {
     clearIdleTimer();
     idleTimer = setTimeout(function() {
         var countdown = 10;
+        var countdownInterval = null;
 
         showConfirm(
             '일정 시간 동안 조작이 없습니다.<br>처음 화면으로 이동하시겠습니까?<br><br>' +
             '<span id="countdown-timer" style="font-size:2rem; font-weight:bold; color:#0055A4;">' +
             countdown + '초</span>',
             function() {
+                clearInterval(countdownInterval);
                 goHome();
             },
             function() {
+                clearInterval(countdownInterval);
                 startIdleTimer();
             }
         );
@@ -94,15 +98,10 @@ function startIdleTimer() {
 
             if(countdown <= 0) {
                 clearInterval(countdownInterval);
-                $('#commonModal').modal('hide');
+                hideModal();
                 goHome();
             }
         }, 1000)
-
-        $('#commonModal').one('hidden.bs.modal', function() {
-            clearInterval(countdownInterval);
-        });
-
     }, idleTime)
 }
 
