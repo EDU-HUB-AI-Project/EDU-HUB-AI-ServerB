@@ -27,7 +27,14 @@ function loadPage(url) {
         $('#nav-facility').addClass('active');
     }
     $('#content-area').load(url, function(response, status) {
-        if(status === 'error') showAlert('페이지 로드에 실패했습니다.');
+        if(status === 'error') {
+            showAlert('페이지 로드에 실패했습니다.');
+        } else {
+            // badge.do 로드 완료 후 키패드 초기화
+            if(url === '/badge.do' && typeof initKeypad === 'function') {
+                initKeypad();
+            }
+        }
     });
     resetIdleTimer();
 }
