@@ -138,5 +138,10 @@
     </div>
 
 </div>
-
+<c:if test="${serverError}">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        showAlert('서버 오류가 발생하였습니다.\n잠시 후 다시 시도해주세요.');
+    });
+</script>
 <script src="/resources/cafeteria/cafeteria.js"></script>
