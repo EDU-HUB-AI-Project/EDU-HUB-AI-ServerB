@@ -117,14 +117,18 @@ Bis.ServiceKey=YOUR_BIS_KEY
 Bis.BaseUrl=http://openapi.its.ulsan.kr/UlsanAPI/
 
 # BIS 정류장 설정
-
 Bis.station.StopIds=192011415
-
 Bis.terminal.StopIds=192011415|192011414
-
 Bis.taehwa.StopIds=192011414|192011415
-
 Bis.airport.StopIds=192011414
+
+# BIS 노선 필터
+Bis.station.192011415=5005
+Bis.terminal.192011415=712|728
+Bis.terminal.192011414=217
+Bis.taehwa.192011414=순환32|217
+Bis.taehwa.192011415=712|728
+Bis.airport.192011414=5005
 
 # 프린트 시킬 URL
 
