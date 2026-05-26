@@ -77,12 +77,6 @@
     box-sizing: border-box;
 }
 
-.facility-card:hover {
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    border-color: #cbd5e1;
-    transform: translateY(-2px);
-}
-
 /* 버튼별 색상 */
 .facility-btn:nth-child(1) { border-color: #e67e22; }
 .facility-btn:nth-child(1):active { background: #fff5ec; }
@@ -110,7 +104,7 @@
 .card-hover-emerald { background: linear-gradient(135deg, rgba(16,185,129,0.05), rgba(20,184,166,0.05)); }
 .card-hover-purple { background: linear-gradient(135deg, rgba(139,92,246,0.05), rgba(168,85,247,0.05)); }
 
-.facility-card:hover .card-hover-bg { opacity: 1; }
+.card-hover-bg { opacity: 1; }
 
 .card-content {
     position: relative;
@@ -166,7 +160,7 @@
     letter-spacing: -0.02em;
 }
 
-.facility-card:hover .card-title { color: #0f172a; }
+.card-title { color: #0f172a; }
 
 .card-description {
     font-size: 18px;
@@ -197,8 +191,8 @@
     transition: all 0.3s;
 }
 
-.facility-card:hover .card-arrow { background: #3b82f6; }
-.facility-card:hover .card-arrow svg { color: white; transform: translateX(4px); }
+.card-arrow { background: #3b82f6; }
+.card-arrow svg { color: white; transform: translateX(4px); }
 
 .facility-card:nth-child(3):hover .card-arrow { background: #10b981; }
 
@@ -217,7 +211,7 @@
 .card-line-emerald { background: linear-gradient(to right, #10b981, #14b8a6); }
 .card-line-purple { background: linear-gradient(to right, #8b5cf6, #a855f7); }
 
-.facility-card:hover .card-bottom-line { width: 100%; }
+.card-bottom-line { width: 100%; }
 
 @keyframes fadeInDown {
     from { opacity: 0; transform: translateY(-30px); }
