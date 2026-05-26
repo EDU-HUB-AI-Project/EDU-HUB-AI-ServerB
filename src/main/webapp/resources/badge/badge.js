@@ -30,6 +30,135 @@ function moveToGuide(data, autoAssigned) {
     });
 }
 
+function pressKey(num) {
+    if (inputValue.length < MAX_LENGTH) {
+        inputValue += num;
+        updateDisplay();
+        updateProgress();
+        updateSubmitButton();
+    }
+}
+
+function deleteKey() {
+    if (inputValue.length > 0) {
+        inputValue = inputValue.slice(0, -1);
+        updateDisplay();
+        updateProgress();
+        updateSubmitButton();
+    }
+}
+
+function clearKey() {
+    inputValue = '';
+    updateDisplay();
+    updateProgress();
+    updateSubmitButton();
+}
+
+function updateDisplay() {
+    var displayArea = document.getElementById('input-display');
+    if (!displayArea) return;
+    displayArea.innerHTML = '';
+
+    if (inputValue.length > 0) {
+        var formatted = formatDisplay(inputValue);
+        formatted.split('').forEach(function(char, index) {
+            if (char === ' ') {
+                var space = document.createElement('div');
+                space.className = 'input-space';
+                displayArea.appendChild(space);
+            } else {
+                var digit = document.createElement('div');
+                digit.className = 'input-digit';
+                digit.textContent = char;
+                digit.style.animationDelay = (index * 0.03) + 's';
+                displayArea.appendChild(digit);
+            }
+        });
+
+        var currentFormatLen = formatted.replace(/ /g, '').length;
+        var remainingPlaceholders = MAX_LENGTH - currentFormatLen;
+        
+        var currentLen = inputValue.length;
+        if (currentLen < 6) {
+            if (currentLen === 2 || currentLen === 3) {
+                var space = document.createElement('div');
+                space.className = 'input-space';
+                displayArea.appendChild(space);
+            }
+            if (currentLen === 4 || currentLen === 5) {
+                if (currentLen === 4) {
+                    var space = document.createElement('div');
+                    space.className = 'input-space';
+                    displayArea.appendChild(space);
+                }
+            }
+            for (var i = 0; i < remainingPlaceholders; i++) {
+                if (currentLen === 2 && i === 2) {
+                    var space = document.createElement('div');
+                    space.className = 'input-space';
+                    displayArea.appendChild(space);
+                }
+                var placeholder = document.createElement('div');
+                placeholder.className = 'input-placeholder';
+                displayArea.appendChild(placeholder);
+            }
+        }
+    } else {
+        for (var i = 0; i < MAX_LENGTH; i++) {
+            if (i === 2 || i === 4) {
+                var space = document.createElement('div');
+                space.className = 'input-space';
+                displayArea.appendChild(space);
+            }
+            var placeholder = document.createElement('div');
+            placeholder.className = 'input-placeholder';
+            displayArea.appendChild(placeholder);
+        }
+    }
+}
+
+function formatDisplay(val) {
+    if (val.length <= 2) return val;
+    if (val.length <= 4) return val.slice(0, 2) + ' ' + val.slice(2);
+    return val.slice(0, 2) + ' ' + val.slice(2, 4) + ' ' + val.slice(4);
+}
+
+function updateProgress() {
+    var fill = document.getElementById('progress-fill');
+    var text = document.getElementById('progress-text');
+    if (!fill || !text) return;
+    fill.style.width = (inputValue.length / MAX_LENGTH * 100) + '%';
+    text.textContent = inputValue.length + ' / ' + MAX_LENGTH;
+}
+
+function updateSubmitButton() {
+    var btn = document.getElementById('submit-btn');
+    if (!btn) return;
+    btn.disabled = inputValue.length !== MAX_LENGTH;
+}
+
+function confirmKey() {
+    if (inputValue.length !== MAX_LENGTH) {
+        showAlert('생년월일 6자리를 입력해주세요.');
+        return;
+    }
+
+    var month = parseInt(inputValue.substring(2, 4));
+    var day   = parseInt(inputValue.substring(4, 6));
+
+    if (isNaN(month) || month < 1 || month > 12) {
+        showAlert('올바른 생년월일을 입력해주세요.');
+        return;
+    }
+    if (isNaN(day) || day < 1 || day > 31) {
+        showAlert('올바른 생년월일을 입력해주세요.');
+        return;
+    }
+
+    searchByBirth(inputValue);
+}
+
 function searchByBirth(birth) {
     showLoading();
     $.ajax({
@@ -42,9 +171,12 @@ function searchByBirth(birth) {
                 return;
             }
 
-            $('#keypad-display').text('');
-            $('#step-keypad').hide();
-            $('#step-result').show();
+            var stepKeypad = document.getElementById('step-keypad');
+            var stepResult = document.getElementById('step-result');
+            if (stepKeypad && stepResult) {
+                $('#step-keypad').hide();
+                $('#step-result').show();
+            }
 
             if (data.length === 0) {
                 document.getElementById('result-section').style.display = 'none';
@@ -52,6 +184,7 @@ function searchByBirth(birth) {
                 return;
             }
 
+            $('#result-section').show();
             $('#result-table').show();
             $('#no-result').hide();
 
@@ -91,6 +224,7 @@ function renderPage(page) {
 
     $('#result-body').empty();
     $('#selected-area').hide();
+    $('#selected-section').hide();
     $('#confirm-btn').hide();
 
     $.each(pageData, function(i, row) {
@@ -138,6 +272,7 @@ $(document).on('click', '.student-row', function() {
     $('#selected-name').text(selected.STUDENT_NAME);
     $('#selected-edu').text(selected.EDU_NAME);
     $('#selected-area').show();
+    $('#selected-section').show();
     $('#confirm-btn').show();
 });
 
@@ -184,6 +319,7 @@ function confirmStudent() {
 function cancelSelect() {
     $('.student-row').removeClass('table-primary');
     $('#selected-area').hide();
+    $('#selected-section').hide();
     $('#confirm-btn').hide();
 }
 
@@ -205,8 +341,6 @@ function fetchDetailAndGuide(studentId) {
             hideLoading();
             showAlert('오류가 발생하였습니다.');
         }
-    });
-}
 
 // 학생 상제 조회 후 재출력, 가이드 이동
 function fetchDetailAndReprint(studentId, autoAssigned) {
