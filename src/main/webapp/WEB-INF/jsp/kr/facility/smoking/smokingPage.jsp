@@ -5,6 +5,7 @@
 
     <!-- 헤더 (원본 id 유지) -->
     <div id="smoking-title">
+        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
         <div class="header-badge">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M18 12h2a2 2 0 012 2v1a2 2 0 01-2 2H2M2 12h14M18 8c0-2.2-1.8-4-4-4"/>

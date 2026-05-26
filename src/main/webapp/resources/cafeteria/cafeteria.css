@@ -17,6 +17,7 @@
     margin-bottom: 40px;
     margin-top: 80px;
     animation: fadeInDown 0.8s ease-out;
+    position: relative;
 }
 
 #cafeteria-title .header-badge {

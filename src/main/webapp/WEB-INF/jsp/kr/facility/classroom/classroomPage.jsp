@@ -4,11 +4,15 @@
 <div id="classroom-container">
 
     <div class="classroom-header">
+        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
         <div class="header-badge">
-            <span class="badge-dot"></span>
-            <span class="badge-text">SMART EDU-HUB</span>
-            <span class="badge-dot"></span>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+            </svg>
+            <span class="badge-text">Classroom Guide</span>
         </div>
+        <h1 class="page-title">강의실 안내</h1>
     </div>
 
     <div class="classroom-layout">

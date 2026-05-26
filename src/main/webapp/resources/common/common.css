@@ -299,3 +299,30 @@ html, body {
 #print-label {
     display: none;
 }
+
+.back-to-facility {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--main-blue);
+    border: none;
+    border-radius: 14px;
+    padding: 14px 28px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 14px rgba(0, 51, 153, 0.25);
+    white-space: nowrap;
+}
+
+.back-to-facility:active {
+    background: #002277;
+    transform: translateY(-50%) scale(0.97);
+    box-shadow: none;
+}

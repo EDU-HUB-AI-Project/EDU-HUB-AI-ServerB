@@ -3,7 +3,19 @@
 
 <div id="transport-container">
 
-    <div id="transport-title">🚆 교통 정보 안내</div>
+    <div id="transport-title">
+        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
+        <div class="header-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="3" width="15" height="13" rx="2"/>
+                <path d="M16 8h4l3 5v3h-7V8z"/>
+                <circle cx="5.5" cy="18.5" r="2.5"/>
+                <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            <span class="badge-text">Transport Guide</span>
+        </div>
+        <h1 class="page-title">교통 정보 안내</h1>
+    </div>
 
     <div id="transport-content">
 

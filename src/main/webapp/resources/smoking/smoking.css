@@ -17,6 +17,7 @@
     margin-bottom: 40px;
     margin-top: 90px;
     animation: fadeInDown 0.8s ease-out;
+    position: relative;
 }
 
 #smoking-title .header-badge {
