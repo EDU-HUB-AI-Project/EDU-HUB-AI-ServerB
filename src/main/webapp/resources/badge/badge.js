@@ -25,14 +25,14 @@ function initKeypad() {
     updateSubmitButton();
 
     // 키패드 버튼 hover 효과 바인딩
-    document.querySelectorAll('.key-btn').forEach(function(btn) {
-        btn.addEventListener('mouseenter', function() {
-            this.classList.add('focused');
-        });
-        btn.addEventListener('mouseleave', function() {
-            this.classList.remove('focused');
-        });
-    });
+    // document.querySelectorAll('.key-btn').forEach(function(btn) {
+    //     btn.addEventListener('mouseenter', function() {
+    //         this.classList.add('focused');
+    //     });
+    //     btn.addEventListener('mouseleave', function() {
+    //         this.classList.remove('focused');
+    //     });
+    // });
 }
 
 // 최초 페이지 진입 시 초기화
@@ -78,72 +78,41 @@ function updateDisplay() {
     if (!displayArea) return;
     displayArea.innerHTML = '';
 
-    if (inputValue.length > 0) {
-        var formatted  = formatDisplay(inputValue);
-        var currentLen = inputValue.length;
-
-        formatted.split('').forEach(function(char, index) {
-            if (char === ' ') {
-                var space = document.createElement('div');
-                space.className = 'input-space';
-                displayArea.appendChild(space);
-            } else {
-                var digit = document.createElement('div');
-                digit.className = 'input-digit';
-                digit.textContent = char;
-                digit.style.animationDelay = (index * 0.03) + 's';
-                displayArea.appendChild(digit);
-            }
-        });
-
-        if (currentLen < MAX_LENGTH) {
-            var remainingPlaceholders = MAX_LENGTH - currentLen;
-
-            // 입력 중 공백 자리 선행 배치
-            if (currentLen === 2 || currentLen === 3) {
-                var space = document.createElement('div');
-                space.className = 'input-space';
-                displayArea.appendChild(space);
-            }
-            if (currentLen === 4 || currentLen === 5) {
-                var space = document.createElement('div');
-                space.className = 'input-space';
-                displayArea.appendChild(space);
-            }
-
-            for (var i = 0; i < remainingPlaceholders; i++) {
-                // 2자리 입력 후 플레이스홀더 사이 공백
-                if (currentLen === 2 && i === 2) {
-                    var space = document.createElement('div');
-                    space.className = 'input-space';
-                    displayArea.appendChild(space);
-                }
-                var placeholder = document.createElement('div');
-                placeholder.className = 'input-placeholder';
-                displayArea.appendChild(placeholder);
-            }
+    var layout = [0, 1, 'space', 2, 3, 'space', 4, 5];
+    
+    layout.forEach(function(pos) {
+        if(pos === 'space') {
+            var space = document.createElement('div');
+            space.className = 'input-space';
+            displayArea.appendChild(space);
         }
-    } else {
-        // 빈 상태: YY MM DD 형태로 플레이스홀더 배치
-        for (var i = 0; i < MAX_LENGTH; i++) {
-            if (i === 2 || i === 4) {
-                var space = document.createElement('div');
-                space.className = 'input-space';
-                displayArea.appendChild(space);
+        else if(pos < inputValue.length) {
+            var digit = document.createElement('div');
+            digit.className = 'input-digit';
+            digit.textContent = inputValue[pos];
+            
+            if(pos === inputValue.length - 1) {
+                digit.style.animation = 'digitSlideIn 0.2s ease-out';
             }
+            else {
+                digit.style.animation = 'none';
+            }
+            displayArea.appendChild(digit);
+        }
+        else {
             var placeholder = document.createElement('div');
             placeholder.className = 'input-placeholder';
             displayArea.appendChild(placeholder);
         }
-    }
+    });
 }
 
-// YY MM DD 포맷 (YYMMDD 6자리 기준)
-function formatDisplay(val) {
-    if (val.length <= 2) return val;
-    if (val.length <= 4) return val.slice(0, 2) + ' ' + val.slice(2);
-    return val.slice(0, 2) + ' ' + val.slice(2, 4) + ' ' + val.slice(4);
-}
+// // YY MM DD 포맷 (YYMMDD 6자리 기준)
+// function formatDisplay(val) {
+//     if (val.length <= 2) return val;
+//     if (val.length <= 4) return val.slice(0, 2) + ' ' + val.slice(2);
+//     return val.slice(0, 2) + ' ' + val.slice(2, 4) + ' ' + val.slice(4);
+// }
 
 function updateProgress() {
     var fill = document.getElementById('progress-fill');
@@ -202,17 +171,19 @@ function searchByBirth(birth) {
             }
 
             $('#step-keypad').hide();
-            $('#step-result').show();
+            $('#step-result').css('display', 'flex');
 
             if (data.length === 0) {
                 $('#result-section').hide();
                 $('#no-result').show();
+                $('#result-guide').hide();
                 return;
             }
 
             $('#result-section').show();
             $('#result-table').show();
             $('#no-result').hide();
+            $('#result-guide').show();
 
             allStudents = data;
             currentPage = 1;
@@ -238,16 +209,26 @@ function renderPage(page) {
     $('#result-body').empty();
     $('#selected-area').hide();
     $('#selected-section').hide();
-    $('#confirm-btn').hide();
+    $('#confirm-btn').css('display', 'none');
 
     $.each(pageData, function(i, row) {
         var $tr = $('<tr>').addClass('student-row').data('student', row);
 
         ['STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID', 'PHONE_NUMBER'].forEach(function(key) {
             var value = row[key] || '';
-            if (key === 'PHONE_NUMBER' && value.length === 11) {
-                value = value.substring(0, 3) + '-****-' + value.slice(-4);
+            
+            if(key === 'BIRTH_DATE' && value.length === 6) {
+                value = value.substr(0, 2) + '.' + value.substr(2, 2) + '.' + value.substr(4, 2);
             }
+
+            if(key === 'DORMITORY_ID') {
+                value = (value === '' || value === 'X') ? '없음' : '있음';
+            }
+
+            if(key === 'PHONE_NUMBER' && row[key] && row[key].length === 11) {
+                value = row[key].slice(-4);
+            }
+
             $('<td>').text(value).appendTo($tr);
         });
 
@@ -257,7 +238,7 @@ function renderPage(page) {
     $('#page-info').text(page + ' / ' + totalPages);
     $('#prev-btn').prop('disabled', page === 1);
     $('#next-btn').prop('disabled', page === totalPages);
-    $('#pagination-area').toggle(totalPages > 1);
+    $('#pagination-area').css('display', totalPages > 1 ? 'flex' : 'none');
 }
 
 function prevPage() {
@@ -289,7 +270,7 @@ function selectStudent(student, $rowElement) {
     $('#selected-edu').text(student.EDU_NAME);
     $('#selected-area').show();
     $('#selected-section').show();
-    $('#confirm-btn').show();
+    $('#confirm-btn').css('display', 'flex');
 }
 
 
