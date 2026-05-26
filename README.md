@@ -108,11 +108,11 @@ Globals.ApiClient=http://localhost:8081/
 
 # 카카오맵 API 키 (도메인 제한 설정 필수)
 
-kakao.map.key=YOUR\_KAKAO\_KEY
+kakao.map.key=YOUR_KAKAO_KEY
 
 # 울산 BIS API
 
-Bis.ServiceKey=YOUR\_BIS\_KEY
+Bis.ServiceKey=YOUR_BIS_KEY
 
 Bis.BaseUrl=http://openapi.its.ulsan.kr/UlsanAPI/
 
@@ -126,14 +126,22 @@ Bis.taehwa.StopIds=192011414|192011415
 
 Bis.airport.StopIds=192011414
 
-빌드 및 실행
+# 프린트 시킬 URL
 
-mvn clean package
+Badge.PrintServerUrl=http://localhost:8080
 
-# WAR 파일을 Tomcat에 배포
+# X-Api_Secret
+
+Globals.ApiSecretKey=YOUR_SECRET_KEY
 ```
 
-### 📁 프로젝트 구조
+## 빌드 및 실행
+
+mvn clean package
+> WAR 파일을 Tomcat에 배포
+
+
+## 📁 프로젝트 구조
 ```bash
 src/main/java/kr/hcnc/
 
@@ -158,7 +166,7 @@ src/main/webapp/WEB-INF/jsp/kr/
 └── facility/     # 시설 정보 (식당·흡연·강의실·교통)
 ```
 
-### 🌿 브랜치 전략
+## 🌿 브랜치 전략
 ``` bash
 main        ← 보호 브랜치, PR + 리뷰 필수
 
@@ -171,7 +179,7 @@ main        ← 보호 브랜치, PR + 리뷰 필수
          └── style/작업명
 ```
 
-### 📋 잔여 개발 항목
+## 📋 잔여 개발 항목
 
 | 항목 | 비고 |
 | ---- | ---- |
