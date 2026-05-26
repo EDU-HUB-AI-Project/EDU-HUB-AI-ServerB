@@ -135,3 +135,138 @@
     background: #222;
     transform: scale(0.98);
 }
+
+#dorm-map-btn-wrap {
+    flex-shrink: 0;
+}
+
+#dorm-map-btn {
+    padding: 16px 28px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: 2px solid #b8860b;
+    background: #fff;
+    color: #b8860b;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+#dorm-map-btn:active {
+    background: #b8860b;
+    color: #fff;
+}
+
+#dorm-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+#dorm-modal-overlay.open {
+    display: flex;
+}
+
+#dorm-modal-box {
+    width: 920px;
+    max-height: 1600px;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#dorm-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 36px;
+    background: #b8860b;
+    color: #fff;
+    flex-shrink: 0;
+}
+
+#dorm-modal-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+#dorm-modal-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+#dorm-modal-body {
+    flex: 1;
+    padding: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#dorm-svg-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#dorm-svg-container svg {
+    width: 100%;
+    height: auto;
+    max-height: 1400px;
+    display: block;
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+}
+
+#dorm-svg-container [id^="room-"] {
+    visibility: hidden;
+}
+
+#dorm-svg-container [id^="room-"].dorm-highlight {
+    visibility: visible;
+    fill: rgba(255, 180, 0, 0.5) !important;
+    stroke: #c00 !important;
+    stroke-width: 4 !important;
+}
+
+#dorm-map-fallback {
+    font-size: 1.4rem;
+    color: #999;
+    text-align: center;
+}
+
+#dorm-modal-footer {
+    padding: 24px 32px;
+    flex-shrink: 0;
+}
+
+#dorm-modal-close-btn {
+    width: 100%;
+    height: 100px;
+    font-size: 1.8rem;
+    font-weight: 700;
+    border-radius: 12px;
+    border: none;
+    background: var(--dark-gray);
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.15s;
+}
+
+#dorm-modal-close-btn:active {
+    background: #222;
+}

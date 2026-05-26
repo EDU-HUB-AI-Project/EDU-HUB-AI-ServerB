@@ -394,9 +394,7 @@ function moveToGuide(data, autoAssigned) {
         if (dormId == null || dormId === 'X') {
             $('#card-dorm').text('생활관 미배정');
         } else {
-            var dong = dormId.charAt(5);
-            var ho   = dormId.substr(6);
-            $('#card-dorm').text(dong + '동 ' + ho + '호');
+            $('#card-dorm').text(data.DORMITORY_ROOM_NAME + '호');
         }
 
         if (autoAssigned) {
@@ -404,6 +402,7 @@ function moveToGuide(data, autoAssigned) {
         }
 
         initGuideCanvas(data.EDU_ROOM_NAME);
+        initDormCanvas(data.DORMITORY_ROOM_NAME);
     });
 }
 
