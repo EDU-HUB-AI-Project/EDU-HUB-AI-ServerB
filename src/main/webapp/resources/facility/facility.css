@@ -8,7 +8,7 @@
     flex-direction: column;
 }
 
-#facility-title {
+.facility-header {
     text-align: center;
     font-size: 2.6rem;
     font-weight: 900;

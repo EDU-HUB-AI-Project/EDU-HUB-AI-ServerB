@@ -30,9 +30,6 @@ function moveToGuide(data, autoAssigned) {
     });
 }
 
-/*  -----------
-    생년월일 조회
-    ---------*/
 function searchByBirth(birth) {
     showLoading();
     $.ajax({
@@ -40,8 +37,7 @@ function searchByBirth(birth) {
         data: {param: birth},
         success: function(data) {
             hideLoading();
-
-            if(data.status === 'error' || data.status === 'fail') {
+            if (data.status === 'error' || data.status === 'fail') {
                 showAlert(data.message || '오류가 발생하였습니다.');
                 return;
             }
@@ -50,9 +46,9 @@ function searchByBirth(birth) {
             $('#step-keypad').hide();
             $('#step-result').show();
 
-            if(data.length === 0) {
-                $('#result-table').hide();
-                $('#no-result').show();
+            if (data.length === 0) {
+                document.getElementById('result-section').style.display = 'none';
+                document.getElementById('no-result').style.display = 'block';
                 return;
             }
 
@@ -149,11 +145,10 @@ $(document).on('click', '.student-row', function() {
     확인 - 출석 시
     -----------*/
 function confirmStudent() {
-    var selected = $('.student-row.table-primary').data('student');
-    var studentId = selected.STUDENT_ID;
+    if (!selectedStudent) return;
+    var studentId = selectedStudent.STUDENT_ID;
 
     showLoading();
-
     $.ajax({
         url: '/updateStudent.do',
         type: 'POST',
@@ -167,16 +162,11 @@ function confirmStudent() {
                 hideLoading();
                 showReprint(
                     '이미 출석 처리된 교육생입니다.',
-                    function() {
-                        fetchDetailAndReprint(studentId);
-                    },
-                    function() {
-                        fetchDetailAndGuide(studentId);
-                    },
-                    function() {goHome();}
+                    function() { fetchDetailAndReprint(studentId); },
+                    function() { fetchDetailAndGuide(studentId); },
+                    function() { goHome(); }
                 );
-            }
-            else {
+            } else {
                 hideLoading();
                 showAlert(data.message || '오류가 발생하였습니다.');
             }
@@ -233,10 +223,7 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
                 showAlert(data.message);
             }
         },
-        error: function() {
-            hideLoading();
-            showAlert('오류가 발생하였습니다.');
-        }
+        error: function() { hideLoading(); showAlert('오류가 발생하였습니다.'); }
     });
 }
 

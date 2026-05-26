@@ -1,8 +1,8 @@
 function selectMenu(url) {
-    $('#intro-overlay').css('opacity', '0');
+    $('#intro-container').css('opacity', '0');
 
     setTimeout(function() {
-        $('#intro-overlay').hide();
+        $('#intro-container').hide();
 
         $('#header').css('display', 'flex');
         $('#footer').css('display', 'flex');
@@ -38,8 +38,8 @@ function goHome() {
     $('#header').hide();
     $('#footer').hide();
     $('#nav-badge, #nav-facility').removeClass('active');
-    $('#intro-overlay').css('opacity', '1');
-    $('#intro-overlay').show();
+    $('#intro-container').css('opacity', '1');
+    $('#intro-container').show();
 }
 
 function showLoading() {

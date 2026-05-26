@@ -2,19 +2,79 @@
 <link rel="stylesheet" href="/resources/classroom/classroom.css">
 
 <div id="classroom-container">
-    <div id="classroom-title">
-        🏫 강의실 안내
+
+    <div class="classroom-header">
+        <div class="header-badge">
+            <span class="badge-dot"></span>
+            <span class="badge-text">SMART EDU-HUB</span>
+            <span class="badge-dot"></span>
+        </div>
+        <h1 class="page-title">강의실 안내</h1>
     </div>
-    
-    <!-- 상단 층 전환 탭 -->
-    <div id="floor-tabs">
-        <button type="button" class="floor-btn active" onclick="changeFloor(1, this)">1F</button>
-        <button type="button" class="floor-btn" onclick="changeFloor(2, this)">2F</button>
-        <button type="button" class="floor-btn" onclick="changeFloor(3, this)">3F</button>
-        <button type="button" class="floor-btn" onclick="changeFloor(4, this)">4F</button>
+
+    <div class="classroom-layout">
+
+    <div class="floor-sidebar">
+        <div class="sidebar-sticky">
+            <p class="sidebar-label">층 선택</p>
+            <div class="floor-buttons">
+                <button type="button" class="floor-btn selected" data-floor="1" onclick="selectFloor(1)">
+                    <div class="floor-glow-blue"></div>
+                    <div class="floor-bg-blue"></div>
+                    <div class="floor-bg-white"></div>
+                    <div class="floor-content">
+                        <div class="floor-header">
+                            <span class="floor-number">1층</span>
+                            <div class="floor-indicator"></div>
+                        </div>
+                        <p class="floor-rooms">1층 강의실</p>
+                    </div>
+                    <div class="floor-border"></div>
+                </button>
+                <button type="button" class="floor-btn" data-floor="2" onclick="selectFloor(2)">
+                    <div class="floor-glow-indigo"></div>
+                    <div class="floor-bg-indigo"></div>
+                    <div class="floor-bg-white"></div>
+                    <div class="floor-content">
+                        <div class="floor-header">
+                            <span class="floor-number">2층</span>
+                            <div class="floor-indicator"></div>
+                        </div>
+                        <p class="floor-rooms">2층 강의실</p>
+                    </div>
+                    <div class="floor-border"></div>
+                </button>
+                <button type="button" class="floor-btn" data-floor="3" onclick="selectFloor(3)">
+                    <div class="floor-glow-purple"></div>
+                    <div class="floor-bg-purple"></div>
+                    <div class="floor-bg-white"></div>
+                    <div class="floor-content">
+                        <div class="floor-header">
+                            <span class="floor-number">3층</span>
+                            <div class="floor-indicator"></div>
+                        </div>
+                        <p class="floor-rooms">3층 강의실</p>
+                    </div>
+                    <div class="floor-border"></div>
+                </button>
+                <button type="button" class="floor-btn" data-floor="4" onclick="selectFloor(4)">
+                    <div class="floor-glow-pink"></div>
+                    <div class="floor-bg-pink"></div>
+                    <div class="floor-bg-white"></div>
+                    <div class="floor-content">
+                        <div class="floor-header">
+                            <span class="floor-number">4층</span>
+                            <div class="floor-indicator"></div>
+                        </div>
+                        <p class="floor-rooms">4층 강의실</p>
+                    </div>
+                    <div class="floor-border"></div>
+                </button>
+            </div>
+        </div>
     </div>
-    
-    <div id="floor-content">
+
+    <div class="classroom-content">
         
         <!-- [왼쪽 영역] 도면 시각화 영역 (인라인 SVG가 들어갈 자리를 비워둡니다) -->
         <div id="floor-map-area">
@@ -229,13 +289,11 @@
         </div>
         
     </div>
+
+    </div>
 </div>
 
 <script src="/resources/classroom/classroom.js"></script>
 <script>
-    // 초기 레이아웃 세팅
-    var roomList = document.getElementById('room-list-area');
-    if(roomList) roomList.style.display = 'block'; 
-    var firstFloorMenu = document.getElementById('room-ul-1');
-    if(firstFloorMenu) firstFloorMenu.style.display = 'block';
+    selectFloor(1);
 </script>
