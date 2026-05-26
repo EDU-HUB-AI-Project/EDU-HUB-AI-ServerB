@@ -7,6 +7,7 @@
 
     <!-- 헤더 (원본 id 유지) -->
     <div id="cafeteria-title">
+        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
         <div class="header-badge">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3z"/>
