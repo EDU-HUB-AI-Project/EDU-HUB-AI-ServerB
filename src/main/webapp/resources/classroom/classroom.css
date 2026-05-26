@@ -108,7 +108,6 @@
     text-align: left;
 }
 
-.floor-btn:hover  { box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); }
 .floor-btn.selected { box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); }
 
 /* glow 레이어 */
@@ -166,9 +165,6 @@
 .floor-btn[data-floor="2"]:hover .floor-bg-indigo { opacity: 0.8; }
 .floor-btn[data-floor="3"]:hover .floor-bg-purple { opacity: 0.8; }
 .floor-btn[data-floor="4"]:hover .floor-bg-pink   { opacity: 0.8; }
-
-.floor-btn:hover .floor-number { color: white; }
-.floor-btn:hover .floor-rooms  { color: rgba(255, 255, 255, 0.8); }
 
 /* 버튼 내용 */
 .floor-content {
@@ -391,11 +387,6 @@
     transform: scale(0.9);
 }
 
-.room-card:hover {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transform: scale(1.05) !important;
-}
-
 .room-card.selected {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
 }
@@ -414,7 +405,6 @@
 .room-bg-pink   { background: linear-gradient(135deg, #ec4899, #f472b6); }
 
 .room-card.selected .room-bg { opacity: 1; }
-.room-card:hover .room-bg    { opacity: 0.1; }
 
 /* 카드 흰 배경 */
 .room-bg-white {
@@ -436,7 +426,6 @@
     pointer-events: none;
 }
 
-.room-card:hover .room-border   { border-color: #cbd5e1; }
 .room-card.selected .room-border { border-color: transparent; }
 
 /* 카드 내용 */
@@ -454,7 +443,6 @@
 }
 
 .room-card.selected .room-name { color: white; }
-.room-card:hover .room-name    { color: #475569; }
 
 /* 선택 표시 */
 .room-indicator {
