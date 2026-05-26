@@ -17,6 +17,8 @@
                 <entry key="chrome.path" value="C:/Program Files (x86)/Google/Chrome/Application/chrome.exe"/>
                 <entry key="badge.print.output" value="C:/test/"/>
 	            <entry key="kiosk.site" value="ulsan"/>
+	            <entry key="kiosk.contact.phone" value="000-0000-0000"/>
+				<entry key="kiosk.contact.location" value="1층 안내데스크"/>
 	            <!-- <entry key="kiosk.site" value="incheon"/> -->
 	            
             </map>
