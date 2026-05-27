@@ -44,3 +44,6 @@ src/main/resources/globals.properties
 .claude/
 CLAUDE.md
 globals.properties
+
+
+*.jks
