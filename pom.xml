@@ -139,6 +139,20 @@
 		    <artifactId>httpclient</artifactId>
 		    <version>4.5.14</version>
 		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss -->
+		<dependency>
+		    <groupId>com.navercorp.lucy</groupId>
+		    <artifactId>lucy-xss</artifactId>
+		    <version>1.6.3</version>
+		    <scope>compile</scope>
+		</dependency>
+		<!-- Source: https://mvnrepository.com/artifact/com.navercorp.lucy/lucy-xss-servlet -->
+		<dependency>
+		    <groupId>com.navercorp.lucy</groupId>
+		    <artifactId>lucy-xss-servlet</artifactId>
+		    <version>2.0.1</version>
+		    <scope>compile</scope>
+		</dependency>
 	</dependencies>
 
 	<build>

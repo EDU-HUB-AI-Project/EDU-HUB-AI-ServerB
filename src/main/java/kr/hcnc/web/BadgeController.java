@@ -38,10 +38,10 @@ public class BadgeController {
 	@ResponseBody
 	public List<Map<String, Object>> selectStudent(String param) {
 		log.info("Called :: /searchStudent.do");
-		
+		// xss 필터 작동 확인하기 위해 콘솔에서 표시
+		log.info("param = {}", param);
 		if(!RequestValidator.isValidBirthDate(param))
 			return new ArrayList<>();
-		
 		List<Map<String, Object>> list = badgeService.selectStudents(param);
 		log.info("list = {}", list);
 		return list;
