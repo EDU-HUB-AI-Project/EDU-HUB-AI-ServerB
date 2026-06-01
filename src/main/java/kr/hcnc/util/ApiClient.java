@@ -48,12 +48,29 @@ public class ApiClient {
 	}
 
 	public <T> T get(String url, Class<T> responseType) {
-        HttpEntity<?> entity = new HttpEntity<>(createHeaders());
-        return restTemplate.exchange(baseUrl + url, HttpMethod.GET, entity, responseType).getBody();
+//        HttpEntity<?> entity = new HttpEntity<>(createHeaders());
+//        return restTemplate.exchange(baseUrl + url, HttpMethod.GET, entity, responseType).getBody();
+		HttpEntity<?> entity = new HttpEntity<>(createHeaders());
+		return restTemplate.exchange(baseUrl + url, HttpMethod.GET, entity, responseType).getBody();
     }
 
     public <T> T post(String url, Object requestBody, Class<T> responseType) {
         HttpEntity<?> entity = new HttpEntity<>(requestBody, createHeaders());
         return restTemplate.postForObject(baseUrl + url, entity, responseType);
+    }
+    
+    public <T> T put(String url, Object requestBody, Class<T> responseType) {
+    	HttpEntity<?> entity = new HttpEntity<>(requestBody, createHeaders());
+    	return restTemplate.exchange(baseUrl + url, HttpMethod.PUT, entity, responseType).getBody();
+    }
+    
+    public <T> T patch(String url, Object requestBody, Class<T> responseType) {
+    	HttpEntity<?> entity = new HttpEntity<>(requestBody, createHeaders());
+    	return restTemplate.exchange(baseUrl + url, HttpMethod.PATCH, entity, responseType).getBody();
+    }
+    
+    public <T> T delete(String url, Object requestBody, Class<T> responseType) {
+    	HttpEntity<?> entity = new HttpEntity<>(requestBody, createHeaders());
+    	return restTemplate.exchange(baseUrl + url,  HttpMethod.DELETE, entity, responseType).getBody();
     }
 }
