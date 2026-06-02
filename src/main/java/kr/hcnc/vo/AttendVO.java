@@ -1,6 +1,7 @@
 package kr.hcnc.vo;
 
 public class AttendVO {
+	private String AttendanceId;
     private String studentId;
 	private String eduId;
 	private String status;
@@ -8,6 +9,13 @@ public class AttendVO {
 	private String createdAt;
 	private String updatedAt;
 	private String attendDate;
+	
+	public String getAttendanceId() {
+		return AttendanceId;
+	}
+	public void setAttendanceId(String attendanceId) {
+		AttendanceId = attendanceId;
+	}
 	public String getStudentId() {
 		return studentId;
 	}

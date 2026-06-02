@@ -42,16 +42,16 @@ public class AdminDormitoryService extends EgovAbstractServiceImpl{
         );
     }
 
-    public int updateDormCurrentCnt(DormitoryVO dormitoryVO) {
+    public int updateDormCurrentCnt(DormitoryVO dormitoryVO, String studentId) {
         log.info("Called::updateDormCurrentCnt");
-        return apiClient.patch("/api/admin/dormitories/current-count", dormitoryVO,
+        return apiClient.patch("/api/admin/dormitories/current-count?studentId=" + studentId, dormitoryVO,
                                 int.class
         );
     }
 
-    public int updateDormCurrentCntDown(DormitoryVO dormitoryVO) {
+    public int updateDormCurrentCntDown(DormitoryVO dormitoryVO, String studentId) {
         log.info("Called::updateDormCurrentCntDown");
-        return apiClient.patch("/api/admin/dormitories/current-down", dormitoryVO,
+        return apiClient.patch("/api/admin/dormitories/current-down?studentId=" + studentId, dormitoryVO,
                                 int.class
         );
     }
