@@ -33,6 +33,7 @@ public class AdminKioskLogService extends EgovAbstractServiceImpl{
         return apiClient.get(url, new ParameterizedTypeReference<List<KioskLogVO>>() {});
     }
     
+    
     public int insertLog(KioskLogVO kioskLogVO) {
 		log.info("Called::insertLog()");
         return apiClient.post("/api/admin/kiosk-log", kioskLogVO,
