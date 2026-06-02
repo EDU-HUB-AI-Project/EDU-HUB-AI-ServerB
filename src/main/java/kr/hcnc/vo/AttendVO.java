@@ -1,0 +1,53 @@
+package kr.hcnc.vo;
+
+public class AttendVO {
+    private String studentId;
+	private String eduId;
+	private String status;
+	private String message;
+	private String createdAt;
+	private String updatedAt;
+	private String attendDate;
+	public String getStudentId() {
+		return studentId;
+	}
+	public void setStudentId(String studentId) {
+		this.studentId = studentId;
+	}
+	public String getEduId() {
+		return eduId;
+	}
+	public void setEduId(String eduId) {
+		this.eduId = eduId;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	public String getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+	public String getAttendDate() {
+		return attendDate;
+	}
+	public void setAttendDate(String attendDate) {
+		this.attendDate = attendDate;
+	}
+}
