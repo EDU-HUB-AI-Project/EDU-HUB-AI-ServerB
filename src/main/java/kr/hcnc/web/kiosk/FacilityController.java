@@ -1,4 +1,4 @@
-package kr.hcnc.web;
+package kr.hcnc.web.kiosk;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.rte.fdl.property.EgovPropertyService;
-import kr.hcnc.service.FacilityService;
+import kr.hcnc.service.kiosk.FacilityService;
 
 @Controller
 public class FacilityController {
@@ -54,14 +54,6 @@ public class FacilityController {
 		log.info("Called :: /facility/smoking.do");
 		return "facility/smoking/smokingPage";
 	}
-	
-	// 강의실 안내
-	@RequestMapping(value = "/facility/classroom.do")
-	public String classroomPage() {
-		log.info("Called :: /facility/classroom.do");
-		return "facility/classroom/classroomPage";
-	}
-	
 	// 교통정보
 	@RequestMapping(value = "/facility/transport.do")
 	public String transportPage(Model model) {

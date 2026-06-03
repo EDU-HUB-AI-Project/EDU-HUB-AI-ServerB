@@ -1,4 +1,4 @@
-package kr.hcnc.web;
+package kr.hcnc.web.kiosk;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import egovframework.rte.fdl.property.EgovPropertyService;
-import kr.hcnc.service.BadgeService;
+import kr.hcnc.service.kiosk.BadgeService;
 import kr.hcnc.validator.RequestValidator;
 
 @Controller

@@ -1,4 +1,4 @@
-package kr.hcnc.service;
+package kr.hcnc.service.kiosk;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
