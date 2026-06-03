@@ -1,4 +1,4 @@
-package kr.hcnc.web;
+package kr.hcnc.web.kiosk;
 
 import javax.annotation.Resource;
 
