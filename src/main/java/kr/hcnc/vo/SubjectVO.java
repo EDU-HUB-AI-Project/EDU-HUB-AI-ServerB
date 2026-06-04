@@ -4,11 +4,11 @@ public class SubjectVO {
 
 	private String subjectId;
 	private String eduId;
+	private String classroomId;
 	private String subjectName;
 	private String startDate;
 	private String endDate;
 	private String endYn;
-	private String eduRoomName;
 	private String createdAt;
 	private String updatedAt;
 	private String delYn;
@@ -24,6 +24,12 @@ public class SubjectVO {
 	}
 	public void setEduId(String eduId) {
 		this.eduId = eduId;
+	}
+	public String getClassroomId() {
+		return classroomId;
+	}
+	public void setClassroomId(String classroomId) {
+		this.classroomId = classroomId;
 	}
 	public String getSubjectName() {
 		return subjectName;
@@ -48,12 +54,6 @@ public class SubjectVO {
 	}
 	public void setEndYn(String endYn) {
 		this.endYn = endYn;
-	}
-	public String getEduRoomName() {
-		return eduRoomName;
-	}
-	public void setEduRoomName(String eduRoomName) {
-		this.eduRoomName = eduRoomName;
 	}
 	public String getCreatedAt() {
 		return createdAt;
