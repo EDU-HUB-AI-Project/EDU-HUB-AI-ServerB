@@ -12,10 +12,35 @@
             </svg>
             <span class="badge-text">Facility Information</span>
         </div>
-        <h1 class="page-title">시설 및 교통 정보 안내</h1>
+        <h1 class="page-title">시설 안내</h1>
     </div>
 
     <div class="facility-menu">
+
+        <button class="facility-card" onclick="loadPage('/facility/location.do')">
+            <div class="card-hover-bg card-hover-gray"></div>
+            <div class="card-content">
+                <div class="card-left">
+                    <div class="card-icon icon-gray">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                            <circle cx="12" cy="10" r="3"/>
+                        </svg>
+                    </div>
+                    <div class="card-text">
+                        <h2 class="card-title">시설 위치</h2>
+                        <p class="card-description">흡연·편의시설 등 위치 안내</p>
+                    </div>
+                </div>
+                <div class="card-arrow">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="5" y1="12" x2="19" y2="12"/>
+                        <polyline points="12 5 19 12 12 19"/>
+                    </svg>
+                </div>
+            </div>
+            <div class="card-bottom-line card-line-gray"></div>
+        </button>
 
         <button class="facility-card" onclick="loadPage('/facility/cafeteria.do')">
             <div class="card-hover-bg card-hover-blue"></div>
@@ -27,8 +52,8 @@
                         </svg>
                     </div>
                     <div class="card-text">
-                        <h2 class="card-title">구내식당</h2>
-                        <p class="card-description">메뉴 및 위치 안내</p>
+                        <h2 class="card-title">식당 메뉴</h2>
+                        <p class="card-description">메뉴 및 운영 안내</p>
                     </div>
                 </div>
                 <div class="card-arrow">
@@ -39,32 +64,6 @@
                 </div>
             </div>
             <div class="card-bottom-line card-line-blue"></div>
-        </button>
-
-        <button class="facility-card" onclick="loadPage('/facility/smoking.do')">
-            <div class="card-hover-bg card-hover-gray"></div>
-            <div class="card-content">
-                <div class="card-left">
-                    <div class="card-icon icon-gray">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M18 8c0-3.3-2.7-6-6-6"/>
-                            <path d="M15 8h6M18 8v6"/>
-                            <rect x="2" y="16" width="20" height="4" rx="2"/>
-                        </svg>
-                    </div>
-                    <div class="card-text">
-                        <h2 class="card-title">흡연장소</h2>
-                        <p class="card-description">흡연 구역 위치 안내</p>
-                    </div>
-                </div>
-                <div class="card-arrow">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="5" y1="12" x2="19" y2="12"/>
-                        <polyline points="12 5 19 12 12 19"/>
-                    </svg>
-                </div>
-            </div>
-            <div class="card-bottom-line card-line-gray"></div>
         </button>
 
         <button class="facility-card" onclick="loadPage('/facility/classroom.do')">
@@ -78,7 +77,7 @@
                         </svg>
                     </div>
                     <div class="card-text">
-                        <h2 class="card-title">강의실 안내</h2>
+                        <h2 class="card-title">강의실</h2>
                         <p class="card-description">교육 과정별 강의실 배치도</p>
                     </div>
                 </div>
@@ -104,7 +103,7 @@
                         </svg>
                     </div>
                     <div class="card-text">
-                        <h2 class="card-title">교통정보</h2>
+                        <h2 class="card-title">교통</h2>
                         <p class="card-description">KTX · 시외버스 이동 안내</p>
                     </div>
                 </div>
