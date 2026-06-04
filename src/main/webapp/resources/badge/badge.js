@@ -12,7 +12,6 @@ var MAX_PER_PAGE    = 5;
 
 /* =====================
    키패드 초기화
-   - DOMContentLoaded 및 키패드 화면 재로드 후 공통 호출
    ===================== */
 function initKeypad() {
     inputValue      = '';
@@ -23,16 +22,6 @@ function initKeypad() {
     updateDisplay();
     updateProgress();
     updateSubmitButton();
-
-    // 키패드 버튼 hover 효과 바인딩
-    // document.querySelectorAll('.key-btn').forEach(function(btn) {
-    //     btn.addEventListener('mouseenter', function() {
-    //         this.classList.add('focused');
-    //     });
-    //     btn.addEventListener('mouseleave', function() {
-    //         this.classList.remove('focused');
-    //     });
-    // });
 }
 
 // 최초 페이지 진입 시 초기화
@@ -106,13 +95,6 @@ function updateDisplay() {
         }
     });
 }
-
-// // YY MM DD 포맷 (YYMMDD 6자리 기준)
-// function formatDisplay(val) {
-//     if (val.length <= 2) return val;
-//     if (val.length <= 4) return val.slice(0, 2) + ' ' + val.slice(2);
-//     return val.slice(0, 2) + ' ' + val.slice(2, 4) + ' ' + val.slice(4);
-// }
 
 function updateProgress() {
     var fill = document.getElementById('progress-fill');
@@ -362,14 +344,11 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
 
 /* =====================
    가이드 화면 이동
-   - #content-area 전체를 guide.do 로 교체
    ===================== */
 function moveToGuide(data, autoAssigned) {
     $('#content-area').load('/guide.do', function() {
         $('#card-name').text(data.STUDENT_NAME);
         $('#card-edu-name').text(data.EDU_NAME);
-        $('#card-room').text(data.EDU_ROOM_NAME + '호');
-        $('#card-floor').text(data.EDU_ROOM_NAME.charAt(0) + '층');
         $('#card-period').text(formatYYMMDD(data.START_DATE) + ' ~ ' + formatYYMMDD(data.END_DATE));
 
         var dormId = data.DORMITORY_ID;
@@ -382,9 +361,9 @@ function moveToGuide(data, autoAssigned) {
         if (autoAssigned) {
             showAlert('생활관이 자동 배정되었습니다.\n배정 호실을 확인해주세요.');
         }
-
-        initGuideCanvas(data.EDU_ROOM_NAME);
+        
         initDormCanvas(data.DORMITORY_ROOM_NAME);
+        renderSubject(data.subject);
 
         resetIdleTimer();
     });
@@ -398,9 +377,6 @@ function formatYYMMDD(s) {
 
 /* =====================
    키패드로 돌아가기
-   - guide.do 가 #content-area 를 덮어쓰므로
-     badge.do 로 키패드 화면 전체를 다시 로드한 뒤
-     initKeypad() 로 상태·이벤트 재초기화
    ===================== */
 function goBackToKeypad() {
     $('#content-area').load('/badge.do', function() {
