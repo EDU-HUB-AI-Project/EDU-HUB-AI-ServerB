@@ -1,0 +1,224 @@
+@charset "UTF-8";
+
+#location-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 32px;
+}
+
+#location-title {
+    text-align: center;
+    margin-bottom: 32px;
+    margin-top: 90px;
+    animation: fadeInDown 0.8s ease-out;
+    position: relative;
+}
+
+#location-title .header-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+#location-title .header-badge svg { color: #6b7280; }
+
+#location-title .badge-text {
+    font-size: 14px;
+    letter-spacing: 0.15em;
+    color: #6b7280;
+    font-weight: 500;
+    text-transform: uppercase;
+}
+
+#location-title .page-title {
+    font-size: 64px;
+    font-weight: 700;
+    color: #374151;
+    margin: 0;
+}
+
+.location-empty {
+    text-align: center;
+    padding: 48px 24px;
+    font-size: 22px;
+    color: #6b7280;
+    background: #f9fafb;
+    border-radius: 12px;
+    border: 1px solid #e5e7eb;
+}
+
+.location-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+    margin-bottom: 28px;
+}
+
+.location-tab {
+    padding: 14px 28px;
+    font-size: 20px;
+    font-weight: 600;
+    color: #4b5563;
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.location-tab:hover {
+    border-color: #9ca3af;
+    background: #f9fafb;
+}
+
+.location-tab.active {
+    color: #fff;
+    background: #4b5563;
+    border-color: #4b5563;
+}
+
+.map-section {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    margin-bottom: 40px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.6s ease-out;
+}
+
+#location-map {
+    width: 100%;
+    height: 450px;
+    border-radius: 12px;
+    border: 1px solid #dee2e6;
+}
+
+.info-section {
+    margin-bottom: 40px;
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 24px;
+}
+
+.section-title svg { color: #6b7280; }
+
+.info-cards {
+    display: flex;
+    gap: 20px;
+}
+
+.info-card {
+	width: 100%;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    transition: all 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.info-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.card-gray .info-icon {
+    background: linear-gradient(135deg, #f3f4f6, #e5e7eb);
+}
+
+.info-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.info-icon svg { color: #6b7280; }
+
+.info-content { flex: 1; }
+
+.info-label {
+    font-size: 14px;
+    color: #6b7280;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    word-break: keep-all;
+}
+
+.photo-section {
+    margin-bottom: 40px;
+}
+
+#photo-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    height: 350px;
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+    transition: all 0.3s;
+}
+
+.gallery-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photo-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    padding: 24px;
+}
+
+.photo-label {
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    #location-title .page-title { font-size: 40px; }
+    #location-map { height: 300px; }
+    .info-cards { grid-template-columns: 1fr; }
+    #photo-container { grid-template-columns: 1fr; }
+    .location-tab { font-size: 16px; padding: 10px 18px; }
+}
