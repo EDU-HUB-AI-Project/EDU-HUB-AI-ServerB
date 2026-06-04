@@ -55,15 +55,8 @@
             </div>
             <div class="card-body">
                 <div class="card-section-label label-emerald">강의실 안내</div>
-                <div class="info-row">
-                    <div class="info-block">
-                        <div class="info-label">강의실</div>
-                        <div class="info-value">
-                            <span id="card-room"></span>
-                            <span id="card-floor-wrap"> · <span id="card-floor"></span></span>
-                        </div>
-                    </div>
-                </div>
+                <!-- 과목 수에 따라 동적으로 렌더링 -->
+                <div id="subject-list-area"></div>
                 <div id="classroom-map-area" style="display:none;">
                     <div id="svg-container"></div>
                 </div>
