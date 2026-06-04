@@ -38,7 +38,7 @@ public class AdminAttendanceController {
 														@RequestParam(required=false) String status){
 		log.info("Called::getAttendance()");
 		Map<String, Object> result = new HashMap<>();
-		result.put("status", "success");
+		result.put("status", 200);
 		result.put("data", adminAttendanceService.getAttend(studentId, eduId, attendDate, status));
 		return ResponseEntity.ok(result);
 
@@ -50,7 +50,7 @@ public class AdminAttendanceController {
 													@RequestBody AttendVO attendVO) {
 		log.info("studId::{}", studentId);
 		Map<String, Object> result = new HashMap<>();
-		result.put("status", "success");
+		result.put("status", 200);
 		result.put("data", adminAttendanceService.updateAttendMsg(studentId, attendVO));
 		return ResponseEntity.ok(result);
 	}
@@ -59,7 +59,7 @@ public class AdminAttendanceController {
 	public ResponseEntity<?> insertAttend(@RequestBody AttendVO attendVO) {
 		log.info("Called :: POST /admin/attendance");
 		Map<String, Object> result = new HashMap<>();
-		result.put("status", "success");
+		result.put("status", 200);
 		result.put("data", adminAttendanceService.insertAttend(attendVO));
 		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
@@ -68,7 +68,7 @@ public class AdminAttendanceController {
 	public ResponseEntity<?> deleteAttend(@PathVariable String attendId) {
 		log.info("Called :: DELETE /admin/attendance");
 		Map<String, Object> result = new HashMap<>();
-		result.put("status", "success");
+		result.put("status", 200);
 	    result.put("data", null);
 		adminAttendanceService.deleteAttend(attendId);
 		return ResponseEntity.ok(result);

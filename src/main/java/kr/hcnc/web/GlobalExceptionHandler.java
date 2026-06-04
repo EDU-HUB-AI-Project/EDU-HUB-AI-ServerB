@@ -20,7 +20,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, Object>> handelIllegalArgument(IllegalArgumentException e) {
 		Map<String, Object> result = new HashMap<>();
 		logger.warn("Invalid request", e);
-		result.put("status", "fail");
+		result.put("status", 400);
 		result.put("message", e.getMessage());
 		return ResponseEntity.ok(result);
 	}
@@ -29,7 +29,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, Object>>  handleMethodNotAllowed(HttpRequestMethodNotSupportedException  e) {
 		Map<String, Object> result = new HashMap<>();
 		logger.warn("Method not allowed", e);
-		result.put("status", "fail");
+		result.put("status", 405);
 		result.put("message", "허용되지 않은 요청 방식입니다.");
 		return ResponseEntity.ok(result);
 	}
@@ -38,7 +38,7 @@ public class GlobalExceptionHandler {
 	public ResponseEntity<Map<String, Object>> handleException(Exception e) {
 		Map<String, Object> result = new HashMap<>();
 		logger.error("Unexpected error", e);
-		result.put("status", "error");
+		result.put("status", 500);
 		result.put("message", "서버 오류가 발생했습니다.");
 		return ResponseEntity.ok(result);
 	}
