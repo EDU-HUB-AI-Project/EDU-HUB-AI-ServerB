@@ -1,5 +1,6 @@
 package kr.hcnc.web.admin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,33 +32,45 @@ public class AdminAttendanceController {
 	private static final Logger log = LoggerFactory.getLogger(AdminAttendanceController.class);
 	
 	@GetMapping 
-	public ResponseEntity<List<AttendVO>> getAttendance(@RequestParam(required=false) String studentId,
+	public ResponseEntity<?> getAttendance(@RequestParam(required=false) String studentId,
 														@RequestParam(required=false) String eduId,
 														@RequestParam(required=false) String attendDate,
 														@RequestParam(required=false) String status){
 		log.info("Called::getAttendance()");
-		return ResponseEntity.ok(adminAttendanceService.getAttend(studentId, eduId, attendDate, status));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminAttendanceService.getAttend(studentId, eduId, attendDate, status));
+		return ResponseEntity.ok(result);
+
 	}
 	
 	// message, status, attendDate
 	@PatchMapping("/{studentId}")
-	public ResponseEntity<Integer> updateAttendMsg(@PathVariable String studentId,
+	public ResponseEntity<?> updateAttendMsg(@PathVariable String studentId,
 													@RequestBody AttendVO attendVO) {
 		log.info("studId::{}", studentId);
-		return ResponseEntity.ok(adminAttendanceService.updateAttendMsg(studentId, attendVO));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminAttendanceService.updateAttendMsg(studentId, attendVO));
+		return ResponseEntity.ok(result);
 	}
 
 	@PostMapping
 	public ResponseEntity<?> insertAttend(@RequestBody AttendVO attendVO) {
 		log.info("Called :: POST /admin/attendance");
-		Map<String, Object> response = adminAttendanceService.insertAttend(attendVO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminAttendanceService.insertAttend(attendVO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 	
 	@DeleteMapping("/{attendId}")
 	public ResponseEntity<?> deleteAttend(@PathVariable String attendId) {
 		log.info("Called :: DELETE /admin/attendance");
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+	    result.put("data", null);
 		adminAttendanceService.deleteAttend(attendId);
-		return ResponseEntity.ok().build();
+		return ResponseEntity.ok(result);
 	}
 }
