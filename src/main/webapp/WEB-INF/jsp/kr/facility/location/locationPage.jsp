@@ -106,7 +106,9 @@ var facilityData = [
         location: "<c:out value='${f.location}'/>",
         imagePath: "<c:out value='${f.imagePath}'/>",
         description: "<c:out value='${f.description}'/>",
-        floor: <c:choose><c:when test="${f.floor != null}">${f.floor}</c:when><c:otherwise>null</c:otherwise></c:choose>
+        floor: <c:choose><c:when test="${f.floor != null}">${f.floor}</c:when><c:otherwise>null</c:otherwise></c:choose>,
+        mapX: <c:choose><c:when test="${f.mapX != null}">${f.mapX}</c:when><c:otherwise>null</c:otherwise></c:choose>,
+        mapY: <c:choose><c:when test="${f.mapY != null}">${f.mapY}</c:when><c:otherwise>null</c:otherwise></c:choose>
     }<c:if test="${!s.last}">,</c:if>
     </c:forEach>
 ];

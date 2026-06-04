@@ -53,7 +53,7 @@ function selectFacilityTab(facilityId) {
     var photoTitle = document.getElementById('photo-title');
 
     if (infoTitle) infoTitle.textContent = facility.name || '시설 안내';
-    if (locationText) locationText.textContent = formatLocationLabel(facility.location);
+    if (locationText) locationText.textContent = formatLocationLabel(facility);
     if (descriptionEl) descriptionEl.textContent = facility.description || '-';
     if (photoTitle) photoTitle.textContent = facility.name || '';
 
@@ -125,14 +125,38 @@ function updateMapSection(facility) {
     }
 }
 
-function formatLocationLabel(location) {
-    if (!location) {
+function formatLocationLabel(facility) {
+    if (!facility) {
         return '-';
     }
-    if (parseLatLng(location)) {
+    if (hasMapCoords(facility)) {
+        var text = facility.location ? String(facility.location).trim() : '';
+        return text || '지도 마커 참조';
+    }
+    if (!facility.location) {
+        return '-';
+    }
+    if (parseLatLng(facility.location)) {
         return '지도 마커 참조';
     }
-    return location;
+    return facility.location;
+}
+
+function hasMapCoords(facility) {
+    if (!facility) {
+        return false;
+    }
+    var lat = parseCoord(facility.mapX);
+    var lng = parseCoord(facility.mapY);
+    return lat !== null && lng !== null;
+}
+
+function parseCoord(value) {
+    if (value === null || value === undefined || value === '') {
+        return null;
+    }
+    var num = parseFloat(value);
+    return isNaN(num) ? null : num;
 }
 
 function parseLatLng(location) {
@@ -152,6 +176,12 @@ function parseLatLng(location) {
 }
 
 function getCoords(facility) {
+    if (hasMapCoords(facility)) {
+        return {
+            lat: parseCoord(facility.mapX),
+            lng: parseCoord(facility.mapY)
+        };
+    }
     var parsed = parseLatLng(facility.location);
     if (parsed) {
         return parsed;
