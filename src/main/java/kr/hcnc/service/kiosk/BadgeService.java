@@ -1,4 +1,4 @@
-package kr.hcnc.service;
+package kr.hcnc.service.kiosk;
 
 import java.util.List;
 import java.util.Map;
