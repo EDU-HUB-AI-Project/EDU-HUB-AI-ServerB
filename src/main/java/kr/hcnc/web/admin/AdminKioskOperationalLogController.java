@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.hcnc.service.admin.AdminKioskOperationalLogService;
 import kr.hcnc.vo.KioskOperationalLogVO;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,32 +29,41 @@ public class AdminKioskOperationalLogController {
     private AdminKioskOperationalLogService adminKioskOperationalLogService;
 
     @GetMapping
-	public ResponseEntity<List<KioskOperationalLogVO>> getOpLog(@RequestParam(required = false) String studentId,
+	public ResponseEntity<?> getOpLog(@RequestParam(required = false) String studentId,
                                                                 @RequestParam(required = false) String dorm,
                                                                 @RequestParam(required = false) String createdAt){
 		log.info("Called :: getOpLog");
-		return ResponseEntity.ok(adminKioskOperationalLogService.selectOpLog(studentId, dorm, createdAt));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskOperationalLogService.selectOpLog(studentId, dorm, createdAt));
+		return ResponseEntity.ok(result);
 	}
 
 
     @PostMapping("/op-log")
-    public ResponseEntity<Integer> insertOpLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
+    public ResponseEntity<?> insertOpLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
 		log.info("Called :: insertOpLog()");
-		int result = adminKioskOperationalLogService.insertOpLog(kioskOpVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskOperationalLogService.insertOpLog(kioskOpVO));
 		return ResponseEntity.ok(result);
 	}
 
     @PostMapping("/dorm-op")
-	public ResponseEntity<Integer> insertDormOutLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
+	public ResponseEntity<?> insertDormOutLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
 		log.info("Called :: insertDormOutLog");
-		int result = adminKioskOperationalLogService.insertDormOutLog(kioskOpVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskOperationalLogService.insertDormOutLog(kioskOpVO));
 		return ResponseEntity.ok(result);
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<Integer> deleteOpLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
+	public ResponseEntity<?> deleteOpLog(@RequestBody KioskOperationalLogVO kioskOpVO) {
 		log.info("Called :: insertDormOutLog");
-		int result = adminKioskOperationalLogService.deleteOpLog(kioskOpVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskOperationalLogService.deleteOpLog(kioskOpVO));
 		return ResponseEntity.ok(result);
 	}
 }
