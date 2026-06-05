@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -29,25 +31,32 @@ public class AdminKioskLogController {
     private AdminKioskLogService adminKioskLogService;
     
     @GetMapping
-    public ResponseEntity<List<KioskLogVO>> getKiostLog(@RequestParam(required = false) String logId,
+    public ResponseEntity<?> getKiostLog(@RequestParam(required = false) String logId,
                                                         @RequestParam(required = false) String action,
                                                         @RequestParam(required = false) String createdAt) {
     	log.info("Called::getKiostLog");
-    	return ResponseEntity.ok(adminKioskLogService.getKiostLog(logId, action, createdAt));
+    	Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+    	result.put("data", adminKioskLogService.getKiostLog(logId, action, createdAt));
+    	return ResponseEntity.ok(result);
     }
  
 
     @PostMapping
-	public ResponseEntity<Integer> insertLog(@RequestBody KioskLogVO kioskLogVO) {
+	public ResponseEntity<?> insertLog(@RequestBody KioskLogVO kioskLogVO) {
 		log.info("Called::insertLog()");
-		int result = adminKioskLogService.insertLog(kioskLogVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskLogService.insertLog(kioskLogVO));
 		return ResponseEntity.ok(result);
 	}
 
     @DeleteMapping
-	public ResponseEntity<Integer> deleteLog(@RequestBody KioskLogVO kioskLogVO){
+	public ResponseEntity<?> deleteLog(@RequestBody KioskLogVO kioskLogVO){
 		log.info("Called::deleteLog");
-		int result = adminKioskLogService.deleteLog(kioskLogVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminKioskLogService.deleteLog(kioskLogVO));
 		return ResponseEntity.ok(result);
 	}
 }
