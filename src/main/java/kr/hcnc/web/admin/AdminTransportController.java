@@ -1,6 +1,7 @@
 package kr.hcnc.web.admin;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -30,34 +31,48 @@ public class AdminTransportController {
 	private AdminTransportService adminTransportService;
 
 	@GetMapping
-	public ResponseEntity<List<TransportVO>> getTransportList() {
+	public ResponseEntity<?> getTransportList() {
 		log.info("Called :: GET /admin/transport");
-		return ResponseEntity.ok(adminTransportService.selectTransportList());
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminTransportService.selectTransportList());
+		return ResponseEntity.ok(result);
 	}
 
 	@GetMapping("/{transportId}")
-	public ResponseEntity<TransportVO> getTransport(@PathVariable String transportId) {
+	public ResponseEntity<?> getTransport(@PathVariable String transportId) {
 		log.info("Called :: GET /admin/transport/{}", transportId);
-		return ResponseEntity.ok(adminTransportService.selectTransportById(transportId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminTransportService.selectTransportById(transportId));
+		return ResponseEntity.ok(result);
 	}
 
 	@PostMapping
-	public ResponseEntity<Integer> insertTransport(@RequestBody TransportVO transportVO) {
+	public ResponseEntity<?> insertTransport(@RequestBody TransportVO transportVO) {
 		log.info("Called :: POST /admin/transport");
-		int result = adminTransportService.insertTransport(transportVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminTransportService.insertTransport(transportVO));
 		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 
 	@PutMapping("/{transportId}")
-	public ResponseEntity<Integer> updateTransport(@PathVariable String transportId,
+	public ResponseEntity<?> updateTransport(@PathVariable String transportId,
 			@RequestBody TransportVO transportVO) {
 		log.info("Called :: PUT /admin/transport/{}", transportId);
-		return ResponseEntity.ok(adminTransportService.updateTransport(transportId, transportVO));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminTransportService.updateTransport(transportId, transportVO));
+		return ResponseEntity.ok(result);
 	}
 
 	@DeleteMapping("/{transportId}")
-	public ResponseEntity<Integer> deleteTransport(@PathVariable String transportId) {
+	public ResponseEntity<?> deleteTransport(@PathVariable String transportId) {
 		log.info("Called :: DELETE /admin/transport/{}", transportId);
-		return ResponseEntity.ok(adminTransportService.deleteTransport(transportId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminTransportService.deleteTransport(transportId));
+		return ResponseEntity.ok(result);
 	}
 }

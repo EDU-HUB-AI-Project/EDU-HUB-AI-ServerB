@@ -1,6 +1,7 @@
 package kr.hcnc.web.admin;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -27,34 +28,46 @@ public class AdminDormitoryController {
     private static final Logger log = LoggerFactory.getLogger(AdminDormitoryController.class);
 
     @GetMapping
-    public ResponseEntity<List<DormitoryVO>> gettDormRoomAssignStatus(){
+    public ResponseEntity<?> getDormRoomAssignStatus(){
         log.info("Called::gettDormRoomAssignStatus");
-        return ResponseEntity.ok(adminDormitoryService.gettDormRoomAssignStatus());
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminDormitoryService.getDormRoomAssignStatus());
+        return ResponseEntity.ok(result);
     }
     @GetMapping("/{dormitoryId}")
-    public ResponseEntity<DormitoryVO> getDormRoomAssignStatusById(@PathVariable String dormitoryId) {
+    public ResponseEntity<?> getDormRoomAssignStatusById(@PathVariable String dormitoryId) {
         log.info("Called :: GET /admin/dormitories/{}", dormitoryId);
-        return ResponseEntity.ok(adminDormitoryService.getDormRoomAssignStatusById(dormitoryId));
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminDormitoryService.getDormRoomAssignStatusById(dormitoryId));
+        return ResponseEntity.ok(result);
     } 
 
     @PatchMapping("/max-count")
-    public ResponseEntity<Integer> updateDormAssignMaxCnt (@RequestBody DormitoryVO dormitoryVO){
+    public ResponseEntity<?> updateDormAssignMaxCnt (@RequestBody DormitoryVO dormitoryVO){
     	log.info("Called :: PATCH /admin/dormitories/max-count");
-        int result = adminDormitoryService.updateDormAssignMaxCnt(dormitoryVO);
+    	Map<String, Object> result = new HashMap<>();
+    	result.put("status", 200);
+    	result.put("data", adminDormitoryService.updateDormAssignMaxCnt(dormitoryVO));
     	return ResponseEntity.ok(result);
     }
 
     @PatchMapping("/current-count")
-    public ResponseEntity<Integer> updateDormCurrentCnt (@RequestBody DormitoryVO dormitoryVO, @RequestParam String studentId) {
+    public ResponseEntity<?> updateDormCurrentCnt (@RequestBody DormitoryVO dormitoryVO, @RequestParam String studentId) {
         log.info("Called :: PATCH /admin/dormitories/current-count");
-        int result = adminDormitoryService.updateDormCurrentCnt(dormitoryVO, studentId);
+    	Map<String, Object> result = new HashMap<>();
+    	result.put("status", 200);
+    	result.put("data", adminDormitoryService.updateDormCurrentCnt(dormitoryVO, studentId));
         return ResponseEntity.ok(result);
     }
     
     @PatchMapping("/current-down")
-    public ResponseEntity<Integer> updateDormCurrentCntDown (@RequestBody DormitoryVO dormitoryVO, @RequestParam String studentId){
+    public ResponseEntity<?> updateDormCurrentCntDown (@RequestBody DormitoryVO dormitoryVO, @RequestParam String studentId){
     	log.info("Called :: PATCH /admin/dormitories/current-down");
-    	int result = adminDormitoryService.updateDormCurrentCntDown(dormitoryVO, studentId);
+    	Map<String, Object> result = new HashMap<>();
+    	result.put("status", 200);
+    	result.put("data", adminDormitoryService.updateDormCurrentCntDown(dormitoryVO, studentId));
     	return ResponseEntity.ok(result);
     }
 }

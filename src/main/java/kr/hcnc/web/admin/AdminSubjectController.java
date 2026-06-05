@@ -1,6 +1,6 @@
 package kr.hcnc.web.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -31,35 +31,47 @@ public class AdminSubjectController {
 	private static final Logger log = LoggerFactory.getLogger(AdminSubjectController.class);
 	
 	@GetMapping
-	public ResponseEntity<List<SubjectVO>> getSubject() {
+	public ResponseEntity<?> getSubject() {
 		log.info("Called :: GET /admin/subject");
-		return ResponseEntity.ok(adminSubjectService.selectSubject());
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminSubjectService.selectSubject());
+		return ResponseEntity.ok(result);
 	}
 	
 	@GetMapping("/{subjectId}")
-	public ResponseEntity<SubjectVO> getSubjectById(@PathVariable String subjectId) {
+	public ResponseEntity<?> getSubjectById(@PathVariable String subjectId) {
 		log.info("Called :: GET /admin/subject/{}", subjectId);
-		return ResponseEntity.ok(adminSubjectService.selectSubjectById(subjectId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminSubjectService.selectSubjectById(subjectId));
+		return ResponseEntity.ok(result);
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> insertSubject(@RequestBody SubjectVO subjectVO) {
 		log.info("Called :: POST /admin/subject");
-		Map<String, Object> response = adminSubjectService.insertSubject(subjectVO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(response);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminSubjectService.insertSubject(subjectVO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 	
 	@PutMapping("/{subjectId}")
 	public ResponseEntity<?> updateSubject(@PathVariable String subjectId, @RequestBody SubjectVO subjectVO) {
 		log.info("Called :: PUT /admin/subject/{}", subjectId);
-		Map<String, Object> response = adminSubjectService.updateSubject(subjectId, subjectVO);
-		return ResponseEntity.ok(response);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminSubjectService.updateSubject(subjectId, subjectVO));
+		return ResponseEntity.ok(result);
 	}
 	
 	@DeleteMapping("/{subjectId}")
 	public ResponseEntity<?> deleteSubject(@PathVariable String subjectId) {
 		log.info("Called :: DELETE /admin/subject/{}", subjectId);
-		adminSubjectService.deleteSubject(subjectId);
-		return ResponseEntity.ok().build();
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminSubjectService.deleteSubject(subjectId));
+		return ResponseEntity.ok(result);
 	}
 }

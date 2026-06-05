@@ -1,7 +1,6 @@
 package kr.hcnc.service.admin;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -40,22 +39,31 @@ public class AdminClassroomService extends EgovAbstractServiceImpl {
 				);
 	}
 	// insertClassroom
-	public Map<String, Object> insertClassroom(ClassroomVO classroomVO) {
+	public int insertClassroom(ClassroomVO classroomVO) {
 		log.info("Called :: insertClassroom()");
 		return apiClient.post(
 				"/api/admin/classroom",
 				classroomVO,
-				new ParameterizedTypeReference<Map<String, Object>>() {}
+				Integer.class
 				);
 	}
 	
 	// updateClassroom
-	public Map<String, Object> updateClassroom(String classroomId, ClassroomVO classroomVO) {
+	public int updateClassroom(String classroomId, ClassroomVO classroomVO) {
 		log.info("Called :: updateClassroom()");
 		return apiClient.put(
 				"/api/admin/classroom/" + classroomId,
 				classroomVO,
-				new ParameterizedTypeReference<Map<String, Object>>() {}
+				Integer.class
+				);
+	}
+	
+	public int deleteClassroom(String classroomId) {
+		log.info("Called ::: deleteClassroom()");
+		return apiClient.delete(
+				"/api/admin/classroom/" + classroomId,
+				null,
+				Integer.class
 				);
 	}
 }
