@@ -62,7 +62,7 @@ public class AdminCafeteriaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PutMapping("/update/{cafeteriaId}")
+    @PutMapping("/{cafeteriaId}")
     public ResponseEntity<?> updateCafeteria(@PathVariable String cafeteriaId, @RequestBody CafeteriaVO cafeteriaVO) {
         log.info("Called :: PUT /admin/cafeteria/{} - body: {}", cafeteriaId, cafeteriaVO);
         
@@ -73,14 +73,13 @@ public class AdminCafeteriaController {
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("/delete/{cafeteriaId}")
+    @DeleteMapping("/{cafeteriaId}")
     public ResponseEntity<?> deleteCafeteria(@PathVariable String cafeteriaId) {
         log.info("Called :: DELETE /admin/cafeteria/{}", cafeteriaId);
         
         Map<String, Object> result = new HashMap<>();
         result.put("status", 200);
-        result.put("data", null);
-        adminCafeteriaService.deleteCafeteria(cafeteriaId);
+        result.put("data", adminCafeteriaService.deleteCafeteria(cafeteriaId));
         
         return ResponseEntity.ok(result);
     }

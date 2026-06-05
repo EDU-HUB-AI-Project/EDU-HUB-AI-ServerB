@@ -34,12 +34,6 @@ public class FacilityController {
 		return "facility/facilityPage";
 	}
 
-	@RequestMapping(value = "/facility/cafeteria.do")
-	public String cafeteriaPage() {
-	    log.info("Called :: /facility/cafeteria.do");
-	    return "facility/cafeteria/cafeteriaPage";
-	}
-
 	@RequestMapping(value = "/facility/location.do")
 	public String locationPage(Model model) {
 		log.info("Called :: /facility/location.do");

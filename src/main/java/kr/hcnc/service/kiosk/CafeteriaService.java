@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import kr.hcnc.util.ApiClient;
 
-@Service
+@Service("cafeteriaService")
 public class CafeteriaService extends EgovAbstractServiceImpl{
 	
 	@Resource(name = "apiClient")
@@ -24,7 +24,7 @@ public class CafeteriaService extends EgovAbstractServiceImpl{
 	public List<Map<String, Object>> selectCafeteriaList(String date) {
 		log.info("Called :: selectCafeteriaList = {}", date);
 		return apiClient.get(
-				"/api/admin/cafeteria/detail" + date,
+				"/api/admin/cafeteria/detail/" + date,
 				new ParameterizedTypeReference<List<Map<String,Object>>>() {}
 		);
 	}
