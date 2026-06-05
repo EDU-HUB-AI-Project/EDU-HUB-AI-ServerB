@@ -1,6 +1,6 @@
 package kr.hcnc.web.admin;
 
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -31,35 +31,47 @@ public class AdminEduInfoController {
 	private static final Logger log = LoggerFactory.getLogger(AdminEduInfoController.class);
 	
 	@GetMapping
-	public ResponseEntity<List<EduInfoVO>> getEduInfo() {
+	public ResponseEntity<?> getEduInfo() {
 		log.info("Called :: GET /admin/eduInfo");
-		return ResponseEntity.ok(adminEduInfoService.selectEduInfo());
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminEduInfoService.selectEduInfo());
+		return ResponseEntity.ok(result);
 	}
 	
 	@GetMapping("/{eduInfoId}")
-	public ResponseEntity<EduInfoVO> getEduInfoById(@PathVariable String eduInfoId) {
+	public ResponseEntity<?> getEduInfoById(@PathVariable String eduInfoId) {
 		log.info("Called :: GET /admin/eduInfo/{}", eduInfoId);
-		return ResponseEntity.ok(adminEduInfoService.selectEduInfoById(eduInfoId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminEduInfoService.selectEduInfoById(eduInfoId));
+		return ResponseEntity.ok(result);
 	}
 	
 	@PostMapping
 	public ResponseEntity<?> insertEduInfo(@RequestBody EduInfoVO eduInfoVO) {
 		log.info("Called :: POST /admin/eduInfo");
-		Map<String, Object> response = adminEduInfoService.insertEduInfo(eduInfoVO);
-		return ResponseEntity.status(HttpStatus.CREATED).body(response);  
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminEduInfoService.insertEduInfo(eduInfoVO));
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);  
 	}
 	
 	@PutMapping("/{eduInfoId}")
 	public ResponseEntity<?> updateEduInfo(@PathVariable String eduInfoId, @RequestBody EduInfoVO eduInfoVO) {
 		log.info("Called :: PUT /admin/eduInfo/{}", eduInfoId);
-		Map<String, Object> response = adminEduInfoService.updateEduInfo(eduInfoId, eduInfoVO);
-		return ResponseEntity.ok(response);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminEduInfoService.updateEduInfo(eduInfoId, eduInfoVO));
+		return ResponseEntity.ok(result);
 	}
 	
 	@DeleteMapping("/{eduInfoId}")
 	public ResponseEntity<?> deleteEduInfo(@PathVariable String eduInfoId) {
 		log.info("Called :: DELETE /admin/eduInfo/{}", eduInfoId);
-		adminEduInfoService.deleteEduInfo(eduInfoId);
-		return ResponseEntity.ok().build();
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminEduInfoService.deleteEduInfo(eduInfoId));
+		return ResponseEntity.ok(result);
 	}
 }
