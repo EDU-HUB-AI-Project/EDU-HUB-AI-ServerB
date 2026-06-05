@@ -9,6 +9,7 @@ public class ClassroomVO {
 	private String imagePath;
 	private String createdAt;
 	private String updatedAt;
+	private String delYn;
 	
 	public String getClassroomId() {
 		return classroomId;
@@ -52,16 +53,10 @@ public class ClassroomVO {
 	public void setUpdatedAt(String updatedAt) {
 		this.updatedAt = updatedAt;
 	}
-	
-	
+	public String getDelYn() {
+		return delYn;
+	}
+	public void setDelYn(String delYn) {
+		this.delYn = delYn;
+	}
 }
-
-/*
-CLASSROOM_ID	varchar(10)
-CLASSROOM_NAME	varchar(100)
-IMAGE_ID	varchar(50)
-IMAGE_PATH	varchar(500)
-CREATED_AT	timestamp
-UPDATED_AT	timestamp
-DEL_YN	char(1)
-*/

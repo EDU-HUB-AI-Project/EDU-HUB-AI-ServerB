@@ -8,6 +8,8 @@ public class EduInfoVO {
 	private Integer batchNumber;
 	private Integer capacity;
 	private String delYn;
+	private String createdAt;
+	private String updatedAt;
 	
 	public String getEduId() {
 		return eduId;
@@ -51,6 +53,16 @@ public class EduInfoVO {
 	public void setDelYn(String delYn) {
 		this.delYn = delYn;
 	}
-	
-	
+	public String getCreatedAt() {
+		return createdAt;
+	}
+	public void setCreatedAt(String createdAt) {
+		this.createdAt = createdAt;
+	}
+	public String getUpdatedAt() {
+		return updatedAt;
+	}
+	public void setUpdatedAt(String updatedAt) {
+		this.updatedAt = updatedAt;
+	}
 }
