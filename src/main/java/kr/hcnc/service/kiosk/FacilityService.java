@@ -62,14 +62,6 @@ public class FacilityService extends EgovAbstractServiceImpl {
 				new ParameterizedTypeReference<List<TransportVO>>() {});
 	}
 
-	public List<Map<String, Object>> selectCafeteriaList() {
-		log.info("Called :: selectCafeteriaList");
-
-		return apiClient.get(
-				"/api/info/cafe",
-				List.class);
-	}
-
 	public List<Map<String, Object>> selectTransportList(String stopId) {
 		log.info("Called :: selectTransportList");
 		try {

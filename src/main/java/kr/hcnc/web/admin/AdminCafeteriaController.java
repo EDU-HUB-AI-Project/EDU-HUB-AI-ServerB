@@ -1,5 +1,6 @@
 package kr.hcnc.web.admin;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kr.hcnc.service.admin.AdminCafeteriaService;
@@ -29,20 +29,24 @@ public class AdminCafeteriaController {
 
     private static final Logger log = LoggerFactory.getLogger(AdminCafeteriaController.class);
     
-    @GetMapping("")
-    public ResponseEntity<List<Map<String, Object>>> getCafeteria(@RequestParam String date) {
-        log.info("Called :: GET /admin/cafeteria?date={}", date);
+    @GetMapping("/{date}")
+    public ResponseEntity<?> getCafeteria(@PathVariable String date) {
+        log.info("Called :: GET /admin/cafeteria/{}", date);
         
-        List<Map<String, Object>> result = adminCafeteriaService.selectCafeteriaSummary(date);
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminCafeteriaService.selectCafeteriaSummary(date));
         
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/detail")
-    public ResponseEntity<List<CafeteriaVO>> getCafeteriaDetail(@RequestParam String date) {
-        log.info("Called :: GET /admin/cafeteria/detail?date={}", date);
+    @GetMapping("/detail/{date}")
+    public ResponseEntity<?> getCafeteriaDetail(@PathVariable String date) {
+        log.info("Called :: GET /admin/cafeteria/detail={}", date);
         
-        List<CafeteriaVO> result = adminCafeteriaService.selectCafeteriaDetail(date);
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminCafeteriaService.selectCafeteriaDetail(date));
         
         return ResponseEntity.ok(result);
     }
@@ -51,22 +55,33 @@ public class AdminCafeteriaController {
     public ResponseEntity<?> insertCafeteria(@RequestBody List<CafeteriaVO> cafeteriaList) {
         log.info("Called :: POST /admin/cafeteria - size: {}", cafeteriaList != null ? cafeteriaList.size() : 0);
         
-        Map<String, Object> result = adminCafeteriaService.insertCafeteria(cafeteriaList);
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminCafeteriaService.insertCafeteria(cafeteriaList));
         
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
     }
 
-    @PutMapping("/{cafeteriaId}")
+    @PutMapping("/update/{cafeteriaId}")
     public ResponseEntity<?> updateCafeteria(@PathVariable String cafeteriaId, @RequestBody CafeteriaVO cafeteriaVO) {
         log.info("Called :: PUT /admin/cafeteria/{} - body: {}", cafeteriaId, cafeteriaVO);
-        Map<String, Object> result = adminCafeteriaService.updateCafeteria(cafeteriaId, cafeteriaVO);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminCafeteriaService.updateCafeteria(cafeteriaId, cafeteriaVO));
+        
         return ResponseEntity.ok(result);
     }
 
-    @DeleteMapping("/{cafeteriaId}")
+    @DeleteMapping("/delete/{cafeteriaId}")
     public ResponseEntity<?> deleteCafeteria(@PathVariable String cafeteriaId) {
         log.info("Called :: DELETE /admin/cafeteria/{}", cafeteriaId);
-        Map<String, Object> result = adminCafeteriaService.deleteCafeteria(cafeteriaId);
+        
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", null);
+        adminCafeteriaService.deleteCafeteria(cafeteriaId);
+        
         return ResponseEntity.ok(result);
     }
 }
