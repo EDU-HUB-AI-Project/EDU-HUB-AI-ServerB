@@ -64,6 +64,15 @@ public class AdminAttendanceController {
 		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 	
+	@PostMapping("/list")
+	public ResponseEntity<?> insertAttend(@RequestBody List<AttendVO> attendList){
+		log.info("Called :: POST /admin/attendance");
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminAttendanceService.insertAttend(attendList));
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);
+	}
+	
 	@DeleteMapping("/{attendId}")
 	public ResponseEntity<?> deleteAttend(@PathVariable String attendId) {
 		log.info("Called :: DELETE /admin/attendance");

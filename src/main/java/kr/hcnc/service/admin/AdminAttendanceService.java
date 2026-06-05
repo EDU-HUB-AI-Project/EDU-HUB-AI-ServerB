@@ -49,6 +49,15 @@ public class AdminAttendanceService extends EgovAbstractServiceImpl { // EgovAbs
 				);
 	}
 	
+	public int insertAttend(List<AttendVO> attendList){
+		log.info("Called :: insertAttend()");
+		return apiClient.post(
+				"/api/admin/attendances/list",
+				attendList,
+				Integer.class
+				);
+	}
+	
 	public void deleteAttend(String attendId) {
 		log.info("Called :: deleteAttend()");
 		apiClient.delete(
