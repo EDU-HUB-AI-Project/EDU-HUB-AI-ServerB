@@ -86,21 +86,21 @@ public class AdminCafeteriaService extends EgovAbstractServiceImpl {
         );
     }
 
-    public Map<String, Object> updateCafeteria(String cafeteriaId, CafeteriaVO cafeteriaVO) {
+    public int updateCafeteria(String cafeteriaId, CafeteriaVO cafeteriaVO) {
         log.info("Called :: updateCafeteria()");
         return apiClient.put(
                 "/api/admin/cafeteria/" + cafeteriaId,
                 cafeteriaVO,
-                new ParameterizedTypeReference<Map<String, Object>>() {}
+                Integer.class
         );
     }
 
-    public Map<String, Object> deleteCafeteria(String cafeteriaId) {
+    public int deleteCafeteria(String cafeteriaId) {
         log.info("Called :: deleteCafeteria()");
         return apiClient.delete(
                 "/api/admin/cafeteria/" + cafeteriaId,
                 null,
-                new ParameterizedTypeReference<Map<String, Object>>() {}
+                Integer.class
         );
     }
 }

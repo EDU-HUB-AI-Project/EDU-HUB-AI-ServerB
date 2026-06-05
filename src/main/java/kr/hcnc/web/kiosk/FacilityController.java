@@ -34,21 +34,6 @@ public class FacilityController {
 		return "facility/facilityPage";
 	}
 
-	@RequestMapping(value = "/facility/cafeteria.do")
-	public String cafeteriaPage(Model model) {
-		log.info("Called :: /facility/cafeteria.do");
-		try {
-			List<Map<String, Object>> list = facilityService.selectCafeteriaList();
-			log.info("결과 : {}", list);
-			model.addAttribute("cafeteriaList", list);
-		} catch (Exception e) {
-			log.error("구내식당 정보 조회 실패", e);
-			model.addAttribute("cafeteriaList", new java.util.ArrayList<>());
-			model.addAttribute("serverError", true);
-		}
-		return "facility/cafeteria/cafeteriaPage";
-	}
-
 	@RequestMapping(value = "/facility/location.do")
 	public String locationPage(Model model) {
 		log.info("Called :: /facility/location.do");
