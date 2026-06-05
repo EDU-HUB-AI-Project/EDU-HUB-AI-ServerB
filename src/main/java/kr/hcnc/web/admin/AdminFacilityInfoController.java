@@ -1,6 +1,7 @@
 package kr.hcnc.web.admin;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -30,34 +31,48 @@ public class AdminFacilityInfoController {
 	private AdminFacilityInfoService adminFacilityInfoService;
 
 	@GetMapping
-	public ResponseEntity<List<FacilityInfoVO>> getFacilityList() {
+	public ResponseEntity<?> getFacilityList() {
 		log.info("Called :: GET /admin/facilityInfo");
-		return ResponseEntity.ok(adminFacilityInfoService.selectFacilityList());
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminFacilityInfoService.selectFacilityList());
+		return ResponseEntity.ok(result);
 	}
 
 	@GetMapping("/{facilityId}")
-	public ResponseEntity<FacilityInfoVO> getFacilityInfo(@PathVariable String facilityId) {
+	public ResponseEntity<?> getFacilityInfo(@PathVariable String facilityId) {
 		log.info("Called :: GET /admin/facilityInfo/{}", facilityId);
-		return ResponseEntity.ok(adminFacilityInfoService.selectFacilityById(facilityId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminFacilityInfoService.selectFacilityById(facilityId));
+		return ResponseEntity.ok(result);
 	}
 
 	@PostMapping
-	public ResponseEntity<Integer> insertFacility(@RequestBody FacilityInfoVO facilityInfoVO) {
+	public ResponseEntity<?> insertFacility(@RequestBody FacilityInfoVO facilityInfoVO) {
 		log.info("Called :: POST /admin/facilityInfo");
-		int result = adminFacilityInfoService.insertFacility(facilityInfoVO);
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminFacilityInfoService.insertFacility(facilityInfoVO));
 		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 
 	@PutMapping("/{facilityId}")
-	public ResponseEntity<Integer> updateFacility(@PathVariable String facilityId,
+	public ResponseEntity<?> updateFacility(@PathVariable String facilityId,
 			@RequestBody FacilityInfoVO facilityInfoVO) {
 		log.info("Called :: PUT /admin/facilityInfo/{}", facilityId);
-		return ResponseEntity.ok(adminFacilityInfoService.updateFacility(facilityId, facilityInfoVO));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminFacilityInfoService.updateFacility(facilityId, facilityInfoVO));
+		return ResponseEntity.ok(result);
 	}
 
 	@DeleteMapping("/{facilityId}")
-	public ResponseEntity<Integer> deleteFacility(@PathVariable String facilityId) {
+	public ResponseEntity<?> deleteFacility(@PathVariable String facilityId) {
 		log.info("Called :: DELETE /admin/facilityInfo/{}", facilityId);
-		return ResponseEntity.ok(adminFacilityInfoService.deleteFacility(facilityId));
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminFacilityInfoService.deleteFacility(facilityId));
+		return ResponseEntity.ok(result);
 	}
 }
