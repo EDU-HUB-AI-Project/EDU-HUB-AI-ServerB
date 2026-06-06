@@ -1,6 +1,7 @@
 package kr.hcnc.web.admin;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -73,5 +74,14 @@ public class AdminStudentController {
 		result.put("status", 200);
 		result.put("data", adminStudentService.deleteStudent(studentId));
 		return ResponseEntity.ok(result);
+	}
+	
+	@PostMapping("/batch")
+	public ResponseEntity<?> batchInsertStudent(@RequestBody List<StudentVO> students) {
+		log.info("Called :: POST /admin/student/batch");
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminStudentService.batchInsertStudent(students));
+		return ResponseEntity.status(HttpStatus.CREATED).body(result);
 	}
 }

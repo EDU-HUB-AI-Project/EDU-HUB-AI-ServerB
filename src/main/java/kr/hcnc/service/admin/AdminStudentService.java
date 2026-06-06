@@ -63,4 +63,13 @@ public class AdminStudentService extends EgovAbstractServiceImpl {
 				Integer.class
 				);
 	}
+	
+	public int batchInsertStudent(List<StudentVO> students) {
+		log.info("Called :: batchInsertStudent");
+		return apiClient.post(
+				"/api/admin/student/batch",
+				students,
+				Integer.class
+				);
+	}
 }
