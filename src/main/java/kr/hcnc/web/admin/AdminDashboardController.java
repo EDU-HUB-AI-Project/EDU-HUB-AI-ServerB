@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import kr.hcnc.service.admin.AdminDashboardService;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -24,24 +25,36 @@ public class AdminDashboardController {
     private AdminDashboardService adminDashboardService;
 
     @GetMapping("/print-count")
-    public ResponseEntity<List<Map<String, Object>>> getPrintCountByHour() {
+    public ResponseEntity<?> getPrintCountByHour() {
         log.info("Called::getPrintCountByHour()");
-        return ResponseEntity.ok(adminDashboardService.getPrintCountByHour());
+        Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminDashboardService.getPrintCountByHour());
+        return ResponseEntity.ok(result);
     }
     @GetMapping("/popular")
-    public ResponseEntity<List<Map<String, Object>>> getPopularFeature() {
+    public ResponseEntity<?> getPopularFeature() {
         log.info("Called::getPopularFeature()");
-        return ResponseEntity.ok(adminDashboardService.getPopularFeature());
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+		result.put("data", adminDashboardService.getPopularFeature());
+        return ResponseEntity.ok(result);
     }
     @GetMapping("/attend-count")
-    public ResponseEntity<Map<String, Object>> getAttendCount() {
+    public ResponseEntity<?> getAttendCount() {
          log.info("Called::getAttendCount()");
-         return ResponseEntity.ok(adminDashboardService.getAttendCount());
+         Map<String, Object> result = new HashMap<>();
+         result.put("status", 200);
+ 		 result.put("data", adminDashboardService.getAttendCount());
+         return ResponseEntity.ok(result);
     }
     @GetMapping("/dorm-stats")
-    public ResponseEntity<Map<String, Object>> getDormStats() {
+    public ResponseEntity<?> getDormStats() {
         log.info("Called::getDormStats()");
-        return ResponseEntity.ok(adminDashboardService.getDormStats());
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+		result.put("data", adminDashboardService.getDormStats());
+        return ResponseEntity.ok(result);
     }
 
 }
