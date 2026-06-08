@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 import kr.hcnc.service.admin.AdminDashboardService;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,6 +22,15 @@ public class AdminDashboardController {
     private static final Logger log = LoggerFactory.getLogger(AdminDashboardController.class);
     @Resource(name="adminDashboardService")
     private AdminDashboardService adminDashboardService;
+    
+    @GetMapping("/kiosk-log")
+    public ResponseEntity<?> getLogTop10(){
+    	log.info("Called::getLogTop10()");
+        Map<String, Object> result = new HashMap<>();
+		result.put("status", 200);
+		result.put("data", adminDashboardService.getLogTop10());
+		return ResponseEntity.ok(result);
+    }
 
     @GetMapping("/print-count")
     public ResponseEntity<?> getPrintCountByHour() {

@@ -1,6 +1,5 @@
 package kr.hcnc.service.admin;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
@@ -21,6 +20,11 @@ public class AdminDashboardService extends EgovAbstractServiceImpl{
      private static final Logger log = LoggerFactory.getLogger(AdminDashboardController.class);
     @Resource(name="apiClient")
      private ApiClient apiClient;
+    
+    public List<Map<String, Object>> getLogTop10(){
+        log.info("Called::getLogTop10()");
+        return apiClient.get("/api/admin/dashboard/kiosk-log", List.class);
+    }
 
     public List<Map<String, Object>> getPrintCountByHour(){
         log.info("Called::getPrintCountByHour()");
