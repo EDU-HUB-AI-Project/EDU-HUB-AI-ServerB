@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import egovframework.rte.fdl.property.EgovPropertyService;
 import kr.hcnc.service.kiosk.FacilityService;
 import kr.hcnc.vo.FacilityInfoVO;
+import kr.hcnc.vo.TransportVO;
 
 @Controller
 public class FacilityController {
@@ -61,5 +62,31 @@ public class FacilityController {
 	public List<Map<String, Object>> getBusInfo(@RequestParam String dest) {
 		log.info("Called :: /facility/transport/bus.do?dest{}", dest);
 		return facilityService.getBusByDest(dest);
+	}
+
+	@RequestMapping(value = "/facility/transport/schedule.do")
+	@ResponseBody
+	public List<TransportVO> getTransportSchedule(@RequestParam(required = false) String type) {
+		log.info("Called :: /facility/transport/schedule.do?type={}", type);
+		try {
+			List<TransportVO> list = facilityService.selectTransportInfoList();
+			if (list == null) {
+				return new java.util.ArrayList<>();
+			}
+			if (type == null || type.trim().isEmpty()) {
+				return list;
+			}
+			String filter = type.trim().toUpperCase();
+			List<TransportVO> filtered = new java.util.ArrayList<>();
+			for (TransportVO vo : list) {
+				if (vo.getType() != null && vo.getType().equalsIgnoreCase(filter)) {
+					filtered.add(vo);
+				}
+			}
+			return filtered;
+		} catch (Exception e) {
+			log.error("교통 시간표 조회 실패", e);
+			return new java.util.ArrayList<>();
+		}
 	}
 }

@@ -23,7 +23,7 @@
 
         <div id="route-buttons">
             <button class="route-btn" onclick="searchRoute('station')">
-                🚆<span>울산역(KTX)</span>
+                🚆<span>울산역</span>
             </button>
             <button class="route-btn" onclick="searchRoute('taehwa')">
                 🚃<span>태화강역</span>
@@ -34,6 +34,9 @@
             <button class="route-btn" onclick="searchRoute('airport')">
                 ✈️<span>울산공항</span>
             </button>
+            <button class="route-btn" onclick="searchRoute('shuttle')">
+                🚌<span>셔틀버스</span>
+            </button>
         </div>
 
         <div id="bus-result">
@@ -43,14 +46,14 @@
 
         <div id="transport-info">
 
-            <!-- 울산역(KTX) -->
-            <div class="route-card route-card-ktx" data-type="station">
-                <div class="route-card-header blue">🚆 교육원 → 울산역(KTX)</div>
+            <!-- 울산역 -->
+            <div class="route-card route-card-station" data-type="station">
+                <div class="route-card-header blue">🚆 교육원 → 울산역</div>
                 <div class="route-card-body">
                     <div class="stop-label">
                         📍 동서발전 정류장 <strong>11415</strong>
                         <span class="stop-tag cross">길 건너</span>
-                        <div class="stop-sub">도로 건너 맞은편 정류장</div>
+                        <div class="stop-sub">도로 건너 맞은편 정류장 · KTX · SRT</div>
                     </div>
                     <div class="bus-route-row">
                         <span class="bus-badge">급행 5005</span>
@@ -148,12 +151,39 @@
                 </div>
             </div>
 
+            <!-- 셔틀버스 -->
+            <div class="route-card route-card-shuttle" data-type="shuttle">
+                <div class="route-card-header purple">🚌 교육원 셔틀버스</div>
+                <div class="route-card-body">
+                    <div class="shuttle-route-summary" id="shuttle-route-summary">
+                        셔틀버스 운행 시간표를 확인하세요.
+                    </div>
+                </div>
+            </div>
+
         </div>
+
+        <div id="transport-schedule-area"></div>
 
     </div>
 
 </div>
 
+<div id="schedule-modal-overlay">
+    <div id="schedule-modal-box">
+        <div id="schedule-modal-header">
+            <span id="schedule-modal-title"></span>
+            <button type="button" id="schedule-modal-close" aria-label="닫기">✕</button>
+        </div>
+        <div id="schedule-modal-body">
+            <div id="schedule-modal-table-wrap"></div>
+        </div>
+        <div id="schedule-modal-footer">
+            <button type="button" id="schedule-modal-close-btn">닫기</button>
+        </div>
+    </div>
+</div>
+
 <script>
-    initTransportMap();
+    initTransportPage();
 </script>
