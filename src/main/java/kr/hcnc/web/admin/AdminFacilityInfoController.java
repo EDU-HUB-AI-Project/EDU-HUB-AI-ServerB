@@ -16,10 +16,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import kr.hcnc.service.admin.AdminFacilityInfoService;
+import kr.hcnc.service.admin.FacilityImageService;
+import kr.hcnc.vo.FacilityImageUploadVO;
 import kr.hcnc.vo.FacilityInfoVO;
+
+import javax.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/admin/facilityInfo")
@@ -29,6 +35,33 @@ public class AdminFacilityInfoController {
 
 	@Resource(name = "adminFacilityInfoService")
 	private AdminFacilityInfoService adminFacilityInfoService;
+
+	@Resource(name = "facilityImageService")
+	private FacilityImageService facilityImageService;
+
+	// 이미지 업로드
+	@PostMapping("/upload")
+	public ResponseEntity<?> uploadFacilityImage(@RequestParam("file") MultipartFile file, HttpServletRequest request) {
+		log.info("Called :: POST /admin/facilityInfo/upload");
+		Map<String, Object> result = new HashMap<>();
+		try {
+			String imagePath = facilityImageService.saveFacilityImage(file, request.getServletContext());
+			FacilityImageUploadVO data = new FacilityImageUploadVO();
+			data.setImagePath(imagePath);
+			result.put("status", 200);
+			result.put("data", data);
+			return ResponseEntity.ok(result);
+		} catch (IllegalArgumentException ex) {
+			result.put("status", 400);
+			result.put("message", ex.getMessage());
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result);
+		} catch (Exception ex) {
+			log.error("Facility image upload failed", ex);
+			result.put("status", 500);
+			result.put("message", "이미지 업로드에 실패했습니다.");
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(result);
+		}
+	}
 
 	@GetMapping
 	public ResponseEntity<?> getFacilityList() {
@@ -59,20 +92,21 @@ public class AdminFacilityInfoController {
 
 	@PutMapping("/{facilityId}")
 	public ResponseEntity<?> updateFacility(@PathVariable String facilityId,
-			@RequestBody FacilityInfoVO facilityInfoVO) {
+			@RequestBody FacilityInfoVO facilityInfoVO, HttpServletRequest request) {
 		log.info("Called :: PUT /admin/facilityInfo/{}", facilityId);
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", 200);
-		result.put("data", adminFacilityInfoService.updateFacility(facilityId, facilityInfoVO));
+		result.put("data", adminFacilityInfoService.updateFacility(facilityId, facilityInfoVO,
+				request.getServletContext()));
 		return ResponseEntity.ok(result);
 	}
 
 	@DeleteMapping("/{facilityId}")
-	public ResponseEntity<?> deleteFacility(@PathVariable String facilityId) {
+	public ResponseEntity<?> deleteFacility(@PathVariable String facilityId, HttpServletRequest request) {
 		log.info("Called :: DELETE /admin/facilityInfo/{}", facilityId);
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", 200);
-		result.put("data", adminFacilityInfoService.deleteFacility(facilityId));
+		result.put("data", adminFacilityInfoService.deleteFacility(facilityId, request.getServletContext()));
 		return ResponseEntity.ok(result);
 	}
 }
