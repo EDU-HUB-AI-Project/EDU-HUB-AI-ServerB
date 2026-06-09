@@ -38,6 +38,13 @@ public class AdminDormitoryService extends EgovAbstractServiceImpl{
     	);
     }
     
+    public List<DormInOutVO> getDormWaiting(){
+    	log.info("Called::getDormWaiting");
+    	return apiClient.get("/api/admin/dormitories/waiting", 
+    			new ParameterizedTypeReference<List<DormInOutVO>>(){}
+    	);
+    }
+    
     public List<DormInOutVO> getDormIn(){
     	log.info("Called::getDormIn");
     	return apiClient.get("/api/admin/dormitories/check-in", 

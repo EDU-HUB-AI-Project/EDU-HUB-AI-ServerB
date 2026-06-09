@@ -46,6 +46,16 @@ public class AdminDormitoryController {
     	return ResponseEntity.ok(result);
     }
     
+    @GetMapping("/waiting")
+    public ResponseEntity<?> getDormWaiting(){
+    	log.info("Called::getDormWaiting");
+        Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminDormitoryService.getDormWaiting());
+        return ResponseEntity.ok(result);
+    }
+    
+    
     @GetMapping("/check-in")
     public ResponseEntity<?> getDormIn(){
     	log.info("Called::getDormIn");
