@@ -1,5 +1,6 @@
 package kr.hcnc.service.admin;
 
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
@@ -44,5 +45,13 @@ public class AdminDashboardService extends EgovAbstractServiceImpl{
     public Map<String, Object> getDormStats() {
         log.info("Called::getDormStats()");
         return apiClient.get("/api/admin/dashboard/dorm-stats", Map.class);
+    }
+    
+    public Map<String, Object> getEduStats() {
+    	log.info("Called :: getEduStats()");
+    	return apiClient.get(
+    			"/api/admin/dashboard/edu-stats",
+    			new ParameterizedTypeReference<Map<String, Object>>() {}
+    			);
     }
 }

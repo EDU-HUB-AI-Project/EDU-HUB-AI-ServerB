@@ -65,4 +65,12 @@ public class AdminDashboardController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/edu-stats")
+    public ResponseEntity<?> getEduStats() {
+    	log.info("Called :: getEduStats()");
+    	Map<String, Object> result = new HashMap<>();
+    	result.put("status", 200);
+    	result.put("data", adminDashboardService.getEduStats());
+    	return ResponseEntity.ok(result);
+    }
 }
