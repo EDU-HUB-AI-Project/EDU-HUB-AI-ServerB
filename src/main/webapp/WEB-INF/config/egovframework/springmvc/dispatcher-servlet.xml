@@ -34,6 +34,11 @@
         p:prefix="/WEB-INF/jsp/kr/"
         p:suffix=".jsp"/>
 
+    <bean id="multipartResolver"
+        class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="5242880"/>
+    </bean>
+
     <mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
 </beans>

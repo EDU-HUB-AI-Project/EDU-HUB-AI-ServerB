@@ -1,8 +1,5 @@
-var locationMap;
-var locationMarker;
 var activeFacilityId;
-
-var DEFAULT_CENTER = { lat: 35.565283, lng: 129.320682 };
+var mapResizeBound = false;
 
 function initLocationPage() {
     if (!facilityData || facilityData.length === 0) {
@@ -115,40 +112,28 @@ function updateMapSection(facility) {
 
     if (isOuterFacility(facility)) {
         mapSection.style.display = 'block';
-        initLocationMap(facility);
+        renderCampusMap(facility);
+        bindMapResize();
     } else {
         mapSection.style.display = 'none';
-        if (locationMarker) {
-            locationMarker.setMap(null);
-            locationMarker = null;
-        }
+        hideMapMarker();
     }
 }
 
 function formatLocationLabel(facility) {
-    if (!facility) {
+    if (!facility || !facility.location) {
         return '-';
     }
-    if (hasMapCoords(facility)) {
-        var text = facility.location ? String(facility.location).trim() : '';
-        return text || '지도 마커 참조';
-    }
-    if (!facility.location) {
-        return '-';
-    }
-    if (parseLatLng(facility.location)) {
-        return '지도 마커 참조';
-    }
-    return facility.location;
+    return String(facility.location).trim() || '-';
 }
 
 function hasMapCoords(facility) {
     if (!facility) {
         return false;
     }
-    var lat = parseCoord(facility.mapX);
-    var lng = parseCoord(facility.mapY);
-    return lat !== null && lng !== null;
+    var x = parseCoord(facility.mapX);
+    var y = parseCoord(facility.mapY);
+    return x !== null && y !== null;
 }
 
 function parseCoord(value) {
@@ -157,36 +142,6 @@ function parseCoord(value) {
     }
     var num = parseFloat(value);
     return isNaN(num) ? null : num;
-}
-
-function parseLatLng(location) {
-    if (!location) {
-        return null;
-    }
-    var parts = location.split(',');
-    if (parts.length !== 2) {
-        return null;
-    }
-    var lat = parseFloat(parts[0].trim());
-    var lng = parseFloat(parts[1].trim());
-    if (isNaN(lat) || isNaN(lng)) {
-        return null;
-    }
-    return { lat: lat, lng: lng };
-}
-
-function getCoords(facility) {
-    if (hasMapCoords(facility)) {
-        return {
-            lat: parseCoord(facility.mapX),
-            lng: parseCoord(facility.mapY)
-        };
-    }
-    var parsed = parseLatLng(facility.location);
-    if (parsed) {
-        return parsed;
-    }
-    return DEFAULT_CENTER;
 }
 
 function getPhotoPaths(imagePath) {
@@ -226,42 +181,107 @@ function renderPhotos(facility) {
     });
 }
 
-function initLocationMap(facility) {
-    if (typeof kakao === 'undefined' || !kakao.maps) {
+// 캠퍼스 지도 + 픽셀 좌표 마커
+function renderCampusMap(facility) {
+    var img = document.getElementById('location-map-img');
+    var marker = document.getElementById('location-map-marker');
+    if (!img || !marker) {
         return;
     }
 
-    setTimeout(function() {
-        kakao.maps.load(function() {
-            var container = document.getElementById('location-map');
-            if (!container) {
-                return;
-            }
+    if (!hasMapCoords(facility)) {
+        hideMapMarker();
+        return;
+    }
 
-            var coords = getCoords(facility);
-            var center = new kakao.maps.LatLng(coords.lat, coords.lng);
-            var options = { center: center, level: 2 };
+    var mapX = parseCoord(facility.mapX);
+    var mapY = parseCoord(facility.mapY);
 
-            if (!locationMap) {
-                locationMap = new kakao.maps.Map(container, options);
-            } else {
-                locationMap.setCenter(center);
-            }
+    function placeMarker() {
+        if (!img.naturalWidth || !img.naturalHeight) {
+            return;
+        }
+        var pos = imagePointToWrap(mapX, mapY, img);
+        marker.style.left = pos.left + 'px';
+        marker.style.top = pos.top + 'px';
+        marker.classList.remove('is-hidden');
+    }
 
-            if (locationMarker) {
-                locationMarker.setMap(null);
-            }
+    if (img.complete && img.naturalWidth) {
+        placeMarker();
+    } else {
+        img.onload = placeMarker;
+    }
+}
 
-            locationMarker = new kakao.maps.Marker({
-                position: center,
-                title: facility.name || ''
-            });
-            locationMarker.setMap(locationMap);
+function hideMapMarker() {
+    var marker = document.getElementById('location-map-marker');
+    if (marker) {
+        marker.classList.add('is-hidden');
+    }
+}
 
-            locationMap.relayout();
-            locationMap.setCenter(center);
-        });
-    }, 100);
+function getMapDisplayRect(img) {
+    var wrap = img.closest('.location-map-wrap');
+    if (!wrap) {
+        return null;
+    }
+
+    var wrapW = wrap.clientWidth;
+    var wrapH = wrap.clientHeight;
+    var imgW = img.naturalWidth;
+    var imgH = img.naturalHeight;
+    if (!wrapW || !wrapH || !imgW || !imgH) {
+        return null;
+    }
+
+    var ratio = Math.min(wrapW / imgW, wrapH / imgH);
+    var w = Math.max(1, imgW * ratio);
+    var h = Math.max(1, imgH * ratio);
+
+    return {
+        x: (wrapW - w) / 2,
+        y: (wrapH - h) / 2,
+        width: w,
+        height: h
+    };
+}
+
+function imagePointToWrap(mapX, mapY, img) {
+    var display = getMapDisplayRect(img);
+    if (!display) {
+        return { left: 0, top: 0 };
+    }
+
+    var relX = mapX / img.naturalWidth;
+    var relY = mapY / img.naturalHeight;
+
+    return {
+        left: display.x + relX * display.width,
+        top: display.y + relY * display.height
+    };
+}
+
+function bindMapResize() {
+    if (mapResizeBound) {
+        repositionActiveMarker();
+        return;
+    }
+
+    mapResizeBound = true;
+    window.addEventListener('resize', repositionActiveMarker);
+}
+
+function repositionActiveMarker() {
+    if (!activeFacilityId) {
+        return;
+    }
+    var facility = facilityData.find(function(f) {
+        return f.facilityId === activeFacilityId;
+    });
+    if (facility && isOuterFacility(facility)) {
+        renderCampusMap(facility);
+    }
 }
 
 function runLocationAnimations() {
@@ -277,7 +297,7 @@ function runLocationAnimations() {
 
     var infoCards = document.querySelectorAll('.info-cards .info-card');
     var visibleIndex = 0;
-    infoCards.forEach(function(card, index) {
+    infoCards.forEach(function(card) {
         if (card.style.display === 'none') {
             return;
         }

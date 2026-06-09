@@ -28,7 +28,17 @@
             <div id="location-tabs" class="location-tabs" role="tablist"></div>
 
             <div class="map-section" id="location-map-section" style="display:none;">
-                <div id="location-map"></div>
+                <div id="location-campus-map" class="location-campus-map">
+                    <div class="location-map-wrap">
+                        <img id="location-map-img" src="/images/facility-location-map.png" alt="공단 지도">
+                        <div id="location-map-marker-layer" class="location-map-marker-layer">
+                            <div id="location-map-marker" class="location-map-marker is-hidden">
+                                <span class="location-map-marker-ping"></span>
+                                <span class="location-map-marker-dot"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="info-section">
