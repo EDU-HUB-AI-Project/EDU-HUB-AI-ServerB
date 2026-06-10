@@ -23,10 +23,17 @@ public class CafeteriaService extends EgovAbstractServiceImpl{
 	
 	public List<Map<String, Object>> selectCafeteriaList(String date) {
 		log.info("Called :: selectCafeteriaList = {}", date);
-		return apiClient.get(
-				"/api/admin/cafeteria/detail/" + date,
+		
+		String monthDate = date.substring(0, 7);
+		
+		List<Map<String, Object>> allData = apiClient.get(
+				"/api/admin/cafeteria/" + monthDate, 
 				new ParameterizedTypeReference<List<Map<String,Object>>>() {}
 		);
+		
+		return allData.stream()
+				.filter(item -> date.equals(item.get("mealDate")))
+				.collect(java.util.stream.Collectors.toList());
 	}
 
 }

@@ -40,18 +40,7 @@ public class AdminCafeteriaController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping("/detail/{date}")
-    public ResponseEntity<?> getCafeteriaDetail(@PathVariable String date) {
-        log.info("Called :: GET /admin/cafeteria/detail={}", date);
-        
-        Map<String, Object> result = new HashMap<>();
-        result.put("status", 200);
-        result.put("data", adminCafeteriaService.selectCafeteriaDetail(date));
-        
-        return ResponseEntity.ok(result);
-    }
-
-    @PostMapping(produces = "application/json; charset=utf8")
+    @PostMapping(produces = "application/json; charset=utf-8")
     public ResponseEntity<?> insertCafeteria(@RequestBody List<CafeteriaVO> cafeteriaList) {
         log.info("Called :: POST /admin/cafeteria - size: {}", cafeteriaList != null ? cafeteriaList.size() : 0);
         

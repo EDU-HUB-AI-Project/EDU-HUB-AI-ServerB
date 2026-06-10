@@ -18,6 +18,7 @@
 <script src="/resources/badge/badge.js"></script>
 <script src="/resources/guide/guide.js"></script>
 <script src="/resources/classroom/classroom.js"></script>
+<script src="/resources/cafeteria/cafeteria.js"></script>
 <script src="/resources/transport/transport.js"></script>
 <script src="/resources/main/main.js"></script>
 

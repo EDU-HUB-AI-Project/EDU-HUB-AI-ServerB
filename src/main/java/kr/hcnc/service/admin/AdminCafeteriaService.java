@@ -1,7 +1,6 @@
 package kr.hcnc.service.admin;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,15 +22,13 @@ public class AdminCafeteriaService extends EgovAbstractServiceImpl {
     private ApiClient apiClient;
 
     private static final Logger log = LoggerFactory.getLogger(AdminCafeteriaService.class);
-    
-    private static final List<String>MEAL_TYPE_ORDER = Arrays.asList("BREAKFAST", "LUNCH", "DINNER");
 
     @SuppressWarnings("serial")
 	public List<Map<String, Object>> selectCafeteriaSummary(String date) {
         log.info("Called :: selectCafeteriaSummary() date = {}", date);
         
         List<CafeteriaVO> rawList = apiClient.get(
-                "/api/admin/cafeteria?date=" + date,
+                "/api/admin/cafeteria/" + date,
                 new ParameterizedTypeReference<List<CafeteriaVO>>() {}
         );
         
@@ -46,6 +43,7 @@ public class AdminCafeteriaService extends EgovAbstractServiceImpl {
         		put("BREAKFAST", "X");
         		put("LUNCH", "X");
         		put("DINNER", "X");
+        		put("details", new ArrayList<>());
         	}});
         	
         	boolean hasMenu = vo.getMenu() != null
@@ -56,25 +54,17 @@ public class AdminCafeteriaService extends EgovAbstractServiceImpl {
         	if(isOpen && hasMenu) {
         		summaryMap.get(mealDate).put(mealType, "0");
         	}
+        	
+        	Map<String, Object> detail = new LinkedHashMap<>();
+        	detail.put("cafeteriaId", vo.getCafeteriaId());
+        	detail.put("mealType", vo.getMealType());
+        	detail.put("mealDate", vo.getMealDate());
+        	detail.put("menu", vo.getMenu());
+        	detail.put("mealClosed", vo.getMealClosed());
+        	((List<Map<String, Object>>) summaryMap.get(mealDate).get("details")).add(detail);
+        	
         }
         return new ArrayList<>(summaryMap.values());
-    }
-
-    public List<CafeteriaVO> selectCafeteriaDetail(String date) {
-        log.info("Called :: selectCafeteriaDetail() date = {}", date);
-        
-        List<CafeteriaVO> result = apiClient.get(
-                "/api/admin/cafeteria/detail?date=" + date,
-                new ParameterizedTypeReference<List<CafeteriaVO>>() {}
-        );
-        
-        result.sort((a, b) -> {
-        	int orderA = MEAL_TYPE_ORDER.indexOf(a.getMealType());
-        	int orderB = MEAL_TYPE_ORDER.indexOf(b.getMealType());
-        	return Integer.compare(orderA, orderB);
-        });
-        
-        return result;
     }
 
     public Map<String, Object> insertCafeteria(List<CafeteriaVO> cafeteriaList) {
