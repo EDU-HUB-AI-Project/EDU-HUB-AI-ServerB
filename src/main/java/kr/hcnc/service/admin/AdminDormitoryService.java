@@ -59,18 +59,20 @@ public class AdminDormitoryService extends EgovAbstractServiceImpl{
     	);
     }
 
-    public List<DormitoryVO> getDormRoomAssignStatus() {
+    public List<DormitoryVO> getDormRoomAssignStatus(String dormitoryId) {
         log.info("Called::gettDormRoomAssignStatus");
-        return apiClient.get("/api/admin/dormitories/assign-status", 
+        String url = "/api/admin/dormitories/assign-status";
+        if(dormitoryId !=null) url += "?dormitoryId=" + dormitoryId; 
+        return apiClient.get(url, 
             new ParameterizedTypeReference<List<DormitoryVO>>(){}
         );
     }
 
-    public DormitoryVO getDormRoomAssignStatusById(String dormitoryId) {
-        log.info("Called::getDormRoomAssignStatusById");
-        return apiClient.get("/api/admin/dormitories/" + dormitoryId, 
-                    DormitoryVO.class);
-    }
+//    public DormitoryVO getDormRoomAssignStatusById(String dormitoryId) {
+//        log.info("Called::getDormRoomAssignStatusById");
+//        return apiClient.get("/api/admin/dormitories/" + dormitoryId, 
+//                    DormitoryVO.class);
+//    }
     
     public int updateDormId (String studentId, DormAssignVO dormAssignVO) {
     	log.info("Called::updateDormId");

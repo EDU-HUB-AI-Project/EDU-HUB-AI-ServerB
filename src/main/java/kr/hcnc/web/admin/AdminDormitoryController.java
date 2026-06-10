@@ -76,22 +76,22 @@ public class AdminDormitoryController {
     }
     
     @GetMapping("/assign-status")
-    public ResponseEntity<?> getDormRoomAssignStatus(){
+    public ResponseEntity<?> getDormRoomAssignStatus(@RequestParam(required=false) String dormitoryId){
         log.info("Called::gettDormRoomAssignStatus");
         Map<String, Object> result = new HashMap<>();
         result.put("status", 200);
-        result.put("data", adminDormitoryService.getDormRoomAssignStatus());
+        result.put("data", adminDormitoryService.getDormRoomAssignStatus(dormitoryId));
         return ResponseEntity.ok(result);
     }
     
-    @GetMapping("/{dormitoryId}")
-    public ResponseEntity<?> getDormRoomAssignStatusById(@PathVariable String dormitoryId) {
-        log.info("Called :: GET /admin/dormitories/{}", dormitoryId);
-        Map<String, Object> result = new HashMap<>();
-        result.put("status", 200);
-        result.put("data", adminDormitoryService.getDormRoomAssignStatusById(dormitoryId));
-        return ResponseEntity.ok(result);
-    } 
+//    @GetMapping("/{dormitoryId}")
+//    public ResponseEntity<?> getDormRoomAssignStatusById(@PathVariable String dormitoryId) {
+//        log.info("Called :: GET /admin/dormitories/{}", dormitoryId);
+//        Map<String, Object> result = new HashMap<>();
+//        result.put("status", 200);
+//        result.put("data", adminDormitoryService.getDormRoomAssignStatusById(dormitoryId));
+//        return ResponseEntity.ok(result);
+//    } 
     
     @PatchMapping("/{studentId}")
     public ResponseEntity<?> updateDormId(@PathVariable String studentId,
