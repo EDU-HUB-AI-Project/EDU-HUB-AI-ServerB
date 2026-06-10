@@ -92,15 +92,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <c:forEach var="item" items="${cafeteriaList}">
-                        <tr>
-                            <td class="meal-type">
-                                <span class="type-badge">${item.MEAL_TYPE}</span>
-                            </td>
-                            <td class="meal-time">${item.MEAL_TIME}</td>
-                            <td class="meal-menu">${item.MENU}</td>
-                        </tr>
-                    </c:forEach>
                 </tbody>
             </table>
         </div>
@@ -145,4 +136,8 @@
     });
 </script>
 </c:if>
-<script src="/resources/cafeteria/cafeteria.js"></script>
+<script>
+    if (typeof initCafeteria === 'function') {
+        initCafeteria();
+    }
+</script>

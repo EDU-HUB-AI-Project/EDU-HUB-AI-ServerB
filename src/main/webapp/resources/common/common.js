@@ -34,6 +34,9 @@ function loadPage(url) {
             if(url === '/badge.do' && typeof initKeypad === 'function') {
                 initKeypad();
             }
+            if(url === '/facility/cafeteria.do' && typeof initCafeteria === 'function') {
+                initCafeteria();
+            }
         }
     });
     resetIdleTimer();
