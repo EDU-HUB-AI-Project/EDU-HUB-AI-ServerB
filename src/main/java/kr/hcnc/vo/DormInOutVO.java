@@ -6,6 +6,8 @@ public class DormInOutVO {
 	private String dormitoryId;
 	private String dormitoryRoomName;
 	private String dorm;
+	private String checkIn;
+	private String checkOut;
 	
 	public String getStudentId() {
 		return studentId;
@@ -28,7 +30,7 @@ public class DormInOutVO {
 	public String getDormitoryRoomName() {
 		return dormitoryRoomName;
 	}
-	public void setDormitoryRoomname(String dormitoryRoomName) {
+	public void setDormitoryRoomName(String dormitoryRoomName) {
 		this.dormitoryRoomName = dormitoryRoomName;
 	}
 	public String getDorm() {
@@ -36,5 +38,17 @@ public class DormInOutVO {
 	}
 	public void setDorm(String dorm) {
 		this.dorm = dorm;
+	}
+	public String getCheckIn() {
+		return checkIn;
+	}
+	public void setCheckIn(String checkIn) {
+		this.checkIn = checkIn;
+	}
+	public String getCheckOut() {
+		return checkOut;
+	}
+	public void setCheckOut(String checkOut) {
+		this.checkOut = checkOut;
 	}
 }
