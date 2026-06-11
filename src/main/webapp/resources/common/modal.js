@@ -9,7 +9,7 @@ function showModal(message, buttons, onHide, extraClass) {
     _modalOnHide = onHide || null;
 
     buttons.forEach(function(btn) {
-        $('<button class="btn btn-lg">')
+        $('<button type="button" class="modal-btn">')
         .addClass(btn.style)
         .text(btn.label)
         .on('click', function() {
@@ -39,22 +39,21 @@ function hideModal() {
 
 function showAlert(message, callback) {
     showModal(message, [
-        {label: '확인', style: 'btn-primary', callback: callback}
+        {label: '확인', style: 'modal-btn-primary', callback: callback}
     ]);
 }
 
 function showConfirm(message, confirmCb, cancelCb, onHide) {
     showModal(message, [
-        {label: '확인', style: 'btn-primary me-2', callback: confirmCb },
-        {label: '취소', style: 'btn-secondary', callback: cancelCb}
+        {label: '확인', style: 'modal-btn-primary', callback: confirmCb },
+        {label: '취소', style: 'modal-btn-secondary', callback: cancelCb}
     ], onHide);
 }
 
 function showReprint(message, reprintCb, guideCb, homeCb) {
     showModal(message, [
-        { label: '🖨️ 재출력', style: 'btn-primary me-2', callback: reprintCb },
-        { label: '📋 안내 화면', style: 'btn-secondary me-2', callback: guideCb},
-        { label: '🏠 처음으로', style: 'btn-outline-secondary', callback: homeCb}
+        { label: '🖨️ 재출력', style: 'modal-btn-primary', callback: reprintCb },
+        { label: '📋 안내 화면', style: 'modal-btn-secondary', callback: guideCb},
+        { label: '🏠 처음으로', style: 'modal-btn-outline', callback: homeCb}
     ], null, 'modal-reprint');
 }
-

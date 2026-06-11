@@ -1,85 +1,80 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/resources/badge/badge.css">
-
 <div id="badge-container">
+    <div class="contents-wrap">
 
-    <!-- 키패드 입력 섹션 -->
     <div id="step-keypad">
-        <div class="badge-header">
-            <div class="header-badge">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Badge Service</span>
-                <span class="badge-dot"></span>
+        <div class="title-wrap badge-header">
+            <h2><span>생년월일</span>을 <br>입력해주세요.</h2>
+            <div class="guide-box guide-box--sub">
+                <p>생년월일 6자리를 입력하세요 (예: 901225)</p>
             </div>
-            <h1 class="page-title" id="badge-title">명찰 발급</h1>
         </div>
 
-        <div class="keypad-section">
-            <div class="keypad-display-wrapper">
-                <div class="display-glow"></div>
-                <div class="keypad-display">
-                    <div class="display-label" id="keypad-guide">
-                        생년월일 6자리를 입력하세요
-                        <span id="keypad-guide-ex">
-                            예 : 901225 (1990년 12월 25일생)
-                        </span>
-                    </div>
-                    <div id="input-display" class="input-area"></div>
-                    <div class="progress-bar">
-                        <div id="progress-fill" class="progress-fill"></div>
-                        <span id="progress-text" class="progress-text">0 / 6</span>
-                    </div>
-                </div>
+        <div class="input-wrap" id="badge-input-wrap">
+            <div id="birthDisplay" class="birth-display" aria-live="polite">
+                <span class="digit" data-idx="0">0</span>
+                <span class="digit" data-idx="1">0</span>
+                <span class="sep">.</span>
+                <span class="digit" data-idx="2">0</span>
+                <span class="digit" data-idx="3">0</span>
+                <span class="sep">.</span>
+                <span class="digit" data-idx="4">0</span>
+                <span class="digit" data-idx="5">0</span>
             </div>
+            <p id="validMsg" class="validMsg"></p>
+        </div>
 
-            <div class="keypad-grid">
-                <button class="key-btn" onclick="pressKey('1')">1</button>
-                <button class="key-btn" onclick="pressKey('2')">2</button>
-                <button class="key-btn" onclick="pressKey('3')">3</button>
-                <button class="key-btn" onclick="pressKey('4')">4</button>
-                <button class="key-btn" onclick="pressKey('5')">5</button>
-                <button class="key-btn" onclick="pressKey('6')">6</button>
-                <button class="key-btn" onclick="pressKey('7')">7</button>
-                <button class="key-btn" onclick="pressKey('8')">8</button>
-                <button class="key-btn" onclick="pressKey('9')">9</button>
-                <button class="key-btn key-clear" onclick="clearKey()">전체삭제</button>
-                <button class="key-btn" onclick="pressKey('0')">0</button>
-                <button class="key-btn key-delete" onclick="deleteKey()">
-                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M19 12H5"></path>
-                        <polyline points="12 19 5 12 12 5"></polyline>
-                    </svg>
-                </button>
-            </div>
-
-            <button id="submit-btn" class="submit-btn" onclick="confirmKey()" disabled>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="20 6 9 17 4 12"></polyline>
+        <div class="badge-keypad-grid" id="btn-main">
+            <button type="button" class="inputNum" data-num="1">1</button>
+            <button type="button" class="inputNum" data-num="2">2</button>
+            <button type="button" class="inputNum" data-num="3">3</button>
+            <button type="button" class="inputNum" data-num="4">4</button>
+            <button type="button" class="inputNum" data-num="5">5</button>
+            <button type="button" class="inputNum" data-num="6">6</button>
+            <button type="button" class="inputNum" data-num="7">7</button>
+            <button type="button" class="inputNum" data-num="8">8</button>
+            <button type="button" class="inputNum" data-num="9">9</button>
+            <button type="button" id="backspaceBtn" class="btn-backspace" aria-label="한 글자 삭제">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>
                 </svg>
-                <span>조회</span>
+            </button>
+            <button type="button" class="inputNum" data-num="0">0</button>
+            <button type="button" id="resetBtn" class="btn-reset" aria-label="전체 삭제">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>
+                </svg>
             </button>
         </div>
+
+        <button type="button" id="submit-btn" class="btn-search" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path d="m21 21-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+            </svg>
+            <span>조회하기</span>
+        </button>
     </div>
 
     <!-- 결과 확인 섹션 -->
     <div id="step-result">
-        <div class="badge-header">
-            <div class="header-badge">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Verification Result</span>
-                <span class="badge-dot"></span>
+        <div class="title-wrap badge-header" id="result-title-wrap">
+            <h2 id="result-title">본인을 <span>선택</span>해주세요.</h2>
+            <div class="guide-box guide-box--sub" id="result-guide-box">
+                <p>생년월일을 기반으로 조회된 결과입니다.</p>
             </div>
-            <h1 class="page-title">조회 결과</h1>
         </div>
 
-        <!-- 조회 결과 없음 -->
-        <div id="no-result" class="no-result">
-            <p>조회 결과가 없습니다.<br>생년월일을 다시 확인해주세요.</p>
-            <button type="button" class="btn-cancel" onclick="goBackToKeypad()">← 다시 입력</button>
+        <div id="no-result" class="badge-no-result">
+            <h3 class="badge-none-msg">해당하는 교육생이 존재하지 않습니다.<br>생년월일을 확인 해주세요.</h3>
+            <button type="button" class="btn-retry-birth" onclick="goBackToKeypad()">
+                <span>생년월일 다시 입력하기</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 5.5 5.5a5.5 5.5 0 0 1-5.5 5.5H11"/>
+                </svg>
+            </button>
         </div>
 
-        <!-- 결과 테이블 -->
         <div id="result-section" class="result-section">
             <div id="result-guide" class="result-guide">목록에서 본인을 선택해 주세요</div>
             <table id="result-table" class="result-table table table-hover table-bordered">
@@ -99,14 +94,12 @@
             </table>
         </div>
 
-        <!-- 페이징 영역 -->
         <div id="pagination-area">
             <button id="prev-btn" class="page-btn" onclick="prevPage()">← 이전</button>
             <span id="page-info"></span>
             <button id="next-btn" class="page-btn" onclick="nextPage()">다음 →</button>
         </div>
 
-        <!-- 선택 영역 -->
         <div id="selected-section" class="selected-section">
             <div id="selected-area" class="selected-info">
                 <span>선택된 교육생 :</span>
@@ -117,7 +110,6 @@
             </div>
         </div>
 
-        <!-- 하단 액션 버튼 -->
         <div id="result-actions" class="action-buttons">
             <button type="button" id="back-btn" class="btn-cancel" onclick="goBackToKeypad()">← 다시 입력</button>
             <button type="button" id="confirm-btn" class="btn-confirm" onclick="confirmStudent()">
@@ -129,10 +121,11 @@
         </div>
     </div>
 
+    </div>
 </div>
 
 <script>
-    if (typeof initBadgePage === 'function') {
-        initBadgePage();
+    if (typeof initKeypad === 'function') {
+        initKeypad();
     }
 </script>

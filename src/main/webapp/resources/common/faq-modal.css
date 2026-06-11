@@ -1,0 +1,384 @@
+@charset "UTF-8";
+
+/* ── FAQ FAB (플로팅 네비 inner 우측 · 처음으로 pill과 동일) ── */
+#faq-fab.kiosk-faq-fab {
+    flex-shrink: 0;
+    display: none;
+    pointer-events: auto;
+    min-width: 168px;
+    color: #4e5968;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, min-width 0.2s ease, padding 0.2s ease, border-radius 0.2s ease;
+}
+
+#faq-fab.kiosk-faq-fab.is-open {
+    min-width: 72px;
+    width: 72px;
+    padding: 0;
+    border-radius: 50%;
+    color: #4e5968;
+}
+
+#faq-fab.is-open .faq-fab-label {
+    display: none;
+}
+
+.faq-fab-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.faq-fab-icon--dots svg {
+    flex-shrink: 0;
+    color: var(--kiosk-primary);
+}
+
+.faq-fab-label {
+    white-space: nowrap;
+}
+
+.faq-fab-icon--close {
+    display: none;
+}
+
+#faq-fab.is-open .faq-fab-icon--dots {
+    display: none;
+}
+
+#faq-fab.is-open .faq-fab-icon--close {
+    display: inline-flex;
+}
+
+/* ── thinking dots (FAB + 패널 공통) ── */
+.thinking-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--kiosk-primary);
+    animation: faq-dot-bounce 1.2s ease-in-out infinite;
+}
+
+.thinking-dot:nth-child(2) {
+    animation-delay: 0.15s;
+}
+
+.thinking-dot:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+@keyframes faq-dot-bounce {
+    0%, 60%, 100% {
+        transform: translateY(0);
+        opacity: 0.35;
+    }
+    30% {
+        transform: translateY(-6px);
+        opacity: 1;
+    }
+}
+
+/* ── FAQ 바텀시트 ── */
+#faq-modal-overlay {
+    display: flex;
+    align-items: flex-end;
+    position: fixed;
+    inset: 0;
+    z-index: 10002;
+    background: rgba(0, 0, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition: background 0.3s ease, visibility 0.3s ease;
+}
+
+#faq-modal-overlay.open {
+    visibility: visible;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+#faq-modal-box {
+    width: 100%;
+    max-height: 72vh;
+    background: #ffffff;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+#faq-modal-overlay.open #faq-modal-box {
+    transform: translateY(0);
+}
+
+.faq-modal-inner {
+    width: 100%;
+    max-width: var(--kiosk-max-width);
+    margin: 0 auto;
+    padding: 0 var(--subpage-padding-x) 32px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 72vh;
+}
+
+.faq-modal-handle {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0 8px;
+}
+
+.faq-modal-handle::before {
+    content: "";
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    background: #e5e8eb;
+}
+
+.faq-modal-header {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 4px 0 20px;
+}
+
+#faq-modal-title {
+    margin: 0;
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #191f28;
+    letter-spacing: -0.02em;
+}
+
+#faq-modal-close {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #f2f4f6;
+    color: #4e5968;
+    cursor: pointer;
+    transition: background 0.12s ease, transform 0.12s ease;
+}
+
+#faq-modal-close:active {
+    transform: scale(0.94);
+    background: #e5e8eb;
+}
+
+/* thinking 상태 */
+.faq-modal-thinking {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 48px 0 64px;
+}
+
+#faq-modal-overlay.thinking .faq-modal-thinking {
+    display: flex;
+}
+
+#faq-modal-overlay.thinking .faq-modal-body {
+    display: none;
+}
+
+.faq-thinking-bubble {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px 28px;
+    border-radius: 20px 20px 6px 20px;
+    background: #f5f8ff;
+    border: 1px solid #c3d8ff;
+}
+
+.faq-thinking-bubble .thinking-dot {
+    width: 10px;
+    height: 10px;
+}
+
+.faq-thinking-text {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 500;
+    color: #6b7684;
+}
+
+.faq-modal-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    padding-bottom: 8px;
+}
+
+/* ── 아코디언 ── */
+.faq-accordion-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.faq-item {
+    border: 1px solid #e2eaf8;
+    border-radius: 16px;
+    background: #ffffff;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+#faq-modal-overlay.ready .faq-item {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#faq-modal-overlay.ready .faq-item:nth-child(1) { transition-delay: 0.05s; }
+#faq-modal-overlay.ready .faq-item:nth-child(2) { transition-delay: 0.1s; }
+#faq-modal-overlay.ready .faq-item:nth-child(3) { transition-delay: 0.15s; }
+#faq-modal-overlay.ready .faq-item:nth-child(4) { transition-delay: 0.2s; }
+
+.faq-item.is-open {
+    border-color: #c3d8ff;
+    box-shadow: 0 4px 16px rgba(72, 128, 238, 0.1);
+}
+
+.faq-item-q {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    min-height: 72px;
+    padding: 18px 20px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: background 0.12s ease;
+}
+
+.faq-item-q:active {
+    background: #f8fafc;
+}
+
+.faq-q-label {
+    flex-shrink: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--kiosk-primary);
+}
+
+.faq-q-text {
+    flex: 1;
+    font-size: 22px;
+    font-weight: 600;
+    color: #191f28;
+    line-height: 1.4;
+    word-break: keep-all;
+}
+
+.faq-chevron {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #8b95a1;
+    transition: transform 0.2s ease;
+}
+
+.faq-chevron svg {
+    display: block;
+}
+
+.faq-item.is-open .faq-chevron {
+    transform: rotate(180deg);
+    color: var(--kiosk-primary);
+}
+
+.faq-item-a {
+    display: none;
+    border-top: 1px solid #eef2f8;
+    background: #f5f8ff;
+}
+
+.faq-item.is-open .faq-item-a {
+    display: block;
+}
+
+.faq-a-thinking {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 24px 20px;
+}
+
+.faq-item.is-open .faq-a-thinking:not(.is-hidden) {
+    display: flex;
+}
+
+.faq-a-thinking.is-hidden {
+    display: none !important;
+}
+
+.faq-a-content {
+    display: none;
+    gap: 12px;
+    padding: 20px 24px 24px;
+    align-items: flex-start;
+}
+
+.faq-a-content.is-visible {
+    display: flex;
+    animation: faq-answer-in 0.25s ease;
+}
+
+@keyframes faq-answer-in {
+    from {
+        opacity: 0;
+        transform: translateY(-6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.faq-a-label {
+    flex-shrink: 0;
+    font-size: 20px;
+    font-weight: 800;
+    color: #39B54A;
+    margin-top: 2px;
+}
+
+.faq-a-content p {
+    margin: 0;
+    flex: 1;
+    font-size: 20px;
+    font-weight: 400;
+    color: #4e5968;
+    line-height: 1.6;
+    word-break: keep-all;
+}

@@ -1,0 +1,189 @@
+@charset "UTF-8";
+
+/* 시간표 하단 시트 — 토스 스타일 미니멀 */
+
+#schedule-modal-overlay {
+    display: flex;
+    align-items: flex-end;
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    background: rgba(0, 0, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition: background 0.3s ease, visibility 0.3s ease;
+}
+
+#schedule-modal-overlay.open {
+    visibility: visible;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.45);
+}
+
+#schedule-modal-box {
+    width: 100%;
+    max-height: 80vh;
+    background: #ffffff;
+    border-radius: 24px 24px 0 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(100%);
+    transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+#schedule-modal-overlay.open #schedule-modal-box {
+    transform: translateY(0);
+}
+
+.schedule-modal-inner {
+    width: 100%;
+    max-width: var(--kiosk-max-width);
+    margin: 0 auto;
+    padding: 0 var(--subpage-padding-x) 28px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    max-height: 80vh;
+}
+
+.schedule-modal-handle {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    padding: 12px 0 8px;
+}
+
+.schedule-modal-handle::before {
+    content: "";
+    width: 48px;
+    height: 5px;
+    border-radius: 999px;
+    background: #e5e8eb;
+}
+
+.schedule-modal-header-inner {
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 8px 0 20px;
+}
+
+#schedule-modal-title {
+    margin: 0;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: #191f28;
+    letter-spacing: -0.02em;
+}
+
+#schedule-modal-close {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    margin-top: 4px;
+    border: none;
+    border-radius: 50%;
+    background: #f2f4f6;
+    color: #4e5968;
+    cursor: pointer;
+}
+
+#schedule-modal-close:active {
+    background: #e5e8eb;
+}
+
+#schedule-modal-body {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    margin-bottom: 16px;
+}
+
+#schedule-modal-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+#schedule-modal-body .transport-schedule-table {
+    width: 100%;
+    table-layout: fixed;
+    border-collapse: collapse;
+    border-top: 1px solid #f2f4f6;
+}
+
+#schedule-modal-body .transport-schedule-table thead th {
+    padding: 16px 10px;
+    font-size: 22px;
+    font-weight: 600;
+    color: #8b95a1;
+    text-align: left;
+    background: #fafbfc;
+    border-bottom: 1px solid #f2f4f6;
+    word-break: keep-all;
+}
+
+#schedule-modal-body .transport-schedule-table thead th:nth-child(1) { width: 22%; }
+#schedule-modal-body .transport-schedule-table thead th:nth-child(2) { width: 28%; }
+#schedule-modal-body .transport-schedule-table thead th:nth-child(3) { width: 25%; }
+#schedule-modal-body .transport-schedule-table thead th:nth-child(4) { width: 25%; }
+
+#schedule-modal-body .transport-schedule-table tbody td {
+    padding: 22px 10px;
+    font-size: 28px;
+    font-weight: 500;
+    color: #333d4b;
+    border-bottom: 1px solid #f2f4f6;
+    vertical-align: middle;
+    word-break: keep-all;
+}
+
+#schedule-modal-body .transport-schedule-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#schedule-modal-body .transport-schedule-table .col-time,
+#schedule-modal-body .transport-schedule-table .col-arrive {
+    font-weight: 700;
+    color: #191f28;
+}
+
+#schedule-modal-box.schedule-btn-ktx .transport-schedule-table .col-time {
+    color: var(--ktx-primary);
+}
+
+#schedule-modal-box.schedule-btn-srt .transport-schedule-table .col-time {
+    color: var(--srt-primary);
+}
+
+#schedule-modal-footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+#schedule-modal-close-btn {
+    width: 100%;
+    height: 80px;
+    font-size: 30px;
+    font-weight: 600;
+    border-radius: 16px;
+    border: none;
+    background: #f2f4f6;
+    color: #4e5968;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.12s ease, transform 0.12s ease;
+}
+
+#schedule-modal-close-btn:active {
+    transform: scale(0.98);
+    background: #e5e8eb;
+}

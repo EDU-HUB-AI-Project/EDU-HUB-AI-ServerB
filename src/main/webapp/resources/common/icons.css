@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+/* Lucide inline SVG */
+.lucide-icon,
+[data-lucide] svg {
+    display: block;
+    stroke: currentColor;
+    flex-shrink: 0;
+}
+
+.lucide-icon--sm,
+.lucide-icon--sm svg { width: 16px; height: 16px; }
+.lucide-icon--md,
+.lucide-icon--md svg { width: 20px; height: 20px; }
+.lucide-icon--lg,
+.lucide-icon--lg svg { width: 28px; height: 28px; }
+.lucide-icon--xl,
+.lucide-icon--xl svg { width: 36px; height: 36px; }
