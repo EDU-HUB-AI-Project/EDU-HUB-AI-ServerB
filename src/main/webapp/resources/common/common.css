@@ -39,6 +39,10 @@
     --subpage-max-width: 920px;
     --subpage-header-spacing: 48px;
 
+    /* 서브페이지 본문 블록 간격 (타이틀 ↔ 콘텐츠) */
+    --subpage-block-gap: 48px;
+    --kiosk-float-nav-clearance: 148px;
+
     /* 철도 브랜드 컬러 */
     --ktx-primary: #0054a6;
     --ktx-primary-dark: #003f7d;

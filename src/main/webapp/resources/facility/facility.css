@@ -1,11 +1,5 @@
 @charset "UTF-8";
 
-#facility-container {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-}
-
 /* 2x2 메뉴 그리드 */
 .facility-menu-grid {
     display: grid;
@@ -56,30 +50,28 @@
 .facility-menu-text {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: stretch;
     gap: 8px;
     width: 100%;
+    min-width: 0;
 }
 
 .facility-menu-title {
     margin: 0;
+    width: 100%;
+    text-align: center;
     color: var(--text-title);
     font-size: 32px;
     font-weight: 700;
-    line-height: 1.3;
+    line-height: 1.35;
     letter-spacing: -0.02em;
-}
-
-.facility-menu-title > span {
-    color: var(--kiosk-primary);
-    font: inherit;
-    letter-spacing: inherit;
-    vertical-align: baseline;
-    display: inline;
+    word-break: keep-all;
 }
 
 .facility-menu-grid .card-description {
     margin: 0;
+    width: 100%;
+    text-align: center;
     color: var(--text-secondary);
     font-size: 20px;
     font-weight: 500;

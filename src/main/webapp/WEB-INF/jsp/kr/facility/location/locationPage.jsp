@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<link rel="stylesheet" href="/resources/common/components.css">
-<link rel="stylesheet" href="/resources/location/location.css">
 
 <div id="location-container">
     <div class="contents-wrap">
 
         <div class="title-wrap" id="location-title">
             <h2>시설 <span>위치</span></h2>
-            <div class="guide-box guide-box--sub">
+            <!-- <div class="guide-box guide-box--sub">
                 <p>캠퍼스 내 시설 위치를 확인할 수 있습니다.</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="subpage-body">
@@ -52,7 +50,7 @@
                     </div>
 
                     <div class="info-section">
-                        <h3 class="section-title">
+                        <h3 class="location-section-title">
                             <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                                 <circle cx="12" cy="12" r="10"/>
                                 <line x1="12" y1="8" x2="12" y2="12"/>
@@ -60,42 +58,43 @@
                             </svg>
                             <span id="location-info-title">시설 안내</span>
                         </h3>
-                        <div class="info-cards">
-                            <div class="info-card card-gray">
-                                <div class="info-icon icon-box icon-box-md icon-subtle">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                        <circle cx="12" cy="10" r="3"/>
-                                    </svg>
-                                </div>
-                                <div class="info-content">
-                                    <div class="info-label">위치</div>
-                                    <div class="info-value" id="location-text">-</div>
+                        <div class="location-info-panel">
+                            <div class="location-meta-card" id="location-meta-card">
+                                <div class="location-meta-row">
+                                    <div class="location-meta-item">
+                                        <span class="location-meta-icon" aria-hidden="true">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                        </span>
+                                        <span class="location-meta-label">위치</span>
+                                        <span class="location-meta-value" id="location-text">-</span>
+                                    </div>
+                                    <span class="location-meta-sep" id="location-meta-sep" aria-hidden="true">·</span>
+                                    <div class="location-meta-item" id="location-floor-wrap">
+                                        <span class="location-meta-icon" aria-hidden="true">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                                <polyline points="9 22 9 12 15 12 15 22"/>
+                                            </svg>
+                                        </span>
+                                        <span class="location-meta-label">층수</span>
+                                        <span class="location-meta-value" id="location-floor">-</span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="info-card card-gray">
-                                <div class="info-icon icon-box icon-box-md icon-subtle">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                        <polyline points="14 2 14 8 20 8"/>
-                                    </svg>
+                            <div class="location-desc-card">
+                                <div class="location-desc-header">
+                                    <span class="location-desc-icon" aria-hidden="true">
+                                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                            <polyline points="14 2 14 8 20 8"/>
+                                        </svg>
+                                    </span>
+                                    <span class="location-desc-label">안내</span>
                                 </div>
-                                <div class="info-content">
-                                    <div class="info-label">안내</div>
-                                    <div class="info-value" id="location-description">-</div>
-                                </div>
-                            </div>
-                            <div class="info-card card-gray" id="location-floor-section" style="display:none;">
-                                <div class="info-icon icon-box icon-box-md icon-subtle">
-                                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                        <polyline points="9 22 9 12 15 12 15 22"/>
-                                    </svg>
-                                </div>
-                                <div class="info-content">
-                                    <div class="info-label">층수</div>
-                                    <div class="info-value" id="location-floor">-</div>
-                                </div>
+                                <p class="location-desc-text" id="location-description">-</p>
                             </div>
                         </div>
                     </div>

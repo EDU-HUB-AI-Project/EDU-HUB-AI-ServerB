@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/resources/common/components.css">
-<link rel="stylesheet" href="/resources/badge/badge.css">
-
 <div id="badge-container">
     <div class="contents-wrap">
 

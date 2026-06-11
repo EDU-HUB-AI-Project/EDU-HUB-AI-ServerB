@@ -50,8 +50,12 @@ function selectFacilityTab(facilityId) {
     var photoTitle = document.getElementById('photo-title');
 
     if (infoTitle) infoTitle.textContent = facility.name || '시설 안내';
+    var description = (facility.description || '').trim() || '-';
     if (locationText) locationText.textContent = formatLocationLabel(facility);
-    if (descriptionEl) descriptionEl.textContent = facility.description || '-';
+    if (descriptionEl) {
+        descriptionEl.textContent = description;
+        descriptionEl.title = description !== '-' ? description : '';
+    }
     if (photoTitle) photoTitle.textContent = facility.name || '';
 
     renderPhotos(facility);
@@ -82,19 +86,33 @@ function formatFloorLabel(floor) {
 }
 
 function updateFloorSection(facility) {
-    var floorSection = document.getElementById('location-floor-section');
+    var metaCard = document.getElementById('location-meta-card');
+    var floorWrap = document.getElementById('location-floor-wrap');
+    var floorSep = document.getElementById('location-meta-sep');
     var floorEl = document.getElementById('location-floor');
-    if (!floorSection || !floorEl) {
+    if (!metaCard || !floorWrap || !floorEl) {
         return;
     }
 
-    if (isInnerFacility(facility)) {
-        floorSection.style.display = 'flex';
+    var hasFloor = isInnerFacility(facility) && hasFloorValue(facility.floor);
+    metaCard.classList.toggle('has-floor', hasFloor);
+    floorWrap.hidden = !hasFloor;
+    if (floorSep) {
+        floorSep.hidden = !hasFloor;
+    }
+
+    if (hasFloor) {
         floorEl.textContent = formatFloorLabel(facility.floor);
     } else {
-        floorSection.style.display = 'none';
         floorEl.textContent = '-';
     }
+}
+
+function hasFloorValue(floor) {
+    if (floor === null || floor === undefined || floor === '') {
+        return false;
+    }
+    return String(floor).trim().length > 0;
 }
 
 function isOuterFacility(facility) {
@@ -295,20 +313,14 @@ function runLocationAnimations() {
         }, 100);
     }
 
-    var infoCards = document.querySelectorAll('.info-cards .info-card');
-    var visibleIndex = 0;
-    infoCards.forEach(function(card) {
-        if (card.style.display === 'none') {
-            return;
-        }
-        var animIndex = visibleIndex;
-        visibleIndex += 1;
+    var infoCards = document.querySelectorAll('#location-container .location-meta-card, #location-container .location-desc-card');
+    infoCards.forEach(function(card, index) {
         card.style.opacity = '0';
         card.style.transform = 'translateY(20px)';
         setTimeout(function() {
             card.style.opacity = '1';
             card.style.transform = 'translateY(0)';
-        }, 300 + (animIndex * 100));
+        }, 300 + (index * 100));
     });
 
     var galleryItems = document.querySelectorAll('#photo-container .gallery-item');

@@ -9,6 +9,13 @@
 <link rel="stylesheet" href="/resources/common/components.css">
 <link rel="stylesheet" href="/resources/common/header.css">
 <link rel="stylesheet" href="/resources/main/main.css">
+<link rel="stylesheet" href="/resources/badge/badge.css">
+<link rel="stylesheet" href="/resources/facility/facility.css">
+<link rel="stylesheet" href="/resources/cafeteria/cafeteria.css">
+<link rel="stylesheet" href="/resources/location/location.css">
+<link rel="stylesheet" href="/resources/transport/transport.css">
+<link rel="stylesheet" href="/resources/classroom/classroom.css">
+<link rel="stylesheet" href="/resources/guide/guide.css">
 <script src="/resources/lib/jquery-4.0.0.min.js"></script>
 <script src="/resources/common/toast.js"></script>
 <script src="/resources/common/common.js"></script>

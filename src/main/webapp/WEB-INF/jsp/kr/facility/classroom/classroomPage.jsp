@@ -1,16 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<link rel="stylesheet" href="/resources/common/components.css">
-<link rel="stylesheet" href="/resources/classroom/classroom.css">
 
 <div id="classroom-container">
     <div class="contents-wrap">
 
     <div class="title-wrap classroom-header">
         <h2>강의실 <span>안내</span></h2>
-        <div class="guide-box guide-box--sub">
+        <!-- <div class="guide-box guide-box--sub">
             <p>층별 강의실 배치도를 확인할 수 있습니다.</p>
-        </div>
+        </div> -->
     </div>
 
     <div class="classroom-layout">

@@ -2,6 +2,22 @@
 
 /* 서브페이지 공통 (B-refer sub-common.css) */
 
+/* ── 서브페이지 공통: 타이틀+본문 상단 정렬 (화면 전환 시 위치 고정) ── */
+#content-area [id$="-container"] > .contents-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: var(--subpage-block-gap);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#content-area [id$="-container"] > .contents-wrap > .title-wrap {
+    margin-bottom: 0;
+    flex-shrink: 0;
+}
+
 .subpage-header,
 .facility-header,
 .badge-header,
@@ -96,7 +112,7 @@
     display: flex;
     flex-direction: column;
     gap: 32px;
-    margin-top:40px;
+    margin-top: 0;
 }
 
 .title-wrap .guide-box {
@@ -139,15 +155,6 @@
     font-weight: 700;
     line-height: 1.5;
     margin: 0;
-}
-
-.btn-wrap p > span,
-.btn-wrap .card-title span {
-    color: var(--kiosk-primary);
-    font: inherit;
-    letter-spacing: inherit;
-    vertical-align: baseline;
-    display: inline;
 }
 
 .btn-wrap .card-description {

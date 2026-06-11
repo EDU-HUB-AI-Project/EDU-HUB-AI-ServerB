@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<link rel="stylesheet" href="/resources/common/components.css">
-<link rel="stylesheet" href="/resources/facility/facility.css">
-
 <div id="facility-container">
     <div class="contents-wrap">
         <div class="title-wrap">
@@ -13,13 +10,23 @@
         </div>
 
         <div class="btn-wrap btn-wrap--animate facility-menu-grid">
+            <button type="button" class="facility-menu-card" onclick="loadPage('/facility/classroom.do')">
+                <span class="facility-menu-icon" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                </span>
+                <div class="facility-menu-text">
+                    <p class="facility-menu-title">강의실 <span>위치</span></p>
+                    <p class="card-description">강의실 배치도</p>
+                </div>
+            </button>
+
             <button type="button" class="facility-menu-card" onclick="loadPage('/facility/location.do')">
                 <span class="facility-menu-icon" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                 </span>
                 <div class="facility-menu-text">
                     <p class="facility-menu-title">시설 <span>위치</span></p>
-                    <p class="card-description">흡연·편의시설 등<br>위치 안내</p>
+                    <p class="card-description">흡연·편의시설 등</p>
                 </div>
             </button>
 
@@ -29,17 +36,7 @@
                 </span>
                 <div class="facility-menu-text">
                     <p class="facility-menu-title">식당 <span>메뉴</span></p>
-                    <p class="card-description">메뉴 및<br>운영 안내</p>
-                </div>
-            </button>
-
-            <button type="button" class="facility-menu-card" onclick="loadPage('/facility/classroom.do')">
-                <span class="facility-menu-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                </span>
-                <div class="facility-menu-text">
-                    <p class="facility-menu-title">강의실 <span>안내</span></p>
-                    <p class="card-description">교육 과정별<br>강의실 배치도</p>
+                    <p class="card-description">메뉴 및 운영 안내</p>
                 </div>
             </button>
 
@@ -49,7 +46,7 @@
                 </span>
                 <div class="facility-menu-text">
                     <p class="facility-menu-title">교통 <span>안내</span></p>
-                    <p class="card-description">KTX · 시외버스<br>이동 안내</p>
+                    <p class="card-description">교통편 · 셔틀버스 안내</p>
                 </div>
             </button>
         </div>

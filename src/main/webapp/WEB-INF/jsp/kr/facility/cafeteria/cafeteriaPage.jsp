@@ -1,17 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<link rel="stylesheet" href="/resources/common/components.css">
-<link rel="stylesheet" href="/resources/cafeteria/cafeteria.css">
-
 <div id="cafeteria-container">
     <div class="contents-wrap">
 
         <div class="title-wrap" id="cafeteria-title">
             <h2>구내식당 <span>안내</span></h2>
-            <div class="guide-box guide-box--sub">
+            <!-- <div class="guide-box guide-box--sub">
                 <p>식당 위치와 오늘의 메뉴를 확인할 수 있습니다.</p>
-            </div>
+            </div> -->
         </div>
 
         <div class="subpage-body">

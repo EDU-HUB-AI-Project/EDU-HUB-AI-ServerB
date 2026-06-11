@@ -18,9 +18,7 @@
     text-align: center;
 }
 
-.page-headline .highlight {
-    color: var(--kiosk-primary);
-}
+/* page-headline .highlight → layout.css 공통 강조 span */
 
 /* ── Tab Pills (위치·가이드 등 탭 통일) ── */
 .tab-pills {
