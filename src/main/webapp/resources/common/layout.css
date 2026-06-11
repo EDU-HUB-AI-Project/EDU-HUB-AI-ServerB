@@ -48,7 +48,9 @@ body {
 #result-title > span,
 .page-headline .highlight,
 .section-title > span,
-.location-section-title > span {
+.location-section-title > span,
+.cafeteria-section-title > span,
+.classroom-section-title > span:not(.classroom-section-heading) {
     color: var(--kiosk-primary);
     font-size: inherit;
     font-weight: inherit;
