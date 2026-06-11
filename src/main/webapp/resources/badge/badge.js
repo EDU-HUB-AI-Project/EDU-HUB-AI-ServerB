@@ -80,8 +80,21 @@ function updateBirthUI() {
     digitCells.forEach(function(cell) {
         var i = +cell.dataset.idx;
         var ch = inputValue[i];
-        cell.textContent = ch || '0';
-        cell.classList.toggle('empty', !ch);
+        var len = inputValue.length;
+
+        if (!ch) {
+            cell.textContent = '0';
+            cell.classList.add('empty');
+            cell.classList.remove('masked');
+        } else if (len > 1 && i < len - 1) {
+            cell.textContent = '*';
+            cell.classList.remove('empty');
+            cell.classList.add('masked');
+        } else {
+            cell.textContent = ch;
+            cell.classList.remove('empty');
+            cell.classList.remove('masked');
+        }
     });
 
     inputNums.forEach(function(btn) {

@@ -95,6 +95,10 @@
     color: #cbd5db;
 }
 
+.birth-display .digit.masked {
+    color: var(--text-title);
+}
+
 .birth-display .sep {
     display: none;
     font-size: 44px;
