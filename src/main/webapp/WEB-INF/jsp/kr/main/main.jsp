@@ -16,6 +16,7 @@
 <script src="/resources/common/modal.js"></script>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=${kakaoMapKey}&autoload=false&libraries=services"></script>
 
+<script src="/resources/badge/badge-validator.js"></script>
 <script src="/resources/badge/badge.js"></script>
 <script src="/resources/guide/guide.js"></script>
 <script src="/resources/classroom/classroom.js"></script>

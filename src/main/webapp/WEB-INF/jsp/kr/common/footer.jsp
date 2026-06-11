@@ -18,14 +18,15 @@
                 <span>처음으로</span>
             </button>
         </div>
-        <button type="button" id="faq-fab" class="kiosk-faq-fab" onclick="toggleFaqPanel()" aria-label="자주 찾는 질문" aria-expanded="false">
+        <button type="button" id="faq-fab" class="kiosk-faq-fab kiosk-float-btn-pill" onclick="toggleFaqPanel()" aria-label="질문하기" aria-expanded="false">
             <span class="faq-fab-icon faq-fab-icon--dots" aria-hidden="true">
-                <svg class="faq-fab-dots-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                    <circle cx="5" cy="12" r="1.75"/>
-                    <circle cx="12" cy="12" r="1.75"/>
-                    <circle cx="19" cy="12" r="1.75"/>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    <path d="M12 7v2"/>
+                    <path d="M12 13h.01"/>
                 </svg>
             </span>
+            <span class="faq-fab-label">질문하기</span>
             <span class="faq-fab-icon faq-fab-icon--close" aria-hidden="true">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
                     <path d="M18 6L6 18M6 6l12 12"/>

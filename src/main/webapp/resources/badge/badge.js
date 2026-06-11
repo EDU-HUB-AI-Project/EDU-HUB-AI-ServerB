@@ -3,7 +3,7 @@
    ===================== */
 var inputValue      = '';
 var selectedStudent = null;
-var MAX_LENGTH      = 6;        // 생년월일 YYMMDD 6자리
+var MAX_LENGTH      = 6;
 
 var allStudents     = [];
 var currentPage     = 1;
@@ -19,95 +19,97 @@ function initKeypad() {
     allStudents     = [];
     currentPage     = 1;
 
-    updateDisplay();
-    updateProgress();
-    updateSubmitButton();
+    bindKeypadEvents();
+    updateBirthUI();
 }
 
-// 최초 페이지 진입 시 초기화
-document.addEventListener('DOMContentLoaded', function() {
-    initKeypad();
-});
+function bindKeypadEvents() {
+    var keypad = document.getElementById('step-keypad');
+    if (!keypad || keypad.dataset.bound === 'true') return;
+    keypad.dataset.bound = 'true';
 
+    keypad.querySelectorAll('.inputNum').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+            pressKey(btn.getAttribute('data-num'));
+        });
+    });
 
-/* =====================
-   키패드 - 입력
-   ===================== */
-function pressKey(num) {
-    if (inputValue.length < MAX_LENGTH) {
-        inputValue += num;
-        updateDisplay();
-        updateProgress();
-        updateSubmitButton();
+    var backspaceBtn = document.getElementById('backspaceBtn');
+    if (backspaceBtn) {
+        backspaceBtn.addEventListener('click', deleteKey);
     }
+
+    var resetBtn = document.getElementById('resetBtn');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', clearKey);
+    }
+
+    var submitBtn = document.getElementById('submit-btn');
+    if (submitBtn) {
+        submitBtn.addEventListener('click', confirmKey);
+    }
+}
+
+function pressKey(num) {
+    if (!canAppendBirth(inputValue, num)) return;
+    if (inputValue.length >= MAX_LENGTH) return;
+    inputValue += num;
+    updateBirthUI();
 }
 
 function deleteKey() {
-    if (inputValue.length > 0) {
-        inputValue = inputValue.slice(0, -1);
-        updateDisplay();
-        updateProgress();
-        updateSubmitButton();
-    }
+    if (!inputValue.length) return;
+    inputValue = inputValue.slice(0, -1);
+    updateBirthUI();
 }
 
 function clearKey() {
     inputValue = '';
-    updateDisplay();
-    updateProgress();
-    updateSubmitButton();
+    updateBirthUI();
 }
 
+function updateBirthUI() {
+    var birthDisplay = document.getElementById('birthDisplay');
+    var digitCells = document.querySelectorAll('#birthDisplay .digit');
+    var validMsg = document.getElementById('validMsg');
+    var backspaceBtn = document.getElementById('backspaceBtn');
+    var resetBtn = document.getElementById('resetBtn');
+    var submitBtn = document.getElementById('submit-btn');
+    var inputNums = document.querySelectorAll('#btn-main .inputNum');
 
-/* =====================
-   키패드 - 디스플레이
-   ===================== */
-function updateDisplay() {
-    var displayArea = document.getElementById('input-display');
-    if (!displayArea) return;
-    displayArea.innerHTML = '';
-
-    var layout = [0, 1, 'space', 2, 3, 'space', 4, 5];
-    
-    layout.forEach(function(pos) {
-        if(pos === 'space') {
-            var space = document.createElement('div');
-            space.className = 'input-space';
-            displayArea.appendChild(space);
-        }
-        else if(pos < inputValue.length) {
-            var digit = document.createElement('div');
-            digit.className = 'input-digit';
-            digit.textContent = inputValue[pos];
-            
-            if(pos === inputValue.length - 1) {
-                digit.style.animation = 'digitSlideIn 0.2s ease-out';
-            }
-            else {
-                digit.style.animation = 'none';
-            }
-            displayArea.appendChild(digit);
-        }
-        else {
-            var placeholder = document.createElement('div');
-            placeholder.className = 'input-placeholder';
-            displayArea.appendChild(placeholder);
-        }
+    digitCells.forEach(function(cell) {
+        var i = +cell.dataset.idx;
+        var ch = inputValue[i];
+        cell.textContent = ch || '0';
+        cell.classList.toggle('empty', !ch);
     });
-}
 
-function updateProgress() {
-    var fill = document.getElementById('progress-fill');
-    var text = document.getElementById('progress-text');
-    if (!fill || !text) return;
-    fill.style.width = (inputValue.length / MAX_LENGTH * 100) + '%';
-    text.textContent = inputValue.length + ' / ' + MAX_LENGTH;
-}
+    inputNums.forEach(function(btn) {
+        var val = btn.getAttribute('data-num');
+        btn.disabled = !canAppendBirth(inputValue, val);
+    });
 
-function updateSubmitButton() {
-    var btn = document.getElementById('submit-btn');
-    if (!btn) return;
-    btn.disabled = inputValue.length !== MAX_LENGTH;
+    if (backspaceBtn) backspaceBtn.disabled = inputValue.length === 0;
+    if (resetBtn) resetBtn.disabled = inputValue.length === 0;
+    if (submitBtn) submitBtn.disabled = !isValidBirth(inputValue);
+
+    if (!birthDisplay) return;
+    birthDisplay.classList.remove('success-border', 'fail-border');
+
+    if (validMsg) {
+        validMsg.textContent = '';
+        validMsg.classList.remove('fail-msg');
+    }
+
+    if (isValidBirth(inputValue)) {
+        birthDisplay.classList.add('success-border');
+    } else if (inputValue.length === MAX_LENGTH) {
+        birthDisplay.classList.add('fail-border');
+        if (validMsg) {
+            validMsg.textContent = '올바른 생년월일을 입력해주세요.';
+            validMsg.classList.add('fail-msg');
+        }
+    }
 }
 
 
@@ -115,23 +117,10 @@ function updateSubmitButton() {
    키패드 - 확인
    ===================== */
 function confirmKey() {
-    if (inputValue.length !== MAX_LENGTH) {
-        showAlert('생년월일 6자리를 입력해주세요.');
-        return;
-    }
-
-    var month = parseInt(inputValue.substring(2, 4));
-    var day   = parseInt(inputValue.substring(4, 6));
-
-    if (isNaN(month) || month < 1 || month > 12) {
+    if (!isValidBirth(inputValue)) {
         showAlert('올바른 생년월일을 입력해주세요.');
         return;
     }
-    if (isNaN(day) || day < 1 || day > 31) {
-        showAlert('올바른 생년월일을 입력해주세요.');
-        return;
-    }
-
     searchByBirth(inputValue);
 }
 
@@ -156,20 +145,11 @@ function searchByBirth(birth) {
             $('#step-result').css('display', 'flex');
 
             if (data.length === 0) {
-                $('#result-section').hide();
-                $('#no-result').show();
-                $('#result-guide').hide();
+                showEmptyResult();
                 return;
             }
 
-            $('#result-section').show();
-            $('#result-table').show();
-            $('#no-result').hide();
-            $('#result-guide').show();
-
-            allStudents = data;
-            currentPage = 1;
-            renderPage(1);
+            showStudentResult(data);
         },
         error: function() {
             hideLoading();
@@ -178,6 +158,34 @@ function searchByBirth(birth) {
     });
 }
 
+
+function showEmptyResult() {
+    $('#step-result').addClass('is-empty');
+    $('#result-title').html('조회 <span>결과</span>');
+    $('#result-guide-box').hide();
+    $('#no-result').css('display', 'flex');
+    $('#result-section').hide();
+    $('#result-guide').hide();
+    $('#pagination-area').hide();
+    $('#selected-section').hide();
+    $('#result-actions').hide();
+}
+
+function showStudentResult(data) {
+    $('#step-result').removeClass('is-empty');
+    $('#result-title').html('본인을 <span>선택</span>해주세요.');
+    $('#result-guide-box').show();
+    $('#no-result').hide();
+    $('#result-section').show();
+    $('#result-table').show();
+    $('#result-guide').show();
+    $('#result-actions').css('display', 'flex');
+    $('#back-btn').show();
+
+    allStudents = data;
+    currentPage = 1;
+    renderPage(1);
+}
 
 /* =====================
    조회 결과 - 페이지네이션
@@ -198,7 +206,7 @@ function renderPage(page) {
 
         ['STUDENT_NAME', 'BIRTH_DATE', 'EDU_NAME', 'DORMITORY_ID', 'PHONE_NUMBER'].forEach(function(key) {
             var value = row[key] || '';
-            
+
             if(key === 'BIRTH_DATE' && value.length === 6) {
                 value = value.substr(0, 2) + '.' + value.substr(2, 2) + '.' + value.substr(4, 2);
             }
@@ -361,7 +369,7 @@ function moveToGuide(data, autoAssigned) {
         if (autoAssigned) {
             showAlert('생활관이 자동 배정되었습니다.\n배정 호실을 확인해주세요.');
         }
-        
+
         initDormCanvas(data.DORMITORY_ROOM_NAME);
         renderSubject(data.subject);
 

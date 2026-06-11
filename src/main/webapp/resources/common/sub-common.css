@@ -9,7 +9,8 @@
 .classroom-header,
 #cafeteria-title,
 #location-title,
-#transport-title {
+#transport-title,
+#badge-container .badge-header {
     position: relative;
     margin-bottom: var(--subpage-header-spacing);
 }

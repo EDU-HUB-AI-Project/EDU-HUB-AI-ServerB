@@ -1,33 +1,25 @@
 @charset "UTF-8";
 
-/* ── FAQ 말풍선 FAB (플로팅 네비 inner 우측) ── */
+/* ── FAQ FAB (플로팅 네비 inner 우측 · 처음으로 pill과 동일) ── */
 #faq-fab.kiosk-faq-fab {
     flex-shrink: 0;
     display: none;
-    align-items: center;
-    justify-content: center;
     pointer-events: auto;
-    width: 72px;
-    height: 72px;
-    padding: 0;
-    border: 1px solid rgba(195, 216, 255, 0.9);
-    border-radius: 22px 22px 6px 22px;
-    background: rgba(255, 255, 255, 0.96);
-    color: var(--kiosk-primary);
-    cursor: pointer;
-    box-shadow: 0 8px 28px rgba(72, 128, 238, 0.2);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    transition: transform 0.12s ease, box-shadow 0.12s ease, border-radius 0.2s ease;
-}
-
-#faq-fab.kiosk-faq-fab:active {
-    transform: scale(0.94);
+    min-width: 168px;
+    color: #4e5968;
+    transition: transform 0.12s ease, box-shadow 0.12s ease, min-width 0.2s ease, padding 0.2s ease, border-radius 0.2s ease;
 }
 
 #faq-fab.kiosk-faq-fab.is-open {
+    min-width: 72px;
+    width: 72px;
+    padding: 0;
     border-radius: 50%;
     color: #4e5968;
+}
+
+#faq-fab.is-open .faq-fab-label {
+    display: none;
 }
 
 .faq-fab-icon {
@@ -37,8 +29,13 @@
     gap: 5px;
 }
 
-.faq-fab-dots-icon {
-    display: block;
+.faq-fab-icon--dots svg {
+    flex-shrink: 0;
+    color: var(--kiosk-primary);
+}
+
+.faq-fab-label {
+    white-space: nowrap;
 }
 
 .faq-fab-icon--close {
