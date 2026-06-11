@@ -55,7 +55,7 @@ public class AdminDormitoryController {
         return ResponseEntity.ok(result);
     }
     
-    
+ // =================== 삭제 예정 ==========================
     @GetMapping("/check-in")
     public ResponseEntity<?> getDormIn(){
     	log.info("Called::getDormIn");
@@ -64,7 +64,7 @@ public class AdminDormitoryController {
         result.put("data", adminDormitoryService.getDormIn());
         return ResponseEntity.ok(result);
     }
-    
+ // =================== 삭제 예정 ==========================
     // 생활관 퇴실 조회
     @GetMapping("/check-out")
     public ResponseEntity<?> getDormOut(){
@@ -72,6 +72,15 @@ public class AdminDormitoryController {
     	Map<String, Object> result = new HashMap<>();
         result.put("status", 200);
         result.put("data", adminDormitoryService.getDormOut());
+    	return ResponseEntity.ok(result);
+    }
+    
+    @GetMapping("/in-out")
+    public ResponseEntity<?> getDormInOut(){
+    	log.info("Called :: GET /admin/dorm/in-out");
+    	Map<String, Object> result = new HashMap<>();
+        result.put("status", 200);
+        result.put("data", adminDormitoryService.getDormInOut());
     	return ResponseEntity.ok(result);
     }
     

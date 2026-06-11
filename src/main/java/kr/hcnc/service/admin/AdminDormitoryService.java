@@ -44,17 +44,24 @@ public class AdminDormitoryService extends EgovAbstractServiceImpl{
     			new ParameterizedTypeReference<List<DormInOutVO>>(){}
     	);
     }
-    
+ // =================== 삭제 예정 ==========================
     public List<DormInOutVO> getDormIn(){
     	log.info("Called::getDormIn");
     	return apiClient.get("/api/admin/dormitories/check-in", 
     			new ParameterizedTypeReference<List<DormInOutVO>>(){}
     	);
     }
-    
+ // =================== 삭제 예정 ==========================
     public List<DormInOutVO> getDormOut(){
     	log.info("Called::getDormOut");
     	return apiClient.get("/api/admin/dormitories/check-out", 
+    			new ParameterizedTypeReference<List<DormInOutVO>>(){}
+    	);
+    }
+    
+    public List<DormInOutVO> getDormInOut(){
+    	log.info("Called::getDormInOut");
+    	return apiClient.get("/api/admin/dormitories/in-out", 
     			new ParameterizedTypeReference<List<DormInOutVO>>(){}
     	);
     }
