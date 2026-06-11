@@ -1,18 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<link rel="stylesheet" href="/resources/common/components.css">
 <link rel="stylesheet" href="/resources/badge/badge.css">
 
 <div id="badge-container">
+    <div class="contents-wrap">
 
-    <!-- 키패드 입력 섹션 -->
     <div id="step-keypad">
-        <div class="badge-header">
-            <div class="header-badge">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Badge Service</span>
-                <span class="badge-dot"></span>
+        <div class="title-wrap badge-header">
+            <h2>명찰 <span>발급</span></h2>
+            <div class="guide-box guide-box--sub" id="keypad-guide-box">
+                <p id="keypad-guide-text">생년월일 6자리를 입력하세요 (예: 901225)</p>
             </div>
-            <h1 class="page-title" id="badge-title">명찰 발급</h1>
         </div>
 
         <div class="keypad-section">
@@ -64,13 +63,11 @@
 
     <!-- 결과 확인 섹션 -->
     <div id="step-result">
-        <div class="badge-header">
-            <div class="header-badge">
-                <span class="badge-dot"></span>
-                <span class="badge-text">Verification Result</span>
-                <span class="badge-dot"></span>
+        <div class="title-wrap badge-header">
+            <h2>조회 <span>결과</span></h2>
+            <div class="guide-box guide-box--sub">
+                <p>목록에서 본인을 선택해 주세요.</p>
             </div>
-            <h1 class="page-title">조회 결과</h1>
         </div>
 
         <!-- 조회 결과 없음 -->
@@ -129,6 +126,7 @@
         </div>
     </div>
 
+    </div>
 </div>
 
 <script>

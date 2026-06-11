@@ -140,7 +140,9 @@ function updateFloorPlanIcon(floor) {
 
     var planIcon = document.getElementById('plan-icon');
     if (planIcon) {
-        planIcon.className = 'plan-icon plan-icon-' + (floorColorMap[floor] || 'blue');
+        var color = floorColorMap[floor] || 'blue';
+        var colorClass = color === 'indigo' ? 'icon-indigo' : 'icon-' + color;
+        planIcon.className = 'plan-icon icon-box icon-box-lg ' + colorClass;
         var planNumber = planIcon.querySelector('.plan-number');
         if (planNumber) planNumber.textContent = floor;
         planIcon.style.animation = 'none';

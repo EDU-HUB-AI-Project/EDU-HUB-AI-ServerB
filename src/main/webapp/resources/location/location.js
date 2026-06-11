@@ -20,7 +20,7 @@ function renderLocationTabs() {
     facilityData.forEach(function(f) {
         var btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = 'location-tab';
+        btn.className = 'tab-pill';
         btn.setAttribute('data-facility-id', f.facilityId);
         btn.textContent = f.name || f.facilityId;
         btn.addEventListener('click', function() {
@@ -40,7 +40,7 @@ function selectFacilityTab(facilityId) {
 
     activeFacilityId = facilityId;
 
-    document.querySelectorAll('.location-tab').forEach(function(tab) {
+    document.querySelectorAll('#location-tabs .tab-pill').forEach(function(tab) {
         tab.classList.toggle('active', tab.getAttribute('data-facility-id') === facilityId);
     });
 
@@ -176,7 +176,7 @@ function renderPhotos(facility) {
         item.className = 'gallery-item';
         item.innerHTML =
             '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(facility.name) + '" class="gallery-img">' +
-            '<div class="photo-overlay"><span class="photo-label">' + escapeHtml(facility.name) + ' ' + (index + 1) + '</span></div>';
+            // '<div class="photo-overlay"><span class="photo-label">' + escapeHtml(facility.name) + ' ' + (index + 1) + '</span></div>';
         container.appendChild(item);
     });
 }

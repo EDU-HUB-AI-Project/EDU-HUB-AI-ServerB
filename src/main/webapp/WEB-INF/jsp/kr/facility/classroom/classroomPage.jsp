@@ -1,19 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="/resources/common/components.css">
 <link rel="stylesheet" href="/resources/classroom/classroom.css">
 
 <div id="classroom-container">
+    <div class="contents-wrap">
 
-    <div class="classroom-header">
-        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
-        <div class="header-badge">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-            </svg>
-            <span class="badge-text">Classroom Guide</span>
+    <div class="title-wrap classroom-header">
+        <h2>강의실 <span>안내</span></h2>
+        <div class="guide-box guide-box--sub">
+            <p>층별 강의실 배치도를 확인할 수 있습니다.</p>
         </div>
-        <h1 class="page-title">강의실 안내</h1>
     </div>
 
     <div class="classroom-layout">
@@ -51,7 +48,7 @@
 
             <div class="classroom-list-section">
                 <div class="section-header">
-                    <div id="plan-icon" class="plan-icon plan-icon-blue">
+                    <div id="plan-icon" class="plan-icon icon-box icon-box-lg icon-blue">
                         <span class="plan-number">1</span>
                     </div>
                     <h3 class="section-title">강의실 목록</h3>
@@ -60,6 +57,8 @@
             </div>
 
         </div>
+    </div>
+
     </div>
 </div>
 

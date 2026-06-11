@@ -1,0 +1,72 @@
+@charset "UTF-8";
+
+/*
+ * EDU-HUB 공통 UI 컴포넌트
+ * 커스텀 시 이 파일만 수정하면 메인·서브페이지에 일괄 반영됩니다.
+ */
+
+/* 서브페이지 쉘: common.css */
+
+/* ── Page Headline (행동 유도 제목) ── */
+.page-headline {
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 700;
+    color: var(--text-title);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    margin: 0;
+    text-align: center;
+}
+
+.page-headline .highlight {
+    color: var(--kiosk-primary);
+}
+
+/* ── Tab Pills (위치·가이드 등 탭 통일) ── */
+.tab-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    justify-content: center;
+}
+
+.tab-pill {
+    padding: 14px 28px;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    background: #fff;
+    border: 2px solid var(--border-light);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.tab-pill:hover:not(.active) {
+    border-color: #9ca3af;
+    background: #f9fafb;
+}
+
+.tab-pill.active {
+    color: #fff;
+    background: var(--kiosk-primary);
+    border-color: var(--kiosk-primary);
+    box-shadow: 0 4px 16px rgba(72, 128, 238, 0.25);
+}
+
+.tab-pill:active:not(.active) {
+    background: #f1f5f9;
+}
+
+.subpage-body .tab-pills {
+    justify-content: flex-start;
+    width: 100%;
+}
+
+.tab-pills--accent .tab-pill.active {
+    background: var(--kiosk-primary);
+    border-color: var(--kiosk-primary);
+    box-shadow: 0 4px 16px rgba(72, 128, 238, 0.25);
+}
+

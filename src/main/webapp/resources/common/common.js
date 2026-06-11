@@ -1,14 +1,29 @@
-function selectMenu(url) {
+function showFooterIntroMode() {
+    $('body').addClass('intro-active').removeClass('app-active');
+    $('#footer').css('display', 'block');
+    if (typeof showFaqFab === 'function') {
+        showFaqFab();
+    }
+}
+
+function showFooterAppMode() {
+    $('body').removeClass('intro-active').addClass('app-active');
+    $('#footer').css('display', 'block');
+    if (typeof showFaqFab === 'function') {
+        showFaqFab();
+    }
+}
+
+function enterAppFromIntro(url) {
     $('#intro-container').css('opacity', '0');
 
     setTimeout(function() {
         $('#intro-container').hide();
-
         $('#header').css('display', 'flex');
-        $('#footer').css('display', 'flex');
+        showFooterAppMode();
 
         $('#nav-badge, #nav-facility').removeClass('active');
-        if(url == '/badge.do') {
+        if (url === '/badge.do') {
             $('#nav-badge').addClass('active');
         } else {
             $('#nav-facility').addClass('active');
@@ -19,16 +34,80 @@ function selectMenu(url) {
     }, 500);
 }
 
+function selectMenu(url) {
+    enterAppFromIntro(url);
+}
+
+function selectShortcut(url) {
+    enterAppFromIntro(url);
+}
+
+var currentPageUrl = null;
+var footerBackUrl = null;
+
+function updateFooterBack(url) {
+    currentPageUrl = url;
+    footerBackUrl = null;
+
+    if (url && url.indexOf('/facility/') === 0 && url !== '/facility.do') {
+        footerBackUrl = '/facility.do';
+        $('#footer-back-btn').attr('aria-label', '시설 안내로');
+    } else if (url === '/facility.do' || url === '/badge.do' || url === '/guide.do') {
+        footerBackUrl = 'home';
+        $('#footer-back-btn').attr('aria-label', '메인으로');
+    }
+
+    $('#footer-back-btn').toggle(!!footerBackUrl);
+}
+
+function handleFooterBack() {
+    if (footerBackUrl === 'home') {
+        goHome();
+        return;
+    }
+    if (footerBackUrl) {
+        loadPage(footerBackUrl);
+    }
+}
+
+function updateHeaderTime() {
+    var $time = $('#header-time');
+    if (!$time.length) return;
+
+    var now = new Date();
+    var y = now.getFullYear();
+    var mo = String(now.getMonth() + 1).padStart(2, '0');
+    var d = String(now.getDate()).padStart(2, '0');
+    var h = String(now.getHours()).padStart(2, '0');
+    var mi = String(now.getMinutes()).padStart(2, '0');
+    var s = String(now.getSeconds()).padStart(2, '0');
+    var text = y + '.' + mo + '.' + d + ' ' + h + ':' + mi + ':' + s;
+
+    $time.text(text);
+    $time.attr('datetime', now.toISOString());
+}
+
+function startHeaderClock() {
+    updateHeaderTime();
+    setInterval(updateHeaderTime, 1000);
+}
+
 function loadPage(url) {
+    updateFooterBack(url);
+
     $('#nav-badge, #nav-facility').removeClass('active');
-    if(url == '/badge.do') {
+    if (url === '/badge.do') {
         $('#nav-badge').addClass('active');
-    } else if(url == '/facility.do') {
+    } else if (url === '/facility.do' || (url && url.indexOf('/facility/') === 0)) {
         $('#nav-facility').addClass('active');
     }
     $('#content-area').load(url, function(response, status) {
         if(status === 'error') {
-            showAlert('페이지 로드에 실패했습니다.');
+            if (typeof showToast === 'function') {
+                showToast('페이지 로드에 실패했습니다.', 'error');
+            } else {
+                showAlert('페이지 로드에 실패했습니다.');
+            }
         } else {
             // badge.do 로드 완료 후 키패드 초기화
             if(url === '/badge.do' && typeof initKeypad === 'function') {
@@ -36,6 +115,9 @@ function loadPage(url) {
             }
             if(url === '/facility/cafeteria.do' && typeof initCafeteria === 'function') {
                 initCafeteria();
+            }
+            if(url === '/facility/transport.do' && typeof initTransportPage === 'function') {
+                initTransportPage();
             }
         }
     });
@@ -45,12 +127,15 @@ function loadPage(url) {
 function goHome() {
     clearIdleTimer();
     hideModal();
+    if (typeof closeFaqPanel === 'function') {
+        closeFaqPanel();
+    }
     $('#content-area').empty();
     $('#header').hide();
-    $('#footer').hide();
     $('#nav-badge, #nav-facility').removeClass('active');
     $('#intro-container').css('opacity', '1');
     $('#intro-container').show();
+    showFooterIntroMode();
 }
 
 function showLoading() {
@@ -116,11 +201,16 @@ function clearIdleTimer() {
 }
 
 function resetIdleTimer() {
-    startIdleTimer();
+    if ($('body').hasClass('app-active')) {
+        startIdleTimer();
+    }
 }
 
 $(document).ready(function() {
-    // 터치/클릭/키보드 동작 감지
+    startHeaderClock();
+    showFooterIntroMode();
+
+    // 터치/클릭/키보드 동작 감지 (서브페이지 유휴 타이머)
     $(document).on('click touchstart keypress', function() {
         resetIdleTimer();
     });

@@ -1,22 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link rel="stylesheet" href="/resources/common/components.css">
 <link rel="stylesheet" href="/resources/cafeteria/cafeteria.css">
 
 <div id="cafeteria-container">
+    <div class="contents-wrap">
 
-    <!-- 헤더 (원본 id 유지) -->
-    <div id="cafeteria-title">
-        <button type="button" class="back-to-facility" onclick="loadPage('/facility.do')">← 시설 안내</button>
-        <div class="header-badge">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 002-2V2M7 2v20M21 15V2v0a5 5 0 00-5 5v6c0 1.1.9 2 2 2h3z"/>
-            </svg>
-            <span class="badge-text">Cafeteria Guide</span>
+        <div class="title-wrap" id="cafeteria-title">
+            <h2>구내식당 <span>안내</span></h2>
+            <div class="guide-box guide-box--sub">
+                <p>식당 위치와 오늘의 메뉴를 확인할 수 있습니다.</p>
+            </div>
         </div>
-        <h1 class="page-title">구내식당 안내</h1>
-    </div>
 
+        <div class="subpage-body">
     <!-- 사진 갤러리 (신규 추가) -->
     <div class="photo-gallery">
         <div class="gallery-item gallery-main">
@@ -38,7 +36,7 @@
     <!-- 운영 정보 (원본 id 유지) -->
     <div id="cafeteria-info">
         <div class="info-item">
-            <div class="info-icon icon-blue">
+            <div class="info-icon icon-box icon-box-sm icon-soft-blue">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
                     <circle cx="12" cy="10" r="3"/>
@@ -50,7 +48,7 @@
             </div>
         </div>
         <div class="info-item">
-            <div class="info-icon icon-green">
+            <div class="info-icon icon-box icon-box-sm icon-soft-green">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/>
                 </svg>
@@ -61,7 +59,7 @@
             </div>
         </div>
         <div class="info-item">
-            <div class="info-icon icon-purple">
+            <div class="info-icon icon-box icon-box-sm icon-soft-purple">
                 <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"/>
                     <polyline points="12 6 12 12 16 14"/>
@@ -128,6 +126,8 @@
         </ul>
     </div>
 
+        </div>
+    </div>
 </div>
 <c:if test="${serverError}">
 <script>

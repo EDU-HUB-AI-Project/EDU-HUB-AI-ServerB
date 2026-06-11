@@ -24,12 +24,19 @@ var SCHEDULE_BLOCK_TITLE = {
     SHUTTLE: '셔틀버스 운행 시간표'
 };
 
+var SCHEDULE_BTN_SVGS = {
+    train: '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="3" width="16" height="12" rx="2"/><path d="M4 11h16"/><path d="M12 3v8"/><path d="M8 19l-2 2"/><path d="M16 19l2 2"/><path d="M8 15h0"/><path d="M16 15h0"/></svg>',
+    tram: '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M3 12h18"/><path d="M12 4v8"/><path d="M7 20l-2 2"/><path d="M17 20l2 2"/></svg>',
+    bus: '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6v6"/><path d="M15 6v6"/><path d="M2 12h19.6"/><path d="M18 18h3v-6h-3"/><path d="M3 18h3v-6H3"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+    plane: '<svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17.8 19.2L16 11l3.5-3.5C21 6 21.5 4 21 3c-1-.5-3 0-4.5 1.5L13 8 4.8 6.2c-.5-.1-.9.1-1.1.5l-.3.5c-.2.5-.1 1 .3 1.3L9 12l-2 3H4l-1 1 3 2 2 3 1-1v-3l3-2 3.2 5.3c.3.4.8.5 1.3.3l.5-.2c.4-.3.6-.7.5-1.2z"/></svg>'
+};
+
 var SCHEDULE_BTN_META = {
-    KTX: { icon: '🚆', cssClass: 'schedule-btn-ktx', label: 'KTX 시간표' },
-    SRT: { icon: '🚄', cssClass: 'schedule-btn-srt', label: 'SRT 시간표' },
-    TAEHWA: { icon: '🚃', cssClass: 'schedule-btn-taehwa', label: '운행 시간표' },
-    EXBUS: { icon: '🚌', cssClass: 'schedule-btn-terminal', label: '버스 시간표' },
-    AIRPORT: { icon: '✈️', cssClass: 'schedule-btn-airport', label: '공항 시간표' }
+    KTX: { iconSvg: SCHEDULE_BTN_SVGS.train, cssClass: 'schedule-btn-ktx', label: 'KTX 시간표' },
+    SRT: { iconSvg: SCHEDULE_BTN_SVGS.tram, cssClass: 'schedule-btn-srt', label: 'SRT 시간표' },
+    TAEHWA: { iconSvg: SCHEDULE_BTN_SVGS.tram, cssClass: 'schedule-btn-taehwa', label: '운행 시간표' },
+    EXBUS: { iconSvg: SCHEDULE_BTN_SVGS.bus, cssClass: 'schedule-btn-terminal', label: '버스 시간표' },
+    AIRPORT: { iconSvg: SCHEDULE_BTN_SVGS.plane, cssClass: 'schedule-btn-airport', label: '공항 시간표' }
 };
 
 // 버튼 눌러야 시간표 보이는 탭 (셔틀 제외)
@@ -49,16 +56,67 @@ var SCHEDULE_HEADER_CLASSES =
     'schedule-btn-ktx schedule-btn-srt schedule-btn-taehwa schedule-btn-terminal schedule-btn-airport';
 
 function initTransportPage() {
+    if (!$('#transport-container').length) return;
+
+    map = null;
+    ORIGIN = null;
+    DESTINATIONS = null;
+    clearOverlays();
+
     bindScheduleModalEvents();
     loadTransportSchedules(function() {
-        initTransportMap();
+        var defaultBtn = document.querySelector('#transport-container .route-btn[data-route="station"]');
+        searchRoute('station', defaultBtn);
+        initTransportMap(finishTransportRouteView);
     });
 }
 
-// 시간표 팝업 닫기
+function finishTransportRouteView() {
+    if (!currentRouteType) return;
+
+    if (currentRouteType === 'shuttle') {
+        kakao.maps.load(function() {
+            if (map && ORIGIN) {
+                map.setCenter(ORIGIN);
+                map.setLevel(5);
+            }
+            refreshTransportMapLayout();
+        });
+        return;
+    }
+
+    var dest = DESTINATIONS && DESTINATIONS[currentRouteType];
+    if (!dest) {
+        refreshTransportMapLayout();
+        return;
+    }
+
+    updateTransportMapForRoute(currentRouteType);
+    showBusInfo(dest.busDest || currentRouteType, dest);
+    refreshTransportMapLayout();
+}
+
+function refreshTransportMapLayout() {
+    if (!map || !document.getElementById('map-transport')) return;
+
+    kakao.maps.load(function() {
+        if (!map) return;
+        map.relayout();
+        if (ORIGIN && currentRouteType === 'shuttle') {
+            map.setCenter(ORIGIN);
+        }
+    });
+}
+
+var scheduleModalBound = false;
+
+// 시간표 팝업 닫기 (메인 쉘에 모달 고정)
 function bindScheduleModalEvents() {
-    $('#schedule-modal-close, #schedule-modal-close-btn').on('click', closeSchedulePopup);
-    $('#schedule-modal-overlay').on('click', function(e) {
+    if (scheduleModalBound) return;
+    scheduleModalBound = true;
+
+    $(document).on('click', '#schedule-modal-close, #schedule-modal-close-btn', closeSchedulePopup);
+    $(document).on('click', '#schedule-modal-overlay', function(e) {
         if (e.target === this) closeSchedulePopup();
     });
 }
@@ -80,8 +138,19 @@ function loadTransportSchedules(callback) {
     });
 }
 
-function initTransportMap() {
+function initTransportMap(callback) {
+    if (typeof kakao === 'undefined' || !kakao.maps) {
+        if (typeof callback === 'function') callback();
+        return;
+    }
+
     kakao.maps.load(function() {
+        var container = document.getElementById('map-transport');
+        if (!container) {
+            if (typeof callback === 'function') callback();
+            return;
+        }
+
         ORIGIN = new kakao.maps.LatLng(35.564887329486496, 129.32046843019748);
 
         DESTINATIONS = {
@@ -108,7 +177,7 @@ function initTransportMap() {
             }
         };
 
-        var container = document.getElementById('map-transport');
+        container.innerHTML = '';
         map = new kakao.maps.Map(container, { center: ORIGIN, level: 5 });
 
         var originMarker = new kakao.maps.Marker({ position: ORIGIN });
@@ -119,12 +188,19 @@ function initTransportMap() {
         });
         infowindow.open(map, originMarker);
 
-        setTimeout(function() {
+        window.requestAnimationFrame(function() {
             if (map) {
                 map.relayout();
                 map.setCenter(ORIGIN);
             }
-        }, 100);
+            setTimeout(function() {
+                if (map) {
+                    map.relayout();
+                    map.setCenter(ORIGIN);
+                }
+                if (typeof callback === 'function') callback();
+            }, 150);
+        });
     });
 }
 
@@ -136,39 +212,53 @@ function clearOverlays() {
 }
 
 // 상단 탭 선택 — 지도·버스·가는길·시간표 영역 전환
-function searchRoute(type) {
+function searchRoute(type, triggerEl) {
     currentRouteType = type;
     closeSchedulePopup();
 
     $('.route-btn').removeClass('active');
-    $(event.currentTarget).addClass('active');
+    var $btn = triggerEl ? $(triggerEl) : $('.route-btn[data-route="' + type + '"]');
+    $btn.addClass('active');
 
     $('.route-card').removeClass('active');
     $('.route-card[data-type="' + type + '"]').addClass('active');
 
     clearOverlays();
+    renderScheduleTables(type);
 
     if (type === 'shuttle') {
         $('#bus-result').hide();
         kakao.maps.load(function() {
-            if (map) {
+            if (map && ORIGIN) {
                 map.setCenter(ORIGIN);
                 map.setLevel(5);
+                map.relayout();
             }
         });
         updateShuttleSummary();
-        renderScheduleTables(type);
         return;
     }
 
-    var dest = DESTINATIONS[type];
+    var dest = DESTINATIONS && DESTINATIONS[type];
     if (!dest) {
         $('#bus-result').hide();
-        renderScheduleTables(type);
         return;
     }
 
+    updateTransportMapForRoute(type);
+    var busType = dest.busDest || type;
+    showBusInfo(busType, dest);
+}
+
+function updateTransportMapForRoute(type) {
+    var dest = DESTINATIONS && DESTINATIONS[type];
+    if (!dest) return;
+
     kakao.maps.load(function() {
+        if (!map || !document.getElementById('map-transport')) {
+            return;
+        }
+
         var destMarker = new kakao.maps.Marker({ position: dest.coords });
         destMarker.setMap(map);
         markers.push(destMarker);
@@ -183,11 +273,8 @@ function searchRoute(type) {
         bounds.extend(ORIGIN);
         bounds.extend(dest.coords);
         map.setBounds(bounds);
+        map.relayout();
     });
-
-    var busType = dest.busDest || type;
-    showBusInfo(busType, dest);
-    renderScheduleTables(type);
 }
 
 function updateShuttleSummary() {
@@ -201,7 +288,7 @@ function updateShuttleSummary() {
 
     var first = rows[0];
     $summary.html(
-        '📍 <strong>' + escapeHtml(first.departLocation || '-') + '</strong>' +
+        '<strong>' + escapeHtml(first.departLocation || '-') + '</strong>' +
         ' ↔ <strong>' + escapeHtml(first.destination || '-') + '</strong>'
     );
 }
@@ -246,6 +333,7 @@ function renderScheduleTables(routeType) {
     }
 
     $area.hide();
+    $('#transport-schedule-section').hide();
 }
 
 function renderInlineSchedule($area, routeType) {
@@ -266,8 +354,11 @@ function renderInlineSchedule($area, routeType) {
 
     if (hasAny) {
         $area.css('display', 'flex');
+        $('#transport-schedule-section').show();
     } else {
         $area.hide();
+        $('#transport-schedule-section').show();
+        $area.html('<p class="schedule-empty-msg">등록된 운행 시간표가 없습니다.</p>').css('display', 'block');
     }
 }
 
@@ -298,6 +389,7 @@ function renderScheduleButtons($area, routeType) {
 
     html += '</div>';
     $area.html(html).css('display', 'flex');
+    $('#transport-schedule-section').show();
 }
 
 function buildScheduleButtonHtml(config) {
@@ -305,16 +397,17 @@ function buildScheduleButtonHtml(config) {
     if (!meta) return '';
 
     var rows = config.rows || [];
-    var disabled = rows.length ? '' : ' disabled';
-    var clickAttr = rows.length
+    var hasRows = rows.length > 0;
+    var disabled = hasRows ? '' : ' disabled';
+    var clickAttr = hasRows
         ? ' onclick="openSchedulePopup(\'' + config.popupKey + '\')"'
         : '';
+    var emptyHint = hasRows ? '' : '<span class="schedule-btn-empty">(시간표 없음)</span>';
 
     return (
         '<button type="button" class="schedule-open-btn ' + meta.cssClass + '"' +
         disabled + clickAttr + '>' +
-        '<span class="schedule-btn-icon">' + meta.icon + '</span>' +
-        '<span class="schedule-btn-label">' + escapeHtml(meta.label) + '</span>' +
+        '<span class="schedule-btn-label">' + escapeHtml(meta.label) + emptyHint + '</span>' +
         '</button>'
     );
 }
@@ -336,18 +429,28 @@ function getSchedulePopupData(popupKey) {
     };
 }
 
-// 시간표 팝업 열기
+// 시간표 하단 시트 열기
 function openSchedulePopup(popupKey) {
     var popup = getSchedulePopupData(popupKey);
     if (!popup.rows.length) return;
 
     var meta = popup.meta;
-    $('#schedule-modal-title').text('🕐 ' + popup.title);
+    var $overlay = $('#schedule-modal-overlay');
+    var $body = $('#schedule-modal-body');
+
+    $('#schedule-modal-title').text(popup.title);
     $('#schedule-modal-table-wrap').html(buildScheduleTableHtml(popup.rows, true));
-    $('#schedule-modal-header')
+    $('#schedule-modal-box')
         .removeClass(SCHEDULE_HEADER_CLASSES)
         .addClass(meta.cssClass || '');
-    $('#schedule-modal-overlay').addClass('open');
+
+    $body.scrollTop(0);
+    $overlay.removeClass('open');
+    window.requestAnimationFrame(function() {
+        window.requestAnimationFrame(function() {
+            $overlay.addClass('open');
+        });
+    });
 }
 
 function closeSchedulePopup() {
@@ -359,7 +462,7 @@ function buildScheduleBlock(dbType, rows, showArrive) {
 
     return (
         '<div class="schedule-block">' +
-        '<div class="schedule-block-title">🕐 ' + escapeHtml(title) + '</div>' +
+        '<div class="schedule-block-title">' + escapeHtml(title) + '</div>' +
         '<div class="schedule-block-table-wrap">' +
         buildScheduleTableHtml(rows, showArrive) +
         '</div></div>'
@@ -410,7 +513,7 @@ function showBusInfo(type, dest) {
     var $list = $('#bus-card-list');
 
     $result.show();
-    $title.text('🚏 ' + dest.name + ' 방면 버스 안내');
+    $title.text(dest.name + ' 방면 버스');
     $list.html('<p class="loading-text">버스 정보를 불러오는 중...</p>');
 
     fetchBusArrival(type, dest.stopId, function(buses) {
@@ -423,7 +526,7 @@ function showBusInfo(type, dest) {
             $list.append(
                 '<div class="bus-card">' +
                 '<span class="bus-no">' + bus.routeNm + '</span>' +
-                '<span class="bus-stop">📍 ' + bus.stopNm + '(' + bus.remark + ')' + '</span>' +
+                '<span class="bus-stop">' + bus.stopNm + '(' + bus.remark + ')' + '</span>' +
                 '<span class="bus-arrival">' + Math.ceil(parseInt(bus.arrivalTime) / 60) + '분 후 도착' + '(' + bus.prevStopCnt + '개전 정류장)' + '</span>' +
                 '</div>'
             );

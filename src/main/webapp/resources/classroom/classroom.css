@@ -3,34 +3,13 @@
 /* =============================================
    컨테이너
 ============================================= */
-#classroom-container {
-    min-height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #eff6ff 100%);
-    padding: 130px 0 80px;
-    box-sizing: border-box;
-}
+/* padding은 components.css 서브페이지 공통 쉘 */
 
 /* =============================================
    헤더
 ============================================= */
 .classroom-header {
-    text-align: center;
-    margin-bottom: 16px;
-    animation: fadeInDown 1s ease-out;
-    padding: 8px 0;
-    position: relative;
-}
-
-.classroom-header .back-to-facility {
-    left: 70px;
-}
-
-.classroom-header .header-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 24px;
+    padding: 0;
 }
 
 .classroom-header .badge-dot {
@@ -60,9 +39,9 @@
    레이아웃
 ============================================= */
 .classroom-layout {
-    max-width: 1400px;
+    width: 100%;
+    max-width: var(--subpage-max-width);
     margin: 0 auto;
-    padding: 0 32px;
     display: grid;
     grid-template-columns: 1fr 3fr;
     gap: 32px;
@@ -290,21 +269,10 @@
 }
 
 .plan-icon {
-    width: 80px;
-    height: 80px;
     margin: 0 auto 16px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     transition: all 0.5s;
 }
-
-.plan-icon-blue   { background: linear-gradient(135deg, #3b82f6, #6366f1); }
-.plan-icon-indigo { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-.plan-icon-purple { background: linear-gradient(135deg, #8b5cf6, #a855f7); }
-.plan-icon-pink   { background: linear-gradient(135deg, #ec4899, #f472b6); }
 
 .plan-number {
     font-size: 48px;
@@ -471,11 +439,6 @@
 /* =============================================
    애니메이션
 ============================================= */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-50px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
 @keyframes fadeInLeft {
     from { opacity: 0; transform: translateX(-20px); }
     to   { opacity: 1; transform: translateX(0); }

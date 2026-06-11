@@ -1,0 +1,181 @@
+@charset "UTF-8";
+
+/* 서브페이지 공통 (B-refer sub-common.css) */
+
+.subpage-header,
+.facility-header,
+.badge-header,
+.guide-header,
+.classroom-header,
+#cafeteria-title,
+#location-title,
+#transport-title {
+    position: relative;
+    margin-bottom: var(--subpage-header-spacing);
+}
+
+.subpage-header .page-title,
+.facility-header .page-title,
+.badge-header .page-title,
+.guide-header .page-title,
+.classroom-header .page-title,
+#cafeteria-title .page-title,
+#location-title .page-title,
+#transport-title .page-title,
+.title-wrap h2 {
+    color: var(--text-title);
+    font-size: clamp(40px, 5vw, 72px);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.btn-home,
+.home-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-width: 100px;
+    min-height: 56px;
+    padding: 12px 20px;
+    border-radius: 16px;
+    background: #9cabc9;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.1s ease-in-out;
+}
+
+.btn-home:not(:disabled):active,
+.home-btn:active {
+    transform: scale(0.95);
+}
+
+.subpage-back-bar {
+    margin-bottom: 20px;
+}
+
+.subpage-back,
+.subpage-back.back-to-facility,
+.back-to-facility {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 24px;
+    border-radius: 16px;
+    background: #a1afca;
+    color: #fff;
+    font-size: clamp(18px, 2vw, 22px);
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.1s ease-in-out;
+    position: static;
+    transform: none;
+    box-shadow: none;
+    margin-bottom: 0;
+}
+
+.subpage-back:active,
+.subpage-back.back-to-facility:active,
+.back-to-facility:active {
+    transform: scale(0.95);
+}
+
+.subpage-back svg {
+    flex-shrink: 0;
+}
+
+.subpage-body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    margin-top:40px;
+}
+
+.title-wrap .guide-box {
+    margin-top: 24px;
+}
+
+.btn-wrap {
+    display: flex;
+    flex-flow: column;
+    gap: 28px;
+    width: 100%;
+}
+
+.btn-wrap > a,
+.btn-wrap > button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 46px 60px;
+    border-radius: 40px;
+    background: #ffffff;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    transition: transform 0.1s ease-in-out;
+}
+
+.btn-wrap > a:active,
+.btn-wrap > button:not(:disabled):active {
+    transform: scale(0.95);
+}
+
+.btn-wrap p,
+.btn-wrap .card-title {
+    color: var(--text-title);
+    font-size: clamp(24px, 3vw, 48px);
+    font-weight: 700;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.btn-wrap p > span,
+.btn-wrap .card-title span {
+    color: var(--kiosk-primary);
+    font: inherit;
+    letter-spacing: inherit;
+    vertical-align: baseline;
+    display: inline;
+}
+
+.btn-wrap .card-description {
+    color: var(--text-secondary);
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+.btn-wrap a.btn-back,
+.btn-wrap button.btn-back {
+    padding: 30px 60px;
+    background: #a1afca;
+    justify-content: center;
+}
+
+.btn-wrap > a svg,
+.btn-wrap > button svg {
+    flex-shrink: 0;
+    color: var(--kiosk-primary);
+}
+
+.btn-wrap > a > div,
+.btn-wrap > button > div {
+    flex: 1;
+    min-width: 0;
+}
+
+.btn-wrap a.btn-back p,
+.btn-wrap button.btn-back p {
+    color: #fff;
+}

@@ -1,28 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<link rel="stylesheet" href="/resources/common/components.css">
 <link rel="stylesheet" href="/resources/guide/guide.css">
 <script>
     var KIOSK_SITE = '${kioskSite}';
 </script>
 
 <div id="guide-container">
+    <div class="contents-wrap">
 
-    <!-- 헤더 -->
-    <div class="guide-header">
-        <div class="header-badge">
-            <span class="badge-dot"></span>
-            <span class="badge-text">Personal Guide</span>
-            <span class="badge-dot"></span>
-        </div>
-        <h1 class="page-title"><span id="card-name"></span> 교육생 안내</h1>
-        <div class="title-divider"></div>
+    <div class="title-wrap guide-header">
+        <h2><span id="card-name" class="title-name"></span> 교육생 <span>안내</span></h2>
     </div>
 
-    <!-- 카드 영역 -->
-    <div class="guide-cards">
+    <div class="subpage-body">
 
         <!-- 교육 정보 -->
-        <div class="guide-card" style="animation-delay: 0.1s;">
+        <div class="guide-card glass-card" style="animation-delay: 0.1s;">
             <div class="card-icon-wrap icon-blue">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
@@ -46,7 +40,7 @@
         </div>
 
         <!-- 강의실 안내 -->
-        <div class="guide-card card-room" style="animation-delay: 0.2s;">
+        <div class="guide-card glass-card card-room" style="animation-delay: 0.2s;">
             <div class="card-icon-wrap icon-emerald">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -68,7 +62,7 @@
         </div>
 
         <!-- 생활관 안내 -->
-        <div class="guide-card" style="animation-delay: 0.3s;">
+        <div class="guide-card glass-card" style="animation-delay: 0.3s;">
             <div class="card-icon-wrap icon-amber">
                 <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <path d="M3 22V8l9-6 9 6v14"/>
@@ -98,26 +92,17 @@
             <div class="card-bottom-line line-amber"></div>
         </div>
 
-    </div>
+        <div class="contact-notice">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="8" x2="12" y2="12"/>
+                <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <span>정보가 다르다면 <strong>${contactLocation}</strong> (${contactPhone})으로 문의하세요.</span>
+        </div>
 
-    <!-- 잘못된 정보 안내 -->
-    <div class="contact-notice">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="10"/>
-            <line x1="12" y1="8" x2="12" y2="12"/>
-            <line x1="12" y1="16" x2="12.01" y2="16"/>
-        </svg>
-        <span>정보가 다르다면 <strong>${contactLocation}</strong> (${contactPhone})으로 문의하세요.</span>
     </div>
-
-    <!-- 처음으로 버튼 -->
-    <button type="button" id="back-btn" onclick="goHome()">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-            <polyline points="9 22 9 12 15 12 15 22"/>
-        </svg>
-        <span>처음으로</span>
-    </button>
+    </div>
 </div>
 
 

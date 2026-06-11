@@ -57,17 +57,17 @@ function renderSubject(subjects) {
         return;
     }
 
-    var $tabs = $('<div>').addClass('subject-tabs');
+    var $tabs = $('<div>').addClass('tab-pills tab-pills--accent');
     var $panels = $('<div>').addClass('subject-panels');
 
     $.each(subjects, function(i, s) {
         var $btn = $('<button>')
             .attr('type', 'button')
-            .addClass('subject-tab-btn')
+            .addClass('tab-pill')
             .text(s.SUBJECT_NAME)
             .on('click', function() {
-                $('.subject-tab-btn').removeClass('active');
-                $('.subject-panel').removeClass('active');
+                $tabs.find('.tab-pill').removeClass('active');
+                $panels.find('.subject-panel').removeClass('active');
                 $(this).addClass('active');
                 $panels.find('[data-index="' + i + '"]').addClass('active');
                 

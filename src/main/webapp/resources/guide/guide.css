@@ -2,39 +2,25 @@
 
 /* ── 컨테이너 ── */
 #guide-container {
-    width: 100%;
-    height: 100vh;
-    background: linear-gradient(135deg, #f8fafc 0%, #ffffff 50%, #eff6ff 100%);
-    padding: 80px 64px 100px;
-    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     gap: 32px;
+    min-height: calc(100vh - var(--app-header-height));
 }
 
 /* ── 헤더 ── */
 .guide-header {
-    text-align: center;
-    animation: fadeInDown 0.8s ease-out;
     flex-shrink: 0;
 }
 
-.header-badge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 20px;
-}
-
-.badge-dot {
+.guide-header .badge-dot {
     width: 12px;
     height: 12px;
     background: #3b82f6;
     border-radius: 50%;
 }
 
-.badge-text {
+.guide-header .badge-text {
     font-size: 15px;
     letter-spacing: 0.3em;
     color: #64748b;
@@ -42,20 +28,12 @@
     text-transform: uppercase;
 }
 
-.page-title {
+.guide-header .page-title {
     font-size: 60px;
     font-weight: 200;
     color: #0f172a;
     margin: 0 0 20px 0;
-    letter-spacing: -0.02em;
     line-height: 1.2;
-}
-
-.title-divider {
-    width: 120px;
-    height: 2px;
-    background: linear-gradient(to right, transparent, #cbd5e1, transparent);
-    margin: 0 auto;
 }
 
 /* ── 카드 목록 ── */
@@ -69,17 +47,10 @@
 
 /* ── 공통 카드 ── */
 .guide-card {
-    position: relative;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(226, 232, 240, 0.6);
-    border-radius: 24px;
     padding: 36px 44px;
     display: flex;
     align-items: flex-start;
     gap: 28px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
-    overflow: hidden;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
@@ -101,20 +72,8 @@
 
 /* ── 아이콘 박스 ── */
 .card-icon-wrap {
-    width: 80px;
-    height: 80px;
-    border-radius: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
     margin-top: 4px;
 }
-
-.icon-blue    { background: linear-gradient(135deg, #3b82f6, #6366f1); box-shadow: 0 8px 24px rgba(59,130,246,0.25); }
-.icon-emerald { background: linear-gradient(135deg, #10b981, #14b8a6); box-shadow: 0 8px 24px rgba(16,185,129,0.25); }
-.icon-amber   { background: linear-gradient(135deg, #f59e0b, #f97316); box-shadow: 0 8px 24px rgba(245,158,11,0.25); }
 
 /* ── 카드 바디 ── */
 .card-body {
@@ -449,36 +408,9 @@
     word-break: keep-all;
 }
 
-/* ── 과목 2개↑: 탭 ── */
-.subject-tabs {
-    display: flex;
-    gap: 10px;
+/* ── 과목 2개↑: 탭 (스타일은 components.css .tab-pills) ── */
+.tab-pills {
     margin-bottom: 20px;
-    flex-wrap: wrap;
-}
-
-.subject-tab-btn {
-    padding: 12px 28px;
-    font-size: 1.4rem;
-    font-weight: 500;
-    border-radius: 12px;
-    border: 2px solid #e2e8f0;
-    background: white;
-    color: #64748b;
-    cursor: pointer;
-    transition: all 0.2s;
-    white-space: nowrap;
-}
-
-.subject-tab-btn.active {
-    background: linear-gradient(135deg, #10b981, #14b8a6);
-    border-color: transparent;
-    color: white;
-    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
-}
-
-.subject-tab-btn:active:not(.active) {
-    background: #f1f5f9;
 }
 
 /* ── 슬라이드 패널 ── */
@@ -518,12 +450,3 @@
 }
 
 /* ── 애니메이션 ── */
-@keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-30px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(24px); }
-    to   { opacity: 1; transform: translateY(0); }
-}

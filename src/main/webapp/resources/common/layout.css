@@ -1,0 +1,166 @@
+@charset "UTF-8";
+
+/* 키오스크 공통 레이아웃 (B-refer edu-hub 기준) */
+
+body {
+    background: var(--page-gradient);
+    touch-action: manipulation;
+}
+
+.inner,
+.kiosk-inner {
+    width: 100%;
+    max-width: var(--kiosk-max-width);
+    min-height: var(--kiosk-min-height);
+    padding: var(--kiosk-inner-padding-y) var(--kiosk-inner-padding-x);
+    margin: 0 auto;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding-bottom: 200px;
+}
+
+.contents-wrap {
+    width: 100%;
+    max-width: var(--subpage-max-width);
+}
+
+.title-wrap {
+    position: relative;
+    margin-bottom: var(--subpage-header-spacing);
+}
+
+.title-wrap h1,
+.title-wrap h2 {
+    color: var(--text-title);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin: 0;
+}
+
+.title-wrap h1 > span,
+.title-wrap h2 > span,
+.page-headline .highlight {
+    color: var(--kiosk-primary);
+    font: inherit;
+    letter-spacing: inherit;
+    vertical-align: baseline;
+    display: inline;
+}
+
+.title-wrap h1 > span.title-name,
+.title-wrap h2 > span.title-name {
+    color: var(--text-title);
+}
+
+.guide-box {
+    position: relative;
+    margin-top: 40px;
+    padding: 28px 36px;
+    border-radius: 32px;
+    background: #ffffff;
+    border: 2px solid #c3d8ff;
+    box-shadow: 0 4px 16px rgb(0 63 238 / 12%);
+}
+
+.guide-box::before {
+    content: "";
+    position: absolute;
+    left: -14px;
+    top: 36px;
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-right: 16px solid #c3d8ff;
+}
+
+.guide-box::after {
+    content: "";
+    position: absolute;
+    left: -10px;
+    top: 38px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 14px solid #ffffff;
+}
+
+.guide-box > p {
+    color: #657aa2;
+    font-size: clamp(18px, 2vw, 36px);
+    font-weight: 400;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.guide-box.success {
+    background: #fafff9;
+    border-color: #90dc8b;
+}
+
+.guide-box.success > p {
+    color: #3abd30;
+}
+
+.guide-box.success::before {
+    border-right-color: #90dc8b;
+}
+
+.guide-box.success::after {
+    border-right-color: #fafff9;
+}
+
+.guide-box.already {
+    background: #e4e9f1;
+    border-color: #c2c6cc;
+}
+
+.guide-box.already > p {
+    color: #8a8a8a;
+}
+
+.guide-box.already::before {
+    border-right-color: #c2c6cc;
+}
+
+.guide-box.already::after {
+    border-right-color: #e4e9f1;
+}
+
+/* 서브페이지 — 가벼운 설명 (버튼과 구분) */
+.guide-box--sub {
+    margin-top: 20px;
+    padding: 20px 28px;
+    background: #f8faff;
+    border-color: #dce8ff;
+    box-shadow: none;
+}
+
+.guide-box--sub::before,
+.guide-box--sub::after {
+    display: none;
+}
+
+.guide-box--sub > p {
+    font-size: clamp(18px, 2vw, 28px);
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.kiosk-footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding-top: 48px;
+}
+
+.kiosk-footer .brand-logo img {
+    height: 64px;
+    width: auto;
+}
