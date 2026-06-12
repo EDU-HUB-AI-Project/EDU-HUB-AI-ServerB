@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -18,14 +17,13 @@ import javax.annotation.Resource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import kr.hcnc.service.admin.AdminDormitoryService;
 import kr.hcnc.service.admin.AdminKioskLogService;
 import kr.hcnc.vo.KioskLogVO;
 
 @RestController
 @RequestMapping("/admin/kiosk-log")
 public class AdminKioskLogController {
-    private static final Logger log = LoggerFactory.getLogger(AdminDormitoryService.class);
+    private static final Logger log = LoggerFactory.getLogger(AdminKioskLogController.class);
 
     @Resource(name = "adminKioskLogService")
     private AdminKioskLogService adminKioskLogService;

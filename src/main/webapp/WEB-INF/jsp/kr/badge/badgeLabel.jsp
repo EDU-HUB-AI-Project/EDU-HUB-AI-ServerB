@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,7 +117,7 @@
 <body>
 
     <div class="badge-header">
-        <img class="header-logo" src="http://localhost:8080/images/logo.gif" alt="로고">
+        <img class="header-logo" src="/images/logo.gif" alt="로고">
         <div class="header-title">스마트 EDU-HUB</div>
     </div>
 
@@ -132,8 +134,13 @@
         </div>
         <div class="footer-divider"></div>
         <div class="footer-item" style="text-align: right;">
-            <span>강의실</span>
-            <strong>${data.EDU_ROOM_NAME}</strong>
+            <strong>
+                <c:choose>
+                    <c:when test="${empty data.subject}">미배정</c:when>
+                    <c:when test="${fn:length(data.subject) == 1}">${data.subject[0].CLASSROOM_NAME}</c:when>
+                    <c:otherwise>${data.subject[0].CLASSROOM_NAME} 외 ${fn:length(data.subject) - 1}</c:otherwise>
+                </c:choose>
+            </strong>
         </div>
     </div>
 
