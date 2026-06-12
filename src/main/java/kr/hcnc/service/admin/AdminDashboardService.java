@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import egovframework.rte.fdl.cmmn.EgovAbstractServiceImpl;
 import kr.hcnc.util.ApiClient;
-import kr.hcnc.web.admin.AdminDashboardController;
 
 import java.util.List;
 import java.util.Map;
@@ -18,7 +17,7 @@ import org.slf4j.LoggerFactory;
 @Service("adminDashboardService")
 public class AdminDashboardService extends EgovAbstractServiceImpl{
     
-     private static final Logger log = LoggerFactory.getLogger(AdminDashboardController.class);
+     private static final Logger log = LoggerFactory.getLogger(AdminDashboardService.class);
     @Resource(name="apiClient")
      private ApiClient apiClient;
     

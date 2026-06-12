@@ -54,27 +54,7 @@ public class AdminDormitoryController {
         result.put("data", adminDormitoryService.getDormWaiting());
         return ResponseEntity.ok(result);
     }
-    
- // =================== 삭제 예정 ==========================
-    @GetMapping("/check-in")
-    public ResponseEntity<?> getDormIn(){
-    	log.info("Called::getDormIn");
-        Map<String, Object> result = new HashMap<>();
-        result.put("status", 200);
-        result.put("data", adminDormitoryService.getDormIn());
-        return ResponseEntity.ok(result);
-    }
- // =================== 삭제 예정 ==========================
-    // 생활관 퇴실 조회
-    @GetMapping("/check-out")
-    public ResponseEntity<?> getDormOut(){
-    	log.info("Called :: GET /api/admin/dormitories");
-    	Map<String, Object> result = new HashMap<>();
-        result.put("status", 200);
-        result.put("data", adminDormitoryService.getDormOut());
-    	return ResponseEntity.ok(result);
-    }
-    
+        
     @GetMapping("/in-out")
     public ResponseEntity<?> getDormInOut(){
     	log.info("Called :: GET /admin/dorm/in-out");
@@ -92,15 +72,6 @@ public class AdminDormitoryController {
         result.put("data", adminDormitoryService.getDormRoomAssignStatus(dormitoryId));
         return ResponseEntity.ok(result);
     }
-    
-//    @GetMapping("/{dormitoryId}")
-//    public ResponseEntity<?> getDormRoomAssignStatusById(@PathVariable String dormitoryId) {
-//        log.info("Called :: GET /admin/dormitories/{}", dormitoryId);
-//        Map<String, Object> result = new HashMap<>();
-//        result.put("status", 200);
-//        result.put("data", adminDormitoryService.getDormRoomAssignStatusById(dormitoryId));
-//        return ResponseEntity.ok(result);
-//    } 
     
     @PatchMapping("/{studentId}")
     public ResponseEntity<?> updateDormId(@PathVariable String studentId,
