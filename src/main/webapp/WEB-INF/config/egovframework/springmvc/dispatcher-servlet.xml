@@ -23,11 +23,6 @@
     <bean id="localeResolver"
         class="org.springframework.web.servlet.i18n.SessionLocaleResolver"/>
 
-    <bean id="localeChangeInterceptor"
-        class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
-        <property name="paramName" value="language"/>
-    </bean>
-
     <bean class="org.springframework.web.servlet.view.UrlBasedViewResolver"
         p:order="1"
         p:viewClass="org.springframework.web.servlet.view.JstlView"
@@ -38,6 +33,25 @@
         class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
         <property name="maxUploadSize" value="5242880"/>
     </bean>
+
+	<bean id="kioskLogInterceptor" class="kr.hcnc.interceptor.KioskLogInterceptor" />
+		
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/facility/classroom.do"/>
+	        <mvc:mapping path="/facility/transport.do"/>
+	        <mvc:mapping path="/facility/cafeteria.do"/>
+	        <mvc:mapping path="/facility/location.do"/>
+	        <mvc:mapping path="/guide.do"/>
+	        <ref bean="kioskLogInterceptor"/>
+		</mvc:interceptor>
+	    <mvc:interceptor>
+        	<mvc:mapping path="/**"/>
+        	<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            	<property name="paramName" value="language"/>
+        	</bean>
+    	</mvc:interceptor>
+	</mvc:interceptors>
 
     <mvc:annotation-driven/>
 	<mvc:default-servlet-handler/>
