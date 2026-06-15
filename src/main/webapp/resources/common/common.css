@@ -159,10 +159,12 @@ body.intro-active .kiosk-float-nav-start {
     display: none;
 }
 
+body.intro-active .kiosk-float-nav-inner {
+    justify-content: flex-end;
+}
+
 body.intro-active .kiosk-float-nav-brand {
-    display: flex;
-    align-items: center;
-    pointer-events: none;
+    display: none;
 }
 
 body.app-active .kiosk-float-nav-brand {
