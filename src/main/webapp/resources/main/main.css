@@ -1,6 +1,8 @@
 @charset "UTF-8";
 
 #intro-container {
+    --intro-title-size: 108px;
+    --intro-content-max: 980px;
     position: fixed;
     inset: 0;
     z-index: 9999;
@@ -10,9 +12,68 @@
 }
 
 #intro-container .inner {
+    position: relative;
+    z-index: 1;
     min-height: 100%;
     height: 100%;
+    justify-content: flex-start;
+    padding-top: 72px;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.intro-top-bar {
+    width: 100%;
+    max-width: var(--intro-content-max);
+    display: flex;
+    align-items: center;
     justify-content: space-between;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-shrink: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+    animation: intro-brand-in 0.7s ease 0.15s forwards;
+}
+
+.intro-brand {
+    flex-shrink: 0;
+}
+
+.intro-brand img {
+    height: 60px;
+    width: auto;
+    display: block;
+}
+
+.intro-time-wrap {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.intro-time-icon {
+    flex-shrink: 0;
+    color: var(--kiosk-primary);
+    width: 24px;
+    height: 24px;
+}
+
+.intro-time {
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: #333d4b;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+@keyframes intro-brand-in {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* 메인만 세로 중앙 (서브페이지는 sub-common 상단 정렬) */
@@ -22,8 +83,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: stretch;
-    gap: 72px;
+    gap: 80px;
     width: 100%;
+    max-width: var(--intro-content-max);
     min-height: 0;
     box-sizing: border-box;
 }
@@ -34,23 +96,69 @@
 }
 
 #intro-container .intro-title-wrap h2 {
-    font-size: 96px;
+    font-size: var(--intro-title-size);
     color: var(--text-title);
     line-height: 1.15;
+}
+
+.intro-title-rotator {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-height: calc(var(--intro-title-size) * 1.15 * 3);
+}
+
+#intro-container .intro-title-wrap h2 > .intro-title-row {
+    display: block;
+    position: relative;
+    height: calc(var(--intro-title-size) * 1.15);
+    overflow: hidden;
+    color: var(--text-title);
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+}
+
+.intro-title-text {
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateY(55%);
+    transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+                transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    will-change: opacity, transform;
+}
+
+.intro-title-text--visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.intro-title-text--exit {
+    opacity: 0;
+    transform: translateY(-45%);
+}
+
+.intro-title-highlight {
+    color: var(--kiosk-primary);
 }
 
 .main-contents-container {
     flex: 0 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 52px;
     margin-top: 0;
     padding: 0;
 }
 
 .btn-wrap-main {
     flex-flow: row;
-    gap: 32px;
+    gap: 36px;
 }
 
 .btn-wrap-main > button {
@@ -58,10 +166,10 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
-    min-height: 380px;
-    padding: 56px 32px;
-    border-radius: 40px;
+    gap: 28px;
+    min-height: 420px;
+    padding: 60px 36px;
+    border-radius: 44px;
     box-shadow: none;
     opacity: 0;
     transform: translateY(20px);
@@ -87,47 +195,97 @@
 
 .btn-wrap-main .btn-label {
     color: #fff;
-    font-size: 48px;
+    font-size: 54px;
     font-weight: 700;
     line-height: 1.3;
     margin: 0;
 }
 
 .btn-wrap-main .btn-icon svg {
-    width: 88px;
-    height: 88px;
+    width: 100px;
+    height: 100px;
     stroke: #fff;
 }
 
 .btn-quick-wrap {
     display: flex;
     flex-wrap: nowrap;
-    gap: 16px;
+    gap: 18px;
     width: 100%;
 }
 
 .btn-quick {
     flex: 1;
     min-width: 0;
+    min-height: 104px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 32px 16px;
-    border-radius: 100px;
-    background: #ffffff;
-    color: var(--kiosk-primary);
-    border: 2px solid var(--kiosk-primary);
-    font-size: 32px;
+    padding: 36px 18px;
+    border-radius: 20px;
+    background: #d8e4f6;
+    color: #4e5968;
+    border: none;
+    font-size: 36px;
     font-weight: 600;
     line-height: 1.2;
     cursor: pointer;
     font-family: inherit;
-    transition: transform 0.1s ease, opacity 0.5s ease;
+    transition: background 0.12s ease, transform 0.1s ease, opacity 0.5s ease;
     opacity: 0;
     transform: translateY(12px);
     white-space: nowrap;
 }
 
 .btn-quick:active {
+    background: #e8ecf2;
     transform: scale(0.95);
+}
+
+#intro-container.intro-animated .btn-wrap-main > button {
+    animation: intro-btn-float 5.5s ease-in-out infinite;
+}
+
+#intro-container.intro-animated .btn-wrap-main > button:nth-child(2) {
+    animation-delay: -2.75s;
+}
+
+#intro-container.intro-animated .btn-quick {
+    animation: intro-quick-float 6s ease-in-out infinite;
+}
+
+#intro-container.intro-animated .btn-quick:nth-child(2) { animation-delay: -1.5s; }
+#intro-container.intro-animated .btn-quick:nth-child(3) { animation-delay: -3s; }
+#intro-container.intro-animated .btn-quick:nth-child(4) { animation-delay: -4.5s; }
+
+@keyframes intro-btn-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+@keyframes intro-quick-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+#intro-container.intro-animated .btn-wrap-main > button:active,
+#intro-container.intro-animated .btn-quick:active {
+    animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .intro-top-bar {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+
+    .intro-title-text {
+        transition: none;
+    }
+
+    #intro-container.intro-animated .btn-wrap-main > button,
+    #intro-container.intro-animated .btn-quick {
+        animation: none;
+    }
 }

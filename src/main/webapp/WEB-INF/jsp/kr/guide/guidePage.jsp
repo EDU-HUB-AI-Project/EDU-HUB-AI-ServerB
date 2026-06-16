@@ -13,41 +13,72 @@
 
     <div class="subpage-body">
 
-        <!-- 교육 정보 -->
-        <div class="guide-card glass-card" style="animation-delay: 0.1s;">
-            <div class="card-icon-wrap icon-blue">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
-                </svg>
-            </div>
-            <div class="card-body">
-                <div class="card-section-label label-blue">교육 정보</div>
-                <div class="info-row">
-                    <div class="info-block">
-                        <div class="info-label">교육과정</div>
-                        <div class="info-value" id="card-edu-name"></div>
-                    </div>
-                    <div class="info-block">
-                        <div class="info-label">교육기간</div>
-                        <div class="info-value" id="card-period"></div>
+        <div class="guide-compact-row">
+            <!-- 교육 정보 -->
+            <div class="guide-card">
+                <div class="card-body">
+                    <h3 class="guide-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                        교육 정보
+                    </h3>
+                    <div class="info-row">
+                        <div class="info-block">
+                            <div class="info-label">교육과정</div>
+                            <div class="info-value" id="card-edu-name"></div>
+                        </div>
+                        <div class="info-block">
+                            <div class="info-label">교육기간</div>
+                            <div class="info-value" id="card-period"></div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="card-bottom-line line-blue"></div>
+
+            <!-- 생활관 안내 -->
+            <div class="guide-card">
+                <div class="card-body">
+                    <h3 class="guide-section-title">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M10 12h4"/>
+                            <path d="M10 8h4"/>
+                            <path d="M14 21v-3a2 2 0 0 0-4 0v3"/>
+                            <path d="M6 10H4a2 2 0 0 0-2 2v9a1 1 0 0 0 1 1h18a1 1 0 0 0 1-1v-9a2 2 0 0 0-2-2h-2"/>
+                            <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16"/>
+                        </svg>
+                        생활관 안내
+                    </h3>
+                    <div class="info-row">
+                        <div class="info-block">
+                            <div class="info-label">배정 호실</div>
+                            <div class="info-value" id="card-dorm"></div>
+                        </div>
+                        <div id="dorm-map-btn-wrap" style="display:none;">
+                            <button type="button" id="dorm-map-btn" onclick="openDormModal()">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/>
+                                    <path d="M12 12l9-4.5M12 12v9M12 12L3 7.5"/>
+                                </svg>
+                                도면 보기
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- 강의실 안내 -->
-        <div class="guide-card glass-card card-room" style="animation-delay: 0.2s;">
-            <div class="card-icon-wrap icon-emerald">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
-            </div>
+        <div class="guide-card card-room">
             <div class="card-body">
-                <div class="card-section-label label-emerald">강의실 안내</div>
-                <!-- 과목 수에 따라 동적으로 렌더링 -->
+                <h3 class="guide-section-title">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                        <polyline points="9 22 9 12 15 12 15 22"/>
+                    </svg>
+                    강의실 안내
+                </h3>
                 <div id="subject-list-area"></div>
                 <div id="classroom-map-area" style="display:none;">
                     <div id="svg-container"></div>
@@ -56,42 +87,10 @@
                     해당 강의실 도면 정보가 없습니다.
                 </div>
             </div>
-            <div class="card-bottom-line line-emerald"></div>
-        </div>
-
-        <!-- 생활관 안내 -->
-        <div class="guide-card glass-card" style="animation-delay: 0.3s;">
-            <div class="card-icon-wrap icon-amber">
-                <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M3 22V8l9-6 9 6v14"/>
-                    <rect x="9" y="14" width="6" height="8"/>
-                    <path d="M9 10h.01M15 10h.01"/>
-                </svg>
-            </div>
-            <div class="card-body">
-                <div class="card-section-label label-amber">생활관 안내</div>
-                <div class="info-row" style="align-items: center;">
-                    <div class="info-block">
-                        <div class="info-label">배정 호실</div>
-                        <div class="info-value" id="card-dorm"></div>
-                    </div>
-                    <div id="dorm-map-btn-wrap" style="display:none;">
-                        <button type="button" id="dorm-map-btn" onclick="openDormModal()">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
-                                <line x1="9" y1="3" x2="9" y2="18"/>
-                                <line x1="15" y1="6" x2="15" y2="21"/>
-                            </svg>
-                            도면 보기
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="card-bottom-line line-amber"></div>
         </div>
 
         <div class="contact-notice">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <circle cx="12" cy="12" r="10"/>
                 <line x1="12" y1="8" x2="12" y2="12"/>
                 <line x1="12" y1="16" x2="12.01" y2="16"/>

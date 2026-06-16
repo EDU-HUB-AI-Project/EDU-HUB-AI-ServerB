@@ -65,8 +65,8 @@ function initTransportPage() {
 
     bindScheduleModalEvents();
     loadTransportSchedules(function() {
-        var defaultBtn = document.querySelector('#transport-container .route-btn[data-route="station"]');
-        searchRoute('station', defaultBtn);
+        var defaultBtn = document.querySelector('#transport-container .route-btn[data-route="shuttle"]');
+        searchRoute('shuttle', defaultBtn);
         initTransportMap(finishTransportRouteView);
     });
 }

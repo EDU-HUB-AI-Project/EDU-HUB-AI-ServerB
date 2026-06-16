@@ -119,7 +119,12 @@ function loadClassroomSvg(imagePath, imageId) {
             if(svgEl) {
                 $(svgEl).removeAttr('width')
                     .removeAttr('height')
-                    .css({width : '100%', height: 'auto'});
+                    .css({
+                        maxWidth: '100%',
+                        maxHeight: '100%',
+                        width: 'auto',
+                        height: 'auto'
+                    });
             }
 
             var target = $container.find('#' + imageId)[0];
@@ -127,7 +132,7 @@ function loadClassroomSvg(imagePath, imageId) {
             if(target) {
                 $(target).addClass('room-highlight');
                 $fallback.hide();
-                $mapArea.show();
+                $mapArea.css('display', 'flex');
             }
             else {
                 $mapArea.hide();

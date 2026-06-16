@@ -367,7 +367,7 @@ function fetchDetailAndReprint(studentId, autoAssigned) {
    가이드 화면 이동
    ===================== */
 function moveToGuide(data, autoAssigned) {
-    $('#content-area').load('/guide.do', function() {
+    $('#content-area').addClass('content-area--guide').load('/guide.do', function() {
         $('#card-name').text(data.STUDENT_NAME);
         $('#card-edu-name').text(data.EDU_NAME);
         $('#card-period').text(formatYYMMDD(data.START_DATE) + ' ~ ' + formatYYMMDD(data.END_DATE));
@@ -400,7 +400,7 @@ function formatYYMMDD(s) {
    키패드로 돌아가기
    ===================== */
 function goBackToKeypad() {
-    $('#content-area').load('/badge.do', function() {
+    $('#content-area').removeClass('content-area--guide').load('/badge.do', function() {
         initKeypad();
     });
 }

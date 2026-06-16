@@ -15,6 +15,9 @@ function showFooterAppMode() {
 }
 
 function enterAppFromIntro(url) {
+    if (typeof window.stopIntroAnimations === 'function') {
+        window.stopIntroAnimations();
+    }
     $('#intro-container').css('opacity', '0');
 
     setTimeout(function() {
@@ -71,7 +74,7 @@ function handleFooterBack() {
 }
 
 function updateHeaderTime() {
-    var $time = $('#header-time');
+    var $time = $('#header-time, #intro-time');
     if (!$time.length) return;
 
     var now = new Date();
@@ -101,6 +104,7 @@ function loadPage(url) {
     } else if (url === '/facility.do' || (url && url.indexOf('/facility/') === 0)) {
         $('#nav-facility').addClass('active');
     }
+    $('#content-area').toggleClass('content-area--guide', url === '/guide.do');
     $('#content-area').load(url, function(response, status) {
         if(status === 'error') {
             if (typeof showToast === 'function') {
@@ -130,12 +134,15 @@ function goHome() {
     if (typeof closeFaqPanel === 'function') {
         closeFaqPanel();
     }
-    $('#content-area').empty();
+    $('#content-area').removeClass('content-area--guide').empty();
     $('#header').hide();
     $('#nav-badge, #nav-facility').removeClass('active');
     $('#intro-container').css('opacity', '1');
     $('#intro-container').show();
     showFooterIntroMode();
+    if (typeof window.restartIntroAnimations === 'function') {
+        window.restartIntroAnimations();
+    }
 }
 
 function showLoading() {

@@ -43,9 +43,25 @@
 
     <div id="intro-container">
         <div class="inner">
+            <div class="intro-top-bar">
+                <div class="intro-brand" aria-hidden="true">
+                    <img src="/images/logo-edu-hub-ai.png" alt="">
+                </div>
+                <div class="intro-time-wrap">
+                    <svg class="intro-time-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <polyline points="12 6 12 12 16 14"/>
+                    </svg>
+                    <time id="intro-time" class="intro-time" datetime=""></time>
+                </div>
+            </div>
             <div class="contents-wrap">
                 <div class="title-wrap intro-title-wrap">
-                    <h2>원하는<br><span>서비스</span>를<br>선택해주세요</h2>
+                    <h2 class="intro-title-rotator" aria-live="polite">
+                        <span class="intro-title-row"><span class="intro-title-text intro-title-text--visible">원하는</span></span>
+                        <span class="intro-title-row"><span class="intro-title-text intro-title-text--visible"><span class="intro-title-highlight">서비스</span>를</span></span>
+                        <span class="intro-title-row"><span class="intro-title-text intro-title-text--visible">선택해주세요</span></span>
+                    </h2>
                 </div>
 
                 <div class="main-contents-container">

@@ -1,66 +1,95 @@
 @charset "UTF-8";
 
-/* ── 컨테이너 ── */
-#guide-container {
-    display: flex;
-    flex-direction: column;
-    gap: 32px;
-    min-height: calc(100vh - var(--app-header-height));
+/* ── 뷰포트 고정 (스크롤 방지) ── */
+#content-area.content-area--guide,
+#content-area:has(#guide-container) {
+    overflow: hidden;
 }
 
-/* ── 헤더 ── */
-.guide-header {
+#guide-container {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 100%;
+    height: 100%;
+    overflow: hidden;
+    gap: 0;
+}
+
+#guide-container > .contents-wrap {
+    height: 100%;
+    min-height: 0;
+    gap: 20px;
+}
+
+#guide-container .guide-header {
+    margin-bottom: 0;
     flex-shrink: 0;
 }
 
-.guide-header .badge-dot {
-    width: 12px;
-    height: 12px;
-    background: #3b82f6;
-    border-radius: 50%;
-}
-
-.guide-header .badge-text {
-    font-size: 15px;
-    letter-spacing: 0.3em;
-    color: #64748b;
-    font-weight: 300;
-    text-transform: uppercase;
-}
-
-.guide-header .page-title {
-    font-size: 60px;
-    font-weight: 200;
-    color: #0f172a;
-    margin: 0 0 20px 0;
-    line-height: 1.2;
-}
-
-/* ── 카드 목록 ── */
-.guide-cards {
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
+#guide-container .subpage-body {
     flex: 1;
     min-height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
 }
 
-/* ── 공통 카드 ── */
-.guide-card {
-    padding: 36px 44px;
-    display: flex;
-    align-items: flex-start;
-    gap: 28px;
-    opacity: 0;
-    transform: translateY(20px);
-    animation: fadeInUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+/* ── 상단 2열 (교육·생활관) ── */
+.guide-compact-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
     flex-shrink: 0;
+}
+
+/* ── 공통 카드 (서브페이지 흰 카드 스타일) ── */
+.guide-card {
+    position: relative;
+    padding: 22px 26px;
+    flex-shrink: 0;
+    background: #ffffff;
+    border: 2px solid var(--border-light);
+    border-radius: 20px;
+    box-shadow: 0 4px 20px rgba(72, 128, 238, 0.08);
+    box-sizing: border-box;
+}
+
+.guide-compact-row .guide-card {
+    padding: 20px 22px;
+}
+
+.guide-compact-row .info-row {
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* 섹션 제목 (강의실·식당 페이지와 동일 패턴) */
+#guide-container .guide-section-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: clamp(22px, 2.5vw, 28px);
+    font-weight: 700;
+    color: var(--text-title);
+    margin: 0 0 14px;
+    letter-spacing: -0.02em;
+}
+
+#guide-container .guide-section-title svg {
+    flex-shrink: 0;
+    color: var(--kiosk-primary);
+}
+
+.card-body {
+    flex: 1;
+    min-width: 0;
 }
 
 .card-room {
     flex: 1;
     min-height: 0;
-    align-items: stretch;
+    overflow: hidden;
 }
 
 .card-room .card-body {
@@ -68,104 +97,77 @@
     flex-direction: column;
     flex: 1;
     min-height: 0;
-}
-
-/* ── 아이콘 박스 ── */
-.card-icon-wrap {
-    margin-top: 4px;
-}
-
-/* ── 카드 바디 ── */
-.card-body {
-    flex: 1;
-    min-width: 0;
-}
-
-.card-section-label {
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    margin-bottom: 20px;
-}
-
-.label-blue    { color: #3b82f6; }
-.label-emerald { color: #10b981; }
-.label-amber   { color: #f59e0b; }
-
-/* ── 정보 행 ── */
-.info-row {
-    display: flex;
-    gap: 48px;
-    align-items: flex-start;
-}
-
-.info-block {
-    flex: 1;
-    min-width: 0;
-}
-
-.info-label {
-    font-size: 1.2rem;
-    color: #94a3b8;
-    font-weight: 300;
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-}
-
-.info-value {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.3;
-    word-break: keep-all;
-}
-
-/* ── 카드 하단 라인 ── */
-.card-bottom-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 3px;
-    border-radius: 0 0 24px 24px;
-    width: 100%;
-}
-
-.line-blue    { background: linear-gradient(to right, #3b82f6, #6366f1); }
-.line-emerald { background: linear-gradient(to right, #10b981, #14b8a6); }
-.line-amber   { background: linear-gradient(to right, #f59e0b, #f97316); }
-
-/* ── SVG 강의실 도면 ── */
-#classroom-map-area {
-    flex: 1;
-    min-height: 0;
-    margin-top: 24px;
     overflow: hidden;
 }
 
-#svg-container {
-    width: 100%;
-    height: 100%;
+/* ── 정보 행 (common.css 토큰과 동일) ── */
+#guide-container .info-row {
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+}
+
+#guide-container .info-block {
+    flex: 1;
+    min-width: 0;
+}
+
+#guide-container .info-label {
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 6px;
+    letter-spacing: 0;
+}
+
+#guide-container .info-value {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-title);
+    line-height: 1.35;
+    word-break: keep-all;
+}
+
+/* ── 강의실 도면 ── */
+#classroom-map-area {
+    flex: 1;
+    min-height: 0;
+    margin-top: 12px;
+    background: #f5f8ff;
+    border: 2px solid var(--border-light);
+    border-radius: 16px;
+    overflow: hidden;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#svg-container svg {
+#svg-container {
     width: 100%;
     height: 100%;
     max-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-sizing: border-box;
+}
+
+#svg-container svg {
     display: block;
-    border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    border-radius: 8px;
 }
 
 #classroom-map-fallback {
-    margin-top: 20px;
+    margin-top: 12px;
     text-align: center;
-    font-size: 1.4rem;
-    color: #94a3b8;
-    font-weight: 300;
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
 #svg-container [id^="area_"] {
@@ -186,74 +188,70 @@
 #dorm-map-btn {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 18px 32px;
-    font-size: 1.5rem;
+    gap: 8px;
+    padding: 12px 20px;
+    font-size: 18px;
     font-weight: 600;
-    border-radius: 14px;
-    border: 2px solid #f59e0b;
-    background: rgba(245, 158, 11, 0.06);
-    color: #d97706;
+    border-radius: 12px;
+    border: 2px solid var(--border-light);
+    background: #ffffff;
+    color: var(--kiosk-primary);
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.15s, color 0.15s, transform 0.1s;
     white-space: nowrap;
 }
 
+#dorm-map-btn svg {
+    color: var(--kiosk-primary);
+}
+
 #dorm-map-btn:active {
-    background: #f59e0b;
-    color: white;
+    background: var(--kiosk-primary);
+    border-color: var(--kiosk-primary);
+    color: #ffffff;
     transform: scale(0.97);
 }
 
-.contact-notice {
+#dorm-map-btn:active svg {
+    color: #ffffff;
+}
+
+.guide-compact-row #dorm-map-btn-wrap {
+    margin-top: 4px;
+}
+
+.guide-compact-row .info-row[style] {
+    align-items: flex-start !important;
+}
+
+/* ── 하단 문의 안내 ── */
+#guide-container .contact-notice {
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    padding: 20px 32px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
+    margin: 0;
+    padding: 16px 24px;
+    background: #ffffff;
+    border: 2px solid var(--border-light);
     border-radius: 16px;
-    font-size: 1.4rem;
-    color: #94a3b8;
-    font-weight: 300;
+    box-shadow: 0 4px 16px rgba(72, 128, 238, 0.06);
+    font-size: 18px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.45;
+    text-align: center;
+}
+
+#guide-container .contact-notice svg {
+    color: var(--kiosk-primary);
     flex-shrink: 0;
 }
 
-.contact-notice svg {
-    color: #94a3b8;
-    flex-shrink: 0;
-}
-
-.contact-notice strong {
-    color: #64748b;
-    font-weight: 600;
-}
-
-/* ── 처음으로 버튼 ── */
-#back-btn {
-    width: 100%;
-    height: 110px;
-    font-size: 1.9rem;
-    font-weight: 600;
-    border-radius: 20px;
-    border: 2px solid #e2e8f0;
-    background: white;
-    color: #475569;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 14px;
-    transition: all 0.2s;
-    flex-shrink: 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-}
-
-#back-btn:active {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
-    transform: scale(0.98);
+#guide-container .contact-notice strong {
+    color: var(--text-title);
+    font-weight: 700;
 }
 
 /* ── 생활관 도면 모달 ── */
@@ -293,13 +291,13 @@
 }
 
 #dorm-modal-title {
-    font-size: 1.9rem;
-    font-weight: 600;
+    font-size: 30px;
+    font-weight: 700;
     letter-spacing: -0.01em;
 }
 
 #dorm-modal-close {
-    background: rgba(255,255,255,0.2);
+    background: rgba(255, 255, 255, 0.2);
     border: none;
     border-radius: 50%;
     width: 48px;
@@ -313,7 +311,7 @@
 }
 
 #dorm-modal-close:active {
-    background: rgba(255,255,255,0.35);
+    background: rgba(255, 255, 255, 0.35);
 }
 
 #dorm-modal-body {
@@ -354,10 +352,10 @@
 }
 
 #dorm-map-fallback {
-    font-size: 1.4rem;
-    color: #94a3b8;
+    font-size: 20px;
+    color: var(--text-secondary);
     text-align: center;
-    font-weight: 300;
+    font-weight: 500;
 }
 
 #dorm-modal-footer {
@@ -368,7 +366,7 @@
 #dorm-modal-close-btn {
     width: 100%;
     height: 96px;
-    font-size: 1.8rem;
+    font-size: 28px;
     font-weight: 600;
     border-radius: 16px;
     border: 2px solid #e2e8f0;
@@ -383,70 +381,37 @@
     border-color: #cbd5e1;
 }
 
-/* ── 과목 0개: 수업 없음 ── */
+/* ── 과목 표시 ── */
 .no-subject-msg {
-    font-size: 1.6rem;
-    color: #94a3b8;
-    font-weight: 300;
-    padding: 12px 0;
+    font-size: 22px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    padding: 4px 0;
 }
 
-/* ── 과목 1개: 단일 표시 ── */
-.subject-single .info-label {
-    font-size: 1.2rem;
-    color: #94a3b8;
-    font-weight: 300;
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
-}
-
-.subject-single .info-value {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.3;
-    word-break: keep-all;
-}
-
-/* ── 과목 2개↑: 탭 (스타일은 components.css .tab-pills) ── */
-.tab-pills {
-    margin-bottom: 20px;
-}
-
-/* ── 슬라이드 패널 ── */
-.subject-panels {
-    position: relative;
-}
-
-.subject-panel {
-    display: none;
-}
-
-.subject-panel.active {
-    display: block;
-}
-
+.subject-single .info-label,
 .subject-panel .info-label {
-    font-size: 1.2rem;
-    color: #94a3b8;
-    font-weight: 300;
-    margin-bottom: 8px;
-    letter-spacing: 0.05em;
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    margin-bottom: 6px;
 }
 
+.subject-single .info-value,
 .subject-panel .info-value {
-    font-size: 2rem;
-    font-weight: 600;
-    color: #0f172a;
-    line-height: 1.3;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-title);
+    line-height: 1.35;
     word-break: keep-all;
-    margin-bottom: 4px;
 }
 
 .subject-panel .info-floor {
-    font-size: 1.4rem;
-    color: #64748b;
-    font-weight: 400;
+    font-size: 20px;
+    color: var(--text-secondary);
+    font-weight: 500;
 }
 
-/* ── 애니메이션 ── */
+#guide-container .tab-pills {
+    margin-bottom: 12px;
+}
