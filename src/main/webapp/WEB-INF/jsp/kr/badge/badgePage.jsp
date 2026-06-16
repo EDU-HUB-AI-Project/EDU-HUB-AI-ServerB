@@ -13,14 +13,12 @@
 
         <div class="input-wrap" id="badge-input-wrap">
             <div id="birthDisplay" class="birth-display" aria-live="polite">
-                <span class="digit" data-idx="0">0</span>
-                <span class="digit" data-idx="1">0</span>
-                <span class="sep">.</span>
-                <span class="digit" data-idx="2">0</span>
-                <span class="digit" data-idx="3">0</span>
-                <span class="sep">.</span>
-                <span class="digit" data-idx="4">0</span>
-                <span class="digit" data-idx="5">0</span>
+                <span class="digit empty cursor" data-idx="0"></span>
+                <span class="digit empty" data-idx="1"></span>
+                <span class="digit empty" data-idx="2"></span>
+                <span class="digit empty" data-idx="3"></span>
+                <span class="digit empty" data-idx="4"></span>
+                <span class="digit empty" data-idx="5"></span>
             </div>
             <p id="validMsg" class="validMsg"></p>
         </div>

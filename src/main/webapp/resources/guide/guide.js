@@ -32,6 +32,28 @@ function initDormCanvas(dormRoom) {
         });
 }
 
+function buildSubjectInfoEl(subject) {
+    var $info = $('<div>').addClass('subject-info');
+
+    var $room = $('<div>').addClass('subject-info-item');
+    $('<span>').addClass('subject-info-label').text('강의실').appendTo($room);
+    $('<span>').addClass('subject-info-value').text(subject.CLASSROOM_NAME).appendTo($room);
+
+    var $floor = $('<div>').addClass('subject-info-item');
+    $('<span>').addClass('subject-info-label').text('층').appendTo($floor);
+    $('<span>').addClass('subject-info-value').text(subject.FLOOR + '층').appendTo($floor);
+
+    return $info.append($room).append($floor);
+}
+
+function selectSubject(subjects, index, $tabs, $panels) {
+    $tabs.find('.tab-pill').removeClass('active');
+    $tabs.find('.tab-pill[data-index="' + index + '"]').addClass('active');
+    $panels.find('.subject-panel').removeClass('active');
+    $panels.find('.subject-panel[data-index="' + index + '"]').addClass('active');
+    loadClassroomSvg(subjects[index].IMAGE_PATH, subjects[index].IMAGE_ID);
+}
+
 function renderSubject(subjects) {
     var $area = $('#subject-list-area');
     $area.empty();
@@ -46,52 +68,46 @@ function renderSubject(subjects) {
     }
 
     if(subjects.length === 1) {
-        var s = subjects[0];
-        var $single = $('<div>').addClass('subject-single');
-        $('<div>').addClass('info-label').text(s.SUBJECT_NAME).appendTo($single);
-        $('<div>').addClass('info-value').text(s.CLASSROOM_NAME).appendTo($single);
-        $('<div>').addClass('info-floor').text(s.FLOOR + '층').appendTo($single);
-        $area.append($single);
-
-        loadClassroomSvg(s.IMAGE_PATH, s.IMAGE_ID);
+        var single = subjects[0];
+        var $wrap = $('<div>').addClass('subject-wrap subject-wrap--single');
+        $wrap.append(buildSubjectInfoEl(single));
+        $area.append($wrap);
+        loadClassroomSvg(single.IMAGE_PATH, single.IMAGE_ID);
         return;
     }
 
-    var $tabs = $('<div>').addClass('tab-pills tab-pills--accent');
+    var $wrap = $('<div>').addClass('subject-wrap');
+    var $tabs = $('<div>').addClass('tab-pills tab-pills--accent').attr('role', 'tablist');
     var $panels = $('<div>').addClass('subject-panels');
 
-    $.each(subjects, function(i, s) {
+    $.each(subjects, function(i, subject) {
         var $btn = $('<button>')
-            .attr('type', 'button')
+            .attr({ type: 'button', 'data-index': i, role: 'tab' })
             .addClass('tab-pill')
-            .text(s.SUBJECT_NAME)
+            .text(subject.SUBJECT_NAME)
             .on('click', function() {
-                $tabs.find('.tab-pill').removeClass('active');
-                $panels.find('.subject-panel').removeClass('active');
-                $(this).addClass('active');
-                $panels.find('[data-index="' + i + '"]').addClass('active');
-                
-                loadClassroomSvg(s.IMAGE_PATH, s.IMAGE_ID);
+                selectSubject(subjects, i, $tabs, $panels);
             });
-        
+
         if(i === 0) {
             $btn.addClass('active');
         }
         $tabs.append($btn);
 
-        var $panel = $('<div>').addClass('subject-panel').attr('data-index', i);
+        var $panel = $('<div>')
+            .addClass('subject-panel')
+            .attr({ 'data-index': i, role: 'tabpanel' });
 
         if(i === 0) {
             $panel.addClass('active');
         }
 
-        $('<div>').addClass('info-label').text(s.SUBJECT_NAME).appendTo($panel);
-        $('<div>').addClass('info-value').text(s.CLASSROOM_NAME).appendTo($panel);
-        $('<div>').addClass('info-floor').text(s.FLOOR + '층').appendTo($panel);
+        $panel.append(buildSubjectInfoEl(subject));
         $panels.append($panel);
     });
 
-    $area.append($tabs).append($panels);
+    $wrap.append($tabs).append($panels);
+    $area.append($wrap);
     loadClassroomSvg(subjects[0].IMAGE_PATH, subjects[0].IMAGE_ID);
 }
 

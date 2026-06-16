@@ -189,12 +189,11 @@ function renderPhotos(facility) {
     }
 
     section.style.display = 'block';
-    photos.forEach(function(src, index) {
+    photos.forEach(function(src) {
         var item = document.createElement('div');
         item.className = 'gallery-item';
         item.innerHTML =
-            '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(facility.name) + '" class="gallery-img">' +
-            // '<div class="photo-overlay"><span class="photo-label">' + escapeHtml(facility.name) + ' ' + (index + 1) + '</span></div>';
+            '<img src="' + escapeAttr(src) + '" alt="' + escapeAttr(facility.name) + '" class="gallery-img">';
         container.appendChild(item);
     });
 }

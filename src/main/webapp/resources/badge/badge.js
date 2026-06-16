@@ -76,24 +76,28 @@ function updateBirthUI() {
     var resetBtn = document.getElementById('resetBtn');
     var submitBtn = document.getElementById('submit-btn');
     var inputNums = document.querySelectorAll('#btn-main .inputNum');
+    var cursorIdx = inputValue.length < MAX_LENGTH ? inputValue.length : -1;
 
     digitCells.forEach(function(cell) {
         var i = +cell.dataset.idx;
         var ch = inputValue[i];
         var len = inputValue.length;
 
+        cell.classList.remove('empty', 'masked', 'cursor', 'filled');
+
         if (!ch) {
-            cell.textContent = '0';
+            cell.textContent = '';
             cell.classList.add('empty');
-            cell.classList.remove('masked');
         } else if (len > 1 && i < len - 1) {
-            cell.textContent = '*';
-            cell.classList.remove('empty');
-            cell.classList.add('masked');
+            cell.textContent = '•';
+            cell.classList.add('masked', 'filled');
         } else {
             cell.textContent = ch;
-            cell.classList.remove('empty');
-            cell.classList.remove('masked');
+            cell.classList.add('filled');
+        }
+
+        if (i === cursorIdx) {
+            cell.classList.add('cursor');
         }
     });
 

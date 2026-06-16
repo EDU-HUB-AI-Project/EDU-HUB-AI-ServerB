@@ -14,14 +14,29 @@ function showFooterAppMode() {
     }
 }
 
-function enterAppFromIntro(url) {
+function enterAppFromIntro(url, clickedEl) {
     if (typeof window.stopIntroAnimations === 'function') {
         window.stopIntroAnimations();
     }
-    $('#intro-container').css('opacity', '0');
+
+    var $intro = $('#intro-container');
+    $intro.find('.intro-btn-active').removeClass('intro-btn-active');
+    $intro.removeClass('intro-navigating');
+
+    if (clickedEl) {
+        $intro.addClass('intro-navigating');
+        $(clickedEl).addClass('intro-btn-active');
+        setTimeout(function() {
+            $intro.css('opacity', '0');
+        }, 200);
+    } else {
+        $intro.css('opacity', '0');
+    }
 
     setTimeout(function() {
-        $('#intro-container').hide();
+        $intro.hide().removeClass('intro-navigating');
+        $intro.find('.intro-btn-active').removeClass('intro-btn-active');
+        $intro.css('opacity', '1');
         $('#header').css('display', 'flex');
         showFooterAppMode();
 
@@ -34,15 +49,15 @@ function enterAppFromIntro(url) {
 
         loadPage(url);
         startIdleTimer();
-    }, 500);
+    }, clickedEl ? 650 : 500);
 }
 
-function selectMenu(url) {
-    enterAppFromIntro(url);
+function selectMenu(url, el) {
+    enterAppFromIntro(url, el);
 }
 
-function selectShortcut(url) {
-    enterAppFromIntro(url);
+function selectShortcut(url, el) {
+    enterAppFromIntro(url, el);
 }
 
 var currentPageUrl = null;
@@ -137,7 +152,8 @@ function goHome() {
     $('#content-area').removeClass('content-area--guide').empty();
     $('#header').hide();
     $('#nav-badge, #nav-facility').removeClass('active');
-    $('#intro-container').css('opacity', '1');
+    $('#intro-container').removeClass('intro-navigating').css('opacity', '1');
+    $('#intro-container .intro-btn-active').removeClass('intro-btn-active');
     $('#intro-container').show();
     showFooterIntroMode();
     if (typeof window.restartIntroAnimations === 'function') {
