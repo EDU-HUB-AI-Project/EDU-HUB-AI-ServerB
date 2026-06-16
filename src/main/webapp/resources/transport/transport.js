@@ -335,7 +335,8 @@ function renderScheduleTables(routeType) {
 function renderInlineSchedule($area, routeType) {
     var dbTypes = SCHEDULE_TYPE_MAP[routeType];
     if (!dbTypes || !dbTypes.length) {
-        $area.hide();
+        $area.hide().empty();
+        $('#transport-schedule-section').hide();
         return;
     }
 
@@ -352,58 +353,62 @@ function renderInlineSchedule($area, routeType) {
         $area.css('display', 'flex');
         $('#transport-schedule-section').show();
     } else {
-        $area.hide();
-        $('#transport-schedule-section').show();
-        $area.html('<p class="schedule-empty-msg">등록된 운행 시간표가 없습니다.</p>').css('display', 'block');
+        $area.hide().empty();
+        $('#transport-schedule-section').hide();
     }
 }
 
 function renderScheduleButtons($area, routeType) {
     var buttonConfig = ROUTE_SCHEDULE_BUTTONS[routeType];
     if (!buttonConfig) {
-        $area.hide();
+        $area.hide().empty();
+        $('#transport-schedule-section').hide();
         return;
     }
 
-    var html = '<div class="schedule-btn-row">';
+    var buttonsHtml = '';
 
     if (buttonConfig === '__location__') {
-        html += buildScheduleButtonHtml({
-            popupKey: routeType,
-            meta: SCHEDULE_BTN_META.TAEHWA,
-            rows: getRowsByLocationKeyword(ROUTE_LOCATION_KEYWORDS[routeType])
-        });
+        var locationRows = getRowsByLocationKeyword(ROUTE_LOCATION_KEYWORDS[routeType]);
+        if (locationRows.length) {
+            buttonsHtml += buildScheduleButtonHtml({
+                popupKey: routeType,
+                meta: SCHEDULE_BTN_META.TAEHWA,
+                rows: locationRows
+            });
+        }
     } else {
         buttonConfig.forEach(function(dbType) {
-            html += buildScheduleButtonHtml({
-                popupKey: dbType,
-                meta: SCHEDULE_BTN_META[dbType],
-                rows: getRowsByDbType(dbType)
-            });
+            var rows = getRowsByDbType(dbType);
+            if (rows.length) {
+                buttonsHtml += buildScheduleButtonHtml({
+                    popupKey: dbType,
+                    meta: SCHEDULE_BTN_META[dbType],
+                    rows: rows
+                });
+            }
         });
     }
 
-    html += '</div>';
-    $area.html(html).css('display', 'flex');
+    if (!buttonsHtml) {
+        $area.hide().empty();
+        $('#transport-schedule-section').hide();
+        return;
+    }
+
+    $area.html('<div class="schedule-btn-row">' + buttonsHtml + '</div>').css('display', 'flex');
     $('#transport-schedule-section').show();
 }
 
 function buildScheduleButtonHtml(config) {
     var meta = config.meta;
-    if (!meta) return '';
-
     var rows = config.rows || [];
-    var hasRows = rows.length > 0;
-    var disabled = hasRows ? '' : ' disabled';
-    var clickAttr = hasRows
-        ? ' onclick="openSchedulePopup(\'' + config.popupKey + '\')"'
-        : '';
-    var emptyHint = hasRows ? '' : '<span class="schedule-btn-empty">(시간표 없음)</span>';
+    if (!meta || !rows.length) return '';
 
     return (
         '<button type="button" class="schedule-open-btn ' + meta.cssClass + '"' +
-        disabled + clickAttr + '>' +
-        '<span class="schedule-btn-label">' + escapeHtml(meta.label) + emptyHint + '</span>' +
+        ' onclick="openSchedulePopup(\'' + config.popupKey + '\')">' +
+        '<span class="schedule-btn-label">' + escapeHtml(meta.label) + '</span>' +
         '</button>'
     );
 }

@@ -18,18 +18,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     staggerItems.forEach(function(el, i) {
         setTimeout(function() {
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
+            el.classList.add('intro-visible');
         }, 120 + i * 100);
     });
-
-    var entranceDone = 120 + staggerItems.length * 100 + 500;
-    setTimeout(function() {
-        if (introContainer) {
-            introContainer.classList.add('intro-animated');
-        }
-    }, entranceDone);
 
     function clearTitleCycle() {
         if (titleCycleTimer) {
@@ -104,9 +95,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     window.stopIntroAnimations = function() {
         clearTitleCycle();
-        if (introContainer) {
-            introContainer.classList.remove('intro-animated');
-        }
     };
 
     window.restartIntroAnimations = function() {
@@ -114,30 +102,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
         clearTitleCycle();
         resetTitleMessage(0);
-        introContainer.classList.add('intro-animated');
         setTimeout(startTitleRotation, 2000);
     };
-
-    function bindTouchScale(selector) {
-        document.querySelectorAll(selector).forEach(function(el) {
-            el.addEventListener('touchstart', function() {
-                this.style.transform = 'scale(0.95)';
-            }, { passive: true });
-
-            el.addEventListener('touchend', function() {
-                this.style.removeProperty('transform');
-            });
-
-            el.addEventListener('click', function() {
-                this.style.transform = 'scale(0.95)';
-                var self = this;
-                setTimeout(function() {
-                    self.style.removeProperty('transform');
-                }, 200);
-            });
-        });
-    }
-
-    bindTouchScale('#intro-container .btn-wrap-main > button');
-    bindTouchScale('#intro-container .btn-quick');
 });

@@ -95,7 +95,7 @@
                 <line x1="12" y1="8" x2="12" y2="12"/>
                 <line x1="12" y1="16" x2="12.01" y2="16"/>
             </svg>
-            <span>정보가 다르다면 <strong>${contactLocation}</strong> (${contactPhone})으로 문의하세요.</span>
+            <span>더 필요한 정보가 있다면 <strong>안내데스크</strong>에 문의해주세요.</span>
         </div>
 
     </div>
