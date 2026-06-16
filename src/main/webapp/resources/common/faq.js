@@ -17,90 +17,133 @@ var KIOSK_FAQ_ITEMS = [
     }
 ];
 
-var faqThinkingTimer = null;
+var FAQ_WELCOME_MESSAGE = '안녕하세요! EDU HUB AI 안내 도우미입니다.\n궁금한 내용을 아래에서 선택해 주세요.';
+
 var faqAnswerTimer = null;
-
-function renderFaqAccordion() {
-    var chevronSvg = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>';
-    var html = '';
-
-    KIOSK_FAQ_ITEMS.forEach(function(item) {
-        html += '<div class="faq-item">';
-        html += '<button type="button" class="faq-item-q" aria-expanded="false">';
-        html += '<span class="faq-q-label">Q.</span>';
-        html += '<span class="faq-q-text">' + escapeHtml(item.q) + '</span>';
-        html += '<span class="faq-chevron">' + chevronSvg + '</span>';
-        html += '</button>';
-        html += '<div class="faq-item-a">';
-        html += '<div class="faq-a-thinking">';
-        html += '<span class="thinking-dot"></span><span class="thinking-dot"></span><span class="thinking-dot"></span>';
-        html += '</div>';
-        html += '<div class="faq-a-content">';
-        html += '<span class="faq-a-label">A.</span>';
-        html += '<p>' + escapeHtml(item.a) + '</p>';
-        html += '</div>';
-        html += '</div>';
-        html += '</div>';
-    });
-
-    $('#faq-accordion-list').html(html);
-}
-
-function closeFaqItem($item) {
-    if (!$item || !$item.length) return;
-    clearTimeout(faqAnswerTimer);
-    $item.removeClass('is-open');
-    $item.find('.faq-item-q').attr('aria-expanded', 'false');
-    $item.find('.faq-a-thinking').addClass('is-hidden');
-    $item.find('.faq-a-content').removeClass('is-visible');
-}
-
-function openFaqItem($item) {
-    var $thinking = $item.find('.faq-a-thinking');
-    var $content = $item.find('.faq-a-content');
-
-    $item.addClass('is-open');
-    $item.find('.faq-item-q').attr('aria-expanded', 'true');
-    $thinking.removeClass('is-hidden');
-    $content.removeClass('is-visible');
-
-    clearTimeout(faqAnswerTimer);
-    faqAnswerTimer = setTimeout(function() {
-        $thinking.addClass('is-hidden');
-        $content.addClass('is-visible');
-    }, 280);
-}
+var faqUsedIndexes = {};
 
 function isFaqPanelOpen() {
     return $('#faq-modal-overlay').hasClass('open');
+}
+
+function scrollFaqChatToBottom() {
+    var el = document.getElementById('faq-chat-messages');
+    if (!el) return;
+    el.scrollTop = el.scrollHeight;
+}
+
+function appendFaqChatMessage(role, text) {
+    var $messages = $('#faq-chat-messages');
+    var safeText = escapeHtml(text).replace(/\n/g, '<br>');
+
+    if (role === 'bot') {
+        $messages.append(
+            '<div class="faq-chat-row faq-chat-row--bot">' +
+                '<span class="faq-chat-avatar faq-chat-avatar--sm" aria-hidden="true">' +
+                    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                        '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' +
+                    '</svg>' +
+                '</span>' +
+                '<div class="faq-chat-bubble faq-chat-bubble--bot"><p>' + safeText + '</p></div>' +
+            '</div>'
+        );
+    } else {
+        $messages.append(
+            '<div class="faq-chat-row faq-chat-row--user">' +
+                '<div class="faq-chat-bubble faq-chat-bubble--user"><p>' + safeText + '</p></div>' +
+            '</div>'
+        );
+    }
+
+    scrollFaqChatToBottom();
+}
+
+function showFaqChatTyping() {
+    if ($('#faq-chat-typing').length) return;
+
+    $('#faq-chat-messages').append(
+        '<div id="faq-chat-typing" class="faq-chat-row faq-chat-row--bot">' +
+            '<span class="faq-chat-avatar faq-chat-avatar--sm" aria-hidden="true">' +
+                '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
+                    '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' +
+                '</svg>' +
+            '</span>' +
+            '<div class="faq-chat-bubble faq-chat-bubble--bot faq-chat-bubble--typing">' +
+                '<span class="thinking-dot"></span>' +
+                '<span class="thinking-dot"></span>' +
+                '<span class="thinking-dot"></span>' +
+            '</div>' +
+        '</div>'
+    );
+    scrollFaqChatToBottom();
+}
+
+function hideFaqChatTyping() {
+    $('#faq-chat-typing').remove();
+}
+
+function renderFaqChatChips() {
+    var html = '';
+
+    KIOSK_FAQ_ITEMS.forEach(function(item, index) {
+        if (faqUsedIndexes[index]) return;
+        html += '<button type="button" class="faq-chat-chip" data-faq-index="' + index + '">' +
+            escapeHtml(item.q) +
+        '</button>';
+    });
+
+    var $chips = $('#faq-chat-chips');
+    $chips.html(html);
+    $chips.toggle(html.length > 0);
+}
+
+function resetFaqChat() {
+    clearTimeout(faqAnswerTimer);
+    faqUsedIndexes = {};
+    $('#faq-chat-messages').empty();
+    $('#faq-chat-chips').empty();
+}
+
+function initFaqChat() {
+    resetFaqChat();
+    appendFaqChatMessage('bot', FAQ_WELCOME_MESSAGE);
+    renderFaqChatChips();
+}
+
+function askFaqQuestion(index) {
+    var item = KIOSK_FAQ_ITEMS[index];
+    if (!item || faqUsedIndexes[index]) return;
+
+    resetIdleTimer();
+    faqUsedIndexes[index] = true;
+
+    appendFaqChatMessage('user', item.q);
+    renderFaqChatChips();
+    showFaqChatTyping();
+
+    clearTimeout(faqAnswerTimer);
+    faqAnswerTimer = setTimeout(function() {
+        hideFaqChatTyping();
+        appendFaqChatMessage('bot', item.a);
+    }, 650);
 }
 
 function openFaqPanel() {
     if (isFaqPanelOpen()) return;
 
     resetIdleTimer();
-    renderFaqAccordion();
+    initFaqChat();
 
-    var $overlay = $('#faq-modal-overlay');
-    $overlay.removeClass('ready').addClass('open thinking');
+    $('#faq-modal-overlay').addClass('open');
     $('#faq-fab').addClass('is-open').attr('aria-expanded', 'true');
-
-    clearTimeout(faqThinkingTimer);
-    faqThinkingTimer = setTimeout(function() {
-        $overlay.removeClass('thinking').addClass('ready');
-    }, 900);
 }
 
 function closeFaqPanel() {
-    clearTimeout(faqThinkingTimer);
     clearTimeout(faqAnswerTimer);
 
-    var $overlay = $('#faq-modal-overlay');
-    $overlay.removeClass('open thinking ready');
+    $('#faq-modal-overlay').removeClass('open');
     $('#faq-fab').removeClass('is-open').attr('aria-expanded', 'false');
-    $('#faq-accordion-list .faq-item').each(function() {
-        closeFaqItem($(this));
-    });
+    resetFaqChat();
 }
 
 function toggleFaqPanel() {
@@ -121,19 +164,10 @@ function hideFaqFab() {
 }
 
 $(document).ready(function() {
-    $(document).on('click', '.faq-item-q', function() {
-        resetIdleTimer();
-        var $item = $(this).closest('.faq-item');
-        var isOpen = $item.hasClass('is-open');
-
-        $('#faq-accordion-list .faq-item').not($item).each(function() {
-            closeFaqItem($(this));
-        });
-
-        if (isOpen) {
-            closeFaqItem($item);
-        } else {
-            openFaqItem($item);
+    $(document).on('click', '.faq-chat-chip', function() {
+        var index = parseInt($(this).attr('data-faq-index'), 10);
+        if (!isNaN(index)) {
+            askFaqQuestion(index);
         }
     });
 
