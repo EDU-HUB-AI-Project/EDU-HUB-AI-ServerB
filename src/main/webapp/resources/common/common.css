@@ -70,6 +70,34 @@ textarea {
     font-family: inherit;
 }
 
+/* 키오스크 터치 UI — 클릭·탭 후 포커스 링 제거 */
+button,
+a,
+[role="button"],
+input,
+select,
+textarea,
+.tab-pill {
+    -webkit-tap-highlight-color: transparent;
+}
+
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible,
+[role="button"]:focus,
+[role="button"]:focus-visible,
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+.tab-pill:focus,
+.tab-pill:focus-visible {
+    outline: none;
+}
+
 *::-webkit-scrollbar {
     display: none; /* Chrome, Safari, Edge */
 }

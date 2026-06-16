@@ -319,50 +319,80 @@
     font-weight: 700;
 }
 
-/* ── 생활관 도면 모달 ── */
+/* ── 생활관 도면 모달 (공통 모달 톤) ── */
 #dorm-modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 1000;
+    display: flex;
     align-items: center;
     justify-content: center;
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    padding: 80px var(--subpage-padding-x);
+    box-sizing: border-box;
+    background: rgba(0, 0, 0, 0);
+    visibility: hidden;
+    pointer-events: none;
+    transition: background 0.3s ease, visibility 0.3s ease;
 }
 
 #dorm-modal-overlay.open {
-    display: flex;
+    visibility: visible;
+    pointer-events: auto;
+    background: rgba(0, 0, 0, 0.45);
 }
 
 #dorm-modal-box {
-    width: 920px;
-    max-height: 1600px;
-    background: white;
-    border-radius: 28px;
+    width: 100%;
+    max-width: var(--subpage-max-width);
+    max-height: calc(100vh - 160px);
+    background: #ffffff;
+    border-radius: 24px;
+    border: 2px solid var(--border-light);
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 24px 64px rgba(72, 128, 238, 0.16);
+    transform: scale(0.96);
+    opacity: 0;
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.28s ease;
+}
+
+#dorm-modal-overlay.open #dorm-modal-box {
+    transform: scale(1);
+    opacity: 1;
 }
 
 #dorm-modal-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 32px 40px;
-    background: linear-gradient(135deg, #f59e0b, #f97316);
-    color: white;
+    gap: 20px;
+    padding: 28px 32px;
+    background: #ffffff;
+    border-bottom: 2px solid var(--border-light);
     flex-shrink: 0;
 }
 
 #dorm-modal-title {
-    font-size: 30px;
+    font-size: clamp(28px, 3vw, 36px);
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: -0.02em;
+    color: var(--text-title);
+}
+
+#dorm-modal-title::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 28px;
+    margin-right: 12px;
+    border-radius: 4px;
+    background: var(--kiosk-primary);
+    vertical-align: -4px;
 }
 
 #dorm-modal-close {
-    background: rgba(255, 255, 255, 0.2);
+    background: #f2f4f6;
     border: none;
     border-radius: 50%;
     width: 48px;
@@ -370,18 +400,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: #4e5968;
     cursor: pointer;
-    transition: background 0.2s;
+    flex-shrink: 0;
+    transition: background 0.12s ease, transform 0.12s ease;
 }
 
 #dorm-modal-close:active {
-    background: rgba(255, 255, 255, 0.35);
+    background: #e5e8eb;
+    transform: scale(0.95);
 }
 
 #dorm-modal-body {
     flex: 1;
-    padding: 36px;
+    min-height: 0;
+    padding: 28px 32px;
+    background: #f5f8ff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -399,10 +433,11 @@
 #dorm-svg-container svg {
     width: 100%;
     height: auto;
-    max-height: 1400px;
+    max-height: 100%;
     display: block;
     border-radius: 12px;
-    border: 1px solid #e2e8f0;
+    border: 2px solid var(--border-light);
+    background: #ffffff;
 }
 
 #dorm-svg-container [id^="room-"] {
@@ -411,8 +446,8 @@
 
 #dorm-svg-container [id^="room-"].dorm-highlight {
     visibility: visible;
-    fill: rgba(255, 180, 0, 0.5) !important;
-    stroke: #c00 !important;
+    fill: rgba(255, 220, 0, 0.5) !important;
+    stroke: #e00 !important;
     stroke-width: 4 !important;
 }
 
@@ -424,26 +459,29 @@
 }
 
 #dorm-modal-footer {
-    padding: 24px 36px 32px;
+    padding: 20px 32px 28px;
     flex-shrink: 0;
+    background: #ffffff;
+    border-top: 2px solid var(--border-light);
 }
 
 #dorm-modal-close-btn {
     width: 100%;
-    height: 96px;
-    font-size: 28px;
+    height: 80px;
+    font-size: 30px;
     font-weight: 600;
     border-radius: 16px;
-    border: 2px solid #e2e8f0;
-    background: white;
-    color: #475569;
+    border: none;
+    background: #f2f4f6;
+    color: #4e5968;
     cursor: pointer;
-    transition: all 0.2s;
+    font-family: inherit;
+    transition: background 0.12s ease, transform 0.12s ease;
 }
 
 #dorm-modal-close-btn:active {
-    background: #f1f5f9;
-    border-color: #cbd5e1;
+    background: #e5e8eb;
+    transform: scale(0.98);
 }
 
 /* ── 과목 표시 ── */
