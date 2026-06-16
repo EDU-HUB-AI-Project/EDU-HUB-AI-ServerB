@@ -89,7 +89,7 @@ function updateBirthUI() {
             cell.textContent = '';
             cell.classList.add('empty');
         } else if (len > 1 && i < len - 1) {
-            cell.textContent = '•';
+            cell.textContent = '*';
             cell.classList.add('masked', 'filled');
         } else {
             cell.textContent = ch;

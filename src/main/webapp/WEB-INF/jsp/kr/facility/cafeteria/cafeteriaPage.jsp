@@ -86,28 +86,6 @@
 
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 
-                            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
-
-                        </svg>
-
-                    </div>
-
-                    <div class="info-content">
-
-                        <div class="info-label">문의</div>
-
-                        <div class="info-value">051-000-0000</div>
-
-                    </div>
-
-                </div>
-
-                <div class="info-card">
-
-                    <div class="info-icon icon-box icon-box-md icon-subtle" aria-hidden="true">
-
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-
                             <circle cx="12" cy="12" r="10"/>
 
                             <polyline points="12 6 12 12 16 14"/>
@@ -196,13 +174,9 @@
 
                 <ul class="cafeteria-notice-list">
 
-                    <li class="cafeteria-notice-item">교육생도 요금을 지불해야 합니다</li>
+                    <li class="cafeteria-notice-item">식당 내에서 식권을 발급해 사용해주세요</li>
 
-                    <li class="cafeteria-notice-item">명찰을 착용하고 입장해 주세요</li>
-
-                    <li class="cafeteria-notice-item">식사 후 식기는 정리대에 반납해 주세요</li>
-
-                    <li class="cafeteria-notice-item">식단은 매주 월요일에 변경됩니다</li>
+                    <li class="cafeteria-notice-item">식사 후 식기는 식기반납대로 반납해 주세요</li>
 
                 </ul>
 

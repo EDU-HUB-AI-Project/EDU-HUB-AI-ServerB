@@ -64,6 +64,7 @@
 /* ── 운영 정보 (공통 info-cards 오버라이드) ── */
 #cafeteria-container #cafeteria-info.info-cards {
     margin-bottom: 0;
+    grid-template-columns: repeat(2, 1fr);
 }
 
 #cafeteria-container #cafeteria-info .info-card {

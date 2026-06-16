@@ -8,7 +8,7 @@
 
         <div class="title-wrap" id="transport-title">
 
-            <h2>교통 <span>안내</span></h2>
+            <h2>교통정보 <span>안내</span></h2>
 
             <!-- <p class="transport-subtitle">KTX · 시외버스 등 교통 정보를 확인할 수 있습니다.</p> -->
 
