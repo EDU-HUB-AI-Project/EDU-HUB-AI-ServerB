@@ -117,8 +117,7 @@
 <body>
 
     <div class="badge-header">
-        <img class="header-logo" src="/images/logo.gif" alt="로고">
-        <div class="header-title">스마트 EDU-HUB</div>
+        <img class="header-logo" src="/images/logo.png" alt="로고">
     </div>
 
     <div class="badge-edu">${data.EDU_NAME}</div>
@@ -130,7 +129,11 @@
     <div class="badge-footer">
         <div class="footer-item">
             <span>교육기간</span>
-            <strong>${data.START_DATE} ~ ${data.END_DATE}</strong>
+            <strong>
+                <c:if test="${not empty data.START_DATE}">20${fn:substring(data.START_DATE, 0, 2)}.${fn:substring(data.START_DATE, 2, 4)}.${fn:substring(data.START_DATE, 4, 6)}</c:if>
+                ~
+                <c:if test="${not empty data.END_DATE}">20${fn:substring(data.END_DATE, 0, 2)}.${fn:substring(data.END_DATE, 2, 4)}.${fn:substring(data.END_DATE, 4, 6)}</c:if>
+            </strong>
         </div>
         <div class="footer-divider"></div>
         <div class="footer-item" style="text-align: right;">
