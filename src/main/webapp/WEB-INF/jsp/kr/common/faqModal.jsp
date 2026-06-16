@@ -3,14 +3,9 @@
     <div id="faq-chat-panel">
         <div class="faq-chat-header">
             <div class="faq-chat-header-info">
-                <span class="faq-chat-avatar" aria-hidden="true">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
-                    </svg>
-                </span>
                 <div>
-                    <h2 id="faq-modal-title">안내 도우미</h2>
-                    <p class="faq-chat-status">무엇이든 물어보세요</p>
+                    <h2 id="faq-modal-title">키오스크 안내</h2>
+                    <p class="faq-chat-status">궁금한 것을 선택해주세요</p>
                 </div>
             </div>
             <button type="button" id="faq-modal-close" aria-label="닫기">

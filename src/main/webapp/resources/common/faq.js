@@ -13,7 +13,7 @@ var KIOSK_FAQ_ITEMS = [
     },
     {
         q: '문제가 생기면 어디로 문의하나요?',
-        a: '키오스크 이용 중 문제가 있으면 1층 안내 데스크로 문의해 주세요. 교육원 직원이 도와드립니다.'
+        a: '키오스크 이용 중 문제가 있으면 1층 안내 데스크로 문의해 주세요.'
     }
 ];
 
@@ -39,11 +39,6 @@ function appendFaqChatMessage(role, text) {
     if (role === 'bot') {
         $messages.append(
             '<div class="faq-chat-row faq-chat-row--bot">' +
-                '<span class="faq-chat-avatar faq-chat-avatar--sm" aria-hidden="true">' +
-                    '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">' +
-                        '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' +
-                    '</svg>' +
-                '</span>' +
                 '<div class="faq-chat-bubble faq-chat-bubble--bot"><p>' + safeText + '</p></div>' +
             '</div>'
         );

@@ -81,10 +81,10 @@
                     </div>
     
                     <div class="btn-quick-wrap">
-                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/classroom.do', this)">강의실 위치</button>
-                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/location.do', this)">시설 위치</button>
-                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/cafeteria.do', this)">식당 메뉴</button>
-                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/transport.do', this)">교통 정보</button>
+                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/classroom.do', this)">강의실 안내</button>
+                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/location.do', this)">시설 안내</button>
+                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/cafeteria.do', this)">구내식당</button>
+                        <button type="button" class="btn-quick" onclick="selectShortcut('/facility/transport.do', this)">교통정보</button>
                     </div>
                 </div>
             </div>

@@ -88,7 +88,6 @@ function formatFloorLabel(floor) {
 function updateFloorSection(facility) {
     var metaCard = document.getElementById('location-meta-card');
     var floorWrap = document.getElementById('location-floor-wrap');
-    var floorSep = document.getElementById('location-meta-sep');
     var floorEl = document.getElementById('location-floor');
     if (!metaCard || !floorWrap || !floorEl) {
         return;
@@ -97,9 +96,6 @@ function updateFloorSection(facility) {
     var hasFloor = isInnerFacility(facility) && hasFloorValue(facility.floor);
     metaCard.classList.toggle('has-floor', hasFloor);
     floorWrap.hidden = !hasFloor;
-    if (floorSep) {
-        floorSep.hidden = !hasFloor;
-    }
 
     if (hasFloor) {
         floorEl.textContent = formatFloorLabel(facility.floor);
