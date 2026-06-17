@@ -40,9 +40,15 @@
                             <div class="location-map-wrap">
                                 <img id="location-map-img" src="/images/facility-location-map.png" alt="공단 지도">
                                 <div id="location-map-marker-layer" class="location-map-marker-layer">
-                                    <div id="location-map-marker" class="location-map-marker is-hidden">
+                                    <div id="location-map-marker-you" class="location-map-marker location-map-marker--you is-hidden" aria-label="현위치">
                                         <span class="location-map-marker-ping"></span>
                                         <span class="location-map-marker-dot"></span>
+                                    </div>
+                                    <div id="location-map-marker-dest" class="location-map-marker location-map-marker--dest is-hidden" aria-hidden="true">
+                                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                                            <circle cx="12" cy="10" r="3"/>
+                                        </svg>
                                     </div>
                                 </div>
                             </div>
