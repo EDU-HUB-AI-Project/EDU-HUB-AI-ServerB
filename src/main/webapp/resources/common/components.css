@@ -35,7 +35,7 @@
     color: var(--text-secondary);
     background: #fff;
     border: 2px solid var(--border-light);
-    border-radius: 999px;
+    border-radius: 20px;
     cursor: pointer;
     transition: all 0.2s;
     white-space: nowrap;

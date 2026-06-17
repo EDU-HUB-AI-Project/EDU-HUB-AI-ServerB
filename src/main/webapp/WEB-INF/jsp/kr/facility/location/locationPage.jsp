@@ -5,7 +5,7 @@
     <div class="contents-wrap">
 
         <div class="title-wrap" id="location-title">
-            <h2>시설 <span>안내</span></h2>
+            <h2>시설 <span>위치</span></h2>
             <!-- <div class="guide-box guide-box--sub">
                 <p>캠퍼스 내 시설 위치를 확인할 수 있습니다.</p>
             </div> -->
@@ -51,38 +51,29 @@
 
                     <div class="info-section">
                         <h3 class="location-section-title">
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="12" y1="8" x2="12" y2="12"/>
-                                <line x1="12" y1="16" x2="12.01" y2="16"/>
-                            </svg>
                             <span id="location-info-title">시설 안내</span>
                         </h3>
                         <div class="location-info-panel">
                             <div class="location-meta-card" id="location-meta-card">
                                 <div class="location-meta-row">
                                     <div class="location-meta-item">
-                                        <div class="location-meta-header">
-                                            <span class="location-meta-icon" aria-hidden="true">
-                                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
-                                                    <circle cx="12" cy="10" r="3"/>
-                                                </svg>
-                                            </span>
-                                            <span class="location-meta-label">위치</span>
-                                        </div>
+                                        <span class="location-meta-icon" aria-hidden="true">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                                <circle cx="12" cy="10" r="3"/>
+                                            </svg>
+                                        </span>
+                                        <span class="location-meta-label">위치</span>
                                         <span class="location-meta-value" id="location-text">-</span>
                                     </div>
                                     <div class="location-meta-item" id="location-floor-wrap">
-                                        <div class="location-meta-header">
-                                            <span class="location-meta-icon" aria-hidden="true">
-                                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                                                    <polyline points="9 22 9 12 15 12 15 22"/>
-                                                </svg>
-                                            </span>
-                                            <span class="location-meta-label">층수</span>
-                                        </div>
+                                        <span class="location-meta-icon" aria-hidden="true">
+                                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                                                <polyline points="9 22 9 12 15 12 15 22"/>
+                                            </svg>
+                                        </span>
+                                        <span class="location-meta-label">층수</span>
                                         <span class="location-meta-value" id="location-floor">-</span>
                                     </div>
                                 </div>

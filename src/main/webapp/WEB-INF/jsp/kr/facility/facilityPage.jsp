@@ -12,11 +12,11 @@
         <div class="btn-wrap btn-wrap--animate facility-menu-grid">
             <button type="button" class="facility-menu-card" onclick="loadPage('/facility/classroom.do')">
                 <span class="facility-menu-icon" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 4.5v9L12 21l-9-4.5v-9L12 3z"/><path d="M12 12l9-4.5M12 12v9M12 12L3 7.5"/></svg>
                 </span>
                 <div class="facility-menu-text">
                     <p class="facility-menu-title">강의실 <span>위치</span></p>
-                    <p class="card-description">강의실 배치도</p>
+                    <p class="card-description">강의실 배치도 및 안내</p>
                 </div>
             </button>
 
@@ -26,7 +26,7 @@
                 </span>
                 <div class="facility-menu-text">
                     <p class="facility-menu-title">시설 <span>위치</span></p>
-                    <p class="card-description">흡연·편의시설 등</p>
+                    <p class="card-description">편의시설·흡연구역 등</p>
                 </div>
             </button>
 
@@ -35,7 +35,7 @@
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3zm0 0v7"/></svg>
                 </span>
                 <div class="facility-menu-text">
-                    <p class="facility-menu-title">식당 <span>메뉴</span></p>
+                    <p class="facility-menu-title">구내<span>식당</span></p>
                     <p class="card-description">메뉴 및 운영 안내</p>
                 </div>
             </button>
