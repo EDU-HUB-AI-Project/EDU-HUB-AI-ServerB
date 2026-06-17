@@ -64,15 +64,32 @@
 
 .location-map-marker {
     position: absolute;
-    width: 28px;
-    height: 28px;
     margin: 0;
-    transform: translate(-50%, -50%);
     pointer-events: none;
 }
 
 .location-map-marker.is-hidden {
     display: none;
+}
+
+.location-map-marker--you {
+    width: 28px;
+    height: 28px;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+}
+
+.location-map-marker--dest {
+    transform: translate(-50%, -100%);
+    color: var(--kiosk-primary);
+    z-index: 11;
+    filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+}
+
+.location-map-marker--dest svg {
+    display: block;
+    width: 48px;
+    height: 48px;
 }
 
 .location-map-marker-ping {

@@ -1,6 +1,10 @@
 var activeFacilityId;
 var mapResizeBound = false;
 
+// 키오스크 현위치 (지도 위 표시 좌표)
+var KIOSK_MARKER_LEFT = 640;
+var KIOSK_MAP_Y = 78;
+
 function initLocationPage() {
     if (!facilityData || facilityData.length === 0) {
         return;
@@ -194,43 +198,65 @@ function renderPhotos(facility) {
     });
 }
 
-// 캠퍼스 지도 + 픽셀 좌표 마커
+// 캠퍼스 지도 — 현위치(키오스크) + 목적지 마커
 function renderCampusMap(facility) {
     var img = document.getElementById('location-map-img');
-    var marker = document.getElementById('location-map-marker');
-    if (!img || !marker) {
+    if (!img) {
         return;
     }
 
-    if (!hasMapCoords(facility)) {
-        hideMapMarker();
-        return;
-    }
-
-    var mapX = parseCoord(facility.mapX);
-    var mapY = parseCoord(facility.mapY);
-
-    function placeMarker() {
+    function placeMarkers() {
         if (!img.naturalWidth || !img.naturalHeight) {
             return;
         }
-        var pos = imagePointToWrap(mapX, mapY, img);
-        marker.style.left = pos.left + 'px';
-        marker.style.top = pos.top + 'px';
-        marker.classList.remove('is-hidden');
+        placeYouMarker(img);
+        placeDestMarker(img, facility);
     }
 
     if (img.complete && img.naturalWidth) {
-        placeMarker();
+        placeMarkers();
     } else {
-        img.onload = placeMarker;
+        img.onload = placeMarkers;
     }
 }
 
-function hideMapMarker() {
-    var marker = document.getElementById('location-map-marker');
-    if (marker) {
+function placeYouMarker(img) {
+    var marker = document.getElementById('location-map-marker-you');
+    if (!marker) {
+        return;
+    }
+    var pos = imagePointToWrap(0, KIOSK_MAP_Y, img);
+    marker.style.left = KIOSK_MARKER_LEFT + 'px';
+    marker.style.top = pos.top + 'px';
+    marker.classList.remove('is-hidden');
+}
+
+function placeDestMarker(img, facility) {
+    var marker = document.getElementById('location-map-marker-dest');
+    if (!marker) {
+        return;
+    }
+    if (!hasMapCoords(facility)) {
         marker.classList.add('is-hidden');
+        return;
+    }
+    var pos = imagePointToWrap(parseCoord(facility.mapX), parseCoord(facility.mapY), img);
+    marker.style.left = pos.left + 'px';
+    marker.style.top = pos.top + 'px';
+    marker.classList.remove('is-hidden');
+    marker.setAttribute('aria-hidden', 'false');
+    marker.setAttribute('aria-label', (facility.name || '목적지') + ' 위치');
+}
+
+function hideMapMarker() {
+    var youMarker = document.getElementById('location-map-marker-you');
+    var destMarker = document.getElementById('location-map-marker-dest');
+    if (youMarker) {
+        youMarker.classList.add('is-hidden');
+    }
+    if (destMarker) {
+        destMarker.classList.add('is-hidden');
+        destMarker.setAttribute('aria-hidden', 'true');
     }
 }
 
